@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Arch Linux)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: sybil.aux
+The style file: apalike.bst
+Database file #1: ./sybil.bib
+You've used 7 entries,
+            1935 wiz_defined-function locations,
+            512 strings with 4929 characters,
+and the built_in function-call counts, 2649 in all, are:
+= -- 249
+> -- 130
+< -- 5
++ -- 46
+- -- 44
+* -- 208
+:= -- 477
+add.period$ -- 20
+call.type$ -- 7
+change.case$ -- 56
+chr.to.int$ -- 7
+cite$ -- 7
+duplicate$ -- 108
+empty$ -- 170
+format.name$ -- 55
+if$ -- 512
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 7
+newline$ -- 37
+num.names$ -- 21
+pop$ -- 58
+preamble$ -- 1
+purify$ -- 57
+quote$ -- 0
+skip$ -- 84
+stack$ -- 0
+substring$ -- 118
+swap$ -- 16
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 40
+warning$ -- 0
+while$ -- 17
+width$ -- 0
+write$ -- 89
