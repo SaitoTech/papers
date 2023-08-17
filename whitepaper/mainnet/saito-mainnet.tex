@@ -1,0 +1,147 @@
+\documentclass[11.5pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
+\usepackage{graphicx}
+\usepackage{caption}
+
+\title{Saito: Mainnet Structure and Launch Strategy}
+\author{David Lancashire}
+\date{September 15, 2019\\v. 1.0.0}
+\begin{document}
+\maketitle
+
+
+
+\begin{onecolabstract}
+Saito is a blockchain that processes terabytes of data every day. It pays all of the nodes that contribute value in the network, and guarantees that attackers will always lose money attacking the blockchain..
+\end{onecolabstract}
+
+
+\begin{multicols}{2}
+This document is divided into three parts. The first discusses the Saito pruning mechanism that permits the network to process terabytes of data each day without collapsing. The second explains how the consensus mechanism works. The third explains the technical choices for the network at MAINNET launch, and discuss launch strategy.
+
+
+1. HOW TO PRUNE USELESS DATA
+
+The blockchain is divided into "genesis periods" of a length specified in the consensus rules. If the "genesis period" is 100,000 blocks and the latest block is 500,000, the genesis period stretches from block 400,001 to block 500,000.
+
+Once a block falls off the genesis period, its unspent transaction outputs (UTXO) are no longer spendable. Any UTXO that contain enough tokens to pay a rebroadcasting fee (double the average network fee over the last genesis period) will be rebroadcast by the next block producer.
+
+This happens by having the next block producer format these UTXO in special "automatic transaction rebroadcasting" (ATR) transactions. The ATR transactions must include the original transaction. And the rebroadcasting fee is deducted from the transaction. Any blocks that do not rebroadcast all necessary transactions (or include unnecessary rebroadcasts) are considered invalid by the network.
+
+Spent transaction outputs fall off the chain. Unspent transaction outputs that cannot pay the rebroadcasting fee fall off the chain. Any "dust" in those outputs are collected into the "treasury" of the blockchain, from where they are redistributed to the network as part of future block reward.
+
+Block producers must store full-block data for two genesis periods. After that they may delete everything except the 32-byte header-hash (i.e. the pre-block hash that combines with the previous block hash to generate the current block hash). The 32-byte hash is retained in order to prove the connection with the original genesis block.
+
+
+2. HOW TO PRODUCE BLOCKS
+
+Saito adds cryptographic signatures to the network layer, which give each transaction an unforgeable record of the path it takes from user to block producer. These paths can be used to measure the "routing work" provided by the routing nodes in the network.
+
+The consensus rules of the blockchain set a "difficulty" for block production. This difficulty is a "cost" that is paid by collecting the  "routing work" embedded in individual transactions. The amount of "work" available to any node is the value of the transaction fee in a transaction halved with each additional hop taken into the network.
+
+Nodes cannot use "routing work" from transactions that do not include them on their routing path to produce blocks.
+
+If the "routing work" available to a block producer is equal to or greater than the "difficulty" required to produce a block, the block producer may produce a block. Any surplus in available work may be taken by the block producer in immediate payment. The remainder of the block reward is handed over to the payment lottery.
+
+
+3. HOW THE PAYMENT LOTTERY WORKS
+
+The lottery works as a proof-of-work challenge. Each block contains a computational puzzle in the form of its block hash. If a miner finds a solution to this puzzle, it broadcasts the solution to the network as part of a normal Saito transaction. We call the puzzle the "golden ticket". We call the solution the "golden ticket solution". 
+
+Nodes earn lottery tickets proportional to the amount of routing work they have contributed to the block.\footnote[1]{If a transaction paying a 10 SAITO fee passes through two relay nodes before its inclusion in a block, the first relay node is deemed to have done 10 / 17.5 percent (57\%), the second node is deemed to have done 5 / 17.5 percent (29\%), and the block producer is deemed to have done 2.5 / 17.5 percent (14\%) of the routing work. The chance each node has of winning the lottery is normalized by the percentage that the transaction fee has relative to the total fees in the block.} A random number in the miner solution selects the winning routing node. The block reward is then divided between the miner that found the golden ticket and the randomly-selected routing node.
+
+Network difficulty auto-adjusts until the network is producing one golden ticket solution on average per block.
+
+The system eliminates the fifty-one percent attack. Unless attackers match one hundred percent of the mining and routing work done by the honest network, they either cannot produce blocks as quickly as honest nodes, or are able to produce blocks but not collect payments. The network remains vulnerable as the hashpower market.
+
+3. IMPROVING SECURITY WITH A DEADWEIGHT LOSS MECHANISM
+
+To improve security beyond the 100 percent point, we introduce a deadweight-loss mechanism through the addition of a proof-of-stake component. This allows us to maintain the security of the blockchain beyond the death of Moore's Law.
+
+The lottery is modified slightly. Once a golden ticket solution is found, the routing and mining rewards for the solved block are allocated as usual. The random variable is then hashed again to select the winning routing node of the previous block, and then hashed again to pick a winner from a table of stakers maintained in the consensus code. This process repeats until all previous unsolved blocks are processed. An upper limit to the number of sequential unsolved blocks may be applied for practical purposes, at which point any uncollected funds are simply apportioned to the treasury.
+
+To stake in the network, users send a specially-formatted transaction into the network containing the desired staking amount as a specially-formatted UTXO. The amount of tokens staked are added to the transaction fee for the purpose of determining the value of "routing work" in this transaction.
+
+New deposits are not eligible for payment or withdrawal until the existing pool of stakers have been fully paid out. So new staking UTXO are added to a list of "pending" UTXO. Once the existing staking table has been fully paid out, the nodes in the network will "refresh" the staking table and make these transactions eligible for payout. Users may not spend their staked UTXO until they have been paid-out by the network.
+
+The amount paid out to staking nodes each block is the average of the amount paid into the treasury by the staking reward during the *previous* genesis period. The size of the staking pool may be adjusted in the consensus rules of the blockchain as desirable.
+
+A hash representation of the state of the staking table is included in every block in the form of a commitment. This table can be downloaded by full-nodes on their initial connection to the network. The design of the network and the ATR mechanism described above combines with the use of UTXO to manage the staking process to ensure that all new nodes can reconstruct the staking table within one genesis period at most.
+
+Mining difficulty is adjusted upwards if two blocks containing golden tickets are found in a row and downwards if two blocks without golden tickets are found in a row. An exponential multiplier to mining difficulty also begins to apply if than two blocks with golden tickets are found in a row. A similarly punitive cost applies if two blocks without golden tickets are found consecutively, which carves off an ever-increasing amount of the staking revenue for direct deposit to the network treasury instead of delivery to stakers.
+
+4. BLOCK FLOODING ATTACKS AND SPAM
+
+Consensus rules dictate that peers will not forward blocks unless they are convinced the blocks exist on the longest-chain. In order to be considered part of the longest-chain, the chain must contain both more aggregate routing work as well as more aggregate mining work.
+
+[ QUESTION.- how do we handle attackers bumping up difficulty for a subset of nodes using their own blocks, thus splitting the chain as those blocks do not adjust downwards to chains on lower difficulty currently, and then attacking the main chain at the normal difficulty once the network is split? The poisoned nodes must be allowed to switch to the lower-difficulty chain once the mining work on that chain is greater than on their own. So there should be an objective way of translating the cost of work to the difficulty function -- Saito does not do this at present, but the logic solution would seem to imply that the value of work on the chain is 10\% less if the difficulty is 10\% easier. But is this the case? ]
+
+Nodes are welcome to set a base transaction fee beyond which they will not forward transactions. This information should be made publicly available to peers as part of the initial handshake that occurs on connection. Nodes also require peers to provide cryptographic signatures proving control of their addresses on connection.
+
+These restrictions prevent nodes from spamming the network - they can only spam their peers. It also allows users to evaluate the security of the chain and calculate the appropriate number of confirmations based on the two different cost factors: the deadweight loss to attackers provided by accumulating proof-of-stake blocks, and the guaranteed cost-function imposed by the mining lottery.
+
+SHOULD STAKING PAYMENTS BE A SMOOTHED FUNCTION? no because you need to mine anyway to find out who is paid. So it would only really work if an attacker had unlimited golden tickets.
+
+
+4. BLOCK FLOODING ATTACKS AND SPAM
+
+
+
+
+
+
+QUESTIONS:
+
+1. is it safe to send the staking mechanism as a transaction fee (attack vectors?)
+
+2. re: table of inactive stakers - does this incentivizing spending your stake once it has passed and adding it again? do we have temporal overloads?
+
+3. IMPROVEMENT SECURITY BEYOND 100\%
+
+
+
+
+
+
+
+
+
+As an aside, it can be seen that this system is fully sybil-resistant. Sybils broadcast Elementary mathematics illustrate that this system is fully sybil resistant. Routing paths with sybils are less profitable for all participants. Knowledge of network paths also
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. MAINNET TECHNICAL CRITERIA
+
+
+Saito is launching with a "genesis period" of 30 days, and a blocksize cap of 1 BB.
+
+The slope of the "difficulty curve" for block production will be set at - - - 
+
+
+\end{multicols} 
+\end{document}
