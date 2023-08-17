@@ -22,7 +22,7 @@
 \usepackage{cite}
 
 
-\title{Sybil-Proofing Red Balloons with Routing Taxes}
+\title{A Simple Proof of Sybil-Proof}
 \author{
   Lancashire, David\\
   \texttt{david@saito.tech}
@@ -36,7 +36,7 @@
 \maketitle
 
 \begin{onecolabstract}
-Existing literature in computer science argues the \textit{Red Balloons} \cite{Babaioff2011OnBA} sybilling problem is unsolvable in permissionless networks. It specifically claims that no sybil-proof reward schemes exist for relay nodes where information propagation without self-cloning is a dominant strategy for all such nodes in a three-hop routing path. This paper offers a counter-proof to this claim, formally proving the existence of a mechanism that achieves sybil-proofness in a three-hop path.
+Existing literature in computer science argues the \textit{Red Balloons sybilling problem} is unsolvable in permissionless networks. It specifically claims that no sybil-proof reward schemes exist in permissionless networks where information propagation without self-cloning is a dominant strategy for all such nodes in a three-hop routing path. This paper offers a counter-proof to this claim, formally proving the existence of a mechanism that achieves sybil-proofness in a three-hop path.
 \end{onecolabstract}
 
 \bigskip 
@@ -46,15 +46,15 @@ Existing literature in computer science argues the \textit{Red Balloons} \cite{B
 
 \subsection*{INTRODUCTION}
 
-The \textit{Red Balloons} sybilling problem is a known issue that impedes the ability of permissionless blockchains to offer payments to routing nodes. As outlined in Babaioff \cite{Babaioff2011OnBA}, this problem exists in networks like Bitcoin where rational nodes will avoid sharing unconfirmed transactions to minimize competition for collection of their fees. Offering a payout to routing nodes can overcome this problem, but creates counter-incentive for nodes to sybil transaction routing paths with pseudoanonymous identities (``self-cloning'') to maximize their chance of winning the routing payout.
+The \textit{Red Balloons sybilling problem} is a known issue that impedes the ability of permissionless blockchains to offer routing payouts. In networks like Bitcoin, this problem exists because rational nodes will avoid sharing unconfirmed transactions to minimize competition for collection of their fees. Offering a payout to routing nodes can overcome this problem, but creates counter-incentive for nodes to sybil transaction routing paths with pseudoanonymous identities (``self-cloning'') to maximize their chance of winning the routing payout.
 
-In their seminal paper \textit{On Bitcoin and Red Balloons} which analyses this problem, Babaioff and his co-authors claim the formal impossibility of solving this problem, offering a mathematical proof they write shows ``there is no Sybil-proof reward scheme in which information propagation and no duplication are dominant strategy for all nodes at depth 3 or less.''
+In their seminal paper \textit{On Bitcoin and Red Balloons} \cite{Babaioff2011OnBA}, Babaioff and his co-authors claim the formal impossibility of solving this problem, offering a mathematical proof they write shows ``there is no Sybil-proof reward scheme in which information propagation and no duplication are dominant strategy for all nodes at depth 3 or less.''
 
-Validation of the Babaioff claims have come through the extension of their approach into related domains like query-incentive networks \cite{chen2013sybil} \cite{zhang2023collusionproof}. Where other academics have proposed mechanisms to strengthen sybil-resistance, their attempts have notably sacrificed the permissionless properties of the Bitcoin design to do so, introducing mechanisms that limit which participants can propose blocks \cite{DBLP:journals/corr/abs-1712-07564}, or adding mechanisms of closure which introduce new attacks on participant selection and ranking mechanisms \cite{DBLP:journals/corr/AbrahamMNRS16}.
+Validation of the Babaioff paper seems to have come through the extension of their approach into related domains like query-incentive networks \cite{chen2013sybil} \cite{zhang2023collusionproof}. Where other academics have proposed mechanisms to strengthen sybil-resistance, their attempts have also notably sacrificed the permissionless properties of the Bitcoin design, introducing mechanisms that limit which participants can propose blocks \cite{DBLP:journals/corr/abs-1712-07564}, or adding mechanisms of closure which introduce new attacks on participant selection and ranking mechanisms \cite{DBLP:journals/corr/AbrahamMNRS16}.
 
-To our knowledge, only one paper has attempted to offer a formal counter-proof \cite{DBLP:journals/corr/abs-2110-10606} by arguing that the incentive nodes have to sybil transactions can be eliminated if we permit them to extract arbitrary amounts of value in a single hop. Whether this approach can be considered a proper solution is an open question, but it is problematic from an economic perspective as it requires viewing the underlying problem as the creation of the additional routing hops rather than the inability of the mechanism to contain value-extraction from attackers in its network layer.
+To our knowledge, only one paper has attempted to offer a formal counter-proof \cite{DBLP:journals/corr/abs-2110-10606}, arguing that the incentive to sybil can be eliminated if we permit nodes to extract arbitrary amounts of value in a single hop. Whether this can be considered a proper solution is an open question, but it is problematic in the way it requires viewing the underlying problem as the creation of superfluous routing hops rather than the inability of the payment mechanism to contain value-extraction from self-interested routers.
 
-The remainder of this paper takes up this task, first describing a simple mechanism with a routing tax, and then showing how it avoids the impossibility trap outlined by Babaioff, creating a permissionless reward scheme in which ``information propagation without self-cloning'' is the dominant strategy for all participants.
+The remainder of this paper takes up the task, first describing a simple mechanism with a routing tax, and then showing how it avoids the impossibility trap outlined by Babaioff, creating a permissionless reward scheme in which ``information propagation without self-cloning'' is the dominant strategy for all participants.
 
 \subsection*{PART I: ASSUMPTIONS}
 
@@ -72,9 +72,9 @@ In mechanisms with this design the dominant strategy for any node holding a tran
 
 \subsection*{PART II: THE PROOF}
 
-Babaioff (2012) starts by deriving an equation which must hold in Bitcoin-style networks if propagating transactions is a dominant strategy. It then demonstrates via a proof-by-contradiction that self-cloning is rational as long as this equation holds. Our counter-proof works in the reverse order. We first demonstrate that self-cloning is an irrational strategy that lowers the expected income of those who do it. We then show that nodes nonetheless benefit from propagating transactions regardless of whether their peers do.
+The Babaioff paper starts by deriving an equation it asserts must hold in Bitcoin-style networks if propagating transactions is a dominant strategy. It then demonstrates via a proof-by-contradiction that self-cloning is rational as long as this equation holds. Our counter-proof works in the reverse order. We first demonstrate that self-cloning is an irrational strategy that lowers the expected income of those who do it. We then show that nodes nonetheless benefit from propagating transactions regardless of whether their peers do.
 
-To establish the income equations necessary to prove this, we start with some preliminary definitions.
+To establish the income equations necessary to show that self-cloning is irrational, we start with some preliminary definitions.
 
 \textbf{Routing Work Definitions:}
 
@@ -112,7 +112,7 @@ By assumptions (1.1), (1.3) and (1.4) this gives us the following equations.
 \end{adjustwidth}
 \normalsize
 
-We refer to the "utility" that a node holds in a transaction as the probability of the node being selected as the winning router if the transaction is selected for payout in the routing lottery. According to (1.4) that is:
+We refer to the "utility" that a node holds \textit{in a transaction} as the probability of the node being selected as the winning router if the transaction is selected as the winning transaction in the routing lottery. According to (1.4) that is:
 
 \large
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -134,7 +134,7 @@ We can now develop the income equation for non-sybils (nodes which produce a blo
 
 \textbf{Income Equation for Non-Sybils:}
 
-The income equation for a non-sybilling node at hop n is the routing payout multiplied by the utility that a node holds in the transactions in the block.
+The income equation for a non-sybilling node at hop \textit{n} is the routing payout multiplied by the utility that a node holds in the transactions in the block.
 
 To simplify our proof we start with a block containing a single transaction. In a non-sybil environment the probability of this transaction being selected is 1:
 
@@ -172,7 +172,7 @@ i_{\text{non-sybil}}(f, n) = \frac{f}{2(2^n - 1)}
 \end{adjustwidth}
 \normalsize
 
-Given a transaction with a fee of 100 units, a second-hop node following a non-sybilling strategy can expect to earn 16.67 in income. This can be confirmed via the tables in APPENDIX I, or intuitively since with 50\% of the block reward destroyed (1.3) the expected income for a second-hop node is $\sim$33.3\% of 50\% or $\sim$16.67\%.
+Given a transaction with a fee of 100 units, a second-hop node following a non-sybilling strategy can expect to earn 16.67 in income. This can be confirmed via the tables in APPENDIX A, or intuitively since with 50\% of the block reward destroyed (1.3) the expected income for a second-hop node is $\sim$33.3\% of 50\% or $\sim$16.67\%.
 
 \textbf{Income Equation for Sybils:}
 
@@ -180,7 +180,7 @@ Calculating the income equation for sybils who add an additional hop before prod
 
 It follows from (1.1), (1.2) and (1.4) that any attacker adding an additional hop to a transaction halves the amount of routing work available in that transaction for production of a block. This puts the attacker at a strict disadvantage vis-a-vis any competitors at the same routing depth.
 
-Compensating for this decline and re-establishing a competitive position in block production requires the attacker to add a supplementary transaction containing real fees. The amount of fees the attacker must contribute to generate the supplementary work lost by their act of sybilling can be calculated as follows:
+Compensating for this decline and re-establishing a competitive position in block production requires the attacker to add a supplementary transaction containing real fees. The amount of fees the attacker must contribute to generate an equivalent amount of first-hop routing work to that lost by their act of sybilling an existing transaction can be calculated as follows:
 
 \large
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -190,9 +190,9 @@ sw(n, f) = \frac{f}{2^n}
 \end{adjustwidth}
 \normalsize
 
-The addition of a supplementary transaction with supplementary work increases the number of transactions in the block. For clarity, we refer to the original transaction which the attacker is sybilling as \begin{math}tx_{syb}\end{math} and the supplementary transaction added by the attacker to make-up for their self-created deficit in routing work as \begin{math}tx_{sup}\end{math}.
+The addition of a supplementary transaction with supplementary work increases the number of transactions in the block. For clarity, we refer to the original transaction which the attacker is sybilling as \begin{math}tx_{syb}\end{math} and the supplementary transaction added by the attacker as \begin{math}tx_{sup}\end{math}.
 
-We observe that the addition of \begin{math}tx_{sup}\end{math} to the block changes the total fees (F) in that block.
+The addition of \begin{math}tx_{sup}\end{math} to the block changes the total fees (F) in that block.
 
 \large
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -240,7 +240,7 @@ p(tx_{sup}) = \frac{1}{1 + \frac{1}{2^n}}
 \end{adjustwidth}
 \normalsize
 
-We now have the probability of each transaction being selected. To calculate the income equation for the attacker we must modify the probability of each transaction being selected by the utility the attacker holds within that transaction. This provides the combined chance of the transaction being selected and then the attacker being selected in the routing lottery. We refer to this figure as the ``lottery adjusted utility" of the attacker and define it for the supplementary transaction as \begin{math}lau_{sup}\end{math} and in the sybilled (original) transaction as \begin{math}lau_{syb}\end{math}. Note that these probabilities represent the chance of the attacker being selected rather than their expected income as only a portion of the block reward will be distributed as the routing payout as per (1.3).
+To calculate the income equation for the attacker we must modify the probability of each transaction being selected by the utility the attacker holds within each transaction. This provides the combined chance that the attacker has of receiving payment - of a transaction that pays them being selected and then of them being selected as the winning node from that transaction's routing path. We refer to this figure as the ``lottery adjusted utility" of the attacker and define it for the supplementary transaction as \begin{math}lau_{sup}\end{math} and in the sybilled (original) transaction as \begin{math}lau_{syb}\end{math}. Note that these probabilities represent the chance of the attacker being selected rather than their expected income as only a portion of the block reward will be distributed as the routing payout as per (1.3).
 
 In the supplementary transaction the attacker is the only routing node and thus earns the payout with a probability of 1 if the supplementary transaction is chosen, making \begin{math}lau_{sup}\end{math} equal to \begin{math}p(tx_{sup})\end{math}.
 
@@ -380,13 +380,13 @@ Net profit is the attacker's income minus the cost of the supplementary work the
 \end{adjustwidth}
 \normalsize
 
-For a second-hop routing node the net profit from a sybilling strategy is ~8.93 if f = 100. This is lower than the income of 16.67 expected from a non-sybilling strategy. Self-cloning is an inferior strategy.
+For a second-hop routing node the profit from a sybilling strategy is ~8.93 if f = 100. This is lower than the profit of 16.67 expected from a non-sybilling strategy. Self-cloning is an inferior strategy.
 
 \textbf{Transaction Propagation:}
 
-We proceed to demonstrate that nodes facing this routing-tax mechanism nonetheless have a rational interest in propagating transactions to their peers. To do this, we assume the existence of two nodes A1 and B1 which receive a transaction from a user as first-hop recipients.
+We now demonstrate that nodes facing this routing-tax mechanism nonetheless have a rational interest in propagating transactions to peers. To do this, assume the existence of two nodes A1 and B1 which receive a transaction from a user as first-hop recipients.
 
-A1 and B1 have the option of propagating this transaction to their children A2 and B2. The existence of a routing tax prevents us from assuming with Babaioff (2012) that all nodes have an equal probability of producing the next block and directly working out the income equations for the parents and children. We can nontheless make headway by observing there are six scenarios in play:
+A1 and B1 have the option of propagating this transaction to their children A2 and B2. The existence of a routing tax prevents us from assuming that all nodes have an equal probability of producing the next block and thus working out the income equations for the parents and childrens. We can nontheless make headway by observing there are six scenarios in play:
 
 \begin{enumerate}
   \item A1 outcompetes B1 and all children
@@ -397,7 +397,7 @@ A1 and B1 have the option of propagating this transaction to their children A2 a
   \item B2 outcompetes B1 and all others
 \end{enumerate}
 
-If both A1 and B1 hoard only the first two outcomes are possible. In this case, A1 and B1 rationally expect to claim payment with equal probability:
+If both A1 and B1 hoard only the first two outcomes are possible and A1 and B1 expect to claim payment with equal probability:
 
 \large
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -409,7 +409,7 @@ h h = u(2, 2) \cdot 0.5
 
 If A1 shares but B1 hoards scenarios 3 and 4 become possible: there is an unknown probability that A2 will produce a block before either A1 or B1.
 
-Let us define this unknown probability as \textit{x}. While we do not know the value of \textit{x} we can expect it to be similar for A2 and B2 given the symmetrical nature of the incentive structure facing A1 or B1. We can also observe that whatever the value of \textit{x} both A1 and B1 expect to outcompete each other with symmetrical probabilities as A1 sharing this transaction with its children does not disadvantage A1 in its direct competition with B1.
+Let us define this unknown probability as \textit{x}. While we do not know the value of \textit{x} we expect it to be similar for A2 and B2 given the symmetrical nature of the incentive structure facing A1 or B1. We can also observe that whatever the value of \textit{x} both A1 and B1 expect to outcompete each other with symmetrical probabilities as A1 sharing this transaction with its children does not disadvantage A1 in its direct competition with B1.
 
 While A1 thus expects the losses from sharing to be distributed evenly between A1 and B1, A1 nonetheless has private benefits which accrue to it privately in the event that A2 produces the next block. This gives us the following income equations for A1 and B1 if we assume that A1 shares and B1 hoards given the unknown probability \begin{math}x\end{math} that B2 produces the next block.
 
@@ -564,18 +564,20 @@ and for x = 0.1 y = 0.6
 \end{adjustwidth}
 \normalsize
 
-The symmetrical nature of the income equations affecting A2 and B2 and their children make it impossible for \textit{x} to be this much larger than \textit{y}. Neither A1 nor B1 can reasonably expect that sharing the same transaction with two children will result in a 700\% greater probability of those children producing a block than if the same transaction is independently shared with either child alone.
+The symmetrical nature of the income equations affecting A2 and B2 and their children make it impossible for \textit{x} to be this much larger than \textit{y}. Given that the probability of each node producing a block depends on its independent transaction flow, there is no formally sound explanation for why both A1 and B1 sharing the same transaction with their two children will result in a 700\% greater probability of those children producing a block than if the same transaction is independently shared by either node with either child alone.
 
-It follows that information propagation is a dominant strategy. Each node increasea its income relative to hoarding peers by propagating its unconfirmed transactions to child nodes for their assistance in outcompeting its competitors at similar routing-depths. This strategy imposes disproportionate losses on hoarding peers at the same depth unless those peers defend against this by propagating transactions to their own children in defense.
+Statistically, what we observe is a formal violation of the inclusion-exclusion principle in statistics, with its requirement the sum of the probability of two independent events be the sum of the probabilities of each event happening on its own.
 
-This applies to every node at every position in a routing path.
+It follows that information propagation is a mathematically dominant strategy. Each node may increase its income relative to its hoarding peers by propagating unconfirmed transactions to child nodes, who assist their parents in outcompeting their competitors at similar routing-depths. Peers who do not share face disproportionate losses unless they defend against this by propagating transactions to their own children to level the playing field.
 
-As all nodes have an incentive to propagate, this delivers a Sybil-proof reward scheme in which information propagation without self-cloning is the dominant strategy for all nodes.
+This logic applies to every node at every position in every routing path.
+
+As all nodes have an incentive to propagate without self-cloning, we have a Sybil-proof reward scheme in which information propagation without self-cloning is the dominant strategy for all nodes.
 
 
 \subsection*{CONCLUSION}
 
-The sybil attack identified by Babaioff exists where nodes adding hops increases private income even if doing so has suboptimal consequences for the network as a whole. As with other collective action problems \cite{olson1971logic}, unless the underlying problem can be fixed on the incentive level, the result is necessarily a market failure \cite{DBLP:journals/corr/abs-2110-10606} which can be eliminated only through the containment of extractive behavior through the use of mechanisms which restrict the freedom of participation of participants in the system \cite{DBLP:journals/corr/AbrahamMNRS16} \cite{DBLP:journals/corr/abs-1712-07564}.
+The sybil problem identified by Babaioff exists because nodes which add hops increase their private income even if doing so has suboptimal consequences for the network as a whole. As with other collective action problems \cite{olson1971logic}, unless the underlying problem can be fixed on the incentive level, the result is necessarily a market failure \cite{DBLP:journals/corr/abs-2110-10606} which can be eliminated only through the containment of extractive behavior through the use of mechanisms which restrict the freedom of participation of participants in the system \cite{DBLP:journals/corr/AbrahamMNRS16} \cite{DBLP:journals/corr/abs-1712-07564}.
 
 The \textit{routing-tax} mechanism described in this paper fixes the sybilling problem by inverting the collective action problem that creates the incentive to sybil in the first place. With a routing-tax in place, while all early-hop nodes would collectively prefer to hoard transactions and minimize their children earning any income at all, each node suddenly has a stronger individual interest in defecting from the hoarding equilibrium and propagating transactions its own children. The direction of defection shifts from hoarding transactions to propagating them.
 
