@@ -36,7 +36,7 @@
 \maketitle
 
 \begin{onecolabstract}
-Existing literature in computer science argues the \textit{Red Balloons sybilling problem} is unsolvable in permissionless networks. It specifically claims that no sybil-proof reward schemes exist in permissionless networks where information propagation without self-cloning is a dominant strategy for all such nodes in a three-hop routing path. This paper offers a counter-proof to this claim, formally proving the existence of a mechanism that achieves sybil-proofness in a three-hop path.
+Existing literature in computer science argues the \textit{Red Balloons sybilling problem} is unsolvable in permissionless networks. It specifically claims that no sybil-proof reward schemes exist in such networks where information propagation without self-cloning is a dominant strategy for all such nodes in a three-or-less hop routing path. This paper offers a counter-proof to this claim, formally proving the existence of a mechanism that achieves sybil-proofness in a three-hop path.
 \end{onecolabstract}
 
 \bigskip 
@@ -46,7 +46,7 @@ Existing literature in computer science argues the \textit{Red Balloons sybillin
 
 \subsection*{INTRODUCTION}
 
-The \textit{Red Balloons sybilling problem} is a known issue that impedes the ability of permissionless blockchains to offer routing payouts. In networks like Bitcoin, this problem exists because rational nodes will avoid sharing unconfirmed transactions to minimize competition for collection of their fees. Offering a payout to routing nodes can overcome this problem, but creates counter-incentive for nodes to sybil transaction routing paths with pseudoanonymous identities (``self-cloning'') to maximize their chance of winning the routing payout.
+The \textit{Red Balloons sybilling problem} is a known issue that impedes the ability of permissionless blockchains to offer routing payouts. In networks like Bitcoin, this problem exists because rational nodes will avoid sharing unconfirmed transactions to minimize competition for collection of their fees. Offering a payout to routing nodes can overcome this problem, but creates a counter-incentive for nodes to sybil transaction routing paths with pseudoanonymous identities (``self-cloning'') to maximize their chance of winning the routing payout.
 
 In their seminal paper \textit{On Bitcoin and Red Balloons} \cite{Babaioff2011OnBA}, Babaioff and his co-authors claim the formal impossibility of solving this problem, offering a mathematical proof they write shows ``there is no Sybil-proof reward scheme in which information propagation and no duplication are dominant strategy for all nodes at depth 3 or less.''
 
@@ -54,7 +54,7 @@ Validation of the Babaioff paper seems to have come through the extension of the
 
 To our knowledge, only one paper has attempted to offer a formal counter-proof \cite{DBLP:journals/corr/abs-2110-10606}, arguing that the incentive to sybil can be eliminated if we permit nodes to extract arbitrary amounts of value in a single hop. Whether this can be considered a proper solution is an open question, but it is problematic in the way it requires viewing the underlying problem as the creation of superfluous routing hops rather than the inability of the payment mechanism to contain value-extraction from self-interested routers.
 
-The remainder of this paper takes up the task, first describing a simple mechanism with a routing tax, and then showing how it avoids the impossibility trap outlined by Babaioff, creating a permissionless reward scheme in which ``information propagation without self-cloning'' is the dominant strategy for all participants.
+The remainder of this paper thus takes up the task of offering a simple proof of sybil-proofness directly, first describing a simple mechanism with a routing tax, and then showing how it avoids the impossibility trap outlined by Babaioff, creating a permissionless reward scheme in which ``information propagation without self-cloning'' is the dominant strategy for all participants.
 
 \subsection*{PART I: ASSUMPTIONS}
 
