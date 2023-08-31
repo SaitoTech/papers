@@ -64,7 +64,7 @@ A routing-tax mechanism requires five basic assumptions:
   \item all unconfirmed transactions provide block-generating "routing work" to the nodes which possess them, with such work consisting of the value of the transaction fee halved by each additional hop beyond the first that the transaction has taken to reach the node in question.
   \item all valid blocks must contain enough "routing work" to meet a consensus-imposed difficulty requirement; nodes that reach this difficulty quota first are able to propose blocks before others.
   \item when a block is produced, 50\% of the fees contained in its transactions are destroyed with the remaining 50\% allocated to a node chosen from the routing network.
-  \item the routing node is chosen by first picking a random transaction from the block, with each transaction's likelihood of being selected being proportional to its share of the fees contributed to the block. A node is then chosen from the routing path of the transaction, where each node's likelihood of selection is propotional to its share of the aggregate routing work (calculated as per item 1 above) the transaction provided to the block producer.
+  \item the routing node is chosen by first picking a random transaction from the block, with each transaction's likelihood of being selected being proportional to its share of the fees contributed to the block. A node is then chosen from the routing path of the transaction, where each node's likelihood of selection is proportional to its share of the aggregate routing work (calculated as per item 1 above) the transaction provided to the block producer.
   \item a simple longest-chain rule determines which blocks are confirmed and which blocks are orphaned.
 
 \end{enumerate}
