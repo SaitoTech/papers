@@ -231,11 +231,11 @@ Factor out f for fee-independent probabilities:
 \large
 \begin{adjustwidth}{1.5em}{1.5em} 
 	\begin{math}
-p(tx_{syb}) = \frac{\frac{1}{2^n}}{1 + \frac{1}{2^n}}
+p(tx_{sup}) = \frac{\frac{1}{2^n}}{1 + \frac{1}{2^n}}
 	\end{math}
 
 	\begin{math}
-p(tx_{sup}) = \frac{1}{1 + \frac{1}{2^n}}
+p(tx_{syb}) = \frac{1}{1 + \frac{1}{2^n}}
 	\end{math}
 \end{adjustwidth}
 \normalsize
@@ -566,7 +566,7 @@ and for x = 0.1 y = 0.6
 
 The symmetrical nature of the income equations affecting A2 and B2 and their children make it impossible for \textit{x} to be this much larger than \textit{y}. Given that the probability of each node producing a block depends on its independent transaction flow, there is no formally sound explanation for why both A1 and B1 sharing the same transaction with their two children will result in a 700\% greater probability of those children producing a block than if the same transaction is independently shared by either node with either child alone.
 
-Statistically, what we observe is a formal violation of the inclusion-exclusion principle in statistics, with its requirement the sum of the probability of two independent events be the sum of the probabilities of each event happening on its own.
+We therefore observe a formal violation of the inclusion-exclusion principle in statistics, with its requirement the sum of the probability of two independent events be the sum of the probabilities of each event happening on its own.
 
 It follows that information propagation is a mathematically dominant strategy. Each node may increase its income relative to its hoarding peers by propagating unconfirmed transactions to child nodes, who assist their parents in outcompeting their competitors at similar routing-depths. Peers who do not share face disproportionate losses unless they defend against this by propagating transactions to their own children to level the playing field.
 
