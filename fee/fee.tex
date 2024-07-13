@@ -23,7 +23,7 @@
 
 \usepackage[bottom]{footmisc}
 
-\title{The Economics of Optimal Transaction Fee Mechanisms}
+\title{The Economics of Transaction Fee Mechanism Design}
 \author{
   David Lancashire\\
   \texttt{david.lancashire@gmail.com}\\
@@ -31,15 +31,14 @@
 \begin{document}
 \maketitle
 
-%\begin{onecolabstract}
-%\end{onecolabstract}
-%\bigskip 
+\begin{onecolabstract}
+A socially optimal transaction fee mechanism must be \textit{incentive compatible} for users and block producers and \textit{pareto optimal} for all participants.\footnote{pareto optimality is a necessary condition for incentive compatibility, as otherwise a subset of users always exists who costlessly increase utility by spending more or less income on transaction fees.} This paper offers a succinct proof it is possible to achieve both properties.
+\end{onecolabstract}
+\bigskip 
 
 \subsection*{Introduction}
 
-A socially optimal transaction fee mechanism must be incentive compatible for users and block producers and \textit{pareto optimal} for all participants.\footnote{Incentive compatibility at a point of pareto optimal production is the technical way to describe our desired properties, since at these points resources are used most efficiently not only within the mechanism to optimize the utility created from the fees paid, but also in relation to all other goods that could theoretically be purchased for the same fee. Unless overall production is \textit{pareto optimal} incentive compatibility is impossible since any global coalition can costlessly increase its collective welfare by adjusting the way resources are allocated in the production of goods and services.} A school of papers in computer science claims this is impossible, but formal economic analysis confirms it is.\footnote{See the papers referenced in the bibliography by Tim Roughgarden, Elaine Shi, Hao Chung and others. The non-standard terms like "side-contract proofing" stem from the apparent belief that collusion must always be a socially suboptimal strategy such that \textit{pareto optimality} and \textit{incentive compatibility} can never be achieved at price levels negotiated directly between users and block producers for private inclusion.}.
-
-Start with the equation for the \textit{utility possibilities frontier} for a single individual \textit{i} choosing between two goods.
+Start with the standard \textit{utility possibilities frontier} for a single individual choosing between two goods.\footnote{The LHS shows the marginal rate of substitution between two goods, which is the ratio of the utility derived from each. The RHS shows the cost function of producing each. The individual get the optimal amount of utility from the resources they are able to spend to purchase or produce goods when both are equally efficient at converting resources into utility. It is easy to see that at any other point the user can costlessly increase their utility by adjusting the composition of the goods they are purchasing.}
 
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -49,7 +48,7 @@ Start with the equation for the \textit{utility possibilities frontier} for a si
 \end{adjustwidth}
 \normalsize
 
-The LHS shows the \textit{marginal rate of substitution} between two goods. The RHS shows the relative costs of producing each. All combinations which maximize individual utility fall on this curve.\footnote{If this equation is not in equilibrium this individual can increase their utility by shifting their allocation of resources to whichever good produces utility more efficiently. This translates directly into paying a higher or lower fee for on-chain transactions if one of the goods in question is a blockchain.} We sum the \textit{marginal rates of substitution} for all individuals to find the \textit{utility possibilities frontier} for society as a whole.
+Sum this across all individuals to find the \textit{utility possibilities frontier} for society as a whole.
 
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -59,63 +58,21 @@ The LHS shows the \textit{marginal rate of substitution} between two goods. The 
 \end{adjustwidth}
 \normalsize
 
-These points are \textit{pareto optimal} as we cannot improve outcomes for anyone without worsening outcomes for someone else. Incentive compatibility is also only possible at these points as otherwise some coalition of participants must be able to improve their utility through the simple byzantine strategy of paying more or less in transaction fees.
+All points on this curve are \textit{pareto optimal} -- we cannot increase utility for any individual without decreasing it for at least one other person. Voluntary-trade pulls this equation into equilibrium for any two private goods under classical assumptions. That implies equilibrium across any N-dimensional basket of private goods. We therefore set \textit{good a} as our blockchain and \textit{good b} as our basket of all other private goods competing for consumption of the transaction fee.
 
-Voluntary-trade pulls this equation into equilibrium for any two private goods in a free market.\footnote{We assume a classical model with standard assumptions such as the existence of rational production schedules. Readers without a background in economics can find treatment of this subject in any introductory economics textbook such as Paul Samuelson's "Economics: An Introductory Analysis" (1948).} That implies equilibrium for any N-dimensional basket of private goods, which allows us to set good \textit{a} as our blockchain and good \textit{b} as the basket of all other private goods.
-
-Our first observation is that if the blockchain were a simple private good then \textit{pareto optimality} is reached at whatever fees-levels users voluntary agree to pay block producers. Collusion is not socially suboptimal in such a case, although this analysis is tangential since the blockchain does not consist of a private good.
+It follows that unless a fee mechanism incentivizes payment of the amount of fees defined by this equation said mechanism cannot be \textit{incentive compatible} or \textit{collusion resistant} as a subset of users must exist who can costlessly increase utility through the byzantine strategy of paying a different fee.
 
 \subsection*{Modelling Blockchain Provision as a Public Good}
 
-It is better to model blockchains as public goods because they offer diffuse and non-excludable benefits that emerge when block producers compete to include publicly-circulating transactions in blocks:
+Modelling the blockchain as a private good is inappropriate as it fails to capture the non-excludable public benefits created when block producers compete to include \textit{publicly-circulating, fee-bearing transactions} in blocks:
 
 \begin{itemize}
   \item \textbf{higher security} - competition induces nodes to spend a greater percentage of their income on the security function than would otherwise be rational.
-  \item \textbf{faster inclusion} - confirmation times are more sensitive to changes in the transaction fee as multiple nodes now compete to prioritize the highest-paying transactions for inclusion in blocks.
-  \item \textbf{censorship resistance} - open competition makes it more profitable for non-censoring nodes to join the network if existing producers refuse to include fee-paying transactions.
+  \item \textbf{faster inclusion} - competition makes confirmation times more sensitive to gradiations in transaction fees as multiple nodes prioritize the highest-paying transactions for inclusion in blocks.
+  \item \textbf{censorship resistance} - it is more profitable for non-censoring nodes to join the network if existing producers refuse to include fee-paying transactions.
 \end{itemize}
 
-We update our utility equation to account for both these public and private benefits:
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{u_{priv}^i}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-becomes
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{u_{{pub}+{priv}}^i}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-and
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{F_a}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-becomes
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{F_{{pub}+{priv}}}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-Our \textit{utility possibilities frontier} is now:
+We thus update our \textit{utility possibilities frontier} following Samuelson (1954) to include both \textit{private} and \textit{public} benefits and costs:
 
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -125,50 +82,11 @@ Our \textit{utility possibilities frontier} is now:
 \end{adjustwidth}
 \normalsize
 
-As in our model for private goods, unless a solution to this curve exists the amount of resources being allocated to our blockchain is not \textit{pareto optimal}. And that means we cannot have an incentive compatibility by definition as some subset of users must necessarily exist who can costlessly improve outcomes through the simple byzantine strategy of paying a different transaction fee.
+Observing this equation, Samuelson hypothesized that free-rider pressures make it impossible to induce any decentralized mechanism to achieve optimal social utility. Leonid Hurwicz -- inventor of the concept of \textit{incentive compatibility} -- later generalized Samuelson's critique to all informationally decentralized games where "byzantine" strategies exist that permit misleading others about utility.
 
-In his seminal 1954 paper on The Pure Theory of Public Expenditure, Paul Samuelson noted that all solutions require individuals to contribute resources in proportion to the utility they receive. In decentralized mechanisms where utility is unobservable and participants cannot be compelled to pay for it, rational users can free-ride on the contributions of others by underreporting how much they value the public good. Samuelson hypothesized that this might make it impossible to design any decentralized mechanism to fund public goods at socially optimal levels.
+\subsection*{Escaping the Samuelson-Hurwicz Trap}
 
-Leonid Hurwicz -- Samuelson's student and inventor of the concept of "incentive compatibility" -- later generalized Samuelson's critique to all informationally decentralized games, pointing out that in decentralized mechanisms participants must communicate via signaling, such that "byzantine" strategies are always available in any game where users can lie about their utility levels and willingless to spend resources.
-
-We can nonetheless prove a solution exists for public blockchains.
-
-\subsection*{Escaping the Samuelson-Hurwicz Trap: The Proof}
-
-In review, our blockchain provides a combination of public and private benefits. Public benefits are diffuse and non-excludable, while private benefits accrue privately and in proportion to the fees paid.
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{u_{{pub}+{priv}}}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-Our provision of public goods depends on the public circulation of transactions in ways that induce open competition for collection of their fees. Minimal public goods emerge in mechanisms where private transactions predominate. The maximum amount requires all participants to share all fee-bearing transactions publicly.
-
-So our cost function is not:
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{F_{{pub}+{priv}}}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-but rather:
-
-\large
-\begin{adjustwidth}{1.5em}{1.5em} 
-\begin{math}
-{F_{{priv}}}
-\sum_{i=1}^{s} \frac{u_a^i}{u_b^i} = \frac{F_a}{F_b}
-\end{math}
-\end{adjustwidth}
-\normalsize
-
-We modify our \textit{utility possibilities frontier} to include a new variable \textit{x} that reflects the probability between 0 and 1 that any transaction is a \textit{public transaction} rather than a \textit{private transaction}.
+Given that public blockchains induce provision of public goods in proportion to the percentage of fee-bearing transactions that circulate publicly, optimal provision must occur when all transactions and fees are available for competitive inclusion. We therefore simplify our cost function and add a variable \textit{x} that reflects the probability that transactions and fees are circulating publicly:
 
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em} 
@@ -178,18 +96,32 @@ We modify our \textit{utility possibilities frontier} to include a new variable 
 \end{adjustwidth}
 \normalsize
 
-Rational users prefer a high value for \textit{x} as it increases utility. Block producers want to consume transactions shared by their peers, but minimize competition for collection of the transactions they already have in their mempool. Their dominant strategy is to consume \textit{public transactions} and hoard \textit{private transactions}.
+The value of \textit{x} depends on whether users and block producers share unconfirmed fee-bearing transactions. Observe:
 
-It follows that no network which fails to incentivize block producers to share transactions publicly can have a \textit{pareto optimal} transaction fee mechanism. A theoretical proof this problem makes optimality impossible to achieve in all proof-of-work and proof-of-stake networks may be found in the paper \textit{On Bitcoin and Red Balloons}.
+\begin{itemize}
+  \item \textbf{rational users} - prefer to share transactions publicly, as sharing transactions publicly increases the utility to the user, while  rational block producers will not discriminate against transactions that are publicly available.
+  \item \textbf{rational nodes} - prefer to free-ride on publicly-circulating transactions but not share their own transactions.
+\end{itemize}
 
-At least one class of consensus mechanisms does exist in which all participants prefer to share transactions publicly. In routing work mechanisms income is higher for block producers who share unconfirmed transactions with their peers.
+The obstacle to achieving optimality is the preference of block producers to restrict transaction propagation to reduce competition for collection of the fee.
 
-Under these conditions, block producers also prefer to share transactions and public transactions crowd out private transactions as the value of \textit{x} approaches 1 in equilibrium. The blockchain achieves \textit{pareto optimality} at the point where transaction fees reflect the private utility of inclusion to users. Incentive compatibility is also achieved as users are dividing their resources between goods based solely on the private utility generated, which cannot be further increased by collusion with others.\footnote{One of the less obvious insights that comes from this proper solution is recognition of why collusion is suboptimal in proof-of-work and proof-of-stake. Strictly speaking, when users collude with block producers in those networks, the users are not increasing their utility by paying a lower fee, since rational block producers will not add transactions that are not profitable to them regardless of whether those transactions are public or private transactions. What is happening is that block producers can increase their change of collecting public transactions by restricting competition for the inclusion of their own set of private transactions. This effects a lateral wealth transfer from block producers who share to those who do not, which creates zero-sum benefits between block producers which may then be extended to users in exchange for exclusive access to their own transactions.}
+Without incentivizing block producers to share transactions publicly we cannot achieve \textit{pareto optimality}. Without \textit{pareto optimality} we cannot achieve \textit{incentive compatibility}. And without \textit{incentive compatibility} we cannot design a fee mechanism that is robust against collusion. This formally proves the \textit{transaction fee mechanism design} problem is strictly reducible to the \textit{sybil problem}.
 
+A theoretical proof it is impossible to induce rational actors to share transactions in proof-of-work and proof-of-stake networks may be found in the paper \textit{On Bitcoin and Red Balloons}. In the absence of a counter-proof for those designs, it would seem impossible to design an socially optimal transaction fee mechanism in those networks.
 
-\subsection*{Conclusion}
+We observe the existence of routing work mechanisms which incentivize block producers to share unconfirmed transactions with peers. If these mechanisms are confirmed to solve this specific technical problem, they necessarily also consitute socially optimal transaction fee mechanisms as our \textit{utility possibilities frontier} simplifies to the following once \textit{x} becomes 1:
 
-It it possible to design a \textit{pareto optimal} transaction fee mechanism, but all solutions require block producers to prefer sharing rather than hoarding transactions. This finding reinforces the value of traditional economic tools like the study of the \textit{utility possibility frontier} as a lense through which seemingly intractable problems in computer science can be simply and elegantly solved.
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em} 
+\begin{math}
+\sum_{i=1}^{s} \frac{u_{{pub}+{priv}}^i}{u_b^i} = \frac{F_{{priv}}}{F_b}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+Social optimality is achieved at all points on this curve by definition.
+
+Incentive compatibility is achieved since the fee paid by users reflects their private utility.
 
 \pagebreak
 

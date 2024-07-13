@@ -136,7 +136,7 @@ As previously noted, our blockchain provides public goods in proportion to the p
 \large
 \begin{adjustwidth}{1.5em}{1.5em} 
 \begin{math}
-{F_{{pub}+{priv}}
+{F_{{pub}+{priv}}}
 \end{math}
 \end{adjustwidth}
 \normalsize
@@ -161,15 +161,15 @@ We modify our \textit{utility possibilities frontier} to include a new variable 
 \end{adjustwidth}
 \normalsize
 
-We can observe the preferences that users and block producers have about \textit{x}.
+The value of \textit{x} depends on the preferences that users and block producers have.
 
-Rational block producers will not discriminate against public transactions when creating blocks, so rational users always prefer a higher value for \textit{x} at any fee-level as it strictly increases their utility.
+Rational block producers will not discriminate against public transactions, so rational users always prefer \textit{public transactions} as it strictly increases their utility.
 
-Block producers prefer minimizing competition for collection of the fees in their mempool. Their dominant strategy is to free-ride on \textit{public transactions} and hoard \textit{private transactions}.
+Block producers prefer minimizing competition for collection of transactions fees. Their dominant strategy is to free-ride on \textit{public transactions} and hoard \textit{private transactions}.
 
-It follows that without incentivizing block producers to share transactions publicly we cannot achieve \textit{pareto optimality}. And given that networks without \textit{pareto optimality} cannot be incentive compatible, the \textit{transaction fee mechanism design} problem is strictly reducible to the \textit{sybil problem}. A theoretical proof this problem makes optimality impossible to achieve in all proof-of-work and proof-of-stake networks may be found in the paper \textit{On Bitcoin and Red Balloons}.
+It follows that without incentivizing block producers to share transactions publicly we cannot achieve \textit{pareto optimality} or design an incentive compatible mechanism. This formally proves the \textit{transaction fee mechanism design} problem is strictly reducible to the \textit{sybil problem}. A theoretical proof this problem makes optimality impossible to achieve in all proof-of-work and proof-of-stake networks may be found in the paper \textit{On Bitcoin and Red Balloons}.
 
-A separate class of routing work mechanisms which incentivize block producers to share unconfirmed transactions with peers. Under these conditions \textit{pareto optimality} is possible, and incentive compatibility is achieved by letting users pay whatever fees correlate with the utility they receive from transaction inclusion.
+Given the existence of routing work mechanisms which incentivize block producers to share unconfirmed transactions with peers, we observe that \textit{pareto optimality} is possible. That further implies incentive compatibility is achieved since utility is maximized in these mechanisms by letting users pay whatever fee-level correlates with the utility they receive privately from transaction inclusion.
 
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em} 
