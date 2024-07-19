@@ -32,13 +32,13 @@
 \maketitle
 
 \begin{onecolabstract}
-A socially optimal transaction fee mechanism must be \textit{incentive compatible} for users and block producers and \textit{pareto optimal} for all participants.\footnote{pareto optimality is a necessary condition for incentive compatibility, as otherwise a subset of users always exists who costlessly increase utility by spending more or less income on transaction fees.} This paper offers a succinct proof it is possible to achieve both properties.
+A socially optimal transaction fee mechanism must be \textit{incentive compatible} for users and block producers and \textit{pareto optimal} for all participants.\footnote{We observe that pareto optimality is a necessary condition for incentive compatibility, as otherwise a subset of users always exists who costlessly increase utility by spending more or less income on transaction fees. It is not a sufficient condition for incentive compatibility as in some mechanisms it is possible that a subset of users will be able to collude or adopt byzantine strategies that increase their own utility at the expense of overall social utility.} This paper offers a succinct proof it is possible to achieve both properties.
 \end{onecolabstract}
 \bigskip 
 
 \subsection*{Introduction}
 
-Start with the standard \textit{utility possibilities frontier} for a single individual choosing between two goods.\footnote{The LHS shows the marginal rate of substitution between two goods, which is the ratio of the utility derived from each. The RHS shows the cost function of producing each. The individual get the optimal amount of utility from the resources they are able to spend to purchase or produce goods when both are equally efficient at converting resources into utility. It is easy to see that at any other point the user can costlessly increase their utility by adjusting the composition of the goods they are purchasing.}
+Start with the standard \textit{utility possibilities frontier} for a single individual choosing between two goods.\footnote{The LHS shows the marginal rate of substitution between two goods. This is the amount of utility that \textit{individual i} gets from each good expressed as a ratio. The RHS shows a similar ratio but reflects the cost of producing each. The individual get the optimal amount of utility from the resources they exspend when these ratios are equal. It is easy to see that if these equations are not in alignment the individual can costlessly increase their utility by adjusting the composition of whichever good produces utility more efficiently. If the LHS is smaller than the RHS, for instance, the individual can increase their utility by consuming more of good b.}
 
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em} 
