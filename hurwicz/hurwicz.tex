@@ -1,0 +1,1178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% LaTeX Template for AAMAS-2025 (based on sample-sigconf.tex)
+%%% Prepared by the AAMAS-2025 Program Chairs based on the version from AAMAS-2025. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Start your document with the \documentclass command.
+
+
+%%% == IMPORTANT ==
+%%% Use the first variant below for the final paper (including auithor information).
+%%% Use the second variant below to anonymize your submission (no authoir information shown).
+%%% For further information on anonymity and double-blind reviewing, 
+%%% please consult the call for paper information
+%%% https://aamas2025.org/index.php/conference/calls/submission-instructions-main-technical-track/
+
+%%%% For anonymized submission, use this
+\documentclass[sigconf,anonymous]{aamas} 
+
+%%%% For camera-ready, use this
+%\documentclass[sigconf]{aamas} 
+
+
+%%% Load required packages here (note that many are included already).
+
+\usepackage{balance} % for balancing columns on the final page
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array} % for array environments
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\sankarshan}[1]{\textcolor{magenta}{#1}}
+\newcommand{\manisha}[1]{\textcolor{cyan}{#1}}
+\newcommand{\varul}[1]{\textcolor{red}{#1}}
+
+\setlength{\fboxsep}{10pt}  % Padding inside the box
+\setlength{\fboxrule}{1pt}  % Border thickness
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% AAMAS-2025 copyright block (do not change!)
+
+\setcopyright{ifaamas}
+\acmConference[AAMAS '25]{Proc.\@ of the 24th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2025)}{May 19 -- 23, 2025}
+{Detroit, Michigan, USA}{A.~El~Fallah~Seghrouchni, Y.~Vorobeychik, S.~Das, A.~Nowe (eds.)}
+\copyrightyear{2025}
+\acmYear{2025}
+\acmDOI{}
+\acmPrice{}
+\acmISBN{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% == IMPORTANT ==
+%%% Use this command to specify your EasyChair submission number.
+%%% In anonymous mode, it will be printed on the first page.
+
+\acmSubmissionID{1330}
+\newtheorem{Claim}{Claim}
+\newtheorem{Remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{assumption}{Assumption}
+
+% Routing Threshold-based Randomized Transaction Fee Mechanism
+\newcommand{\ourTFM}{\textsc{RTR-TFM}}
+\renewcommand{\paragraph}[1]{\smallskip\noindent\textbf{#1}}
+\newcommand{\ourOPT}{\texttt{OPT$_{\texttt{RTR}}$}}
+
+\title[Routing Threshold-based Randomized Transaction Fee Mechanism]{RTR-TFM: A Routing Threshold-based Randomized Transaction Fee Mechanism}
+
+\author{David Lancashire}
+\affiliation{
+  \institution{Proclus Technologies}
+  \city{Bangkok}
+  \country{Thailand}}
+\email{david@saito.tech}
+
+\begin{abstract}
+In recent years, impossibility proofs have been written claiming the impossibility of achieving efficient and collusion-proof transaction fee mechanisms. In the face of growing consensus that these problems are impossible to solve, this paper offers a dissenting proof, demonstrating the existence of a mechanism that implements the social choice rule of pareto optimality, thereby achieving both incentive compatibility and collusion-resistance.
+\end{abstract}
+
+\keywords{Transaction Fee Mechanism, Leonid Hurwicz, Incentive Compatibility, Free-Riding, Collective Action Problems, Blockchain, Distributed Systems}
+
+
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead{}
+
+\maketitle 
+
+\section{Introduction \label{sec::introduction}}
+
+\emph{Transaction Fee Mechanisms} (TFMs) refer to a class of distributed systems in which a consensus mechanism governs the allocation of resources necessary to incentivize its own provision. Unlike traditional mechanisms, where the number of honest and dishonest processes is fixed over time, in TFMs voting power is dynamic — it adjusts with the payouts issued by the mechanism. This introduces the potential for Byzantine strategies that manipulate transaction fees and introduce circular attacks that compromise the security and stability of the mechanism.
+
+Due to their focus on technical architectures, computer scientists often name these attacks after the "mechanism-specific" techniques they exploit, resulting in a wide array of terminology such as sybil attacks, block-orphaning attacks, selfish mining attacks, fee manipulation attacks, eclipse attacks, side-contract payments, and others. While most researchers treat these vulnerabilities as isolated technical challenges, a few scholars have applied concepts from mechanism design to ask whether general solutions are theoretically feasible. Unfortunately, this line of research has led to a series of impossibility results, suggesting that building socially optimal TFMs may be infeasible.
+
+This paper offers a general rebuttal by identifying the specific economic equilibrium in which fee manipulation and collusion are irrational. We argue that three specific problems — goal conflict, free-riding pressures, and incentives to strategically manipulate price signals — are what prevent this equilibrium from being realized in most TFMs. After showing why these problems arise in other two-sided market mechanisms, we review the most widely cited impossibility results and show why the TFM optimization problem appears intractable: their conclusions stem from subtle limitations introduced by models they use to structure their analysis, and particularly models that lack the informational capability to achieve the optimal equilibria.
+
+Using the language of mechanism design, this paper demonstrates that the social choice rule needed to achieve fee-optimality and collusion-resilience in \textit{TFMs} is \textit{pareto optimality}, but the direct mechanisms used to model TFMs are incapable of implementing this rule, as doing so requires multi-dimensional preference revelation across a high-dimensional preference space - a level of informational complexity that composable algorithms cannot handle efficiently. While Maskin's Revelation Principle suggests that a direct mechanism must exist for any indirect mechanism capable of implementing our desired equilibrium, achieving optimality requires decomposable algorithms that use the "no-trade option" to reduce the complexity of preference revelation prior to computation, limiting the scope of the state transitions proposed by rational participants towards those consistent with an efficiency shift towards \textit{paretop optimality}.
+
+Since information theory and economic theory are needed to address this question, we begin by identifying the novel informational properties of TFMs that complicate preference revelation. We show that the challenge of inducing an optimal and collusion-free equilibrium hinges on eliminating goal conflicts, free-riding pressures, and costless strategies for manipulating the price signals embedded in the state transitions proposed to the consensus algorithm. We explain why Pareto optimality is the social choice rule needed to solve all three challenges, which leads to a review of the impossibility results debunked in this paper and a discussion of how the conclusions of these papers reflect the informational limitations of the models they use to analyse the problem, and why their impossibility results cannot generalize to the type of mechanism capable of solving the problem.
+
+In the second half of this paper, we provide a practical counter-proof by introducing a novel type of indirect mechanism. This mechanism includes a formula that makes proposing state transitions that move the network away from Pareto optimality more costly than those that push it toward greater efficiency. We then provide a game-theoretic treatment of the mechanism and explain how its properties connect to the economic theory discussed in our first section, demonstrating its compatibility with the theoretical solution. Finally, we show that the mechanism is incompatible with the assumptions underlying the models responsible for the impossibility results this paper debunks.
+
+
+\section{Transaction Fee Mechanisms and their Properties of Suboptimality\label{sec::section1p1}}
+
+The novel properties of \textit{TFMs} that lead to suboptimal provision are \emph{non-excludability}, \emph{self-provision} and \emph{informational decentralization}. While various mechanisms may compromise these properties to eliminate the trade-offs they create, their novel properties are \emph{non-excludability}, \emph{self-provision} and \emph{informational decentralization}.
+
+\paragraph{Non-Excludability} allows anyone to use or provision the networks on equal terms provided they are willing to pay the competitive market price. This makes \textit{non-excludability} the source of \textit{censorship resistance}, \textit{decentralization} and \textit{permissionlessness}: censorship requires a mechanism with the power to exclude; centralization creates barriers to entry; permissionlessness emphasizes the lack of need for authorization to use the network. Non-excludability is also the driver of economic efficiency in \textit{TFMs}, as efficiency is maximized when participants include blocks and transactions efficiently proposed by peers instead of orphaning them.
+
+\paragraph{Informational Decentralization} is not the casual concept of \textit{decentralization} as used in computer science (see: non-excludability) but refers strictly to the economic definition offered by Hurwicz (1972) and used in mechanism design to describe classes of mechanisms in which "participants have direct information only about themselves." This property makes \textit{TFMs} vulnerable to the class of byzantine strategies identified in Hurwicz in any pre-exchange messaging step that precedes the broadcast of the fee-bearing transaction into the network.
+
+
+\paragraph{Self-Provision}. \textit{TFMs} are required to sustain their operations in the absence of an owner, which implies the availability of a payout for network participants. While volunteer-run networks are theoretically possible their designs fall outside the scope of \textit{TFMs} as they avoid the need for transaction fees. Technically, in volunteer mechanisms the existence of fees constitutes a dead-weight efficiency loss since any fee-level above zero is strictly suboptimal given the cost structure of the network.
+
+
+
+
+
+These three properties combine to give \textit{TFMs} the properties of a public good. These mechanisms must permit non-excludable participation, they must offer benefits that can be privatized while costs can be socialized, and they must exist in an informationally decentralized state where all parties have the freedom to embrace byzantine strategies to maximize the difference between the two: privatizing the gains available from use of the network while socializing the losses. 
+
+The fact that these properties combine to create a collective action problem can be confirmed by the way they form an \textit{economic trilemma} of sorts, such that the removal of any one property offers immediate relief to the collective action problems created by the combination of all three.
+
+If non-excludability is sacrificed, we shift into a permissioned network in which a trusted-third party regains control of the mechanism and the power to exclude. On the production side, this shift allows for the policing and exclusion of participants who follow suboptimal pricing strategies. On the demand side, the elimination of non-excludability allows the imposition of price-floors based on cost-structures, making it feasible to exclude transactions from users who extract more in value than they contribute in fees. In theoretical terms, the elimination of non-excludability in \textit{TFMs} has an identical effect to the privatization of a public commons: the problem of unrestrained value-extraction is eliminated by the insertion of a party who is motivated to extract rents from regulating access and empowered to maximize the productive capacity of the network.
+
+If self-provision is sacrificed, we return to a volunteer-powered network in which participants cannot -- by default -- be expected to act rationally. This is one of the most popular compromises made by developers, and the entire Bitcoin scaling debate can be understood as an ideological debate over whether commercial provision of a distributed network infrastructure necessarily sacrifices the other two critical properties associated with TFMs.
+
+If informational decentralization is sacrificed, it becomes possible for all participants to know the optimal market price, since this price can be calculated centrally. Our resource allocation mechanism avoids the hurdles identified by Samuelson (1954) or Hurwicz (1972) which we will discuss shortly. But the mechanism becomes unrecognizable as any economically-viable equilibrium can be achieved by fiat since it is only the strategic choices of a single-actor that determines whether the mechanism implements any particular social choice rule.
+
+The fact that \textit{TFMs} require all three properties allows us to identify the exact reasons byzantine strategies which subvert fee-optimality are attractive to participants. The first occurs if the mechanisms do not target a fee-level at which users are allocating their resources efficiently across all of the goods and services offering them utility in exchange for consumption of the fee. In this case participants will unilaterally change their bids to extract more utility. These attacks take the form of users paying and producers accepting fee-levels that network designers but not participants deem suboptimal.
+
+The second problem is driven by the combination of the \textit{non-excludability} and \textit{self-provision} properties, which make the challenge of how to achieve an optimal \textit{TFM} similar to the challenge of inducing consumers and producers in free markets to rationally fund the production of public goods in socially-optimal amounts. As with other collective action problems, free-riding pressures are the source of the incentive to defect. To the extent this problem is novel, it is that where most free-rider problems are one-sided, in \textit{TFMs} we have a dual-sided free-rider problem where both users and producers are motivated to free-ride on the mechanism in different ways: producers free-ride by maximizing the revenue they extract from the self-provisioning payout, while users free-ride by minimizing their contribution to the non-excludable security function. These are the class of attacks that take the form of side-contract payments.
+
+The third problem is the most sophisticated as it involves questions of bayesian incentive compatibility, stemming particularly from Leonid Hurwicz' observation that in informationally-decentralized mechanisms participants have strategies available to mislead others into suboptimal allocation of resources in the absence of an incentive for truthfulness. This vulnerability is the main problem mechanism designers seek to address when they create mechanisms which incentivize the truthful revelation of preference. As we shall see, one of the major problems in the extant computer science literature is that researchers are expecting to stop unrelated forms of suboptimality like side-contract payments by designing mechanisms that can only prevent attacks that involve costless manipulation of price expectations.
+
+While the existence of these three motivations for byzantine strategies may seem to make suboptimality inevitable, the good news is that all three problems can be solved if a mechanism can be designed which successfully implements a single social choice rule: pareto optimality. In the next section we dig into this to explain how \textit{pareto optimality} solves or is subverted by these attack vectors, and why it is consequently the proper social choice rule for building a collusion-resilient \textit{TFM} that can achieve an optimal fee-throughput level in equilibrium.
+
+
+
+
+\section{Pareto Optimality and its Strategic Vulnerabilities\label{sec::section1p2}}
+
+In the field of economics, the pioneering work on welfare economics was the publication of Vilfredo Pareto's "Cours d'économie politique" in 1896, a book which describes the state of \textit{pareto optimality} as the condition in which resources are allocated with such efficiency that it is impossible for anyone to improve overall social welfare by changing the composition of production. 
+
+From a mathematical perspective, \textit{pareto optimality} can be defined as the point at which the marginal utility produced by the last unit of each good purchased by each individual is proportional to the cost of producing that good. This means that every individual is spending each dollar on whatever good or service is providing them with the most utility for that dollar. We know this is socially optimal, as were this not the case, at least one individual could re-allocate their resources to increase their utility without making anyone else worse off. \textit{Pareto optimality} thus provides two important social criteria demanded by TFMs. First, it is economically optimal since a blockchain funded at \textit{pareto optimal} fee levels is by definition in a state of optimal provision where no party has an incentive to pay a greater or lesser fee. Second, \textit{pareto optimality} has attractive collusion-proof properties: if no individual can unilaterally re-allocate their resources without making himself off, no group can collude to re-allocate their collective resources differently without at least one member of the group suffering as a result. Pareto optimality thus eliminates the rationality of the first class of incentives we have identified for subvertingthe optimality of a \textit{TFM}.
+
+Returning to our discussion of economics, while \textit{pareto optimality} quickly became the gold standard for defining the socially optimal state of production under classical assumptions in the early twentieth century, the academic focus shifted to whether and how to achieve it. In 1919, concerned with whether government-funded goods could be provisioned at \textit{pareto optimal} levels, for instance, \citet{lindahl1919gerechtigkeit} invented the Lindahl tax which achieves  \textit{pareto optimality} by having the government tax users in proportion to the utility they receive from public goods such that each individual’s marginal benefit matches the marginal cost of production. In addition to the problems we will shortly discuss with the Lindahl mechanism, his approach of course introduces a trusted third party who cannot be present in a \textit{TFM} without violating the principle of non-excludability and thus is not a practical solution for our own needs.
+
+While Lindahl provided a rational for government intervention in the provision of public goods, it took until 1954 for \citet{samuelson1954pure} to point out a fundamental problem that defines the second source of byzantine strategies that TFMs struggle to contain -- the observation that the Lindahl equilibrium is unachievable if the goods under provision have the property of non-excludability. In these case, as Samuelson observed, users can lie about the utility they receive from the goods in question and \textit{free-ride} on the contributions of their honest counterparts. It was Samuelson's observation of this problem -- the fact that individual rationality induced social suboptimality -- that led \citet{hurwicz1960optimality} to coin the term \textit{incentive compatibility} in reference to the opposite condition, the state in which the rational utility-maximizing behavior of individuals is \textit{compatible with} or leads emergently to a desirable social welfare condition referred to as \textit{social choice rule}.
+
+The byzantine strategies that Samuelson noticed prevent the optimal provision of public goods in free markets thus constitute the second class of byzantine strategies that subvert fee-optimality in \textit{TFMs}. This is the specific class into which \textit{side-contract payments} fall, agreements between users and block producers that allow users to pay a socially suboptimal transaction fee in exchange for the block producer gaining the exclusive right to include the transaction on the chain.
+
+In order to understand the exact source of suboptimality, it is critical to recognize that while many computer scientists view all forms of price negotiation and off-chain payments as negative, this is not strictly true. If price negotiations between users and block producers are welfare-optimizing and drive the cost of transaction-inclusion towards \textit{pareto optimal} levels, they technically shift the network into a more efficient equilibrium in which fee-throughput level are more optimal. It is also trivial to see that side-contract payments will never drive transaction fees below the cost of blockspace in the absence of a public good or non-excludable source of revenue elsewhere in the network, as rational producers will not accept transaction fees that are lower than their own cost of providing blockspace.
+
+This teaches us that \textit{side-contract payments} are a form of collusion incentivized by the presence of a non-excludable form of value elsewhere in the network. Unfortunately, this is exactly what we have in most \textit{TFMs}. From the perspective of users, selling transactions to block producers gives those producers the right to collect the transaction fee without the need to face competitive pressure from other producers in block production. Producers happily accept a smaller fee in this situation as a smaller percentage of their income flows into the public security function. This form of strategic collusion involves users free-riding on the contributions that other users are making to the common security budget - they contribute proportionally less than their peers while extracting the same amount in utility at a lower fee-level. This is perfectly analogous to the free-rider in Samuelson's model who benefits from a public good without committing the resources needed to sustain it at optimal production levels in equilibrium.
+
+The second form of free-riding that incentivizes \textit{side-contract payments} involves block producers free-riding on the network payout. In this second case the free-riding strategy has nothing to do with the security function. It involves block producers offering users transaction-inclusion at suboptimal rates because private possession of the fee allows the producers to expand their relative share of the blocks committed to the longest-chain, which allows them to extract more income from any non-excludable payout like the block reward than they lose by modestly subsidizing the user's transaction. Once again we have a situation analogous to the free-rider in Samuelson's model, except in this case the incentive to collude comes from the existence of a payout that is not sourced directly from the fees included in the block.
+
+This teaches us that \textit{side-contract payments} are a strategic response to free-riding opportunities created by the existence of non-excludable sources of value produced by the consensus mechanism. As we shall see, this form of suboptimality has nothing to do with the problems mechanism designers normally fix by creating direct or indirect mechanisms for truthful preference revelation, which is why attempts to eliminate collusion by adopting bayesian incentive compatibility are unable to disincentivize users and producers from colluding in this fashion.
+
+Our first two classes of byzantine strategies are thus "unilateral fee manipulation" and "side-contract payments". The first issue exists in mechanisms that lack \textit{pareto optimality} and can be solved only by designing mechanisms that achieve incentive compatibility with that social choice rule. The second issue is different: created by the presence of public goods within the \textit{TFM} itself, which let users and producers privatize fee flows in ways that allow the block producer to share the financial benefits of free-riding with the user. The existence of public goods thus pulls the network away from the state of \textit{pareto optimality} in which these problems are not manifest. This leaves our third and final incentive towards suboptimality, which ends up being the hardest to solve and the most intractable from a mechanism design perspective.
+
+By the late 1950s and 1960s, the problems that Samuelson flagged regarding the efficient provision of public goods had become widely accepted in mainstream economics, and the recognition that market failure could occur with the production of these goods had become a cornerstone of public economics. Nonetheless, most economists still believed that the production and trade of private goods under classical assumptions was more-or-less \textit{pareto optimal}. And this was the assumption that collapsed in 1972 when \citet{hurwicz1973design}, in his second great contribution to mechanism design, pointed out that similar problems also subvert the \textit{pareto optimal} provision of private goods in informationally decentralized mechanisms, since the price-negotiation and discovery process in these mechanisms necessarily relies on a pre-exchange messaging step that is itself vulnerable to strategic manipulation. While players might not be willing to misallocate their own resources for private gain, they could attempt to shamelessly lie to others in an attempt to get them to strategically misallocate their own. This particular section of Hurwicz's seminal paper is worth quoting in full:
+
+\begin{quote}
+Economists have long been alerted to this issue by Samuelson (1954) in the context of the allocation problem for public goods. But, in fact, a similar problem arises in a "nonatomistic" world of pure exchange of exclusively private goods.... If [two parties] were both told to behave as price-takers it would pay one of them to violate this rule if he could get away with it. Now we assume that he cannot violate the rule openly, but he can "pretend" to have preferences different from his true ones. The question is whether he could think up for himself a false (but convex and monotone) preference map which would be more advantageous for him than his true one, assuming that he will follow the rules of price-taking according to the false map while the other trader plays the game honestly. It is easily shown that the answer is in the affirmative. Thus, in such a situation, the rules of perfect competition are not incentive-compatible.
+\end{quote}
+
+Recognition of this problem led Hurwicz to ask whether these issues could ever be transcended? And this led to his framework of \textit{incentive compatibility}, which asked whether specific incentive structures (mechanisms) could achieve (implement) specific outcomes (social choice rules) in the presence of participants who made strategic decisions, including decisions about how to communicate with others and whether to strategically misrepresent their own interests, on the basis of private information such as their secret preferences for consuming different types of goods and services.
+
+Of some importance, since many papers on \textit{TFMs} declare \textit{incentive compatibility} impossible to achieve, Hurwicz did not make this claim. As his student Eric Maskin later pointed out, this claim is itself a fundamental misunderstanding of social choice theory since all mechanisms are by definition incentive compatible with their outcomes. What Hurwicz argued was that in the absence of an "incentive for truthful revelation [of private information]", mechanisms could not be assumed capable of implementing any social choice rule.
+
+While Hurwicz is often misinterpreted as implying that the direct revelation of preferences is a pre-condition for achieving \textit{pareto optimality}, the truth is more nuanced -- market structures still exist which lack the problems Hurwicz identified, the key exceptions being \textit{atomistic} markets characterized by perfect competition, markets in which the utility purchased varies with price paid, and markets lacking a pre-exchange messaging step. Eric Maskin, who would later win the Nobel Prize for his work on the revelation principle, confirmed Hurwicz's intuition when he confirmed that \texit{pareto optimality} is possible in some market structures without the need for truthful preference revelation as an intermediary step.\citet{maskin1999nash}. His revelation principle also illustrates this in a more subtle way, by showing that a necessary symmetry of outcomes must exist between mechanisms where information is computed in decomposable fashion using agent-level functions that process private information known only to them, and mechanisms where the information needed to calculate the outcome is revealed truthfully to the mechanism and the computation happens by a centralized mechanism in a non-decomposable fashion. As Maskin showed, if the centrally-computed outcome does not result in a Nash Equilibrium then the non-decomposable function cannot possibly have one and at least one agent must be lying about their true preferences.
+
+Maskin's work confirmed Hurwicz's insight while revealing a deeper truth: all incentive compatible mechanisms will induce truthful preference revelation of the relevant private information one way or the other, meaning that the difference between mechanisms is whether they reveal user preferences \textit{directly} or \textit{indirectly}. In direct mechanisms participants share their preferences truthfully in the pre-exchange negotiation step, while in \textit{indirect} mechanisms they reveal this information either obliquely in the pre-exchange negotiation step (such as by attempting to negotiation for bundles of goods) or by skipping the pre-negotiation stage entirely and simply submitting their offers to purchase goods directly onto the market.
+
+In the context of \textit{informationally decentralized} consensus mechanisms, this finally gives us the third class of attack on the optimality of \textit{TFMs}. Any fee mechanism lacking an "incentive to truthfulness" much necessarily allow users and block producers to attack each other by manipulate their counterpart's expectation of the market price for blockspace. For users, this might constitute lying about the fee they are willing to pay, such that producers genuinely believe the market rate is lower than it really is. For producers, this might constitute including their own transactions in blocks to push fee levels above the equilibrium levels that would exist if only the demand from participants genuinely interested in purchasing blockspace and suppliers genuinely interested in seling it were determing the settlement price.
+
+Our third form of suboptimality is thus the availability of strategies for both users and producers to costlessly manipulate the contents of blocks or the outstanding set of transactions available for inclusion in them such that other participants can be induced to accept a higher or lower fee for transaction-inclusion than would be accepted if they were credibly informed about the optimal market price that reflected the true preferences of their peers. This attack must be solved by creating an incentive for truthful revelation of preference, but the mechanism that accomplishes it must properly solicit the multi-dimensional preferences all participants have across the full range of goods and services competing for resource allocation. As it turns out, this is only possible through the use of an indirect mechanism that targets pareto optimality} as its social choice rule.
+
+n the following section, we turn our attention to the existing literature on \textit{TFMs} in computer science, with the goal of highlighting how the methodologies employed in these papers can neither prove nor disprove the existence of mechanisms that solve the problems they seek to address. 
+
+
+
+
+
+ or misunderstanding the information format
+
+models chosen to study the problems cannot solve the problem tasked to them on the grounds of model misspecification and mechanism choice misspecification, thus leading to errors in interpretation that lead to the generation of incorrect eeing how the models chosen to analyze the above problems in these papers are either inappropriately applied or given their methodological approaches, or make errors in interpretation that lead to the generation of incorrect impossibility results that cannot apply to the only class of mechanisms capable of achieving pareto optimality in informationally decentralized environments: indirect mechanisms that use decomposible algorithms to eliminate the need for the transfer of impossibly large amounts of information during the pre-exchange negotiation step.
+
+
+\section{The Transaction Fee Mechanism Literature in Computer Science\label{sec::section1p2}}
+
+In the first section of this paper we discussed how the three properties of \textit{TFMs} (non-excludability, self-provision and informational decentralization) create dual-sided free-rider problems within \textit{TFMs} and profitable opportunities for byzantine manipulation of the general price level. In our second section, we showed that any mechanism that successfully implements the social choice rule of \textit{pareto optimality} will necessarily eliminate all rational strategies for , although doing will will require eliminating the existence of the public goods lurking within the mechanisms themselves.
+
+Now that the underlying source of suboptimality within \textit{TFMs} can be understood as the failure of these mechanisms to implement \textit{pareto optimality} as their social choice rule, we can conduct a brief review of the \textit{TFM} literature and see how the models and approaches used to draw conclusions about the feasibility of deterring collusion and achieving fee-optimality are inappropriate, resulting from a failure to understand the underlying informational requirements for mechanisms that much achieve pareto optimality. As will be clear by the end of this section, the impossibiltiy results in circulation describe not the impossibility of solving these problems but the impossibility of doing so through direct mechanisms which require truthful preference revelation in composable environments.
+
+\citet{roughgarden2021,roughgarden2024transaction} introduces Transaction Fee Mechanisms (TFMs) as two-party auction mechanisms in which block producers given a temporary monopoly over the production of a block in a blockchain strategically allocate a subset of transactions from a pool of pending transactions into a block. Roughgarden was the first to highlight the challenge of simultaneously acheiving incentive compatibility for both users (UIC) and block producers or miners (MIC), and has written seminal works~\cite {roughgarden2021,roughgarden2024transaction} provide incentive guarantees for Bitcoin's "first-price auction" and Ethereum's EIP-1559~\cite{buterin2019eip} among others. Roughgarden~\cite{roughgarden2021,roughgarden2024transaction}.
+
+While the methodological assumptions Roughgarden makes may be useful for the study of proof-of-stake mechanisms and have value for drawing conclusions about these approaches, they cannot support more robust conclusions about what equilibria are possible to achieve within distributed consensus mechanisms generally. Methodological issues start with Roughgarden's definition of UIC and MIC as properties which can be examined outside the context of a specific social choice rule, which translates into a lack of clarity on what specific information participants must reveal to any mechanism in order for the mechanism to successfuly implement it.
+
+For an example of this, we can intuit that Roughgarden's social choice rule is the "efficient allocation" of blockspace from his citation of the Vickrey-Clarke-Groves (VCG) mechanism as being UIC. The VCG auction is a \textit{direct} mechanism that does not require high-dimensional preference information as part of its process of truthful preference revelation. Users share information on the maximum price-point at which they are willing to purchase the single good being allocated, not their comparative preferences for allocationg resources across multiple goods and services in all possible price equilibria as is required for implementing \textit{pareto optimality}. The approach is informationally inadequate for eliminating byzantine strategies motivated by what Hurwicz called "goal conflict" -- our first category of byzantine behavior where the incentive to misallocate resources is driven by the desire of participants to increase their utility by spending more money on other goods or services, such as occurs when saving money on a transaction fee allows the user to purchase more utility elsewhere. As we have explained in Section 2, this problem does not apply in a \textit{pareto optimal} equilibrium since any reduction of the fee necessarily shifts user expenditure into a suboptimal position, which is why \textit{pareto optimality} is the social choice rule we need -- not "efficient allocation".
+
+A second problem applies to the treatment of block producers, who are simply asked to faithfully implement the fee mechanism. The lack of any need for producers to reveal any private information raises questions about why we are even modelling this game as a two-sided strategic interaction, but also points to a deeper methodological problem. As we have discussed in our first section, the class of \textit{TFMs} studied by Roughgarden contain dual-sided free-rider problems. This makes it impossible to achieve pareto optimality by solving incentive compatibility for only one party. Both parties have incentives to adopt byzantine strategies that are driven by different opportunities to free-ride on their peers. Users are free-riding on other users, and producers are free-riding on other producers. The solution thus requires either eliminating both collective action problems (and the mechanisms studied by Roughgarden cannot technically eliminate either), or identifying a kind of "private information" which can by leveraged by the mechanism designer to motivate producers to shift their strategies away from defection and towards cooperation in the face of these two free-rider pressures, a solution that is informationally impossible in Roughgarden's approach as incentive compatibility is attempted without the need for preference revelation.
+
+The third and most fundamental problem in Roughgarden's approach is an apparent belief that the provable lack of \textit{dominant strategy incentive compable} (DSIC) equilibria in the kind of \textit{direct mechanism} he models implies the impossibility of designing \textit{indirect mechanisms} that can achieve them through the solicitation of a different kind of preference. Since this is a somewhat subtle point, note that while Maskin's relevation principle teaches us that all nash equilibria which are reachable by \textit{indirect mechanisms} can be implemented as \textit{direct mechanisms}, the opposite is not true. We simply cannot conclude from a proof implying the absence of direct mechanisms that no indirect mechanism exists which are capable of implementing any social choice rule in a DSIC fashion.
+
+One reason for this problem is that Maskin's revelation principle is based on logical reasoning about the consistency of outcomes between decomposable algorithms where participants compute their preferences privately and share the results and composable algorithms where they first share their data with a centralized mechanism that does it for them. In situations where the amount of information required to compute a solution so large as to be impossible to communicate or compute, such as exists with the high-dimensional preference data needed to compute \textit{pareto optimal} equilibria in informationally decentralized environments, \textit{indirect mechanisms} that use \textit{decomposable algorithms} to filter and transform the preferences which are ultimately revealed in indirect form can be necessary to achieve incentive compatibility. It should be noted that Maskin's revelation principle still holds -- truthful preference revelation happens in both types of mechanism -- but it can happen in a different stage, such as the "action stage" identified by Hurwicz rather than the "pre-exchange negotiation stage" that is subject to the form of byzantine manipulation that constitutes the third process by which participants in TFMs can undermine the pareto optimality of the mechanism.
+
+Rather curiously, the problem we identify here is the exact reason that \textit{indirect mechanisms} are traditionally used by economic theorists when building mechanisms that involve optimizing the production of non-excludable goods and free-rider problems. Such is the curious case of the Clarke-Groves mechanism (not be to confused with the VCG mechanism), a indirect mechanism in which users are asked to asked to submit bids across bundles of goods. Given the parallels between the information requirements to solve both problems, it is likely no accident that the solution this paper identifies to the challenge of building an optimal \textit{TFM} is an \textit{indirect mechanism} that leverages decomposabitility to avoid the need for truthful preference revelation during the "pre-exchange negotiation step" as a necessary precondition for achieving incentive compatibility.
+
+Perhaps because Roughgarden has been so influential in the field, most of the subtle methodological problems identified in our discussion above have replicated themselves across the literature. PROVIDE EXAMPLES
+
+The tendency of computer science papers to treat the conclusions of earlier papers as axioms in lemmas intended to support the development of new theorems has exacerbated this problem, as impossibility results have been exaggerated and amplified by misapplication. And perhaps because of the difference in the way papers are written, very few papers in computer science go back and examine the underlying assumptions behind the earlier conclusions or realize that mechanism-imposed limitations on how information is produced or propagated open attack vectors on earlier impossibility results in economics. Hurwicz notes that participants be able to costlessly broadcast false information, something that is technically solvable in distributed networks in any mechanism where a costly value-burn is needed to propose state transitions.
+
+Returning to our review of the related literature in computer science, a second important strand of papers has come from Hao Chung and Elaine Shi in their papers on \textit{side-contract payments} and the \textit{zero-revenue bound}. Specifically, Hao and Chung advance claims that side-contract payments (SCP) are impossible to disincentivize in TFMs in any mechanism where the income for block producers is above zero. They conclude from this that "dream TFMs" are impossible because the existence of any revenue implies an incentive for collusion between users and producers.
+
+The same methodological problems apparent in the Roughgarden piece replicate themselves here, as Hao and Chung treat truthful preference revelation as if it is a valid social choice rule rather than an intermediary step that is informationally required in order to achieve one. As unlike Roughgarden, who viewed "efficient and fee-stable blockspace allocation" as his implicit social choice rule, for Hao and Chung it is the collusion-free properties of the "dream TFM" that constitutes their goal. So the authors have essentially shifted their focus from examining whether fee-levels are sustainable to focusing more narrowly on the problem of user-producer collusion.
+
+The fact that Hao and Chung are dealing with collusion explains why their models lead them to the zero-revenue bound. As explained in Section 2, the underlying source of profitable user-producer collusion strategies is the existence of the dual-sided free-rider problems embedded in the mechanisms. Understanding this provides an intuitive explanation of why Hao and Chung stumble into their zero-revenue bound. At any positive fee-level users have an incentive to collude with producers to free-ride on the contribution of their peers to the collective security budget. This incentive can be eliminated by compensating producers through a block reward rather than through transaction fees, but that creates opportunities for producers to free-ride on the network payout. Avoiding one trap pushes us into the other, and the only situation in which we can avoid collusion completely is if neither fees nor block rewards exist and free-rider pressures. Non-excludability can be maintained only through the elimination of self-provision, since it is the combination of the two properties that creates the problem.
+
+
+%%%
+%%% \citet{ferreira2021dynamic} propose a posted-price TFM and provide an equilibrium posted-price at which TFMs are incentive compatible for both users and producers. \citet{chen2022bayesian} propose a TFM that guarantees BUIC and collusion resistance.
+%%%
+\citet{chung2023foundations} introduce a "Burning Second-price" TFM that compromises allocative efficiency to guarantee user and block producer IC. In their model, the authors tweak the utility model with "$\gamma$-Strict" utility for users/producers. The new model captures the future cost of introducing fake transactions discounted by a \textit{public} parameter $\gamma\in [0,1]$. We believe compared to  "$\gamma$-Strict" utility \ourTFM's incentive rule introduces a natural cost for introducing fake transactions to the users/producers. Moreover $\gamma$-Strict utility does not prevent free-riding.
+%%% \citet{gafni2024barriers} fully characterize deterministic TFMs and show that only the trivial TFM -- that never confirms any transaction -- is IC for users and producers and is simultaneously collusion proof. \citet{chung2024collusion} shows the impossibility of satisfying Block Producer IC, User IC, and user-producer collusion-proofness in randomized TFMs. They also propose relaxations to circumvent the impossibility. Among other works, \citet{wu2023maximizing} provide an optimal bound for the block producer for a TFM that is Bayesian IC and collusion-proof, assuming that a known fraction of the users are honest. \citet{damle2024designing} instead focus on reducing transaction fees by redistributing the surplus while providing a relaxed incentive-compatibility guarantee.
+%%%
+%%% % \varul{
+%%%\paragraph{Maximal Extractable Value (MEV).}
+%%%Another developing line of work in TFMs decouples the process of block production and extracting maximal value out of the transactions (referred to as "maximal extractable value" (MEV)). \citet{bahrani2023transaction} discuss the incentive and welfare properties for Block Producers and Users considering the additional MEV value as "block producer surplus". \citet{bahrani2024transaction} introduce another type of agent, namely \emph{searchers}, that act like MEV Oracles and analyze TFMs with MEV. \citet{bahrani2024centralization} discuss the problem of centralization due to heterogeneity in knowledge among different agents. 
+%%% }
+%%%Informationally, what these papers seem to be establishing is that in 
+%%%
+
+
+\section{The Transaction Fee Mechanism Literature in Computer Science\label{sec::section1p2}}
+
+In the first section of this paper we explained the properties of \textit{TFMs} (non-excludability, self-provision, and informational-decentralization) that make byzantine attacks on fee mechanisms rational. We then identified the social choice rule that makes all such attacks irrational, and categorized the strategies which undermine such pareto optimal equilibria according to the nature of their underlying impulse (goal conflict, free-riding, strategic price manipulation). We then showed why the impossibility results offered by computer scientists cannot follow from the methodological approaches they use to offer them.
+
+In this second section, we move from rejecting impossibility results to offering a positive proof that these solutions are possible by providing a specific mechanism that is capable of disincentivizing all three categories of strategies that undermine pareto optimal equilibria. As per Hurwicz, we provide the formula for this mechanism in Appendix A attached to this paper. In the section that follows, we explain how the mechanism , before moving into a game theoretic proof that shows two things: first, that the mechanism is not bound by the assumptions made in the papers that seek to demonstrate the impossibility; second, that the mechanism belongs to the class of mechanisms known in economics to be capable of addressing this problem.
+
+As can be seen from Appendix A, the mechanism we propose eliminates all three categories of byzantine attacks on fee-throughput mechanisms as it is an \textit{indirect mechanism} that implements \textit{pareto optimality} as its social choice rule. This decision immediately eliminates \textit{goal conflict} as an impulse -- while block producers and users may have strategic incentives to commit their own resources to the mechanism, they are always worse off unilaterally changing their own fee-allocation levels. This also eliminates user-user and producer-producer forms of collusion.
+
+GOAL CONFLICT
+
+While it may seem counterintuitive to those used to modelling blockchain mechanisms as "temporary auctions" in which block producers gain a temporary monopoly over producing blocks, the mechanism described is capable of achieving this because it is a competitive mechanisms in which users are constantly competing for transaction inclusion and block producers are constantly competing for block production. Any attempts by block producers to exclude competitive fees or manipulate the general price level makes them less competitive in producing blocks. We will see this shortly in the game theoretic treatment of the model which follows.
+
+FREE RIDER
+
+The free-rider problems that motivate the second-class of attacks are eliminated directly in the mechanism. Since there is no block reward there is no incentive for producers to collude with users to expand their share of block production. And since offering lower fees instantly reduces the ability of block producers to propose valid blocks, rational producers will not collude with users to accept lower fees.
+
+DSIC
+
+The mechanism is an \textit{indirect mechanism} in which both users and producers truthfully reveal secret information. Hurwicz' impossibility proof is elegantly sidestepped by the elimination of the need for the pre-exchange negotiation step. Users can calculate the market price for transaction inclusion directly from the burn fee, and forging this information is quantifiably costly . The one situation in which producers have an incentive to spend their own money at the mechanism, and this...
+
+
+\subsection*{RTR-TFM: Routing-based Randomized TFM}
+
+In this section we introduce \ourTFM: a \underline{R}outing \underline{T}hreshold-based \underline{R}andomized-TFM. Figure~\ref{fig::teaser} presents the overview of our mechanism, which is described briefly below.
+
+There are three key differences between \ourTFM and  existing TFMs. \textbf{First,} we introduce the concept of "routing-work" which replaces \textit{mining} or \textit{staking} as the form of work used to regulate the pace of block production. The amount of routing work in any block is verifiable in an informationally decentralized and permissionless environment and provides an objective standard for determining when a block can be produced. \textbf{Second,} we propose a payment rule that makes payments available to multiple network nodes and pulls payouts away from nodes that orphan blocks with statistical regularity. \textbf{Third}, we demonstrate how competition between users and block producers in mechanism eliminates opportunities for the socially-suboptimal forms of value-extraction that prevent attaining pareto optimality in other mechanisms. Figure~\ref{fig::rtr-tfm} summarizes the main components of \ourTFM. 
+
+In \ourTFM, when users send transactions to nodes in the network, they include cryptographic routing signatures indicating the first \emph{hop} node. Each node adds its signature as it \emph{propagates} the transaction deeper into the network, creating within each transaction an unforgeable record of the path the transaction has taken from the user to the block producer offering inclusion.
+
+The "routing work" that nodes need to produce blocks and which regulates payouts is derived from this chain of signatures. Specifically, the amount of routing work that is available to a potential block producer from any transaction is given by $c\cdot \frac{1}{2^{h-1}}$, where $c$ is a network-determined constant and $h$ is the node's hop for that transaction. E.g., a node hearing about a transaction at its third hop receives $\frac{c}{4}$ routing work for that transaction. Each node gathers transactions until they have enough total routing work to meet a network-determined \textit{difficulty} \textit{threshold}, $\tau$. At this time, the node may become a block producer and broadcast its block with its set of transactions whose total routing work crosses $\tau$.
+
+Once a block is produced, we \emph{burn} half of the total fees. The other half is given to a \emph{random} routing node selected from the routing paths within the transactions in the block, selected using the following probability distribution: (i) we uniformly select a transaction among those that are part of the block weighted by the total fees paid by that transaction, then (ii) from the routing path of the winning transaction, we randomly select a routing node, with each node weighted by the routing work available at their specific hop to the total amount of routing work generated across the entire relay path.
+
+Importantly, while the block producer is eligible for payment as the final routing nodes in the routing paths of every transaction, other nodes also have a probability of being selected for payment. This is an important distinction between \ourTFM and other mechanisms, as block producers who include their own fees in blocks are not guaranteed to recapture them.
+
+\subsection{Game Theoretic Characterization}
+
+\paragraph{TFM Model~\cite{roughgarden2021,roughgarden2024transaction}.} We model \ourTFM\ as a game with a set of $m\in\mathbb{N}$ block producers, $\mathcal{P}:=[m]$. We consider each block producer $i\in \mathcal{P}$ to be \emph{myopic} and \emph{strategic}. We assume that each transaction is of the same size, with each block's capacity denoted by $k \in \mathbb{N}$. Furthermore, let $n\in\mathbb{N}$ denote the total number of users, denoted by $\mathcal{U}:=[n]$. We assume that each user $j\in\mathcal{U}$ is also myopic and strategic~\cite{roughgarden2021,ferreira2021dynamic,chung2023foundations,gafni2024barriers,damle2024designing}. A user $j\in\mathcal{U}$ is interested in getting a slot in the block for its transaction. Let $\theta_{j}\in \mathbb{R}_{\geq 0}$ denote user $j$'s private valuation for its transaction's confirmation and $b_j \in \mathbb{R}_{\geq 0}$ as its transaction's public bid.
+
+Each block producer $i\in \mathcal{P}$ has its private copy of the set of outstanding transactions, known as \emph{mempool}. Recall that in \ourTFM\ the block producers store both the transaction bids and the specific hop at which they first hear the transaction. That is, producer $i$'s mempool is the tuple $\mathcal{M}_i=({F}_i, {H}_i)$. $\mathcal{M}_i$ comprises the set of user bids $F_i = (b_1,\ldots, b_{n})$ and their corresponding hops $H_i = (h_{i,1},\ldots, h_{i,n})$.
+
+\paragraph{TFM: Allocation $(\mathbf{x})$, Payment $(\mathbf{p})$, and Burning Rule 
+$(\mathbf{\delta})$~\cite{roughgarden2021,roughgarden2024transaction}.} To create its block, a block producer $i\in \mathcal{P}$ selects a subset of transactions from $S\in F_i$ to add. Each such \textit{allocated} transaction $t \in S$, is charged a \textit{payment} $p_t$ for its slot in the block. E.g., if the TFM is a first-price auction, $p_t = b_t$. If the TFM is a second-price auction, then $p_t$ equals the highest losing bid. Furthermore, TFMs can also include a \textit{burning} rule, where a fraction of the payment $p_t$, say $\delta_t$, is removed from the cryptocurrency's supply forever.
+
+\paragraph{Strategy Space.} Trivially, the strategy space for users in a TFM is their bid, i.e., for each user $j\in\mathcal{U}$, the strategy space is $(b_j)$. Typically, the block producer's strategy space comprises the allocation rule it picks, say $x$, and any fake transactions it adds to manipulate the fee levels in the block, say $\mathcal{F}$. As payments are issued for routing transactions, we enrich the producer's strategy space to include the choice of whether to hoard transactions or \textit{sybil} the routing path by adding false identities controlled by the attacker.
+
+
+
+
+
+
+
+
+
+This paper offers a general rebuttal. It first identifies the underlying cause of the incentive misalignments that must be addressed to achieve TFM-optimality, and then explains why this makes the TFM-optimization problem seem intractable given the informational limitations of the specific Bayesian models used to draw conclusions about the solution space. Specifically, it shows that the social choice rule needed to achieve fee-optimality and eliminate collusion in TFMs is \textit{pareto optimality}, and that the direct mechanisms used to model TFMs in the relevant computer science literature are incapable of implementing this rule because doing so requires multi-dimensional preference revelation across such a high-dimensional preference space that composable algorithms cannot handle the informational complexity. We then follow this discussion with the revelation of an indirect mechanism that addresses the underlying causes of incentive misalignment, and can be implemented using an indirect mechanism in a decomposable environment.
+
+
+\section{Informational Complexity and Incentive Compatibility\label{sec::section1p3}}
+
+The previous sections have provided us with the information needed to describe our problem clearly. TFMs are challenging to design as they are informationally decentralized mechanisms in which multiple classes of participants must cooperate to both provision and consume the form of utility generated by the mechanism in optimal and balanced amounts, while both parties have strategic opportunities to mislead others about .
+
+Our first problem is that users and producers will always have incentives to adopt byzantine strategies that change their voluntarily-provided fee-levels unless the mechanism implements or achieves incentive compatibility with the social choice rule of pareto optimality. But pareto optimality cannot be achieved in the presence of public goods, which means non-excludable benefits to users in the form of a collective security function, or non-excludable benefits to producers in the form of a block reward encourage collusion between users and block producers and side-contract payments. We face a mechanism with a two-sided free-rider problem, which is why solutions that focus on the interests of only one party are structurally incapable of solving the underlying problem and fixing the misalignments.
+
+Even if these problems can be avoided, we must then deal with the objection that Hurwicz offered to designing avoidable, which is the ability of participants to costlessly manipulate the expectations of others by misleading them about the expected market price. While this problem is solved in direct mechanisms which achieve Bayesian Nash Equilibrium, the inability 
+
+
+
+
+
+
+
+Understanding the difference between direct and indirect mechanisms is critical for the rest of this paper, since the impossibility results this paper circumvents fail on these grounds -- they use techniques developed from the study of \textit{direct mechanisms} to generalize about the impossibility of addressing problems with can be solved using \textit{indirect mechanisms}.
+
+Ironically, Hurwicz criticized this exact tendency when he wrote "an optimality criterion which presupposes a particular mechanism cannot serve as a legitimate criterion for comparison with other mechanisms." If a mechanism is studied that requires price-maker/price-taker negotiation as a precondition for order-submission, it is a direct mechanism which achieves in truthful preference revelation during the pre-exchange messaging stage of the exchange process. Conversely, in indirect mechanisms users reveal their preferences indirectly in the action stage when submitting bids at prices they consider strategically optimal.
+
+At it turns out, Hurwicz's point was not entirely true. While Maskin's revelation principle proved that all indirect mechanisms that successfully implement social choice rules can be structured as direct mechanisms, the opposite is not true, which means that impossibility results generated from the difficulty of finding Bayesian Nash Equilibria in direct mechanisms can never rule out the existence of indirect mechanisms. Indeed, there are mechanisms like the Clarke-Groves demand revelation mechanism which achieves the efficient provision both public and private goods by soliciting participant preferences over different bundles of goods. Free-rider pressures which cannot be solved with direct mechanisms are addressed here through an indirect mechanism.
+
+
+
+
+
+More critically, without a properly specified social choice rule, it is not even clear what specific information participants must reveal to . For parteo optimality, for instance, the nature of the information required is different from that collected in the course of mechanisms like the Vickrey auction.
+
+While we do not have time to review the implications of this point in too much depth, we can observe in passing that a significant amount of literature has gone into examining what kinds of information exist, can be represented a compact-enough form to be exchanged, and what kinds are practically computable in both composable and decomposable environments. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ later in this paper, one of the reasons for the recent bloom in blockchain impossibility proofs is linguistic in origin -- the term "utility" is used too casually, and univariate representations of it which assume a specific price and production schedule for all non-blockchain goods are being confused with multi-variate forms which express the preferences of subjects for the consumption of the blockchain goods across all possible price levels and production possibilities. Once again, this is a subject covered by Hurwicz in his 1973 examination of the intellectual problem when he criticized non-economic approaches that study only "one-objective function problems" and thus cannot address "the crucial issue of goal conflict."
+
+In the next section we will show how all of these underlying problems are creating an intellectual Gordion Knot that can only be untied by noticing their internal and informational inconsistencies. Before we continue with a survey of how these problems are surfacing again and again in the computer science literature, we still have one significant topic in economics to discuss: the question of how and whether conclusions made from studying auction mechanisms can generalize to broader market structures.
+
+For the purposes on this paper, perhaps the most seminal early contribution on this front came from William Vickrey, a Canadian economist, who invented the Vickrey auction in 1961. In this type of auction, also known as a second-price sealed-bid auction, participants submit bids without knowing the bids of others, and the highest bidder wins but pays the second-highest bid rather than their own bid. When multiple goods are available for sale, such as when multiple slots for transactions are available in a block, all participants would pay the lowest price.
+
+The importance of Vickrey's idea can be seen in the context of Hurwicz's discovery, since under the Vickrey auction participants are not punished for revealing the true price they are willing to pay for the good under allocation, but face potential losses if they over-bid (pay too much) or under-bid (pay too little). Roger Myerson would later observe that strategic opportunities were still exploitable if participants used strategies that incorporated expectations about the strategic behavior of others, and modified the Vickrey auction to make it Bayesian Incentive Compatible, a situation in which the strategies all players are stable once they account for the expected strategies of their counter-parties in the mechanism. Both discoveries are of tremendous significance for the problem we are having to unravel, as they demonstrated that it is possible to create "incentive compatible" auction mechanisms as participants indeed had an incentive for the truthful revelation of their preferences.
+
+The final intellectual step we need to observe is the one Roger Myerson, made when he leveraged Maskin's revelation principle to generalize the possibilities and impossibilies of auction mechanisms to general markets in which participants act not only on the basis of their own strategic calculations, but in response to how they believe other participants will act. In order to do this, Myerson developed the concept of virtual valuations allow us to account for private information (such as a bidder's valuation of a good) in a way that helps achieve efficient allocations, even in the presence of multiple agents with potentially different private information. Since this approach remains robust in the presence of multiple participants, Myerson then used the Revelation Principle to generalize to show that it is possible to design mechanisms that lead to Pareto-efficient outcomes (where no one can be made better off without making someone else worse off) while maintaining incentive compatibility (truth-telling is a best response for all participants). This generalized from the auction setting (where participants bid for a good) to a broader context in market mechanisms (where buyers and sellers interact to exchange goods).
+
+If we can establish the impossibility of achieving Bayesian Nash Equilibrium for an auction that is designed assuming the truthful revelation of a specific type of private information, then we can generalize the results to markets where achieving optimality requires the revelation of the same type of information. Essentially, Myerson created a link that allowed conclusions drawn from the auction setting (where participants bid for a good) to be generalized to the broader multi-player context in market mechanisms.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+we are used to thinking about direct mechansism because they're the easiest mechanisms, but we restrict to direct mechanisms because we all learned this so there is a familiarity bias
+
+but now 
+
+well, yes, but we also know that we can in principle look at indirect mechanisms 
+
+and in this particular instance the indirect mechanism has certain properties
+
+	and one of those properties is that it can use much less information, which is critical since the information required is more volumous
+
+	- can use much less information, which is critical 
+
+
+these papers have incorrectly assumed that these problems are insovable.
+
+
+
+
+
+
+What unites these fields is the new class of distributed consensus mechanism, hereafter referred to hereafter as \emph{Transaction Fee Mechanisms} or TFMs. While public attention has been captivated by the speculative opportunities these networks afford, academics and mechanism designers are asking broader questions about the theoretical limits of what is possible in these new kinds of distributed mechanisms. As compared to their antecedents, 
+
+
+\paragraph{Self-Provisioning}. As noted above, \textit{TFMs} are self-provisionin
+
+a novel class of auction in which block producers sell blockspace to users who bid \textit{transaction fees} for inclusion. While traditional auction mechanisms are well understood at this point, \emph{Transaction Fee Mechanisms} have some of the properties of free markets. Recent literature~\cite{ferreira2021dynamic,chen2022bayesian,chung2023foundations,gafni2024barriers,damle2024designing} has aimed to characterize the game-theoretic properties of these mechanisms given these informational differences:
+
+
+These papers claimTransaction Fee Mechanism (TFM) design explores the strategic interaction between transaction creators (users) and block producers. Classic TFMs give block producers control over the transactions they include in blocks, creating problems maintaining incentive compatibility, preventing collusion, and inducing a socially optimal fee-throughput level. Given previous research showing existing TFMs only solve these problems under strictly-limited conditions, we introduce \ourTFM, which achieves incentive compatibility, collusion-resilience and pareto optimality through a novel "routing-based" mechanism that derives the form of work used for block production and the payouts issued for this work from the measured efficiency of competing nodes in fee-collection and sharing. This paper introduces the mechanism and rigorously demonstrates its robustness to the collective action problems that prevent incentive compatibility in other TFMs.
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Include any author-defined commands here.
+         
+\newcommand{\BibTeX}{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em\TeX}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+
+\maketitle 
+
+\section{Introduction \label{sec::introduction}}
+
+
+
+
+In the face of these changes, recent literature has been skeptical about the prospect of designing socially-optimal TFMs. ~\cite{ferreira2021dynamic,chen2022bayesian,chung2023foundations,gafni2024barriers,damle2024designing} have all flagged problems inducing participants to follow the rules these mechanisms require to achieve socially optimal and collusion-free outcomes.
+
+And this is the landscape into which \citet{roughgarden2021,roughgarden2024transaction} introduced Transaction Fee Mechanisms (TFMs) as a research agenda for studying two-sided auction mechanisms. In his seminal works, which explore the trade-offs that exist in Bitcoin's "first-price auction" and Ethereum's EIP-1559~\cite{buterin2019eip}, Roughgarden asks whether these mechanisms are \textit{incentive compatible} but defines incentive compatibility solely as the truthful preference revelation.
+
+But what preferences? Are users expected to share information on the comparative value of the goods competing for consumption of their transaction fee as is needed for \textit{pareto optimality}? Or are users expected to share the price point at which they enjoy zero consumer surplus, as is needed for an envy-free \textit{allocation}? One of the challenges of grappling with the literature is that most papers treat honest preference revelation as if it is the \textit{social choice rule} instead of an intermediary step in which the information collected must be suitable for achieving a broader social goal.
+
+For this reason, while Roughgarden and his peers refer to their desired property as "incentive compatibility", this paper refers to the "Roughgarden Compatibility" (RC) as it combines assumptions from both market and auction mechanisms in ways that are non-obvious. A review of the TFM literature shows that RC assumes the following:
+
+First, RC implicitly accepts the \textit{social choice rule} used in auction mechanisms, where the goal is ensuring the "fair allocation" of blockspace. We can see this from Roughgarden's assertion that TFMs which use the second-price Vickrey auction to price blockspace are RC for users, and from the fact that the information solicited from users is the price point at which they enjoy zero consumer surplus.
+
+Second, RC restricts its focus to analyzing the utility of a single private good -- transaction inclusion. It does not define an explicit \textit{social choice rule} for block producers, who are asked merely to refrain from submitting their own bids in an effort to manipulate the price levels paid by users.
+
+Third, RC holds the probability of block production constant when examining the strategic options available to both users and producers. This assumption is essential for many of the conclusions made across the TFM literature, which assume that value of transaction inclusion must be independent of the fee users pay to secure it.
+
+Given the obvious novelty of the two-sided auction designs, a number of papers have been written exploring the strategic limitations of RC and attempting to draw conclusions about what sort of equilibria are and are not possible in them. For example, \citet{ferreira2021dynamic} propose a posted-price TFM and provide an equilibrium posted-price at which the TFM achieves RC for both users and block producers. \citet{chen2022bayesian} relax the requirements for RC and propose a TFM that with compatibility for block producers and provides some limited forms of collusion resistance.
+
+\citet{chung2023foundations} introduce a "Burning Second-Price" TFM that compromises allocative efficiency to guarantee user and block producer RC. In their model, the authors tweak the utility model with "$\gamma$-Strict" utility for users/producers. The new model captures the future cost of introducing fake transactions discounted by a \textit{public} parameter $\gamma\in [0,1]$, with the limitation of reliance on a parameter that is impossible to estimate in informationally-decentralized mechanisms. The described mechanism also does not prevent certain forms of free-riding.
+
+\citet{gafni2024barriers} incorrectly argue that only trivial TFMs -- those that never confirm any transaction -- can be RC for users and producers and simultaneously collusion proof. \citet{chung2024collusion} argue that it is impossible to achieve RC for users and producers and also collusion-proofness in randomized TFMs, but propose relaxations that circumvent this impossibility. Among other works, \citet{wu2023maximizing} provide optimal bounds for the block producer for a TFM that is Bayesian IC and collusion-proof, assuming that a known fraction of the users are honest. \citet{damle2024designing} instead focus on reducing transaction fees by redistributing the surplus while providing a relaxed incentive-compatibility guarantee.
+
+As this paper demonstrates, it is in fact possible to design mechanisms that exhibit both RC as well as traditional incentive compatibility. 
+
+
+\clearpage
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%
+%%%%
+%%%%%
+\begin{figure*}[t]
+    \centering
+    \begin{minipage}{0.5\textwidth}\centering
+    \includegraphics[width=\textwidth, trim={0 0 300pt 0}, clip]{AAMAS25/figures/example.png}
+    \caption*{Block Production Rule}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}\centering
+    \fbox{ \parbox{\textwidth}{ The "winning lottery" is computed by (i) uniformly sampling a transaction from the new block and (ii) sampling a Producer from the routing path of that transaction, weighted by the routing work.
+
+    \smallskip
+    
+    For our example for Producer 3's block, the blockchain will choose each transaction $b_2$, $b_3$, and $b_4$ w.p. $\frac{1}{3}$. 
+
+    \begin{itemize}[leftmargin=*,itemsep=0.3em]
+        \item If $b_2$ is selected, Producer 2 wins the lottery w.p. $\frac{2}{3}$ and Producer 1 w.p. $\frac{1}{3}$
+        \item If $b_3$ or $b_4$ is selected, Producer 3 wins the lottery w.p. $1$
+        \item Let the {total} payment from {the} new block be $p$, then the expected {revenue} is, 
+        \begin{itemize}
+            \item $\mbox{Producer 3} = \frac{1}{3} \cdot \frac{1}{3} \cdot p  + \frac{1}{3} \cdot p + \frac{1}{3} \cdot p = {\frac{7}{9}\cdot p}$
+            \item ${\mbox{Producer 2}} = \frac{1}{3} \cdot \frac{2}{3} \cdot p = {\frac{2}{9}\cdot p} $
+        \end{itemize}
+    \end{itemize}
+    } }
+    \caption*{Block Producer Revenue Rule}
+    \end{minipage}
+    \caption{\ourTFM: Overview of the Block Production Rule \textbf{(left)} and Block Producer Revenue Rule \textbf{(right)}}
+    \label{fig::teaser}
+\end{figure*}
+%%%%%
+%%%%
+%%
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{Utility Model~\cite{roughgarden2021,roughgarden2024transaction}.} 
+
+For Roughgarden Compatibility, each user $j\in\mathcal{U}$ with valuation $\theta_j$ and bid $b_j$ has the following utility structure:
+
+\begin{equation}
+ u^\mathcal{U}_j(\theta_j,\{\theta_{j^\prime}\}_{j^\prime \in \mathcal{U}\setminus \{j\} }; p_j) :=   \begin{cases}
+       \left( \theta_j - p_j - \delta_t \right) & \text{if} j \in S \\
+        0  & \text{otherwise.} 
+    \end{cases}
+\end{equation}
+
+The utility of the block producer depends on $\mathcal{F}_i$, which is the set of fake transactions the block producer $i\in\mathcal{P}$ may include to strategically deviate from honest behavior:
+
+\begin{equation}
+    u^\mathcal{P}_{i}(F_i, \mathcal{F}_i) :=  \underbrace{\sum_{t\in F_i} p_t}_{\text{Revenue from Honest Txs}} - \underbrace{\sum_{t^\prime \in \mathcal{F}_i} \delta_{t^\prime}}_{\text{Cost of Fake Txs}}
+\end{equation}
+
+These definitions suffice to demonstrate Roughgarden Compatibility for both users and block producers.
+
+\begin{definition}[Roughgarden Compatibility ~ Users~\cite{roughgarden2021,roughgarden2024transaction}]\label{def::UIC}
+    We say that a TFM is Roughgarden Compatible for users if bidding their true valuation maximizes the utility of users, irrespective of the other user bids. That is, for any user $i \in \mathcal{U}$, $\forall \theta_j$ and $\forall \{\theta_{j^\prime}\}_{j^\prime \mathcal{U} \setminus \{j\} }$, we have
+    $$
+     u^\mathcal{U}_j(b_i^\star = \theta_j,\cdot; \cdot) \geq  u^\mathcal{U}_j(b_i = \theta_j,\cdot;\cdot).
+    $$
+\end{definition}
+
+\begin{definition}[Roughgarden Compatibility - Block Producers]\label{def::BPIC}
+    We say that a TFM is Roughgarden Compatible for block producers if it is the block producer $i \in \mathcal{P}$'s best response to (i) follow the intended TFM allocation rule and (ii) not include any fake transaction, i.e., $\mathcal{F}=\emptyset$, given that the remaining producers $\mathcal{P}\setminus \{i\}$ follow the same strategy. 
+\end{definition}
+
+With these definitions we now demonstrate the \ourTFM game is Roughgarden Compatible. \textbf{First,} in Theorem~\ref{thm:UIC}, we show that \ourTFM\ is RC for users through the second-price payment rule, similar to \citet{roughgarden2021}. We then show that block producers maximize welfare by propagating transactions without self-cloning. \textbf{Third,} in Lemma~\ref{lemma:fake-txn}, we show that \ourTFM\ disincentivizes block producers from including fake transactions in their blocks, under reasonable conditions of the network state.
+
+\subsection{\ourTFM: Roughgarden Compatibility for Users}
+
+Myerson's Lemma \cite{myerson81} provides a condition under which any mechanism (like an auction) ensures users bid the maximum amount they are willing to pay irrespective of what every other user does. According to the lemma, the allocation rule must be monotone in the user bids, given other bids are constant. Further, it must follow the proposed payment characterization. E.g., it is well known that the generalized second-price auction (or VCG) is a special case of Myseron's Lemma and, thus, Roughgarden Compatible for users. In TFM, we consider the single-demand, homogeneous setting, i.e., each user has a requirement of at most one item, and all the available items are copies of a single item. The VCG auction allocates to the highest $k$ users and charges them the $(k+1)^{th}$ bid. 
+
+In \ourTFM, the block producers must consider both the bids and the routing work corresponding to each transaction. Due to the additional requirement of the routing work threshold, producers may not follow the standard VCG allocation. That is, the highest $k$ bids may not clear the routing work threshold if they have propagated deeply into the network. Thus, we propose an allocation rule discussed in Section \ref{sec::protocol}. We first show that the proposed allocation rule is monotonic. 
+
+\begin{lemma}\label{lemma:monotone}
+    For any user $i\in \mathcal{U}$, \ourTFM\ allocation rule $\bm{x}$ is monotone with respect to their bid (transaction fees), given the remaining bids $\mathcal{U}\setminus \{i\}$ do not change.
+\end{lemma}
+\begin{proof}
+    A strategic producer selects transactions that clear the routing work threshold and satisfy the block capacity constraint, captured by \ourOPT's feasibility constraints. Note that, the routing work of any transaction is independent of the user's bids. Let $\mathcal{S}$ be the set of the subset of feasible transactions. The producer selects the subset that maximizes the minimum bid (objective of \ourOPT). If a user's transaction belongs to any feasible subset, increasing the bid will have the following effect.
+
+    If the said bid is the minimum in $S$, increasing it will increase the chance of confirmation. It will not affect the chance of confirmation if it is not the minimum in $S$. Changing the bid does not have any effect if the transaction does not belong to any feasible subset (due to the constraints in \ourOPT). Hence, the allocation is non-decreasing with increasing bid.
+\end{proof}
+
+%
+% the block producer / burn fee is a price-setting transaction, or an aggregate of the price-setting transactions...
+%
+
+\ourTFM\ has a monotonic allocation rule, but it does not entirely satisfy Myerson Lemma's~\cite{myerson81} payment characterization. If $S^\star \in$ \ourOPT, then the payment rule that depends on smaller bids than the minimum bid in $S^\star$ would satisfy the payment criterion. To facilitate such payments, these "price-setting" bids must be included in the blockchain.  Including price-setting transactions without any cost of inclusion can be easily manipulated by the block producer to increase revenue~\cite{chung2023foundations}. Thus, \citet{chung2023foundations} introduce the future cost of inclusion within their modeling. In \ourTFM, we do not have any such arbitrary cost of inclusion; thus, having price-setting transactions will allow for minor deviations. Similar to \citet{roughgarden2021}, we propose to use minimum bid in $S^\star$ as the price-setting bid. Theorem~\ref{thm:UIC} shows that this payment rule ensures almost URC. That is, when there are sufficient transactions and the difference between transaction pairs is small, the incentive from deviating is negligible. 
+% \manisha{please check this}
+
+\begin{theorem}\label{thm:UIC}
+   \ourTFM\ is \emph{almost} Roughgarden Compatible for Users
+\end{theorem}
+\begin{proof}
+    We prove almost UIC through a case-by-case analysis.
+    Let $S^\star$ be the block producer's optimal subset of transactions based on the bids, computed via \ourOPT.  
+    Let $B = \min_{(f, h)\in S^\star} f$ be the minimum accepted transaction.
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Case 1.} $\theta_i < B$ for any user $i$, if $b_i = \theta_i$ the user does not get selected in $S^\star$ and gets zero utility. If the user under-bids, i.e., $b_i < \theta_i$ the utility remains zero. Upon overbidding, i.e., $b_i > \theta_i$, the user might get selected, but the user's utility will be $\theta_i - B < 0$. For Case 1, bidding true value maximizes the utility.
+        \item \textbf{Case 2.} $\theta_i > B$, if $b_i = \theta_i$ and $b_i \in S^\star$, i.e., the user is truthful and other constraints (independent of bid) ensures the selection of $i$ and utility of $\theta_i - B$. As long as the bid value $b_i > B$, the user might get a utility $\theta_i - B$. If the bid $b_i < B$, the utility will be zero. Hence, the maximum utility is obtained at truthful bidding. In the other scenario where $b_i = \theta_i$ and $b_i \not\in S^\star$, i.e., the user does not get included due to other constraints, the user's utility is zero. Changing the bid does not impact its inclusion; thus, the utility remains zero. 
+        \item \textbf{Case 3.} $\theta_i = B$, in this case, the user can deviate by bidding the lowest value needed to qualify for $S^\star$. Although, when there are large number of transactions the deviation may not help the user significantly~\cite{roughgarden2021}.
+    \end{itemize} 
+    This proves the theorem.
+\end{proof}
+
+
+\begin{lemma}\label{lemma:routing}
+    In \ourTFM, routing is a Dominant Strategy over hoarding transactions for any block producer $i\in\mathcal{P}$. 
+\end{lemma}
+\begin{proof}
+    Consider four block producers, say $A_{1}, A_{2}, B_{1}, B_{2}$, such that $A_{1}$ and $A_{2}$ are connected (i.e., messages from $A_{1}$ reach $A_{2}$ in single hop). Also, consider $B_{1}$ and $B_{2}$ as connected. We assume $A_1$ and $B_1$ receive the same transaction as first hop nodes. Now, we examine 2 cases: (1) when $B_{1}$ hoards transactions, and (2) when $B_{1}$ routes transactions. We show that, in either case, $A_{1}$ receives a higher utility on routing than hoarding. 
+    
+    For the proof, we quantify $u(A_1\ \mbox{routes} | B_1\ \mbox{hoards})$ as the utility $A_1$ receives from routing the transaction in the event $B_1$ decides to hoard it. Further, $u(A_1\ \mbox{hoards} | B_1\ \mbox{hoards})$ denotes the utility for $A_1$ when both choose to hoard. Likewise, $u(A_1\ \mbox{hoards} | B_1\ \mbox{routes})$ and $u(A_1\ \mbox{routes} | B_1\ \mbox{routes})$ correspond to utilities for $A_1$  when $B_1$ decides to route to $B_2$.
+    % \begin{itemize}[leftmargin=*]
+    \smallskip
+    
+    \noindent \textbf{Case 1: $B_1$ hoards the transaction.} If $A_1$ hoards then the probability of $A_1$ and $A_2$ producing the block is $\Pr(A_1) = \Pr(A_2) = \frac{1}{2}$, that is, both are equally likely. Let $p$ be the payment received, implying $A_1$'s utility is $u(A_1\ \mbox{hoards}) = \frac{1}{2}\cdot p$. When $A_1$ propagates instead of hoarding and given $\Pr(A_1) = \Pr(A_2) = \Pr(B_1) = \frac{1}{3}$, i.e., all the three nodes involved are equally likely to produce a block, $u(A_1 \ \mbox{routes}) = \Pr(A_1) \cdot p + \Pr(A_2) \cdot \frac{2}{3} \cdot p = \frac{5}{9} \cdot p $. Thus $u(A_1\ \mbox{routes} | B_1\ \mbox{hoards}) > u(A_1\ \mbox{hoards} | B_1\ \mbox{hoards})$.
+
+   \smallskip
+    \noindent \textbf{Case 2: $B_1$ routes the transaction to $B_2$.} If $A_1$ hoards then $u(A_1\ \mbox{hoards}) = \frac{1}{3} \cdot p$ where $\Pr(A_1) = \frac{1}{3}$. If $A_1$ decides to route to $A_2$, and given that all the four nodes involved are equally likely to produce the block, we get  $u(A_1\ \mbox{routes}) = \Pr(A_1) \cdot p + \Pr(A_2) \cdot \frac{2}{3} \cdot p  = \frac{1}{4} \cdot p + \frac{1}{4} \cdot \frac{2}{3} \cdot p = \frac{5}{4} \cdot \frac{1}{3} \cdot p$. Thus, $u(A_1\ \mbox{routes} | B_1\ \mbox{routes}) > u(A_1\ \mbox{hoards} | B_1\ \mbox{routes})$.
+\end{proof}
+
+\subsection{\ourTFM: Producer-side Properties}
+
+We now show that \ourTFM\ is Roughgarden Compatible for block producers. Demonstrating that block producers have no incentive to manipulate the fee mechanism is done by demonstrating that the block producer is disincentivized from including fake transactions.
+
+As previous discussed, in \ourTFM block producers solve \ourOPT\ to product blocks. For the given payment rule, \ourOPT\ ensures revenue maximizing allocation, which is also feasible. Hence, a rational block producer is incentivized to follow the allocation rule. What remains is the question of whether the block producer can deviate through the inclusion of fake transactions that spend fees contributed by the block producer.
+
+\paragraph{Fake Transactions are Disincentivized.} block producers can include fake transactions to increase the minimum fee paid by the price-setting transaction, thereby earning more revenue from all transactions in the block.
+
+\begin{assumption}
+    \label{assumption::1}
+    We assume that the blockchain network is sufficiently bootstrapped, such that there are a sufficient number of block producers handling a sufficient amount of inbound transactions. Moreover, TFMs assume the demand for a slot in a block is more than the supply (otherwise transaction allocation is trivial).
+\end{assumption}
+
+\begin{example}[Working Example for Assumption~\ref{assumption::1}]\label{eg::ass1}
+
+    Consider three block producers $\{1,2,3\}$ and three transactions $\{A, B, C\}$. Each of the block producers is the first hop for each of the transactions, respectively. That is, Producer 1 receives transaction $A$ and routes it to 2. Producer 2 receives transaction $B$ and routes it to 3 and Producer 3 receives $C$ and routes it to 1. Figure~\ref{fig::illustration} illustrates this.
+    
+    Now each of the three block producers have a total routing work of $\frac{3c}{2}$. If $\tau = \frac{3c}{2}$ then the probability of producing a block is the same for everyone, i.e., $\Pr(S_i) = \frac{1}{3}$ for all $i\in \{1,2,3\}$. From Eq.~\ref{eqn:alphai}, $\alpha_{i}$ is the probability that block producer $i$ receives the revenue. In addition, the random variable $\mathbb{I}_{i} = 1$ if ${i}$ is the winner of the revenue lottery and $0$ otherwise. If $S$ is the set of transactions included in the block, $S = S_{j}$ means block producer is $j$. Then, 
+    \[
+        \alpha_{i} = \sum_{j = 1}^{m} \Pr(\mathbb{I}_{i} = 1 | S_{j})\cdot \Pr(S = S_{j})
+    \]
+        
+    $\alpha_1 = \sum_j \Pr(\mathbb{I}_1 = 1| S_j = 1).\frac{1}{3} = \frac{1}{3} \cdot \left[ \frac{1}{2} \cdot \frac{1}{6} + \frac{1}{2} \cdot \frac{2}{3} \right] = \frac{1}{3} = \alpha_2 = \alpha_3$. 
+    % While such an assumption may not be valid with few block producers but with a large number of producers, we assume similar winning probability across them.
+\end{example}
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}[node distance=1.5cm, >=Latex, thick]
+
+% block producers (BPs) positioned in a triangle
+\node[draw, circle] (bp1) {\textbf{Producer 1}};
+\node[draw, circle, below right=of bp1] (bp2) {\textbf{Producer 2}};
+\node[draw, circle, below left=of bp2] (bp3) {\textbf{Producer 3}};
+
+% Transactions
+\node[right=1.5cm of bp1] (txA) {Transaction A};
+\node[below=1.5cm of bp2] (txB) {Transaction B};
+\node[below=1.5cm of bp3] (txC) {Transaction C};
+
+% Routing Arrows (Transactions to Producers)
+\draw[->] (txA) -- (bp1) node[midway, below] {\textbf{Work:} \textcolor{blue}{$c$}} ;
+\draw[->] (txB) -- (bp2) node[midway, right] {\textbf{Work:} \textcolor{blue}{$c$}};
+\draw[->] (txC) -- (bp3) node[midway, right] {\textbf{Work:} \textcolor{blue}{$c$}};
+
+% Routing between Producers
+\draw[->] (bp1) -- (bp2) node[midway, left, xshift=0.1cm,yshift=-0.2cm] {\large \textcolor{blue}{$A, \frac{c}{2}$}};
+\draw[->] (bp2) -- (bp3) node[midway, left, yshift=0.1cm] {\large \textcolor{blue}{$B, \frac{c}{2}$}};
+\draw[->] (bp3) -- (bp1) node[midway, left] {\large \textcolor{blue}{$C, \frac{c}{2}$}};
+
+\end{tikzpicture}
+    \caption{Illustrating Example~\ref{eg::ass1}}
+    \label{fig::illustration}
+\end{figure}
+
+
+\paragraph{Change in $\alpha$ with Fake Transactions.}
+
+In the above example, without fake transactions, the probability of winning for any block producer is $\alpha$. Assumption~\ref{assumption::1} states that for a sufficiently large set of outstanding transactions, such a scenario is mimicked. Thus, we follow Roughgarden in assuming that each honest block producer has the same winning probability. 
+
+%
+% we don't need each block producer to have the same probability of winning the next block as long as we can assume -- Roughgarden Compatibility -- that the allocation must happen without changing the probability of the block producer being selected.
+%
+
+With fake transactions, any block producer $i$ can only affect $S_i$, its own set of transactions. Thus, $\Pr(\mathbb{I}=1|S_i)$ will change. Formally, we can capture the change as $\Delta(\alpha) = \frac{\partial \alpha}{\partial \Pr(\mathbb{I}_i = 1| S_i)}$. From Eq. \ref{eqn:alphai}, we trivially observe that,
+
+\begin{equation}\label{eqn:delta-alpha}
+    \Delta(\alpha) = \frac{\partial \alpha_{i}}{\partial \Pr(\mathbb{I}_{i} = 1| S_{i})} = \Pr(S_{i})
+\end{equation}
+
+From Assumption \ref{assumption::1}, each block producer has the same probability of proposing the next block, so we have $\Pr(S_{i}) = \mathcal{O}\left(\frac{1}{m}\right)$, $\forall i \in [m]$, where $m$ are the total number of block producers. 
+
+With this background, Lemma~\ref{lemma:fake-txn} shows that \ourTFM\ disincentivizes creation of fake transactions. 
+
+\begin{lemma}
+    In \ourTFM, as $m \to \infty$, including any fake transaction to compute $S$ (refer to \ourOPT) is disincentivized for any block producer $i \in \mathcal{P}$ if $\alpha \leq \frac{2}{k+1}$.
+    % , the inclusion of $z$ fake transactions is disincentivized if 
+    % $$ \alpha  \leq \frac{z - \epsilon/\tilde{p}}{|\tilde{S}| + z - |S| \frac{p}{\tilde{p}}} $$
+    % \[
+    % \alpha \leq \frac{z/k - \epsilon/(kp^{max})}{(1 - \frac{p}{\tilde{p}}) + z/k}
+    % \]
+    % and, 
+    % \[
+    % \frac{\partial \alpha}{\partial Pr(\mathbb{I}_{i} = 1 | S = S_{i}}) \leq \frac{2\epsilon}{\left(|\tilde{S}|\tilde{p} + c\tilde{p}\right)}
+    % \]
+    % hold true $\forall z \in [0,k]$, where $k$ is the block capacity. 
+    % \sankarshan{not needed >>>>}
+    % Here, $S$ is the set of transactions determined by the honest allocation rule, and $\tilde{S}$ is the set that includes $z$ fake transactions. 
+    % $p^{max} = \max_{(t,h) \in S} t$ is maximum fees transaction, $p = \min_{(t,h) \in S} t$ is price setting transaction and $\epsilon$ diminishes by $\mathcal{O}\left(\frac{1}{m}\right)$ for $m$ block producers.  
+    \label{lemma:fake-txn}
+\end{lemma}
+\begin{proof}
+    Consider a block producer $i$ with $S \in$ \ourOPT, i.e., set of transactions selected for allocation. A strategic producer instead can choose an alternate subset $\tilde{S} \in \mathcal{M}_i \cup \mathcal{F}$ that includes a set of fake transactions, $\mathcal{F}$. Note that $\tilde{S}$ must also clear the routing work threshold and be within the block capacity. Let $p$ be the second-price payment per transaction when $S$ is published, and $\tilde{p}$ be the payment per transaction when $\tilde{S}$ is published. 
+    
+    % \varul{Since fake transactions included by block producer $i$ is incentivized only when they are selected out of $m$ potential block producer. We analyse utilities of honest and dishonest strategies in the case to show fake transaction inclusion is disincentivized.}
+
+    Producer $i$'s utility without fake transaction is given by,
+    $
+    u_i = \alpha\cdot \frac{p}{2}\cdot |S|.
+    $
+    The utility corresponding to $\tilde{S}$ is given by,
+    $$ \tilde{u}_i = (\alpha + \Delta \alpha) (|\tilde{S}| - z) \frac{\tilde{p}}{2}  -  (1-\alpha - \Delta \alpha) z \cdot \tilde{p} $$ where $\Delta \alpha$ is the change in the probability of winning the revenue lottery when $i$ unilaterally deviates and includes fake transactions.  The first term in $\tilde{u}$ corresponds to the payment $i$ receives when it wins the lottery with probability $(\alpha + \Delta\alpha)$. The second term corresponds to the payment lost when it loses the lottery. 
+    
+    The producer $i$ will not include fake transactions only when $\tilde{u}_i - u_i \leq 0$. That is,
+ 
+    
+    \begin{equation*}
+    \begin{aligned}
+        \tilde{u}_i - u_i & = |\tilde{S}|\cdot \frac{\tilde{p}}{2}(\alpha + \Delta \alpha) - (1 - \alpha - \Delta \alpha)\cdot z \cdot \tilde{p} \\ 
+        & - (\alpha + \Delta \alpha)\frac{z\tilde{p}}{2} - |S|\frac{p}{2}\alpha\\
+        & = \alpha \left(\frac{|\tilde{S}|\tilde{p}}{2} - \frac{|S|p}{2} + z\tilde{p} - \frac{z\tilde{p}}{2}\right) - z\tilde{p}  + \Delta \alpha \left(\frac{|\tilde{S}|\tilde{p}}{2} + \frac{z\tilde{p}}{2}\right) \\ 
+        & \leq \alpha \left(\frac{|\tilde{S}|\tilde{p}}{2} - \frac{|S|p}{2} +\frac{z\tilde{p}}{2}\right) - z\tilde{p} + \epsilon 
+    \end{aligned}
+    \end{equation*}
+    where $\epsilon \geq \Delta \alpha \left(\frac{|\tilde{S}|\tilde{p}}{2} + \frac{z\tilde{p}}{2}\right)$. To derive the condition for disincentivizing inclusion of fake transactions, i.e., $\tilde{u}_i - u_i \leq 0$, we have,
+    
+    % This is a reasonable assumption because $\Delta \alpha$ diminishes as number of block producers increase by $\mathcal{O}\left(\frac{1}{m}\right)$. The multiplicand $\left(\frac{|\tilde{S}|\tilde{p}}{2} + \frac{c\tilde{p}}{2}\right) $ is independent of $m$ and hence the term becomes smaller than $\epsilon$ for sufficiently large number of block producers. The condition therefore becomes 
+    
+    \begin{equation}\label{eqn:alpha}
+    \alpha \leq \frac{z\tilde{p} - \epsilon}{\left( \frac{|\tilde{S}|\tilde{p}}{2} - \frac{|S|p}{2} + \frac{z\tilde{p}}{2}\right)} = \frac{2z\tilde{p} - \Delta\alpha \tilde{p} (|\tilde{S}| + z)}{\tilde{p} (|\tilde{S}| + z) - |S|p}
+    \end{equation}
+
+    As we saw before, $\Delta \alpha = \mathcal{O}(\frac{1}{m})$, with increasing number of block producers. Hence, $\epsilon$ diminishes with increase in number of block producers, $m$. We re-write Eq.~\ref{eqn:alpha} as,
+    
+    $$ \alpha  \leq \frac{2z - \Delta\alpha (|\tilde{S}| + z)}{|\tilde{S}| + z - |S| \frac{p}{\tilde{p}}} $$
+    When $m \to \infty$ and $|\tilde{S}| \leq k$, $\Delta \alpha \to 0$. With trivial manipulations, 
+    $$ \alpha \leq \frac{2z}{k + z}$$
+    As the above inequality is increasing in $z\in\mathbb{N}$, if $\alpha \leq \frac{2}{k+1}$, the producer is not incentivized to include even a single fake transaction.  
+    % \approx  \frac{z/k - \epsilon/(\tilde{p}k)}{(1 - p/\tilde{p}) + z/k}$$
+    % where $k = |S| = |\tilde{S}|$ is the block capacity. 
+   % $$ 
+    \end{proof}
+    \if 0
+    However, selection of winner for transaction fees is done by (1) selecting one of $|\tilde{S}| + c$ transactions uniformly at random and then selecting one of the routers proportional to their routing work. Fake transactions are only routed by the block producer. Hence, probability of block producer being winner of payment lottery is $\geq \frac{c}{|\tilde{S}| + c}$. Therefore, $\frac{c}{|\tilde{S}| + c} \leq \alpha$, and for ensuring $U_{advr} - U_{honest} \leq 0$ we require Equation~\ref{eqn:alpha} to hold. This can be simultaneously satisfied only if $\forall c \exists \alpha$ such that 
+    \begin{equation}\label{eqn:alpha-left-right}
+        \frac{c}{|\tilde{S}| + c} \leq \alpha \leq \frac{c\tilde{p} - \epsilon}{\left( \frac{|\tilde{S}|\tilde{p}}{2} - \frac{|S|p}{2} + \frac{c\tilde{p}}{2}\right)}
+    \end{equation}
+    RHS is minimized when $\tilde{p} = p^{max}$. There exists such an $\alpha$ only if 
+    \[
+        \frac{c}{|\tilde{S}| + c} \leq \frac{c\tilde{p} - \epsilon}{\left( \frac{|\tilde{S}|\tilde{p}}{2} - \frac{|S|p}{2} + \frac{c\tilde{p}}{2}\right)} 
+    \]
+    \[
+        \left(|\tilde{S}| + c\right)\tilde{p} - |S|p \leq 2\left(|\tilde{S}| + c\right)\tilde{p} - \frac{\epsilon(|\tilde{S}| + c)}{\tilde{p}}
+    \]
+    \[
+        \epsilon \leq \frac{\left(|S|p + (|\tilde{S}| + c)\tilde{p}\right)\tilde{p}}{(|\tilde{S}| + c)} 
+    \]
+    Since $\Delta \alpha \left(\frac{|\tilde{S}|\tilde{p}}{2} + \frac{c\tilde{p}}{2}\right) \leq \epsilon$, we get
+    \[
+    \Delta \alpha \leq \frac{2\tilde{p}\left(|S|p + |\tilde{S}|\tilde{p} + c\tilde{p}\right)}{(|\tilde{S}| + c)^{2}}
+    \]
+    Since RHS is independent of $m$ (number of block producers), and LHS diminishes by $\mathcal{O}\left(\frac{1}{m}\right)$ with large enough number of producers, this condition is satisfied. This in-turn means there exists valid value of $\alpha, \forall c$ for which  Equation~\ref{eqn:alpha-left-right} is also satisfied. Such an $\alpha$ is set by the protocol through selection of $\tau$ (routing work threshold) protocol. 
+    \fi
+
+
+% %%%
+\paragraph{Note.}
+From Lemma~\ref{lemma:fake-txn}, we require $\alpha \leq  \frac{2}{k+1}$ when we burn $\frac{1}{2}$ of the payment (refer to Eq.~\ref{eqn::burn}). In general, for burning $f_b$ fraction of the total payments collected, we can re-write the bound by,
+$$ \alpha \leq \frac{z}{k + (z-k)f_b}$$ From the above equation we can verify that, burning everything, i.e., $f_b = 1$ prevents inclusion of fake transactions universally, as expected. When $f_b = 0$, $\alpha$ increases slightly since the cost of a fake transaction reduces, formally, $\alpha \leq \frac{1}{k}$.
+%%%%
+
+
+\iffalse
+\begin{lemma}\label{lemma:fake-txn}
+    Inclusion of $z$ fake transaction $tx_{fake} = (f_{fake},h)$ for any $h$ is disincentivized for block producer if $\forall (f,h) \in S$
+    \[
+        Pr_{S} \leq \frac{\epsilon + (1 - \alpha)zf_{fake}}{(f_{fake} - f_{min})|S|}
+    \]
+    where, $Pr_{S}$ is the probability for the miner being selected as the winner of golden ticket reward for current block and $f_{min} = \min_{(f,h) \in S} f$ and $1 - \alpha$ of the transaction fees is burnt.
+\end{lemma}
+\begin{proof}
+    Consider a block with transaction set $S$ included in the block. The block producer has replaced $z$ transactions with fake transactions to make the new set $S^{'}$. Note that $|S| \geq |S^{'}|$. \sankarshan{why should this hold? 2 fake txs can give the same routing work as 3 honest txs.}
+
+ Consider blocks containing transaction sets $S$ and $S^{'}$ be $B$ and $B_{S^{'}}$ respectively. Consider $f_{min} = \min_{(f,h) \in S} f$ and $f_{fake} = \min_{(f,h) \in S^{'}} f$. Let the change in utility is $\Delta u = $ utility from producing block with $S^{'}$ $ - $ utility from producing block with $S$. Further, if the probability of block producer being winner of golden ticket for $B_{S}$ is $Pr_{S}$ and probability with $B_{S^{'}}$ is $Pr_{S^{'}} = Pr_{S} + \Delta p$. \sankarshan{This is non-intuitive. Golden ticket is just finding a random nonce. How is changing tx sets improving my probability of finding it?}
+
+
+ Further, $F_{old} = \sum_{(f,h) \in S} f$ and $F_{new} = \sum_{(f,h) \in S^{'}} $ \sankarshan{$f$} are sum of transaction fees. \sankarshan{is $\Delta u$ for second-price payments?}
+    \begin{equation*}
+        \begin{aligned}
+            \Delta u = &  \alpha Pr_{S^{'}}|S'|f_{fake} - \alpha Pr_{S}|S|f_{min} - z f_{fake}\\
+            \leq &  \alpha Pr_{S^{'}}|S|f_{fake} - \alpha Pr_{S}|S|f_{min} - z f_{fake}\\
+            = & \alpha Pr_{S}|S|\left(f_{fake} - f_{min}\right) + \alpha \Delta p|S|f_{fake} - z f_{fake}
+        \end{aligned}
+    \end{equation*}
+\sankarshan{Ok, it seems by 'golden ticket' you actually meant the probability of being selected via the distributions created using fees and routing work. David uses golden ticket for the puzzle. Still the equation $Pr_{S^{'}} = Pr_{S} + \Delta p$ is not clear to me. Do we not have to do something like: $\mathbb{E}[\Delta u] = \mathbb{E}[\text{utility due to S} - \text{utility due to S'} ] = \mathbb{E}_{\sim S }[\text{utility due to S}] - \mathbb{E}_{\sim S'}[\text{utility due to S'}]$?   }
+
+\sankarshan{So $\mathbb{E}_{\sim S }[u_S] = p_1 f_1 + \ldots + p_{|S|} f_{|S|}$ and $\mathbb{E}_{\sim S' }[u_{S'}] = p'_1 f'_1 + \ldots + p'_{|S'|} f'_{|S'|}$. But getting $\mathbb{E}[\Delta u]$ is hard as any 'swap' between txs changes probabilities of $p_1$ and $p'_1$ also. }
+
+    The change in probability $\Delta p = \frac{z\cdot f_{fake}}{F_{new}} - \sum_{(f,h) \in S/S^{'}} \frac{f}{F_{old}}2^{-h}$. Therefore, 
+        $$\Delta p \leq \frac{z\cdot f_{fake}}{F_{new}} - \frac{z \cdot f_{min}}{F_{old}} \leq \frac{z\cdot f_{fake}}{F_{new}}$$
+        $$\Delta u = \alpha Pr_{S}|S|\left(f_{fake} - f_{min}\right) + \alpha\Delta p|S|f_{fake} - z f_{fake}$$
+    The utility is at most marginally better if $\Delta u \leq \epsilon$. Using $\frac{f_{fake}|S|}{F_{new}} \leq 1$
+    \begin{equation*}
+    \begin{aligned}
+        \Delta u \leq Pr_{S}|S|\left(f_{fake} - f_{min}\right) + \frac{\alpha z f_{fake}|S|f_{fake}}{F_{new}} - z f_{fake}\\
+        \leq Pr_{S}|S|\left(f_{fake} - f_{min}\right) - (1 - \alpha)zf_{fake}\leq \epsilon  \\        
+    \end{aligned}
+    \end{equation*}
+    Therefore, $Pr_{S} \leq \frac{\epsilon + (1 - \alpha)zf_{fake}}{|S|\left(f_{fake} - f_{min}\right)}$. 
+    When the transaction pool is high enough, $\max_{(f,h) \in S} f - \min_{(f,h) \in S}f$ is very small. Therefore, $\frac{\epsilon}{(f_{fake} - f_{min})} \approx \mathcal{O}(1)$ and $\Delta u \leq \epsilon$ if $Pr_{S} \leq \frac{\epsilon + (1 - \alpha)zf_{fake}}{|S|\left(f_{fake} - f_{min}\right)}$.
+        
+\end{proof}
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Second,} in Lemma \ref{lemma:routing}, we show that \ourTFM\ also incentivizes block producers to propagate transactions. 
+\textbf{Fourth,} Lemma~\ref{lemma:sybil-resistance} shows that block producers are not incentivized to create multiple identities to self-propagate transactions, i.e., to not launch a \emph{Sybil attack}. We combine Lemma~\ref{lemma:fake-txn} and Lemma~\ref{lemma:sybil-resistance} to show that \ourTFM\ is BPIC.
+
+%
+%%
+%%%%%
+\begin{figure}[t]
+\centering
+    \fbox{
+     \centering \parbox{0.9\linewidth}{  % Box width
+        \begin{enumerate}[leftmargin=*,itemsep=0.2em]
+        \item \textbf{Allocation:} 
+        A block producer $i\in\mathcal{P}$, with its local mempool $\mathcal{M}_i$,  confirms a set $S\subseteq \mathcal{M}_i$ by solving for \ourOPT. The optimization \ourOPT\ constraints $S$ to clear the routing threshold $\tau$ and honor the block capacity $C$. 
+    
+        \item \textbf{User Payment Rule:} Each confirmed user, $b_j \in S$, pays the minimum confirmed bid, i.e., $p_j = \min_{(b_t,h_t)\in S} b_t$. The remaining users $\mathcal{M}_i\setminus S$ pay zero.
+    
+        \item \textbf{Block Burning Rule:} From the total user payments, $\sum_{(b_t,h_t)\in S} p_t$, we burn $\frac{1}{2}$ fraction of it. That is, the total payment burned is $\delta(S) = \frac{1}{2} \sum_{(b_t,h_t)\in S} p_t$.
+    
+        \item \textbf{Block Producer Revenue Rule:} Once a block is produced, an \textit{on-chain lottery} determines the routing node that receives the remaining collected payment (post-burning), $\frac{1}{2} \sum_{(b_t,h_t)\in S} p_t$. 
+        
+        To select the node that receives the payments, the lottery (i) uniformly samples a transaction from $S$ and (ii) uniformly selects a hop from the routing path of the sampled transaction. The node corresponding to the selected hop receives $\frac{1}{2} \sum_{(b_t,h_t)\in S} p_t$. 
+        
+        % The payment is not always made to the block producer, but the block producer may be selected as the winner in the lottery.
+        % The chance of each transaction winning is weighted according to its share of all fees in the block. That hash is then hashed again to select a hop from the routing path of the winning transaction, with each hop weighted according to its share of work in the overall routing path.
+        \end{enumerate}
+      }
+    }
+    \caption{\ourTFM: Mechanism Outline}\label{fig::rtr-tfm}
+\end{figure}
+%%%%%
+%%%
+%%
+
+
+
+
+
+
+\subsection{\ourTFM: Allocation, Payments and Burning Rules\label{subsec::block-production}}
+
+\noindent \textbf{Transactions.} Recall from Section~\ref{sec::prelims}, that each transaction received by the block producer $i\in \mathcal{P}$ is denoted by the tuple $(b,h) \in \mathcal{M}_i$. That is, the bid $b \in \mathbb{R}_{\geq 0}$ submitted by a user, and the corresponding routing hops $h \in \mathbb{N}$ each transaction has gone through before reaching the producer $i$. We also assume that each transaction has the same size, as a shortcut to normalize fees-per-byte and avoid the need to adjust the likelihood of any transaction winning the payout lottery to its relative contribution of fees to the block.
+
+\noindent \textbf{Routing Work.} We now define the routing work for any transaction $(b,h) \in \mathcal{M}_i$. Consider a function $\omega:\mathbb{R}_{\geq 0}\times\mathbb{N}\rightarrow\mathbb{R}_{\geq 0}$ that represents the amount of routing work gained by a block producer at the $h\textsuperscript{th}$ hop. In \ourTFM, the routing function $\omega$ is:
+\begin{equation}
+    \omega(h) := c\cdot2^{1 - h}
+\end{equation}
+That is, \ourTFM\ offers 1\textsuperscript{st}-hop nodes $c\in \mathbb{R}_{\geq 0}$ units of routing work, 2\textsuperscript{nd}-hop nodes $\frac{c}{2}$ units of routing work, 3\textsuperscript{rd}-hop nodes $\frac{c}{4}$ units of routing work, and so on.
+
+\noindent \textbf{Allocation Rule.} Each producer $i\in \mathcal{P}$ selects transactions from $M_i$ by solving the following optimization, denoted by \ourOPT,
+\begin{align}\tag{\ourOPT}
+    \begin{rcases}
+        \underset{S\subseteq \mathcal{M}_i}{\mbox{arg}\max} & \min_{(b_t,h_t)\in S}  b_t \\
+       \mbox{{s.t.}}\  & \sum_{(b_t,h_t)\in S} \omega(h_t) \geq \tau \\
+       & |S| \leq k\\
+   \end{rcases}
+\end{align}
+
+The first constraint ensures that $S\subseteq \mathcal{M}_i$ clears the \textit{network-determined threshold for routing work}, $\tau$\footnote{The threshold $\tau$ is a network-determined dynamic parameter and increases upon block production, and slowly decreases until the next block is produced, similar in principle to the role of the base fee in EIP-1559~\cite{buterin2019eip}. As we consider myopic block producers and users, we omit additional details on the role of $\tau$.}. For the second constraint, recall that each transaction is of the same size. This implies that the total transactions in a block cannot exceed its capacity, $|S| \leq k$. Throughout this paper, we refer to $S\subseteq \mathcal{M}_i$ as the subset that satisfies these two constraints and $S^\star$ as the solution to \ourOPT.
+
+\paragraph{User Payment Rule.} As aforementioned, while the second-price auction is incentive-compatible for users, in TFMs, the block producers are also strategic. Producers can inflate the highest-losing (price-setting) bid to maximize their revenue. To avoid such strategic manipulations by the producers, and as payments can only depend on the transactions part of the block, in \ourTFM, we let confirmed transactions pay a fee equal to the lowest confirmed bid. That is, $\forall (b_t,h_t)\in S$, we have 
+\begin{equation}
+    p_t := \min_{(b_t,h_t) \in S} b_t
+\end{equation}
+
+For the confirmed transaction with the lowest bid, the auction becomes a first-price auction, thus compromising IC on the user end. \citet{roughgarden2021} argues that such a payment rule is approximately-UIC, given a sufficiently large transaction pool.
+
+\paragraph{Burning Rule.} In TFMs, a certain fraction of a cryptocurrency's supply is often burned, i.e., removed from circulation. This can be done by having the consensus mechanism issuing less in payouts than have been collected in network fees. While it is theoretically possible to improve on this lower bound, we set the fraction of network fees that are burned in \ourTFM as $1/2$ for purposes of this paper, i.e., 
+\begin{equation}\label{eqn::burn}
+    \delta(S) := \frac{1}{2} \sum_{(b_t,h_t)\in S} p_t
+\end{equation}
+
+\subsection{\ourTFM: Producer Revenue rule\label{subsec::producer-revenue}}
+While half of the transaction fees are burned in \ourTFM, the other half is paid to a random node from set of nodes identifiable from the routing paths within the set of transactions included in the block. This is in contrast to existing (popular) TFMs that give the surplus directly to the block producer.
+
+\noindent \textbf{Block Producer Revenue Rule. } A block can be produced only when it has enough transactions to meet the routing threshold, $\tau$. From \ourOPT, a producer $i \in \mathcal{P}$ computes $S \subseteq \mathcal{M}_i$, such that the transactions in $S$ clear $\tau$, or, 
+$$
+\sum_{(b_t,h_t) \in S} \frac{c}{2^{j-1}} \geq \tau.
+$$
+
+In \ourTFM, we employ the second-price payment rule. That is, the payment collected from \emph{each} user whose transactions are confirmed in $S$ is the lowest winning bid (say) $p$. The total payment collected is $\frac{1}{2}\cdot|S|\cdot p$ (recall that the other half is burned). However, the block producer is not guaranteed to receive the payment when the block is produced. Instead, the payment is made through a \textit{revenue lottery}, defined formally in Figure~\ref{fig::payment}.
+
+\begin{figure}[h]
+\centering
+    \fbox{
+     \centering \parbox{0.9\linewidth}{  % Box width
+     The revenue, $\frac{1}{2}\cdot|S|\cdot p$, collected when a block is produced is given to the winner sampled from the following distribution. All sampling is done on-chain, i.e., in a trusted manner~\cite{chung2023foundations,damle2024designing}.
+        \begin{enumerate}[leftmargin=*,itemsep=0.2em]
+            \item Sample a transaction $t^\star \in S$ uniformly, i.e., $t^\star \sim \text{Uniform}(S)$.
+            \item From the routing path of $t^\star$, sample a node through a probability distribution that weighs each node by their share of the routing work available at their hop over the total sum of routing work available to all nodes in the routing path of the transaction as included in the block.
+                \begin{itemize}
+                    \item Let the producers part of $t^\star$'s routing path be (w.l.o.g.) $\mathbf{P}_{t^\star}=\{1,\ldots,l\}$.
+                    \item Any producer's $i \in \mathcal{P}_{t^\star}$ routing work for the transaction $t^\star$ is $\omega(t^\star;h_{i})$. Likewise, the total routing work for $t^\star$ is $\sum_{i \in \mathcal{P}_{t^\star}} \omega(t_\star;h_{i})$.
+                    \item We sample a producer $i^\star \in \mathcal{P}_{t^\star}$ from the following weighted probability distribution:
+                        $$
+                        \Pr(i^\star) \sim \frac{\omega(t^\star;h_{i^\star})}{\sum_{i \in \mathcal{P}_{t^\star}} \omega(t_\star;h_{i})}
+                        $$
+                    \item The producer $i^\star$ receives the payment $\frac{1}{2}\cdot|S|\cdot p$.
+                \end{itemize}
+        \end{enumerate}
+      }
+    }
+    \caption{\ourTFM: Revenue Lottery given $S$ (refer \ourOPT)}\label{fig::payment}
+\end{figure}
+
+We provide a working example of the revenue lottery in Figure~\ref{fig::teaser}. For instance, from Figure~\ref{fig::teaser}, if a transaction is sampled that was proposed by the second node to receive it, then this transaction has two nodes in its routing path. The total routing work for all nodes in the routing path is $c+\frac{c}{2}=\frac{3c}{2}$. The sampling probability of the first-hop node is $\frac{c}{3c/2}=\frac{2}{3}$ while the sampling probability of the second-hop node is $\frac{c/2}{3c/2}=\frac{1}{3}$. 
+
+\iffalse
+
+\noindent \textbf{Routing Threshold and $\alpha$}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{Winning the Revenue Lottery.}
+In \ourTFM, the block producers are simultaneously working towards block production, i.e., solving \ourOPT. Let $S_i$ be the output of \ourOPT\ for a producer $i\in\mathcal{P}$. If the block producer $i$ is successful, $S_i$ gets confirmed. The revenue of the block is given to a producer using the revenue lottery (Figure~\ref{fig::payment}). Note that any block producer may have a chance to receive the revenue as long as it is in the routing path of one of the confirmed transactions. The probability of an arbitrary producer $i$ receiving the revenue, denoted by $\alpha_i$ may be written as,
+
+\begin{equation}\label{eqn:alphai}
+    \alpha_{i} = \sum_{j = 1}^{m} \Pr(\mathbb{I}_{i} = 1 | S_{j})\cdot \Pr(S_{j})
+\end{equation}
+
+Here, the indicator variable  $\mathbb{I}_{i} = 1$ denotes the event that producer $i$ is selected as the winner (recipient) of the block's payment; $\mathbb{I}_{i} = 0$ otherwise. $\Pr(S_j)$ denotes the confirmation of the set $S_j$ owned by the $j^{\mbox{th}}$ producer. 
+
+
+\if 0
+\begin{itemizerally dev\tilde{iates from proposing $S_$e}
+    \{i}item If this transaction is confirmed in the block, then auction becomes a first price auction for this transaction (compromising IC on the user end). 
+    \item If this transaction is included but not confirmed in the block, the miner is incentivized to include \emph{fake transaction} in the block to increase the price setter transaction to strategically increase its revenue. 
+\end{itemize}
+We therefore come up with a proposal to use \emph{verifiable on-chain randomness} to \st{include} \sankarshan{confirm} the \sankarshan{price-setting} transaction in the block with certain probability which is $p_{conf}$. 
+% in decreasing order of $f\cdot\omega(f,h)$ values. 
+
+\noindent \textbf{Second Price Payment Rule.} All \st{included} \sankarshan{confirmed} transactions pay the \st{least accepted transaction fee} \sankarshan{lowest confirmed bid??}. The \emph{price setter} transaction is \st{included} \sankarshan{confirmed} with probability $p_{conf}$ and is part of payment to the \st{miner} \sankarshan{block producer}. Otherwise, it is not part of the payment to \st{block} \sankarshan{the} producer. Consider $\mathbb{I}_{incl} = 1$ if price setter is \st{included} \sankarshan{confirmed} and $0$ otherwise. The total payment from the block is 
+\begin{equation}\label{eqn:payment-total}
+    F = (|S\sankarshan{|} - 1 + \mathbb{I}_{incl}) \min_{(f,h) \in S} f
+\end{equation}
+
+The payment is divided into two parts: $p = (p_{solver}, p_{winner})$ where (1) $p_{solver}$ goes to the player who solves \emph{golden ticket} (if there are no solvers, this payment is burnt) and (2) $p_{winner}$ goes to a randomly chosen router out of the set of transactions included in a block according to the \emph{golden ticket winner selection} (described in the the following section). Out of the total transaction fees in a block, $\alpha$ $\in [0,1]$ fraction goes to $p_{winner}$ and $(1 - \alpha)$ to $p_{solver}$. 
+\begin{equation}\label{eqn:payment-winner}
+p_{winner} = \alpha\cdot(|S - 1| + \mathbb{I}_{incl}) \cdot  \min_{(f,h) \in S} f  
+\end{equation}
+
+
+\noindent \textbf{Golden Ticket.} Golden ticket for a block is solved by a player (say) $solver$ in the next block and gets $(1 - \alpha)F$ and the result of the golden ticket. Consider the probability with which the golden ticket is solved in the next block be $\phi$. Payment to the solver is
+
+\[
+    p_{solver} = 
+\begin{cases}
+(1 - \alpha)F \hspace{20pt} \text{with probability $\phi$}\\
+0 \hspace{45pt} \text{otherwise}
+\end{cases}
+
+\]
+
+\noindent \textbf{Golden Ticket Winner Selection.} The solution of golden ticket is a random variable that decides another player (router from the current block) $winner$ (say) who gets remaining $\alpha$ fraction of the transaction fee from the block (See Equation~\ref{eqn:payment-winner}). $p_{winner}$ is paid $\alpha$ fraction of  to one of the routers from all transactions contained in the block. The probability of any transaction $tx = (f,h) \in \mathcal{B}$ getting selected is $\frac{f}{F}$ and the probability of router $j \in [1,h]$ getting selected is $\frac{2^{-j}}{(1 - 2^{-h})}$.
+
+\noindent \textbf{Burn Rule $q$.} The burn rule is to burn the payment designated for $solver$ of golden ticket if the puzzle for a block is not solved in the immediate block. Such a case happens with probability $1 - \phi$. The burn rule is therefore, 
+
+\[
+q = \begin{cases}
+        (1 - \alpha)F \hspace{20pt} \text{with probability $1 - \phi$}\\
+        0 \hspace{20pt} \text{otherwise}
+    \end{cases}
+\]
+
+The transaction fees mechanism is therefore represented as $\mathcal{T}_{route} = \langle x_{incl}, (p_{solver},p_{winner}), q \rangle$.
+\subsection{Utility}
+\subsubsection{User Utility} User proposes a transaction $tx$ and has some valuation that they get when this transaction gets accepted in the current block. Consider user with transaction $tx$ with valuation $\overline{f}$ and disclosed bid (in form of transaction fees) as $f$. The set of transactions accepted in the current block is contained in set $S$, then the utility for user is represented as
+\begin{equation}
+    u(tx,\overline{f}) = \begin{cases}
+        f - \overline{f} \hspace{20pt}\text{if }tx \in S\\
+        0 \hspace{35pt}\text{otherwise}
+    \end{cases}
+\end{equation}
+\subsubsection{block producer Utility} 
+\subsection{Incentive Compatibility}
+\begin{definition}[User Incentive Compatibility (UIC)]\label{def:UIC}
+    
+\end{definition}
+
+
+\begin{definition}[Miner Incentive Compatibility (MIC)]\label{def:MIC}
+    
+\end{definition}
+
+\fi
+
+
+Having presented the formal protocol in Section~\ref{sec::protocol}, in this section, we now game-theoretically prove \ourTFM achieves Roughgarden Compatibility for both users and block producers.
+
+
+
+
+
+ 
+
+
+
+
+
+\subsection{\ourTFM: Traditional Incentive Compatibility}
+
+In addition achieving Roughgarden Compatibility, \ourTFM also achieves traditional incentive compatibility. In order to demonstrate this, we define our \textit{social choice rule}, and then demonstrate the profit-maximizing behavior of all rational actors leads to this socially-optimal outcome.
+
+We choose \textit{pareto optimality} as our \textit{social choice rule}. This refers to the point of production defined by the equation below, where we cannot increase utility for any individual without decreasing it for at least one other participant. This by definition puts overall production on the \textit{production possibilities frontier}, which means that the blockchain is being produced and funded at optimal levels relative to the utility it provides participants relative to all other goods and services competing for consumption of the same fee.
+
+\textit{Pareto optimality} is the appropriate social choice rule not only because it means the blockchain is producing utility with the highest possible efficiency, but because it eliminates the . Given that all participants are voluntarily optimizing their resource-allocation strategies at this point, \textit{pareto optimality} makes all forms of user-user and producer-producer collusion impossible: no subset of participants can change their individual decisions regarding resource allocation without shifting to a less desirable equilibrium.
+
+Setting \textit{pareto optimality} as our \textit{social choice rule} thus aligns social optimality with maximum utility for user, and reduces the scope of potentially profitable collusion to the case of user-producer collusion.
+
+We observe that \ourTFM achieves traditional incentive compatibility. This can be done extremely simply, merely by observing the nature of competition and price-discovery in the network and seeing that it aligns with the 
+
+\subsection{\ourTFM: Traditional Incentive Compatibility}
+
+We can prove incentive compatibility easily by observing that \ourTFM falls into the category of two-sided competitive markets.
+
+
+
+Competitive markets with multiple consumers and multiple producers are known to be incentive compatible
+
+
+
+
+
+
+
+
+\paragraph{Sybil-attacks are Disincentivized.} We discuss the block producer's incentive for launching Sybil-attack in Lemma~\ref{lemma:sybil-resistance}.
+
+\begin{lemma}\label{lemma:sybil-resistance}
+   Under Assumption~\ref{assumption::1}, not launching a Sybil attack is a Nash equilibrium strategy for block producers in \ourTFM.
+\end{lemma}
+\begin{proof}
+    Consider any block producer $i\in\mathcal{P}$ and a transaction $tx = (b,h)$ that reaches $i$ after $h-1$ hops. Now, the producer has two strategies: (1) to launch a Sybil-attack and (2) not to launch one. Recall that to launch a Sybil attack, the producer propagates transactions to itself, by creating multiple identities. For the proof, we show launching a Sybil attack is not a Nash equilibrium strategy if a block producer $i$ propagates a transaction to multiple identities it owns and \underline{Case 1} --- broadcasts the propagated transaction and \underline{Case 2} --- includes this transaction in their block.
+    
+    \smallskip\noindent\textbf{\underline{Case 1:}} If this transaction is broadcasted and later added to the proposed block by another block producer $j$, there might be an increased probability of Producer $i$ winning the revenue lottery due to existence of its own pseudo identities in the routing path. Let this increase be $x$ to the utility. If the transaction gave utility $u$ to $i$ (in expectation) if the non-Sybil transaction is included by block producer $j$, then utility (in expectation) is $u + x$ for Sybil transaction. 
+
+    If all other block producers follow non-Sybil strategy, there exists with high probability another (non-Sybil) router through which $j$ gets the same transaction with lesser hops. They are incentivized to include this transaction instead of transaction broadcasted by $i$.
+\begin{table}[]
+\begin{center}
+\begin{tabular}{ | m{4em} | m{5em}| m{4em} | } 
+    \hline
+         & \textbf{Sybil} & \textbf{Not Sybil} \\ 
+        \hline
+        \textbf{Sybil} & $(u+x,u+x)$ & $(0,u)$ \\ 
+    \hline
+        \textbf{Not Sybil} & $(u,0)$ & $(u,u)$ \\ 
+    \hline
+\end{tabular}
+\end{center}
+    \caption{Game between Sybil and Non-Sybil Strategy}
+    \label{tab:induced-game}
+\end{table}
+    The game induced is summarized in Table~\ref{tab:induced-game}. We see that the "Not-Sybil" strategy is Nash Equilibrium for the Producer.  
+
+    \smallskip\noindent\textbf{\underline{Case 2:}} In this case, if there are $|S|$ total transactions in the block produced by $i$, then by adding multiple identities with a Sybil attack, the total routing work reduces. E.g., signing on transaction $tx = (b, h)$ a total of $z$ times reduces total work contributed by this transaction by a factor of $\frac{1}{2^{z}}$. To compensate for this reduced work, fake transactions must be added by the producer such that the total routing work satisfies the threshold. This fake transaction is therefore $tx_{fake} = (b_{min},1)$ where $b_{min} = \min_{(b, h) \in S} b$. Out of this, $\frac{b_{min}}{2}$ is burnt, which is the negative payment. Improvement in utility due to sybil attack is therefore, $\Delta u = |S|b_{min}\frac{\partial\alpha}{\partial \Pr(\mathbb{I}_{i} = 1 | S)} - \frac{b_{min}}{2}$. Note that $\frac{\partial\alpha }{\partial \Pr(\mathbb{I}_{i} = 1 | S)} = \Pr(S)$ diminishes by $\mathcal{O}\left(\frac{1}{m}\right)$. For sufficiently large number of block producers, $\Delta u < 0$, when $\Pr(S) < \frac{1}{2|S|}$. Hence for large number of block producers, sybil attack is disincentivized. 
+\end{proof}
+
+
+We now combine these results to show that \ourTFM\ is BPIC. 
+% Consider the following theorem.
+
+\begin{theorem}\label{thm::bpic}
+    \ourTFM\ is block producer Incentive Compatible (BPIC) under Assumption~\ref{assumption::1}. 
+\end{theorem}
+\begin{proof}
+    From the definition of BPIC (Definition~\ref{def::BPIC}), as the block producers are not incentivized (i) to include fake transactions (Lemma~\ref{lemma:fake-txn}) and (ii) to not launch a Sybil-attack (Lemma~\ref{lemma:sybil-resistance}). As the allocation rule is utility maximizing (\ourOPT), \ourTFM\ is BPIC.
+\end{proof}
+
+
+Table~\ref{tab::summary} tabulates the results presented in this section. In summary, we present a novel TFM that avoids free-riding and satisfies UIC and BPIC, under reasonable assumptions, and without any modifications to the utility structure.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cc}
+    \toprule
+    \textbf{Property} &  \ourTFM  \\
+    \midrule
+    UIC     &  \cmark$^\dagger$~(Theorem~\ref{thm:UIC}) \\
+    Transaction Propagation &  \cmark~(Lemma~\ref{lemma:routing})  \\
+    Sybil-resistance   &  \cmark$^\ddagger$~(Lemma~\ref{lemma:sybil-resistance})    \\
+    BPIC    &  \cmark$^\ddagger$~(Theorem~\ref{thm::bpic})  \\ 
+    \bottomrule
+    \multicolumn{2}{l}{$^\dagger$: Almost-UIC~\cite[Footnote 28]{roughgarden2021}} \\
+    \multicolumn{2}{l}{$^\ddagger$: Under Assumption~\ref{assumption::1}}
+    \end{tabular}
+    \caption{\ourTFM: Results Summary}
+    \label{tab::summary}
+\end{table}
+
+
+
+
+\input{AAMAS25/sections/introduction}
+
+
+
+% \newpage
+% \section{Related Work\label{sec::rw}}
+% \input{AAMAS25/sections/rw}
+
+% \newpage
+% \section{Preliminaries\label{sec::prelims}}
+% \input{AAMAS25/sections/preliminaries}
+
+% \newpage
+% \section{\ourTFM: Routing-based Randomized TFM\label{sec::protocol}}
+% \input{AAMAS25/sections/rtrtfm}
+
+% \section{\ourTFM: Game-theoretic Characterization\label{sec::analysis}}
+% \input{AAMAS25/sections/analysis}
+
+
+
+% \newpage
+\section{Conclusion \& Future Work}
+In this paper, we introduced \textsc{RTR-TFM}: a novel TFM that addresses the incentive misalignment in classic transaction fee mechanisms (TFMs) by introducing a novel routing-based block production rule and a revenue scheme. \ourTFM\ rewards block producers in proportion to their contribution to the propagation of transactions. Such a reward ensures that block producers actively participate in the blockchain network upkeep instead of free-riding on other participating nodes. We also provide a game-theoretic characterization of the underlying game in \ourTFM. We prove that \textsc{RTR-TFM} effectively discourages transaction hoarding, ensures Sybil resistance, and achieves incentive compatibility for both users and block producers under reasonable assumptions.
+
+\paragraph{Future Work.} With \ourTFM, we introduce a TFM revenue rule that links a direct cost to the block producers to create fake transactions. However, our BPIC analysis assumes a bootstrapped blockchain (Assumption~\ref{assumption::1}). While Assumption~\ref{assumption::1} is practical, we can look towards BPIC guarantees without constraints on the blockchain state. Furthermore, the TFM literature also looks at off-chain collusion between users and producers. \cite{gafni2024barriers} show the impossibility of a deterministic TFM simultaneously satisfying the UIC, the BPIC, and the resistance to off-chain collusion between a user and a producer. Future work can also study off-chain collusion guarantees for \ourTFM. 
+
+
+% TO ADD: It is always incentivized to include block 
+% Swap a transaction with a fake transaction 
+% \url{https://docs.google.com/spreadsheets/d/1XVnXETZuQC0HijhT5H-Qh3CsxEc7fzhgJ_H2Xyq0GUM/edit?usp=sharing}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% The next two lines define, first, the bibliography style to be 
+%%% applied, and, second, the bibliography file to be used.
+\cleardoublepage
+\bibliographystyle{ACM-Reference-Format} 
+\bibliography{ref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
