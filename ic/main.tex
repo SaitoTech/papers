@@ -32,6 +32,7 @@
 \usepackage{mathtools}
 \usepackage{multicol}
 \usepackage{multirow}
+\usepackage{changepage}
 \usepackage{array} % for array environments
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \newcommand{\cmark}{\ding{51}}%
@@ -91,8 +92,8 @@
 \email{david@saito.tech}
 
 \begin{abstract}
-Transaction Fee Mechanism (TFM) design explores the strategic interaction between users and block producers in permissionless networks. Classic TFMs give block producers control over the transactions they include in blocks, creating problems preventing collusion and achieving a socially-optimal fee equilibrium. Given previous research showing existing TFMs only solve these problems under strictly-limited conditions, we introduce RTR-TFM, which achieves collusion-resilience and incentive compatibility through a novel "routing-based" mechanism that derives the right to chain-extension and network payouts separately from the measured efficiency competing nodes demonstrate with the collection and sharing of transactions. This paper introduces the mechanism and demonstrates its robustness to the collective action problems that prevent incentive compatibility in other TFMs.
-/end{abstract}
+Transaction Fee Mechanism (TFM) design explores the strategic interaction between users and block producers in permissionless networks. Classic TFMs give block producers control over the transactions they include in blocks, creating problems preventing collusion and achieving a socially-optimal fee equilibrium. Given previous research showing existing TFMs only eliminate these problems under strictly-limited conditions, we introduce RTR-TFM, an indirect mechanism which achieves collusion-resilience and incentive compatibility through a novel routing-based technique that derives the right to chain-extension and network payouts separately from the efficiency competing nodes demonstrate at the collection and sharing of transaction fees. This paper introduces the mechanism and demonstrates its robustness against the informational problems that prevent incentive compatibility in other TFMs.
+\end{abstract}
 
 \keywords{Transaction Fee Mechanism, Leonid Hurwicz, Incentive Compatibility, Free-Riding, Collective Action Problems, Blockchain, Censorship Resistance, Collusion-Resilience, Distributed Systems}
 
@@ -108,10 +109,10 @@ Transaction Fee Mechanism (TFM) design explores the strategic interaction betwee
 \section{Introduction \label{sec::introduction}}
 \input{introduction}
 
-\section{Characteristics of a TFM \label{sec::characteristics}}
+\section{The Characteristics of TFMs and the Relationship with Goal Conflict \label{sec::characteristics}}
 \input{characteristics}
 
-\section{The Economics of TFM Limitations \label{sec::economics}}
+\section{The Economics of Eliminating Goal Conflict \label{sec::economics}}
 \input{economics}
 
 \section{The TFM Literature in Computer Science \label{sec::distsys}}
