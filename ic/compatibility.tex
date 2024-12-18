@@ -1,0 +1,65 @@
+
+In the body of this paper, we demonstrated previous impossibility results simply universalize the limitations of \textit{direct mechanisms} (auctions) and their implicit choice of social choice rule. We then introduced an \textit{indirect mechanism} which is not subject to these limitations.
+
+While the previous section shows the preceding impossibility results do not apply to \ourTFM, it does not establish that the mechanism is incentive compatible with the social choice rule of \textit{pareto optimality}. To do that, we must return to economics and discuss how the \ourTFM overcomes the foundational informational impediments to implementing \textit{pareto optimality}: Samuelson's objection based on the existence of public goods, and Hurwicz's objection on the requirements of price-discovery in informationally decentralized mechanisms.
+
+\paragraph{Samuelson and Free-Riding}
+
+Samuelson's objection is based on the two-good equation for the \textit{utility possibilities frontier} which describes all points at which economic production is pareto optimali. His observation was that achieving this equation and thus pareto optimality is problematic in the presence of \textit{private and \textit{public} goods. Rational actors will not keep this equation in equilibrium if they can enjoy the benefits of goods without paying the costs:
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{i=1}^{s} \frac{u_{{pub}+{priv}}^i}{u_b^i} = \frac{F_{{pub}+{priv}}}{F_b}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+To solve this problem, observe that transaction inclusion is neither a private good as conceptualized by Roughgarden nor a public good as conceptualized by Fox. The fee paid for blockspace is privately-collected and can be privately-negotiated, but collective security is maximized to the extent its existence induces competition between producers for the right to use the blockchain to collect the fee. This is why transaction hoarding can transform public transactions into private ones by limiting the degree of competition for collection, and why hoarding does not affect the collective security budget in atomistic environments.
+
+\ourTFM skirts this problem through two approaches. The first involves the use of the fee as the direct incentive. This eliminates the ability for participants to increase the relative value of their fee for producers by limiting distribution. Producers who offer participants submarket rates through off-chain payments must add their own fees back to the block in a separate transaction in order to make up for the shortfall in routing work that results. This kills incentives for off-chain payments, or at the least ensures that .
+
+The second technique that eliminates this problem is the explicit incentive of participants to broadcast transactions. We can see how this avoids the problem that Samuelson raised by modifying his cost function and adding a variable \textit{x} that reflects the probabiliy that transactions and fees are circulating publicly, and that open competition thus exists for collection of the transaction fee:
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{i=1}^{s} \frac{u_{({pub}*{x})+{priv}}^i}{u_b^i} = \frac{F_{{priv}}}{F_b}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+Ceteris paribus, we know that users prefer widespread distribution of their fee as this maximizes the speed of transaction inclusion. And that producers prefer to have private access to fees in order to free-ride on publicly circulating transactions and improve their relative profitability. Given the proof offered in an earlier section that routing work incentivizes producers to cooperatively share transactions, we can see that these mechanisms avoid the problems Samuelson flagged with suboptimality as the equation for the \textit{utility possibilities frontier} simplifies to the following once \textit{x} becomes 1:
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{i=1}^{s} \frac{u_{{pub}+{priv}}^i}{u_b^i} = \frac{F_{{priv}}}{F_b}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+Pareto optimality is achievable in this situation.
+
+
+
+
+
+
+
+\paragraph{Hurwicz and the Incentive to Truthfulness}
+
+The objection that Hurwicz offers to achieving incentive compatibility is based on the informational need for participants to engage in a process of price discovery priour to allocating resources to the purchase or production of utility. This is the source of Hurwicz' distinction between the "pre-exchange negotiation stage" in which participants determine and optimize their resource allocation strategies, and the "action stage" in which they put them into effect. Hurwicz argues that this distinction is always needed as all algorithms capable of optimizing prices over time require users to engage in this form of price discovery.
+
+It is consequently the lack of an "incentive to truthfulness" in this pre-exchange negotiation step that gives participants the ability to strategically mislead others in ways that can lead to suboptimal outcomes. 
+
+The first way in which \ourTFM overcomes this issue is by moving the information needed to calculate prices out of the hands of adversarial peers and into the environment itself. With the cost of transaction inclusion listed directly in the block header, and a cost of chain-extension rooted in real-world hash expenses, calculating the market rate for transaction-inclusion becomes a mathematical exercise that can be performed without the need for off-chain negotiations with peers. Participants can model the expected prices by examining a single block, or through more granulated models that examine the cost of transaction inclusion over time.
+
+But don't users need to get this information about the blockchain from their peers? While it might seem that block producers can forge the information as a form of strategic manipulation, the ability of the mechanism to prevent the costless inclusion of self-generated transactions imposes an asymmetrical cost on the communication of fraudulent information.
+
+Abstractly, the market price is the competitive price at which all transactions which pay the market rate are included, and no transactions which do not pay the market rate *are* included. The ability to create a mechanism that punishes transaction exclusion thus implies the ability to create a mechanism that makes pushing the equilibrium price of transactions away from the pareto optimal point.
+
+We observe that this \ourTFM passes the criterion offered by Hurwicz for algorithmic compatibility with a pareto optimal process. The presence of a historical blockchain allows for optimization processes that involve \textit{inertia}, while there is an inherent \textit{incentive to truthfulness} in the informational exchanges that participants may need to may to engage in the process, such as the sharing of the block headers that contain pricing information. As an additional note, we note that the presence of smoothed payouts allows for smoothed price-adjustments that overcome the objections of critics like Jordan (1986) to the theoretical attainment of pareto optimality itself.
+
+
+

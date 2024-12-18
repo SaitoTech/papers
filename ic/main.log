@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.16)  16 DEC 2024 17:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.16)  18 DEC 2024 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**hurwicz.tex
-(./hurwicz.tex
+**main.tex
+(./main.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (./aamas.cls
 Document Class: aamas 2021/05/01 v1.78 Typesetting articles for the Association
@@ -1200,8 +1200,8 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count357
 \l__pdf_internal_box=\box120
 )
-(./hurwicz.aux)
-\openout1 = `hurwicz.aux'.
+(./main.aux)
+\openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 101.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line
@@ -1223,7 +1223,8 @@ LaTeX Font Info:    ... okay on input line 101.
 LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 101.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
 101.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/newtx/untxexa.fd
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
 LaTeX Font Info:    ... okay on input line 101.
@@ -1320,9 +1321,10 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 Package hyperref Info: Link coloring OFF on input line 101.
- (./hurwicz.out) (./hurwicz.out)
+ (./main.out)
+(./main.out)
 \@outlinefile=\write5
-\openout5 = `hurwicz.out'.
+\openout5 = `main.out'.
 
 
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1437,75 +1439,77 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 8.0pt on input line 105.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 105.
-
-
-LaTeX Warning: Reference `TotPages' on page 1 undefined on input line 105.
-
+ (./introduction.tex
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 109.
+(Font)              scaled to size 9.0pt on input line 2.
+) (./characteristics.tex
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 126.
+urrounding objects on input line 4.
 
-[1.1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr
-/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{/usr/
-local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1.1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/us
+r/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{/usr
+/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}
 
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{
 /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{/
 usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc}]
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 128.
+urrounding objects on input line 6.
 
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 130.
+urrounding objects on input line 8.
 
+) (./economics.tex
 
 Package natbib Warning: Citation `hurwicz1960optimality' on page 2 undefined on
- input line 157.
+ input line 8.
 
 
-Underfull \vbox (badness 4279) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2.2]
 
 Package natbib Warning: Citation `hurwicz1973design' on page 3 undefined on inp
-ut line 169.
+ut line 20.
 
 
 Package natbib Warning: Citation `maskin1999nash' on page 3 undefined on input 
-line 183.
+line 34.
 
-[3.3]
+[3.3]) (./distsys.tex
 
 Package natbib Warning: Citation `roughgarden2021' on page 4 undefined on input
- line 204.
+ line 8.
 
 
 Package natbib Warning: Citation `roughgarden2024transaction' on page 4 undefin
-ed on input line 204.
+ed on input line 8.
 
 
 Package natbib Warning: Citation `roughgarden2021' on page 4 undefined on input
- line 204.
+ line 8.
 
 
 Package natbib Warning: Citation `roughgarden2024transaction' on page 4 undefin
-ed on input line 204.
+ed on input line 8.
 
 
 Package natbib Warning: Citation `buterin2019eip' on page 4 undefined on input 
-line 204.
+line 8.
 
 
 Package natbib Warning: Citation `roughgarden2021' on page 4 undefined on input
- line 204.
+ line 8.
 
 
 Package natbib Warning: Citation `roughgarden2024transaction' on page 4 undefin
-ed on input line 204.
+ed on input line 8.
 
 
 Underfull \vbox (badness 4279) has occurred while \output is active []
@@ -1516,15 +1520,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [5.5]
 
 Package natbib Warning: Citation `ferreira2021dynamic' on page 6 undefined on i
-nput line 248.
+nput line 52.
 
 [6.6]
 
 Package natbib Warning: Citation `chung2023foundations' on page 7 undefined on 
-input line 255.
+input line 59.
 
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 255.
+(Font)              scaled to size 9.0pt on input line 59.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1536,132 +1540,343 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 255.
+(Font)              scaled to size 9.0pt on input line 59.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 255.
+(Font)              scaled to size 9.0pt on input line 59.
+)
+(./solution.tex
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-LaTeX Warning: Reference `fig::teaser' on page 7 undefined on input line 291.
+LaTeX Warning: Reference `fig::teaser' on page 7 undefined on input line 2.
 
 
-LaTeX Warning: Reference `fig::rtr-tfm' on page 7 undefined on input line 293.
+Overfull \hbox (24.95183pt too wide) in paragraph at lines 2--3
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) This sec-tion in-tro-duces \T1/LinuxLiberti
+neT-TLF/m/sc/9 (-20) RTR-TFM\T1/LinuxLibertineT-TLF/m/n/9 (-20) : a $[]$outing 
+$[]$hreshold-based $[]$andomized-
+ []
 
 
-Underfull \vbox (badness 6741) has occurred while \output is active []
-
- [7.7{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.
-enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.e
-nc}]
-
-Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 305.
+Package natbib Warning: Citation `roughgarden2021' on page 7 undefined on input
+ line 14.
 
 
-Package natbib Warning: Citation `roughgarden2021' on page 8 undefined on input
- line 305.
+Package natbib Warning: Citation `ferreira2021dynamic' on page 7 undefined on i
+nput line 14.
 
 
-Package natbib Warning: Citation `roughgarden2024transaction' on page 8 undefin
-ed on input line 305.
+Package natbib Warning: Citation `chung2023foundations' on page 7 undefined on 
+input line 14.
 
 
-Package natbib Warning: Citation `roughgarden2021' on page 8 undefined on input
- line 305.
+Package natbib Warning: Citation `gafni2024barriers' on page 7 undefined on inp
+ut line 14.
 
 
-Package natbib Warning: Citation `ferreira2021dynamic' on page 8 undefined on i
-nput line 305.
+Package natbib Warning: Citation `damle2024designing' on page 7 undefined on in
+put line 14.
 
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 7.3pt on input line 18.
+LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 26
+.
+(/usr/local/texlive/2023/texmf-dist/tex/latex/inconsolata/t1zi4.fd
+File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
+)
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 9.0pt on input line 26.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `zi4' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 7.3pt on input line 26.
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 5.5pt on input line 26.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 5.5pt on input line 36.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 7.0pt on input line 36.
+
+
+Package natbib Warning: Citation `buterin2019eip' on page 7 undefined on input 
+line 36.
+
+[7.7{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.e
+nc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.en
+c}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-4.enc}]
 
 Package natbib Warning: Citation `chung2023foundations' on page 8 undefined on 
-input line 305.
-
-
-Package natbib Warning: Citation `gafni2024barriers' on page 8 undefined on inp
-ut line 305.
+input line 75.
 
 
 Package natbib Warning: Citation `damle2024designing' on page 8 undefined on in
-put line 305.
+put line 75.
+
+
+Overfull \hbox (2.38377pt too wide) in paragraph at lines 75--76
+ [][] 
+ []
+
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/sc' will be
+(Font)              scaled to size 9.0pt on input line 76.
+LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
+(Font)              scaled to size 9.0pt on input line 76.
+LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
+(Font)              scaled to size 7.3pt on input line 76.
+LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
+(Font)              scaled to size 5.5pt on input line 76.
+
+Class aamas Warning: A possible image without description on input line 77.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.82 
+     
+? 
+
+Class aamas Warning: \vspace should only be used to provide space above/below s
+urrounding objects on input line 95.
+
+
+Package natbib Warning: Citation `myerson81' on page 8 undefined on input line 
+95.
+
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/scit' will be
+(Font)              scaled to size 9.0pt on input line 100.
+[8.8{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.e
+nc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_tlukpt.en
+c}]
+
+Package natbib Warning: Citation `myerson81' on page 9 undefined on input line 
+109.
+
+
+Package natbib Warning: Citation `roughgarden2021' on page 9 undefined on input
+ line 109.
 
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 310.
-
-
-Package natbib Warning: Citation `roughgarden2021' on page 8 undefined on input
- line 310.
-
-
-Package natbib Warning: Citation `roughgarden2024transaction' on page 8 undefin
-ed on input line 310.
+urrounding objects on input line 133.
 
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 312.
+urrounding objects on input line 144.
 
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 315.
+urrounding objects on input line 148.
 
 
-Package natbib Warning: Citation `roughgarden2021' on page 8 undefined on input
- line 315.
-
-
-Package natbib Warning: Citation `roughgarden2024transaction' on page 8 undefin
-ed on input line 315.
-
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 321.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 321.
-
-Package natbib Warning: Citation `roughgarden2021' on page 8 undefined on input
- line 334.
-
-
-Package natbib Warning: Citation `roughgarden2024transaction' on page 8 undefin
-ed on input line 334.
+Overfull \hbox (25.80498pt too wide) in paragraph at lines 149--150
+\T1/LinuxLibertineT-TLF/b/n/9 (-20) Case 2: $\OML/nxlmi/m/it/9 B[]$ \T1/LinuxLi
+bertineT-TLF/b/n/9 (-20) routes the trans-ac-tion to $\OML/nxlmi/m/it/9 B[]$\T1
+/LinuxLibertineT-TLF/b/n/9 (-20) . \T1/LinuxLibertineT-TLF/m/n/9 (-20) If $\OML
+/nxlmi/m/it/9 A[]$ \T1/LinuxLibertineT-TLF/m/n/9 (-20) hoards then $\OML/nxlmi/
+m/it/9 u\LMS/ntxsy/m/n/9 ¹\OML/nxlmi/m/it/9 A[] []\LMS/ntxsy/m/n/9 º \U/ntxmia/
+m/it/9 =
+ []
 
 
 Class aamas Warning: \vspace should only be used to provide space above/below s
-urrounding objects on input line 361.
+urrounding objects on input line 156.
+
+[9.9{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_iqbcqn.e
+nc}]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.173 
+      
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.173 
+      
+? 
+
+Overfull \hbox (668.40727pt too wide) in paragraph at lines 172--173
+[]\T1/LinuxLibertineT-TLF/b/n/9 (-20) Case 1. \T1/LinuxLibertineT-TLF/m/n/9 (-2
+0) If the block pro-ducer elim-i-nates $\OML/nxlmi/m/it/9 Bitnolongerhasadequat
+eroutingworktoproduceablockandhasexpectsreducedincomefromincreasedcompetitionfo
+rblockproduction:Theutilityoftheblockproducerislowerwithcensorshipthanhonestinc
+lusion:[]$ 
+ []
+
+! Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.173 
+      
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.175 
+      
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.175 
+      
+? 
+
+Overfull \hbox (692.10248pt too wide) in paragraph at lines 174--175
+[]\T1/LinuxLibertineT-TLF/b/n/9 (-20) Case 2. \T1/LinuxLibertineT-TLF/m/n/9 (-2
+0) If the block pro-ducer re-places $\OML/nxlmi/m/it/9 Bwithanidenticaltransact
+ion; itsprobabilityofblockproductionisheldconstant; butitreplacesaprofitabletra
+nsactionwithonethatimposeslossesonitpersonally:Theutilityoftheblockproducerislo
+werwiththistransaction \LMS/ntxsy/m/n/9 ^^@
+ []
+
+! Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.175 
+      
+? 
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.177     \end{itemize}
+                       
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.177     \end{itemize}
+                       
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.177     \end{itemize}
+                       
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.177     \end{itemize}
+                       
+? 
+
+Overfull \hbox (775.2384pt too wide) in paragraph at lines 176--178
+[]\T1/LinuxLibertineT-TLF/b/n/9 (-20) Case 3. \T1/LinuxLibertineT-TLF/m/n/9 (-2
+0) If the block pro-ducer re-places $\OML/nxlmi/m/it/9 Bwithaself \LMS/ntxsy/m/
+n/9 ^^@ \OML/nxlmi/m/it/9 generatedtransactionthatpaysahigherfee; alltransactio
+nsintheblockwillpayahigherfee:Thisistheonlypotentialsituationinwhichtheincomeav
+ailabletotheproducercanovercomethelossestheyimposeonthemselvesbycreatingaself \
+LMS/ntxsy/m/n/9 ^^@
+ []
 
 
-LaTeX Warning: Reference `assumption::1' on page 8 undefined on input line 361.
+Overfull \hbox (371.53906pt too wide) in paragraph at lines 176--178
+\OML/nxlmi/m/it/9 generatedtransactionthathasthepotentialtobeprofitable:Itwillr
+equirealargenumberofuserskeenforfasterinclusionandwillingtooffersignificantlyhi
+gherratesforit:$
+ []
+
+! Undefined control sequence.
+l.182 ...e the narrow definition of MIC as \textif
+                                                  {faithful implementation o...
+
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.183 
+      
+? 
+
+Overfull \hbox (550.0114pt too wide) in paragraph at lines 182--183
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) higher fee than $\OML/nxlmi/m/it/9 Bandwhoh
+avesignalledapreferenceforfasterinclusionatahigherrate:Thisisbydefinitionafaith
+fulimplementationofthemechanism; sincethemechanismisimposingarelationshipbetwee
+nutilityandfee \LMS/ntxsy/m/n/9 ^^@
+ []
 
 
-
-LaTeX Warning: Reference `assumption::1' on page 8 undefined on input line 361.
-
-
-
-Package natbib Warning: Citation `gafni2024barriers' on page 8 undefined on inp
-ut line 361.
+Overfull \hbox (657.3885pt too wide) in paragraph at lines 182--183
+\OML/nxlmi/m/it/9 levelsthatrequiresbothtomoveinunion:Ifwetakethenarrowdefiniti
+onofMICas[]thenourproducersarebydefinitiondoingthat; sincetheyareusingtheirownf
+undstosubsidizethedeliveryofvaluetousersatfee \LMS/ntxsy/m/n/9 ^^@
+ []
 
 
-Overfull \hbox (5.04724pt too wide) in paragraph at lines 361--362
+Class aamas Warning: \vspace should only be used to provide space above/below s
+urrounding objects on input line 185.
+
+) (./compatibility.tex
+
+Class aamas Warning: \vspace should only be used to provide space above/below s
+urrounding objects on input line 6.
+
+)
+Runaway argument?
+{private and \textit {public} goods. Rational actors will not keep th\ETC.
+! File ended while scanning use of \textit .
+<inserted text> 
+                \par 
+l.127 \input{compatibility}
+                           
+? 
+(./conclusion.tex
+
+Class aamas Warning: \vspace should only be used to provide space above/below s
+urrounding objects on input line 7.
+
+[10.10]
+
+Class aamas Warning: \vspace should only be used to provide space above/below s
+urrounding objects on input line 66.
+
+
+Package natbib Warning: Citation `gafni2024barriers' on page 11 undefined on in
+put line 66.
+
+
+Overfull \hbox (5.04724pt too wide) in paragraph at lines 66--67
 \T1/LinuxLibertineT-TLF/m/n/9 (-20) tions. How-ever, our BPIC anal-y-sis as-sum
 es a boot-strapped blockchain
  []
 
-[8.8{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_fygcup.e
-nc}]
-No file hurwicz.bbl.
+) [11.11
 
-Package natbib Warning: There were undefined citations.
-
+]
 (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [9.8]
-(./hurwicz.aux)
+) [12.12
+
+
+]
+No file main.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+
+Class aamas Warning: Some images may lack descriptions.
+
+
+Class aamas Warning: CCS concepts are mandatory for papers over two pages.
+
+(./main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1669,43 +1884,50 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 
-LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
-
-
-Package rerunfilecheck Warning: File `hurwicz.out' has changed.
+Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
-Package rerunfilecheck Info: Checksums for `hurwicz.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  F7E035A5AB1C57DA83DAA77187347FAC;2013.
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: E745616086275C4844C31DE6EEA34248;1658
+(rerunfilecheck)             After:  4364F900825E5B695839E366D5FA6C7C;1912.
  ) 
 Here is how much of TeX's memory you used:
- 33093 strings out of 476025
- 603369 string characters out of 5790017
- 1880388 words of memory out of 5000000
- 52220 multiletter control sequences out of 15000+600000
- 675951 words of font info for 406 fonts, out of 8000000 for 9000
+ 33293 strings out of 476025
+ 607217 string characters out of 5790017
+ 1881388 words of memory out of 5000000
+ 52312 multiletter control sequences out of 15000+600000
+ 696585 words of font info for 448 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 90i,12n,131p,1540b,515s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.
-pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/LibertineMathM
-I5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/LibertineMa
-thMI7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/libertine/LinB
-iolinumTB.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/libertine/
-LinLibertineT.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/libert
-ine/LinLibertineTB.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
-ibertine/LinLibertineTI.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pub
-lic/libertine/LinLibertineTZ.pfb></usr/local/texlive/2023/texmf-dist/fonts/type
-1/public/newtx/NewTXMI7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pub
-lic/newtx/txexas.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/new
-tx/txexs.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txmia
-X.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb>
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on hurwicz.pdf (9 pages, 489909 bytes).
+ 90i,17n,131p,1555b,612s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{assumption.1} has been referenced but does not exis
+t, replaced by a fixed one
+
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-
+zi4b.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/Inc
+onsolata-zi4r.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/
+LibertineMathBMI.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/new
+tx/LibertineMathMI.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/n
+ewtx/LibertineMathMI5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/publi
+c/newtx/LibertineMathMI7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pu
+blic/libertine/LinBiolinumTB.pfb></usr/local/texlive/2023/texmf-dist/fonts/type
+1/public/libertine/LinLibertineT.pfb></usr/local/texlive/2023/texmf-dist/fonts/
+type1/public/libertine/LinLibertineTB.pfb></usr/local/texlive/2023/texmf-dist/f
+onts/type1/public/libertine/LinLibertineTI.pfb></usr/local/texlive/2023/texmf-d
+ist/fonts/type1/public/libertine/LinLibertineTZ.pfb></usr/local/texlive/2023/te
+xmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/local/texlive/2023/texmf-di
+st/fonts/type1/public/newtx/NewTXMI5.pfb></usr/local/texlive/2023/texmf-dist/fo
+nts/type1/public/newtx/NewTXMI7.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
+ype1/public/newtx/txexs.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/pub
+lic/newtx/txmiaX.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/txf
+onts/txsya.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/txfonts/t
+xsyb.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txsys.pfb
+>
+Output written on main.pdf (12 pages, 556124 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 86045 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 253 PDF objects out of 1000 (max. 8388607)
+ 192 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 103525 words of extra memory for PDF output out of 106986 (max. 10000000)
 

@@ -573,10 +573,6 @@ As previous discussed, in \ourTFM block producers solve \ourOPT\ to product bloc
 
 In the above example, without fake transactions, the probability of winning for any block producer is $\alpha$. Assumption~\ref{assumption::1} states that for a sufficiently large set of outstanding transactions, such a scenario is mimicked. Thus, we follow Roughgarden in assuming that each honest block producer has the same winning probability. 
 
-%
-% we don't need each block producer to have the same probability of winning the next block as long as we can assume -- Roughgarden Compatibility -- that the allocation must happen without changing the probability of the block producer being selected.
-%
-
 With fake transactions, any block producer $i$ can only affect $S_i$, its own set of transactions. Thus, $\Pr(\mathbb{I}=1|S_i)$ will change. Formally, we can capture the change as $\Delta(\alpha) = \frac{\partial \alpha}{\partial \Pr(\mathbb{I}_i = 1| S_i)}$. From Eq. \ref{eqn:alphai}, we trivially observe that,
 
 \begin{equation}\label{eqn:delta-alpha}

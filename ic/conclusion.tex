@@ -1,0 +1,67 @@
+
+
+In the body of this paper, we demonstrated that the impossibility results of previous papers do not apply. We showed that results are a product of the decision to model blockchains as \textit{direct mechanisms} (auctions) in which both parties are faced with strategic choices but only one party is required to truthfully reveal their preferences to the mechanism. We also showed that the informational requirements of \textit{pareto optimality} are incompatible with direct mechanisms generally.
+
+While the previous section establishes the preceding impossibility results do not apply to \ourTFM, it does not establish that the mechanism is incentive compatible with the social choice rule of \textit{pareto optimality}. To do that, we must return to economics and discuss how the \ourTFM overcomes the two informational impediments to implementing \textit{pareto optimality}: Samuelson's objection based on the existence of public goods, and Hurwicz's objection about the need for a pre-exchange negotiation step that can be strategically manipulated by participants.
+
+\paragraph{Samuelson and Free-Riding}
+
+Samuelson's objection is based on the .
+
+
+
+We observe that transaction inclusion is neither a private good as conceptualized by Roughgarden or a public good as conceptualized by Fox. The fee paid for blockspace is privately-collected and can be privately-negotiated, but induces a public good to the extent that its existence induces competition between producers for the right to use the blockchain to collect the fee. Open competition reduces the marginal profitability of any transaction by inducing producers to provide
+
+In atomistic markets there are no public goods.
+Atomistic markets 
+
+This is why off-chain payments, transaction hoarding, 
+
+
+This is why off-chain payments that restrict competition . But it is also why transaction hoarding accomplishes the same result.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+In lieu of a direct we can offer a much simplier proof that \ourTFM is in fact pareto optimal, which is to note its compatibility with the "greed process" . Both users and producers are 
+
+As outlined in our discussion of economics, 
+
+
+The 
+
+As can be seen, \ourTFM is an "indirect mechanism" in which
+
+Users can be
+
+
+
+The history of the 
+
+
+
+
+In order to do this, we can simply observe compatibility between the routing work mechanism and 
+
+
+
+
+Competition between users pushes them in 
+
+In this paper, we introduced \textsc{RTR-TFM}: a novel TFM that addresses the incentive misalignment in classic transaction fee mechanisms (TFMs) by introducing a novel routing-based block production rule and a revenue scheme. \ourTFM\ rewards block producers in proportion to their contribution to the propagation of transactions. Such a reward ensures that block producers actively participate in the blockchain network upkeep instead of free-riding on other participating nodes. We also provide a game-theoretic characterization of the underlying game in \ourTFM. We prove that \textsc{RTR-TFM} effectively discourages transaction hoarding, ensures Sybil resistance, and achieves incentive compatibility for both users and block producers under reasonable assumptions.
+
+\paragraph{Future Work.} With \ourTFM, we introduce a TFM revenue rule that links a direct cost to the block producers to create fake transactions. However, our BPIC analysis assumes a bootstrapped blockchain (Assumption~\ref{assumption::1}). While Assumption~\ref{assumption::1} is practical, we can look towards BPIC guarantees without constraints on the blockchain state. Furthermore, the TFM literature also looks at off-chain collusion between users and producers. \cite{gafni2024barriers} show the impossibility of a deterministic TFM simultaneously satisfying the UIC, the BPIC, and the resistance to off-chain collusion between a user and a producer. Future work can also study off-chain collusion guarantees for \ourTFM.
+
