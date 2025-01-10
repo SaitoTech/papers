@@ -1,0 +1,296 @@
+\documentclass[oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{changepage}
+\usepackage{hyperref}
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usepackage{cite}
+
+\usepackage[bottom]{footmisc}
+
+\title{Modifying Utility Function to Include Heterogenous Goods}
+\author{
+  David Lancashire\\
+  \texttt{david.lancashire@gmail.com}\\
+}
+\begin{document}
+\maketitle
+
+\begin{onecolabstract}
+A socially optimal transaction fee mechanism must be \textit{incentive compatible} for users and block producers and \textit{pareto optimal} for all participants. This paper offers a succinct proof it is possible to overcome the objection Paul Samuelson raised to achieving both properties in the presence of a blockchain that offers both excludable and non-excludable forms of utilitty.
+\end{onecolabstract}
+\bigskip 
+
+\subsection*{Introduction}
+
+
+The standard equation for utility in :
+
+\[
+u_j^U(\theta_j, \{\theta_{j'}\}_{j' \in \mathcal{U} \setminus \{j\}}; p_j) := 
+\begin{cases} 
+\theta_j - p_j - \delta_t & \text{if } j \in S, \\
+0 & \text{otherwise.}
+\end{cases}
+\]
+
+We observe two kinds of utility:
+
+\begin{itemize}
+  \item \textbf{public good:} the cost-of-attack provided by the security function.
+  \item \textbf{private good:} any additional benefits offered in exchange for fee flow.
+\end{itemize}
+
+We also observe two kinds of fees:
+
+\begin{itemize}
+  \item \textbf{public fee:} any fee allocated to the public good
+  \item \textbf{private fee:} any fee allocated to a private good
+\end{itemize}
+
+The price paid by user j is the sum of their public and private fees.
+
+$$
+p_j = p_{pub}^j + p_{priv}^j
+$$
+
+Their valuation $\theta_j$ to the sum of their public and private utility functions:
+
+$$
+\theta_j = U_{pub}^j + U_{priv}^j
+$$
+
+The public utility function is a monotonically-increasing function of all public fees in the block.
+
+$$
+U_{pub}^j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right)
+$$
+
+The private utility function is a monotonically-increasing function of the users's own private fees.
+
+$$
+U_{priv}^j = f_{priv}^j(p_{priv}^j)
+$$
+
+This gives us a revised valuation equation:
+
+$$
+\theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
+$$
+
+As users do not face a variable "burn" for transaction inclusion, we remove it from our equation
+
+\[
+u_j^U\left(...\right) : =
+\begin{cases}
+\left(
+	f_{pub}^j
+		\left(\sum_{k \in S} p_{pub}^{k}\right) 
+		+ f_{priv}^j(p_{priv}^j) 
+\right)  -   \left(p_{pub} + p_{priv}\right) & \text{if } j \in S, \\ 0 & \text{otherwise.}
+\end{cases}
+\]
+
+
+\subsection*{Utility Equation in the Presence of Free-Riding}
+
+In a free-riding situation, users collude with producers to receive a discount on their fee. This can be modelled as a shift in the allocation of the fee that increases the percent spent on the private good, which can include a cash-discount. Producers have the flexibility to reduce their spending on the public-good if they have private access to the transaction in non-atomistic market conditions. We define the fee-shift as $$p_{fr}^j$$ which is the price of free-riding.
+
+$$
+p_j = \left( p_{pub}^j - p_{fr}^j \right) + \left( p_{priv}^j + p_{fr}^j \right)
+$$
+
+This shift modifies our valuation function:
+
+$$
+\theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j )
+$$
+
+Free-riding is utility-increasing if the re-allocation increases utility, i.e.:
+\[
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j )
+> 
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
+\]
+
+Free-riding is attractive in any situation where the marginal utility of an additional unit of the public good is lower than the marginal utility of the private good:
+
+\[
+\lim_{x \to \infty} \frac{f_{pub}^j()}{f_{priv}^j()} =
+\begin{cases} 
+\infty & \text{if } f_{pub}(x) \text{ free-riding irrational} \\
+C > 0 & \text{ indifferent } \\
+0 & \text{if } f_{priv}(x) \text{ free-riding rational}
+\end{cases}
+\]
+
+Since the private good can be a cash discount, the utility of the private good is the marginal utility of the highest-utility-providing good or service. This means that free-riding is rational unless the highest utility-providing good is the collective security function.
+
+
+\subsection*{Individual and Social Optimality in the Presernce of Free-Riding}
+
+As per Samuelson, the allocation of resources is socially optimal if it is individually optimal for all individuals
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{i=j}^{s} f_{pub}^j(p_{pub}^j) + f_{priv}^j}(p_{priv}^j)
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+
+
+\subsection*{Block Producer Utility Function}
+
+We observe three costs:
+
+\begin{itemize}
+  \item \textbf{public cost:} the cost of funding the security function.
+  \item \textbf{private cost:} the cost of providing any private benefits
+  \item \textbf{fees:} the fees paid by self-generated transactions
+\end{itemize}
+
+We also observe two kinds of income:
+
+\begin{itemize}
+  \item \textbf{public income:} any income from public fees
+  \item \textbf{private income:} any income from private fees
+\end{itemize}
+
+The utility to the producer is the sum of income, minus any costs borne
+
+(income) - (costs)
+
+
+This is technically:
+
+(public income) - (public cost) + (private income) - (private cost)
+
+(profitability of public fees) + (profitability of private fees)
+
+The public income function is a monotonically-increasing function of all public fees in the block.
+
+$$
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right)
+$$
+
+In equilibrium, public costs approach public income, since open competition for collection of the fee erodes the profitability of performing the security function:
+
+$$
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right)
+$$
+
+The private income function is a monotonically-increasing function of all private fees.
+
+$$
+f_{priv}^j\left(\sum_{k \in S} p_{priv}^{k}\right)
+$$
+
+The private cost function depends on the profitbility of the private service.
+
+$$
+f_{priv}^j\left(\sum_{k \in S} p_{priv}^{k}\right)
+$$
+
+
+
+
+\[
+\mathcal{P}_{j}^U\left(...\right) : =
+\underbrace{\sum_{t \in \mathcal{F}_o} p_t}_{\text{Income from Others}} + 
+\underbrace{\sum_{t \in \mathcal{F}_o} p_t}_{\text{Income from Self}} -
+\underbrace{\sum_{t \in \mathcal{F}_o} p_t}_{\text{Cost from Self}}
+\]
+
+
+
+
+$$
+\delta_t = \delta_{pub} + \delta_{priv}
+$$
+
+Our utility equation thus becomes:
+
+\[
+u_j^U(U_{pub}, U_{priv}, \{\theta_{j'}\}_{j' \in \mathcal{U} \setminus \{j\}}; p_{pub}, p_{priv}, \delta_{pub}, \delta_{priv}) :=
+\begin{cases}
+(U_{pub} + U_{priv}) - (p_{pub} + p_{priv}) - (\delta_{pub} + \delta_{priv}) & \text{if } j \in S, \\
+0 & \text{otherwise.}
+\end{cases}
+\]
+
+Users do not face a divided penalty in practice, so we can re-simplify our penalty component:
+
+\[
+u_j^U(U_{pub}, U_{priv}, \{\theta_{j'}\}_{j' \in \mathcal{U} \setminus \{j\}}; p_{pub}, p_{priv}, \delta_t) :=
+\begin{cases}
+(U_{pub} + U_{priv}) - (p_{pub} + p_{priv}) - \delta_t & \text{if } j \in S, \\
+0 & \text{otherwise.}
+\end{cases}
+\]
+
+The amount of utility any user receives depends on the how both their own fee is divided between public and private goods, and how other user fees are divided between public and private goods. 
+
+\[
+\alpha: \text{ proportion of all fees allocated to the public good.}
+\]
+
+\[
+\beta: \text{ proportion of one's own fees allocated to the public good.}
+\]
+
+It follows that $$U_{pub}$$ is the sum of all fees contributed by fee-paying users:
+
+For private goods, the principle of voluntary trade and no-trade theorum allow us to assert that utility equal price
+
+$$
+U_{priv}^j = p_{priv}^j
+$$
+
+We update our utility equation:
+
+\[
+u_j^U\left(\sum_{j' \in S} p_{pub}^{j'}, p_{priv}^j, \{\theta_{j'}\}_{j' \in \mathcal{U} \setminus \{j\}}; p_{pub}, p_{priv}, \delta_t\right) :=
+\begin{cases}
+\left(\sum_{j' \in S} p_{pub}^{j'} + p_{priv}^j\right) - (p_{pub} + p_{priv}) - \delta_t & \text{if } j \in S, \\
+0 & \text{otherwise.}
+\end{cases}
+\]
+
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{i=1}^{s} \frac{u_a^i}{u_b^i} = \frac{F_a}{F_b}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+
+$$
+U_{priv} = \beta * 1 
+$$
+
+
+
+
+\pagebreak
+
+\end{document}
+

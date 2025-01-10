@@ -1,0 +1,169 @@
+\documentclass[oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{changepage}
+\usepackage{hyperref}
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usepackage{cite}
+
+\usepackage[bottom]{footmisc}
+
+\title{Modifying Blockchain Utility Function to Include Heterogenous Goods}
+\author{
+  David Lancashire\\
+  \texttt{david.lancashire@gmail.com}\\
+}
+\begin{document}
+\maketitle
+
+\subsection*{1.1 The Utility Function for Users}
+
+We have two kinds of utility:
+
+\begin{itemize}
+  \item \textbf{public good:} the value of inclusion in the \textbf{public} blockchain
+  \item \textbf{private good:} any additional benefits offered in exchange for fee flow.
+\end{itemize}
+
+We have two kinds of fees:
+
+\begin{itemize}
+  \item \textbf{public fee:} any fee allocated to the public good
+  \item \textbf{private fee:} any fee allocated to a private good
+\end{itemize}
+
+The price paid by user j is the sum of their public and private fees.
+
+$$
+p_j = p_{pub}^j + p_{priv}^j
+$$
+
+Their valuation $\theta_j$ to the sum of their public and private utility functions:
+
+$$
+\theta_j = U_{pub}^j + U_{priv}^j
+$$
+
+The public utility function is a monotonically-increasing function of all public fees in the block.
+
+$$
+U_{pub}^j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right)
+$$
+
+The private utility function is a monotonically-increasing function of the users's own private fees.
+
+$$
+U_{priv}^j = f_{priv}^j(p_{priv}^j)
+$$
+
+This gives us a revised valuation equation:
+
+$$
+\theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
+$$
+
+As users do not face a variable "burn" for transaction inclusion, we remove it from our equation
+
+\[
+u_j^U\left(...\right) : =
+\begin{cases}
+\left(
+	f_{pub}^j
+		\left(\sum_{k \in S} p_{pub}^{k}\right) 
+		+ f_{priv}^j(p_{priv}^j) 
+\right)  -   \left(p_{pub} + p_{priv}\right) & \text{if } j \in S, \\ 0 & \text{otherwise.}
+\end{cases}
+\]
+
+\subsection*{1.2 The Utility Function in the Presence of Collusion}
+
+Users reduce their public fee by $$p_{fr}$$ and replace it with an identical private payment. Under conditions where diminished competition permits the producer to effect the trade, the private payment allows the producer to provide a compensating private benefit, including a cash refund or discount. This can be modelled as the redirection of the fee into a second utility function.
+
+$$
+p_j = \left( p_{pub}^j - p_{fr}^j \right) + \left( p_{priv}^j + p_{fr}^j \right)
+$$
+
+We modify our valuation function:
+
+$$
+\theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j )
+$$
+
+Collusion is utility-increasing if the re-allocation increases joint utility, i.e.:
+
+\[
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j )
+> 
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
+\]
+
+
+
+\subsection*{Eliminating Collusion Completely}
+
+\begin{itemize}
+  \item \textbf{private collusion:} if all goods are private goods with non-excludable benefits
+  \item \textbf{free-riding:} if our public good is a real "public good" (has non-excludable benefits, externalities, etc.)
+\end{itemize}
+
+As per Samuelson (1954), \textit{private collusion} is not rational at the \textit{utility possibilities frontier}.
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\frac{u_pub^i}{u_priv^i} = \frac{F_pub}{F_priv}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+Free-riding remains rational at the \textit{utility possibilities frontier}!
+
+In any network where free-riding is rational, we will always get pulled into an equilibrium where private collusion is rational.
+
+
+\subsection*{How to Achieve a Collusion-Free Equilibrium}
+
+The first step is eliminating free-riding. This is *necessary* but not *sufficient* for eliminating collusion - getting rid of free-riding does not pull us into the state of pareto optimality ("utility possibilities frontier") where \textit{private collusion} is irrational, but it means that if we have a mechanism that induces participants to pay fees at levels that put us on the utility frontier, we will not be forcibly dragged out of it into an equilibrium where \textit{private collusion} is rational.
+
+The second step is to design a mechanism that successfully implements \textit{pareto optimality} in an informationally decentralized environment. In order to do this, per Hurwicz, we need an \textit{indirect mechanism} that has high-dimensional and truthful preference revelation from both users and producers.
+
+
+
+\subsection*{The Connection with Temporary Monopoly}
+
+All models that give block producers *temporary monopoly* over block production have free-riding. Threshold users can always lower their fee.
+
+Ample impossibility results demonstrate this, but do not understand the underlying cause, thus identify exceptions without understanding why they become possible. To give an example of this the "many honest users" exception Shi and Chung identify eliminates collusion because atomistic competition eliminates the "diminished competition" necessary for producers to redirect a portion of the user fee into a second utility function: if they lower their spending on the security function they produce fewer blocks and collect less income.
+
+
+\subsection*{Fundamental Analytic Errors in the Literature}
+
+ * assuming all blockchains give block producers "temporary monopoly" over slots
+ * modelling blockspace as a private good, not noticing that some forms of collusion involve free-riding
+ * asking for truthful preference revelation from users, not producers
+ * not specifying ANY social choice rule ("our goal is truthful preference revelation")
+ * not specifying the ONLY VIABLE social choice rule (pareto optimality -> utility possibilities frontier)
+ * low-dimensional preference revelation (the VCG "fee" is enough, when we need marginal utilities for multiple goods at multiple price levels)
+ * not applying Samuelson (collective action problems and negative externalities)
+ * not applying Hurwicz (the implediments to pareto optimality in informationally decentralized mechanisms)
+
+Some of the more viable approaches ("posted prices") are indirect attempts to solve problems Hurwicz considered impossible.
+
+\pagebreak
+\end{document}
+

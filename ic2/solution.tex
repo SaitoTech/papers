@@ -1,0 +1,195 @@
+
+This section introduces \ourTFM: a \underline{R}outing \underline{T}hreshold-based \underline{R}andomized-TFM.
+
+\ourTFM is a Dutch clock auction where producers compete for the right to produce blocks through the collection of transactions and the submission of their fees into a burning mechanism. A costly lottery which follows the production of each block has the potential to resurrect and redistribute these burned fees, with this same lottery providing wrap-around sybil-resistance for the chain. The economic innovation of the approach is that it makes the production of blocks costly for participants who spend their own fees.
+
+\ourTFM incentives prices to move towards \textit{pareto optimality} by punishing the two forms of activity that push any \textit{TFM} away from optimal fee-levels: the deliberate censorship of transactions which pay theoretically competitive fees, and the inclusion of \textit{fake transactions} whose inclusion is motivated by a desire to manipulate fee-levels.
+
+In the section that follows, we provide game-theoretic characterization of this mechanism. This is accomplished by modelling what Hurwicz referred to as the \textit{formula} or mathematical properties of the approach. We follow this characterization with several game-theoretic proofs that this mechanism evades the impossibility results cited previously, as an \textit{indirect mechanism} that implements \textit{pareto optimality} as its social choice rule.
+
+\subsection{Game Theoretic Characterization}
+
+In \ourTFM, when users send transactions to nodes in the network, they include cryptographic routing signatures indicating the first \emph{hop} node. Each node adds its signature as it \emph{propagates} the transaction deeper into the network, creating within each transaction an unforgeable record of the path the transaction has taken from the user to any block producer competing to offer inclusion.
+
+The "routing work" used to purchase blocks is derived from this chain of signatures. Specifically, the amount of routing work that is available to a producer from any transaction is given by $c\cdot \frac{1}{2^{h-1}}$, where $c$ is a network-determined constant and $h$ is the node's hop for that transaction. E.g., a node hearing about a transaction at its third hop receives $\frac{c}{4}$ routing work for that transaction. Each node gathers transactions until they have enough total routing work to meet a network-determined \textit{difficulty} \textit{threshold}, $\tau$. At this time, the node may become a block producer and broadcast a block with its set of transactions whose total routing work crosses $\tau$.
+
+The existence of multiple nodes processing transactions allows us to model \ourTFM\ as a game with a set of $m\in\mathbb{N}$ producers, $\mathcal{P}:=[m]$. We consider each producer $i\in \mathcal{P}$ to be \emph{myopic} and \emph{strategic}. To simplify analysis, we assume that each transaction is of the same size, with each block's capacity denoted by $k \in \mathbb{N}$. Furthermore, we let $n\in\mathbb{N}$ denote the total number of users, denoted by $\mathcal{U}:=[n]$. We assume that each user $j\in\mathcal{U}$ is also myopic and strategic~\cite{roughgarden2021,ferreira2021dynamic,chung2023foundations,gafni2024barriers,damle2024designing}. A user $j\in\mathcal{U}$ is interested in getting a slot in the block for its transaction. Let $\theta_{j}\in \mathbb{R}_{\geq 0}$ denote user $j$'s private valuation for its transaction's confirmation and $b_j \in \mathbb{R}_{\geq 0}$ as its transaction's public bid.
+
+As is common in distributed consensus mechanisms, each block producer $i\in \mathcal{P}$ has its private copy of the set of outstanding transactions, known as \emph{mempool}. The presence of routing signatures within transactions means that in \ourTFM\ producers store both the transaction bids and the specific hop at which they received the transaction. That is, producer $i$'s mempool is the tuple $\mathcal{M}_i=({F}_i, {H}_i)$. $\mathcal{M}_i$ comprises the set of user bids $F_i = (b_1,\ldots, b_{n})$ and their corresponding hops $H_i = (h_{i,1},\ldots, h_{i,n})$.
+
+This lets us define the routing work for any transaction $(b,h) \in \mathcal{M}_i$. Consider a function $\omega:\mathbb{R}_{\geq 0}\times\mathbb{N}\rightarrow\mathbb{R}_{\geq 0}$ that represents the amount of routing work gained by a block producer at the $h\textsuperscript{th}$ hop. In \ourTFM, the routing function $\omega$ is:
+
+\begin{equation}
+    \omega(h) := c\cdot2^{1 - h}
+\end{equation}
+
+That is, \ourTFM\ offers 1\textsuperscript{st}-hop nodes $c\in \mathbb{R}_{\geq 0}$ units of routing work, 2\textsuperscript{nd}-hop nodes $\frac{c}{2}$ units of routing work, 3\textsuperscript{rd}-hop nodes $\frac{c}{4}$ units of routing work, and so on.
+
+The algorithm for calculating the routing work available to block producers allows us to provide the \textbf{optimization function}, denoted by \ourOPT, which involves each production $i\in \mathcal{P}$ selecting transactions from $M_i$ for inclusion in their proposed blocks:
+
+\begin{align}\tag{\ourOPT}
+    \begin{rcases}
+        \underset{S\subseteq \mathcal{M}_i}{\mbox{arg}\max} & \min_{(b_t,h_t)\in S}  b_t \\
+       \mbox{{s.t.}}\  & \sum_{(b_t,h_t)\in S} \omega(h_t) \geq \tau \\
+       & |S| \leq k\\
+   \end{rcases}
+\end{align}
+
+The first constraint ensures that $S\subseteq \mathcal{M}_i$ clears the \textit{network-determined threshold for routing work}, $\tau$\footnote{The threshold $\tau$ is a network-determined dynamic parameter and increases upon block production, and slowly decreases until the next block is produced as similar to other Dutch clock auctions, similar in principle to the role of the base fee in EIP-1559~\cite{buterin2019eip}. As we consider myopic block producers and users, we omit additional details on the role of $\tau$.}. For the second constraint, recall that each transaction is of the same size. This implies that the total transactions in a block cannot exceed its capacity, $|S| \leq k$. Throughout this paper, we refer to $S\subseteq \mathcal{M}_i$ as the subset that satisfies these two constraints and $S^\star$ as the solution to \ourOPT.
+
+As follows, a producer $i \in \mathcal{P}$ computes $S \subseteq \mathcal{M}_i$, such that the transactions in $S$ clear $\tau$, or,
+$$
+\sum_{(b_t,h_t) \in S} \frac{c}{2^{j-1}} \geq \tau.
+$$
+
+In order to keep block production stable over time, the consensus mechanism adjusts $\tau$ over time to target a constant pace of block production. If fee-throughput increases, $\tau$ is increased to force blocktime back into the desired pace by making block production more expensive. If fee-throughput decreases, $\tau$ is reduced slightly to make block production cheaper.
+
+We now progress how to payouts are issued. As distinct from other networks, the first thing that happens after a block is produced is that all of its fees are removed from circulation, and then a lottery takes place to distributing up to half of those fees back into circulation as a payout to a random network node. The burning of fees can be done in a pure implementation by having the consensus mechanism simply destroy half of the tokens collected in network fees. A more practical implementation can use a costly method of random-number generation such as hashing to power a post-block payout lottery and give miners half the block reward. Penalizing fee-throughput spikes is also helpful. Given that this paper focuses on the forumula for routing work, we set the fraction of network fees that are burned in \ourTFM  as $1/2$, i.e.
+
+\begin{equation}\label{eqn::burn}
+    \delta(S) := \frac{1}{2} \sum_{(b_t,h_t)\in S} p_t
+\end{equation}
+
+As an aside, while it is not necessary for \ourTFM to have a second-price payment rule, we adopt it here for the convenience of demonstrating UIC, since one of the purposes of this section is to show that previous impossibility results that make similar assumptions no longer apply to routing work mechanisms. Under this second-price payment rule, the payment collected from \emph{each} user whose transactions are confirmed in $S$ is the lowest winning bid (say) $p$. The total payment collected is $\frac{1}{2}\cdot|S|\cdot p$ (recall that the other half is burned).
+
+Whether a second-price payment rule is used or not, the lottery that determines the winner of the payout begins after the production of the block. This lottery first selects a random transaction from within the block, and then a random node from within the routing paths of the selected transaction. 
+%%% This lottery is defined formally in Figure~\ref{fig::payment}.
+
+\begin{figure}[h]
+\centering
+    \fbox{
+     \centering \parbox{0.9\linewidth}{  % Box width
+     The revenue, $\frac{1}{2}\cdot|S|\cdot p$, collected when a block is produced is given to the winner sampled from the following distribution. All sampling is done on-chain, i.e., in a trusted manner~\cite{chung2023foundations,damle2024designing}.
+        \begin{enumerate}[leftmargin=*,itemsep=0.2em]
+            \item Sample a transaction $t^\star \in S$ uniformly, i.e., $t^\star \sim \text{Uniform}(S)$.
+            \item From the routing path of $t^\star$, sample a node through a probability distribution that weighs each node by their share of the routing work available at their hop over the total sum of routing work available to all nodes in the routing path of the transaction as included in the block.
+                \begin{itemize}
+                    \item Let the producers part of $t^\star$'s routing path be (w.l.o.g.) $\mathbf{P}_{t^\star}=\{1,\ldots,l\}$.
+                    \item Any producer's $i \in \mathcal{P}_{t^\star}$ routing work for the transaction $t^\star$ is $\omega(t^\star;h_{i})$. Likewise, the total routing work for $t^\star$ is $\sum_{i \in \mathcal{P}_{t^\star}} \omega(t_\star;h_{i})$.
+                    \item We sample a producer $i^\star \in \mathcal{P}_{t^\star}$ from the following weighted probability distribution:
+                        $$
+                        \Pr(i^\star) \sim \frac{\omega(t^\star;h_{i^\star})}{\sum_{i \in \mathcal{P}_{t^\star}} \omega(t_\star;h_{i})}
+                        $$
+                    \item The producer $i^\star$ receives the payment $\frac{1}{2}\cdot|S|\cdot p$.
+                \end{itemize}
+        \end{enumerate}
+      }
+    }
+    \caption{\ourTFM: Revenue Lottery given $S$ (refer \ourOPT)}\label{fig::payment}
+\end{figure}
+
+For an intuitive example, if a transaction is sampled that has two nodes in its routing path, the total routing work for all nodes in the routing path is $c+\frac{c}{2}=\frac{3c}{2}$. The sampling probability of the first-hop node is $\frac{c}{3c/2}=\frac{2}{3}$ while the sampling probability of the second-hop node is $\frac{c/2}{3c/2}=\frac{1}{3}$. 
+
+This allows us to define the probabiltiy of an arbitrary producer $i$ winning the lottery, which depends on the efficiency with which it sends fees into the burning mechanism, denoted by $\alpha_{i}, as:
+
+\begin{equation}\label{eqn:alphai}
+    \alpha_{i} = \sum_{j = 1}^{m} \Pr(\mathbb{I}_{i} = 1 | S_{j})\cdot \Pr(S_{j})
+\end{equation}
+
+Here, the indicator variable  $\mathbb{I}_{i} = 1$ denotes the event that producer $i$ is selected as the winner (recipient) of the block's payment; $\mathbb{I}_{i} = 0$ otherwise. $\Pr(S_j)$ denotes the confirmation of the set $S_j$ owned by the $j^{\mbox{th}}$ producer.
+
+The dynamics of the routing work mechanism provide security against classes attacks of attacks which are impossible to eliminate in other mechanisms. Producers minimize their losses in the payout lottery if they spend their own fees, but doing so also burns half of their own money. Adding transactions which have been routed by other nodes adds fees that can subsidize the unlock cost, but also introduce competing claims-on-payout from other routers that grow faster than the work provided. As our next sections will show, in a competitive dynamic this lose-lose situation dissuades rational producers from using their own money to extend the chain once the network is in equilibrium, ceteris paribus.
+
+\subsection{Incentive Compatibility}
+
+The standard way TFM papers test for UIC and MIC is to establish incentive compatibility for users following Myerson's Lemma, and then examine whether producers have an incentive to faithfully implement the mechanism assuming that the probability of block production -- and thus the utility offered to users for transaction inclusion -- is held constant. In this section we take the same approach to prove the impossibility results of earlier papers do not apply to \ourTFM.
+
+\paragraph{User Incentive Compatibility}. As mentioned above, Myerson's Lemma \cite{myerson81} provides a condition under which any mechanism (like an auction) ensures users bid the maximum amount they are willing to pay irrespective of what every other user does. According to the lemma, the allocation rule must be monotone in the user bids, given other bids are constant. Further, it must follow the proposed payment characterization. E.g., it is well known that the generalized second-price auction (or VCG) is a special case of Myseron's Lemma and thus incentive compatible for users. The TFM literature considers the single-demand, homogeneous setting, i.e., each user has a requirement of at most one item, and all the available items are copies of a single item. The VCG auction allocates to the highest $k$ users and charges them the $(k+1)^{th}$ bid. 
+ 
+In \ourTFM, the block producers must consider both the bids and the routing work corresponding to each transaction. Due to the additional requirement of the routing work threshold, producers may not follow the standard VCG allocation. That is, the highest $k$ bids may not clear the routing work threshold if they have propagated deeply into the network and their transactions provide less "routing work" for the production of a block. Therefore, in order to demonstrate that Myerson's Lemma holds we must first show that the proposed allocation rule is monotonic.
+
+\begin{lemma}\label{lemma:monotone} 
+    For any user $i\in \mathcal{U}$, \ourTFM\ allocation rule $\bm{x}$ is monotone with respect to their bid (transaction fees), given the remaining bids $\mathcal{U}\setminus \{i\}$ do not change. 
+\end{lemma}
+\begin{proof}
+
+A strategic producer selects transactions that clear the routing work threshold and satisfy the block capacity constraint, captured by \ourOPT's feasibility constraints. Note that, the routing work of any transaction is independent of the user's bids. Let $\mathcal{S}$ be the set of the subset of feasible transactions. The producer selects the subset that maximizes the minimum bid (objective of \ourOPT). If a user's transaction belongs to any feasible subset, increasing the bid will have the following effect. 
+
+If the said bid is the minimum in $S$, increasing it will increase the chance of confirmation. It will not affect the chance of confirmation if it is not the minimum in $S$. Changing the bid does not have any effect if the transaction does not belong to any feasible subset (due to the constraints in \ourOPT). Hence, the allocation is non-decreasing with increasing bid.
+\end{proof}
+
+We note that \ourTFM\ has a monotonic allocation rule, it does not entirely satisfy Myerson Lemma's~\cite{myerson81} payment characterization in the absence of a price-setting transaction. As we have yet to establish that it is costly for producers to include their own price-setting transactions in the block. Therefore, similar to \citet{roughgarden2021}, we suggest using the minimum bid in $S^\star$ as the price-setting bid. Theorem~\ref{thm:UIC} shows that this payment rule ensures almost URC. That is, when there are sufficient transactions and the difference between transaction pairs is small, the incentive from deviating is negligible.
+
+\begin{theorem}\label{thm:UIC}
+   \ourTFM\ is incentive compatible for users
+\end{theorem}
+\begin{proof}
+
+    We prove UIC through a case-by-case analysis.
+
+    Let $S^\star$ be the block producer's optimal subset of transactions based on the bids, computed via \ourOPT. The utility to the user is the value of inclusion in the blockchain at the level of security generated by the user if they bid their true value.
+
+    Let $B = \min_{(f, h)\in S^\star} f$ be the minimum accepted transaction.
+
+    \begin{itemize}[leftmargin=*]
+
+        \item \textbf{Case 1.} $\theta_i < B$ for any user $i$, if $b_i = \theta_i$ the user does not get selected in $S^\star$ and gets zero utility. If the user under-bids, i.e., $b_i < \theta_i$ the utility remains zero. Upon overbidding, i.e., $b_i > \theta_i$, the user might get selected, but the user's utility will be $\theta_i - B < 0$. For Case 1, bidding true value maximizes the utility.
+
+        \item \textbf{Case 2.} $\theta_i > B$, if $b_i = \theta_i$ and $b_i \in S^\star$, i.e., the user is truthful and other constraints (independent of bid) ensures the selection of $i$ and utility of $\theta_i - B$. As long as the bid value $b_i > B$, the user might get a utility $\theta_i - B$. If the bid $b_i < B$, the utility will be zero. Hence, the maximum utility is obtained at truthful bidding. In the other scenario where $b_i = \theta_i$ and $b_i \not\in S^\star$, i.e., the user does not get included due to other constraints, the user's utility is zero. Changing the bid does not impact its inclusion; thus, the utility remains zero.
+
+        \item \textbf{Case 3.} $\theta_i = B$, in this case, the user can deviate by bidding the lowest value needed to qualify for $S^\star$. Since this deviation explicitly lowers fee-throughput relative to the optimal level at which user utility is assumed, $\tau$ is lowered by consensus and the amount of utility received by the user is also lowered. As per our starting assumptions, this is a suboptimal outcome as the reduction of the fee is not costless in terms of the utility purchased and the user is in a suboptimal equilibrium -- if they preferred this equilibrium they should have bid it originally as per the Revelation Principle.
+    \end{itemize}
+    This proves the theorem.
+\end{proof}
+
+\paragraph{Producer Incentive Compatibility}. The standard way in which MIC is examined is to demonstrate that block producers with a temporary monopoly over block production have incentives to manipulate fee-levels. In this section we show the same assumptions other papers treat as universal limitations lead to different results in \ourTFM. To do this, given the presence of a routing payout and the potential for strategic attacks on it, we first show that RTR-TFM incentivizes producers to propagate transactions without engaging in malicious routing strategies: either the hoarding of transactions or the addition of fake identities on the routing network. We then show that the inclusion of fake transactions is only rational if it pushes the network towards a \textit{pareto optimal} equilibrium, and thus constitutes a form of strategic behavior that the mechanism leverages to achieve fee-optimality.
+
+\begin{lemma}\label{lemma:routing}
+    In \ourTFM, routing is a Dominant Strategy over hoarding transactions for any block producer $i\in\mathcal{P}$. 
+\end{lemma} 
+\begin{proof}
+
+    Consider four block producers, say $A_{1}, A_{2}, B_{1}, B_{2}$, such that $A_{1}$ and $A_{2}$ are connected (i.e., messages from $A_{1}$ reach $A_{2}$ in single hop). Also, consider $B_{1}$ and $B_{2}$ as connected. We assume $A_1$ and $B_1$ receive the same transaction as first hop nodes. Now, we examine 2 cases: (1) when $B_{1}$ hoards transactions, and (2) when $B_{1}$ routes transactions. We show that, in either case, $A_{1}$ receives a higher utility on routing than hoarding.
+    
+    For the proof, we quantify $u(A_1\ \mbox{routes} | B_1\ \mbox{hoards})$ as the utility $A_1$ receives from routing the transaction in the event $B_1$ decides to hoard it. Further, $u(A_1\ \mbox{hoards} | B_1\ \mbox{hoards})$ denotes the utility for $A_1$ when both choose to hoard. Likewise, $u(A_1\ \mbox{hoards} | B_1\ \mbox{routes})$ and $u(A_1\ \mbox{routes} | B_1\ \mbox{routes})$ correspond to utilities for $A_1$  when $B_1$ decides to route to $B_2$.
+    % \begin{itemize}[leftmargin=*]
+    \smallskip
+
+    \noindent \textbf{Case 1: $B_1$ hoards the transaction.} If $A_1$ hoards then the probability of $A_1$ and $A_2$ producing the block is $\Pr(A_1) = \Pr(A_2) = \frac{1}{2}$, that is, both are equally likely. Let $p$ be the payment received, implying $A_1$'s utility is $u(A_1\ \mbox{hoards}) = \frac{1}{2}\cdot p$. When $A_1$ propagates instead of hoarding and given $\Pr(A_1) = \Pr(A_2) = \Pr(B_1) = \frac{1}{3}$, i.e., all the three nodes involved are equally likely to produce a block, $u(A_1 \ \mbox{routes}) = \Pr(A_1) \cdot p + \Pr(A_2) \cdot \frac{2}{3} \cdot p = \frac{5}{9} \cdot p $. Thus $u(A_1\ \mbox{routes} | B_1\ \mbox{hoards}) > u(A_1\ \mbox{hoards} | B_1\ \mbox{hoards})$.
+
+   \smallskip
+    \noindent \textbf{Case 2: $B_1$ routes the transaction to $B_2$.} If $A_1$ hoards then $u(A_1\ \mbox{hoards}) = \frac{1}{3} \cdot p$ where $\Pr(A_1) = \frac{1}{3}$. If $A_1$ decides to route to $A_2$, and given that all the four nodes involved are equally likely to produce the block, we get  $u(A_1\ \mbox{routes}) = \Pr(A_1) \cdot p + \Pr(A_2) \cdot \frac{2}{3} \cdot p  = \frac{1}{4} \cdot p + \frac{1}{4} \cdot \frac{2}{3} \cdot p = \frac{5}{4} \cdot \frac{1}{3} \cdot p$. Thus, $u(A_1\ \mbox{routes} | B_1\ \mbox{routes}) > u(A_1\ \mbox{hoards} | B_1\ \mbox{routes})$.
+\end{proof}
+
+While we can observe that forwarding transactions does modify the probability of producers proposing a block, probability analysis shows that forward-propagation is still statistically dominant. As with our section on UIC, what is really happening is that the impossibility results created by the assumption of "temporary monopoly" are overcome by the use of a work function that explicitly links fee-levels to the pace of block production.
+
+Similar logic shows that fake transactions (producer-initiated fees) are also disincentivized under temporary-monopoly assumptions.
+
+\paragraph{Fake Transactions} 
+
+We consider the case of a block producer who is able to produce a block that solves \ourOPT using at least a subset of the transactions in their mempool. The question is whether this block producer is advantaged by the manipulation of the set transactions in their block. We prove on a case-by-case basis that they are not by showing that there is only one situation in which fee-manipulation can be profitable and then showing that this situation is incentive compatible with \textit{pareto optimality}:
+
+\begin{theorem}\label{thm:MIC}
+    Accellerating the burn fee is the only non-losing strategy for producers
+\end{theorem}
+
+\begin{proof}
+
+    Let $S^\star$ be the block producer's optimal subset of transactions based on the bids, computed via \ourOPT. The utility to the producer is at most the value of half of the fees in the block minus at minimum the value of the half the fees in the block that originate from the block producer.
+
+    Let $B = \min_{(f, h)\in S^\star} f$ be the minimum accepted transaction.
+
+    \begin{itemize}[leftmargin=*]
+
+        \item \textbf{Case 1.} If the block producer eliminates $B it no longer has adequate routing work to produce a block and has expects reduced income from increased competition for block production. The utility of the block producer is lower with censorship than honest inclusion.
+
+        \item \textbf{Case 2.} If the block producer replaces $B with an identical transaction, its probability of block production is held constant, but it replaces a profitable transaction with one that imposes losses on it personally. The utility of the block producer is lower with this transaction-replacement strategy.
+
+        \item \textbf{Case 3.} If the block producer replaces $B with a self-generated transaction that pays a higher fee, all transactions in the block will pay a higher fee. This is the only potential situation in which the income available to the producer can overcome the losses they impose on themselves by creating a self-generated transaction that has the potential to be profitable. 
+    \end{itemize}
+\end{proof}
+
+The situation that must be analyzed to determine whether the mechanism is incentive compatible (with pareto optimality) is the third case. But note a fundamental difference between \ourTFM and other TFMs. In this case, by attempting to increase the fees they are able to collect, the block producer is forcing up the burn-fee and pushing the network into a higher-throughput equilibrium that is more secure and more costly to re-organize. The decision to speed-up the blockchain is also tantamount to an increase in the overall supply of blockspace. Supply is expanding to fill an increase in demand. 
+
+Any strategy that accellerates the burn fee involves the block producer \textit{subsidizing} security for the subset of users who have paid a higher fee than $B and who have signalled a preference for faster inclusion at a higher rate. This is by definition a faithful implementation of the mechanism, since the mechanism is imposing a relationship between utility and fee-levels that requires both to move in union. If we take the narrow definition of MIC as \textif{faithful implementation of the mechanism} then our producers are by definition doing that, since they are using their own funds to subsidize the delivery of value to users at fee-levels that users have already indicated is optimal.
+
+\paragraph{Genuine Incentive Compatibility} 
+
+We can move beyond "faithful implementation" and towards full incentive compatibility. To see this, observe that the decision to self-generate a transaction is rational if the block producer earns enough in profit from the transaction fees paid by other users to outweigh the costs they bear from the inclusion of their own fee-bearing transaction. Even in the hypothetical case where generating such a block is profitable, there is an explicit cost that the block producer pays in the form of accepting a lower marginal profitability.
+
+We also note that if producers spend their own money to push up the burn fee, they increase the cost of repeating this strategy, since the cost of this strategy rises as the burn fee rises relative to the networks' volume of organic fee-throughput. Equilibrium must be reached at the point where the losses from self-generation are not larger than the profits available from the other fees included in the block. It follows that any strategic exploitation of Case 3 pushes the network into an equilibrium where supply expands until the marginal profitability of providing more blockspace matches the marginal utility of users purchasing it.
+
+In game theoretic terms, the decision to self-generate is a strategic decision which reveals private information available only to the block producer: information about their marginal profitability given their private cost structure for attracting whatever mixture of public and private fees exists in their mempool. Producers who are efficient at gathering high-fee transactions may choose to self-generate if they fear competition or desire more rapid inclusion. But all shifts of this sort push the network a higher-throughput equilibrium in which the utility delivered to users increases relative to the fees they are paying, and larger losses must be borne to speed up the chain further.
+
+We thus have a functioning market. Users desire transaction inclusion at the lowest rates possible. Producers desire transaction inclusion at the highest rates possibe. The mechanism induces honest revelation from users of the fees they are willing to pay for the utility that the blockchain offers at its equilibrium level as represented by the burn fee. Producers reveal private information about their own cost structure through their decision to generate a transaction that speeds up the blockchain but burns a portion of their own wallet as the cost. Truthful preference revelation and strategic behavior occurs on both sides of the market, and the network reaches an equilibrium at the point where these two forces come into balance, the point of \textit{pareto optimality} at which neither users nor producers can profitably extract more utility from the network by allocating their resources to it in any different proportion.
+
