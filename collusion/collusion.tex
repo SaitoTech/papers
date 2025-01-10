@@ -32,13 +32,26 @@
 \maketitle
 
 \subsection*{1.1 The Utility Function for Users}
+\vspace{0.5em}
+
+We start with our standard equation for utility: 
+
+\[
+u_j^U(\theta_j, \{\theta_{j'}\}_{j' \in \mathcal{U} \setminus \{j\}}; p_j) :=
+\begin{cases}
+\theta_j - p_j & \text{if } j \in S, \\
+0 & \text{otherwise.}
+\end{cases}     
+\]              
+
 
 We have two kinds of utility:
 
 \begin{itemize}
-  \item \textbf{public good:} the value of inclusion in the \textbf{public} blockchain
+  \item \textbf{public good:} the value of inclusion in the public blockchain
   \item \textbf{private good:} any additional benefits offered in exchange for fee flow.
 \end{itemize}
+\vspace{0.5em}
 
 We have two kinds of fees:
 
@@ -46,6 +59,7 @@ We have two kinds of fees:
   \item \textbf{public fee:} any fee allocated to the public good
   \item \textbf{private fee:} any fee allocated to a private good
 \end{itemize}
+\vspace{0.5em}
 
 The price paid by user j is the sum of their public and private fees.
 
@@ -53,31 +67,31 @@ $$
 p_j = p_{pub}^j + p_{priv}^j
 $$
 
-Their valuation $\theta_j$ to the sum of their public and private utility functions:
+Their valuation $\theta_j$ is the sum of their public and private valuation functions:
 
 $$
 \theta_j = U_{pub}^j + U_{priv}^j
 $$
 
-The public utility function is a monotonically-increasing function of all public fees in the block.
+Their public valuation function is a monotonically-increasing function of all public fees in the block.
 
 $$
 U_{pub}^j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right)
 $$
 
-The private utility function is a monotonically-increasing function of the users's own private fees.
+Their private valuation function is a monotonically-increasing function of the users's own private fees.
 
 $$
 U_{priv}^j = f_{priv}^j(p_{priv}^j)
 $$
 
-This gives us a revised valuation equation:
+The total valuation function is thus:
 
 $$
 \theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
 $$
 
-As users do not face a variable "burn" for transaction inclusion, we remove it from our equation
+This gives us the full utility function:
 
 \[
 u_j^U\left(...\right) : =
@@ -91,20 +105,21 @@ u_j^U\left(...\right) : =
 \]
 
 \subsection*{1.2 The Utility Function in the Presence of Collusion}
+\vspace{0.5em}
 
-Users reduce their public fee by $$p_{fr}$$ and replace it with an identical private payment. Under conditions where diminished competition permits the producer to effect the trade, the private payment allows the producer to provide a compensating private benefit, including a cash refund or discount. This can be modelled as the redirection of the fee into a second utility function.
+Under collusion, users reduce their public fee by $p_{fr}$. Under non-atomistic market conditions (i.e. diminished competition) the producer can allocate this to the provision of a second good, which can even be a cash discount.
 
 $$
 p_j = \left( p_{pub}^j - p_{fr}^j \right) + \left( p_{priv}^j + p_{fr}^j \right)
 $$
 
-We modify our valuation function:
+Therefore:
 
 $$
 \theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j )
 $$
 
-Collusion is utility-increasing if the re-allocation increases joint utility, i.e.:
+Total fee is unchanged, so collusion is rational if the re-allocation increases joint utility, i.e.:
 
 \[
 f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j )
@@ -112,9 +127,11 @@ f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{pr
 f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
 \]
 
+Collusion is rational whenever the marginal utility of the second good is higher than the marginal utility of the first. Since the second good can be a cash refund, this means collusion is viable if the marginal utility of \textit{any other good} is higher than the marginal utility of the blockchain for even a single user in the network!
 
 
-\subsection*{Eliminating Collusion Completely}
+\subsection*{1.3. Eliminating Collusion}
+\vspace{0.5em}
 
 \begin{itemize}
   \item \textbf{private collusion:} if all goods are private goods with non-excludable benefits
@@ -126,43 +143,43 @@ As per Samuelson (1954), \textit{private collusion} is not rational at the \text
 \LARGE
 \begin{adjustwidth}{1.5em}{1.5em}
 \begin{math}
-\frac{u_pub^i}{u_priv^i} = \frac{F_pub}{F_priv}
+\frac{u_{pub}^i}{u_{priv}^i} = \frac{F_{pub}}{F_{priv}}
 \end{math}
 \end{adjustwidth}
 \normalsize
 
-Free-riding remains rational at the \textit{utility possibilities frontier}!
+The problem disappears because at this point the marginal utility of all goods is in equilibrium by definition.
 
-In any network where free-riding is rational, we will always get pulled into an equilibrium where private collusion is rational.
+But free-riding remains rational at the \textit{utility possibilities frontier}!
 
-
-\subsection*{How to Achieve a Collusion-Free Equilibrium}
-
-The first step is eliminating free-riding. This is *necessary* but not *sufficient* for eliminating collusion - getting rid of free-riding does not pull us into the state of pareto optimality ("utility possibilities frontier") where \textit{private collusion} is irrational, but it means that if we have a mechanism that induces participants to pay fees at levels that put us on the utility frontier, we will not be forcibly dragged out of it into an equilibrium where \textit{private collusion} is rational.
-
-The second step is to design a mechanism that successfully implements \textit{pareto optimality} in an informationally decentralized environment. In order to do this, per Hurwicz, we need an \textit{indirect mechanism} that has high-dimensional and truthful preference revelation from both users and producers.
+\textbf{In any network where free-riding is rational, we will always get pulled into an equilibrium where private collusion is rational.}
 
 
+\subsection*{1.4 What Happens Without Free-Riding?}
 
-\subsection*{The Connection with Temporary Monopoly}
+Eliminating free-riding is *necessary* but not *sufficient* for eliminating collusion. Eliminating it does not pull us into pareto optimality ("utility possibilities frontier") because eliminating cannot change the marginal utility of the second good. But it means that if we for some other reason end up with the marginal utilities of our various goods properly alligned at pareto optimal levels we will not be forcibly dragged back into an equilibrium where \textit{private collusion} is rational.
 
-All models that give block producers *temporary monopoly* over block production have free-riding. Threshold users can always lower their fee.
+What we are doing by eliminating free-riding is eliminating externalities.
 
-Ample impossibility results demonstrate this, but do not understand the underlying cause, thus identify exceptions without understanding why they become possible. To give an example of this the "many honest users" exception Shi and Chung identify eliminates collusion because atomistic competition eliminates the "diminished competition" necessary for producers to redirect a portion of the user fee into a second utility function: if they lower their spending on the security function they produce fewer blocks and collect less income.
+Once that is done, you still need a mechanism to successfully implement \textit{pareto optimality} in an informationally decentralized environment. In order to do this, per Hurwicz, we need an \textit{indirect mechanism} that has high-dimensional and truthful preference revelation from both users and producers and contains an "incentive for truthfulness". This is not an easy problem, but it is a solvable problem.
 
 
-\subsection*{Fundamental Analytic Errors in the Literature}
+\subsection*{1.5 Fundamental Analytic Errors in the Literature}
 
- * assuming all blockchains give block producers "temporary monopoly" over slots
- * modelling blockspace as a private good, not noticing that some forms of collusion involve free-riding
- * asking for truthful preference revelation from users, not producers
- * not specifying ANY social choice rule ("our goal is truthful preference revelation")
- * not specifying the ONLY VIABLE social choice rule (pareto optimality -> utility possibilities frontier)
- * low-dimensional preference revelation (the VCG "fee" is enough, when we need marginal utilities for multiple goods at multiple price levels)
- * not applying Samuelson (collective action problems and negative externalities)
- * not applying Hurwicz (the implediments to pareto optimality in informationally decentralized mechanisms)
+The solution tells us that all of these 
 
-Some of the more viable approaches ("posted prices") are indirect attempts to solve problems Hurwicz considered impossible.
+\begin{itemize}
+ \item assuming all blockchains give block producers "temporary monopoly" over slots
+ \item modelling blockspace as a private good, not noticing that some forms of collusion involve free-riding
+ \item asking for truthful preference revelation from users, not producers
+ \item assumptions like "many honest users" rather than "atomististic competition"
+ \item not specifying ANY social choice rule ("our goal is truthful preference revelation")
+ \item not specifying the ONLY collusion-free social choice rule (pareto optimality -> utility possibilities frontier)
+ \item low-dimensional preference revelation (the VCG "fee" rather than the marginal utilities for multiple goods at multiple price levels)
+ \item not solving for Samuelson (collective action problems and negative externalities)
+ \item not solving for Hurwicz (the implediments to pareto optimality in informationally decentralized mechanisms)
+\end{itemize}
+
 
 \pagebreak
 \end{document}
