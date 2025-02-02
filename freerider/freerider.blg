@@ -1,0 +1,114 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: freerider.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: ref.bib
+Repeated entry---line 249 of file ref.bib
+ : @inproceedings{chung2023foundations
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 261 of file ref.bib
+ : @article{chen2022bayesian
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 270 of file ref.bib
+ : @inproceedings{ferreira2021dynamic
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 279 of file ref.bib
+ : @article{wu2023maximizing
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 288 of file ref.bib
+ : @inproceedings{damle2024designing
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 297 of file ref.bib
+ : @article{gafni2024barriers
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 367 of file ref.bib
+ : @techreport{bahrani2023transaction
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 374 of file ref.bib
+ : @article{bahrani2024transaction
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 381 of file ref.bib
+ : @techreport{chung2024collusion
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 404 of file ref.bib
+ : @article{babaioffredballoons
+ :                             ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Lavi2017RedesigningBitcoin"
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--page numbers missing in both pages and numpages fields in babaioffredballoons
+Warning--no number and no volume in bahrani2024transaction
+Warning--page numbers missing in both pages and numpages fields in bahrani2024transaction
+Warning--no number and no volume in chen2022bayesian
+Warning--page numbers missing in both pages and numpages fields in chen2022bayesian
+Warning--empty publisher in chung2023foundations
+Warning--empty address in chung2023foundations
+Warning--empty publisher in damle2024designing
+Warning--empty address in damle2024designing
+Warning--empty publisher in ferreira2021dynamic
+Warning--empty address in ferreira2021dynamic
+Warning--no number and no volume in gafni2024barriers
+Warning--page numbers missing in both pages and numpages fields in gafni2024barriers
+Warning--empty address in maskin2002
+Warning--no number and no volume in wu2023maximizing
+Warning--page numbers missing in both pages and numpages fields in wu2023maximizing
+Warning--no number and no volume in Yao2018IncentiveBitcoin
+Warning--page numbers missing in both pages and numpages fields in Yao2018IncentiveBitcoin
+You've used 19 entries,
+            5981 wiz_defined-function locations,
+            1588 strings with 20886 characters,
+and the built_in function-call counts, 20079 in all, are:
+= -- 2878
+> -- 498
+< -- 0
++ -- 156
+- -- 175
+* -- 1276
+:= -- 1836
+add.period$ -- 100
+call.type$ -- 19
+change.case$ -- 118
+chr.to.int$ -- 19
+cite$ -- 37
+duplicate$ -- 1792
+empty$ -- 1275
+format.name$ -- 215
+if$ -- 5111
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 64
+newline$ -- 216
+num.names$ -- 135
+pop$ -- 685
+preamble$ -- 1
+purify$ -- 268
+quote$ -- 0
+skip$ -- 614
+stack$ -- 0
+substring$ -- 1462
+swap$ -- 155
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 402
+warning$ -- 18
+while$ -- 131
+width$ -- 0
+write$ -- 420
+(There were 10 error messages)

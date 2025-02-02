@@ -1,0 +1,297 @@
+\documentclass[oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{changepage}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usepackage[bottom]{footmisc}
+\usepackage{textcomp}
+\usepackage{abstract}
+\usepackage{natbib} % Required for ACM-Reference-Format
+\bibliographystyle{ACM-Reference-Format}
+
+\title{Collusion and Free-Riding in Transaction Fee Mechanisms}
+\author{
+  David Lancashire\\
+  \texttt{david.lancashire@gmail.com}\\
+}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+A number of papers in computer science borrow techniques from mechanism design to explore the feasibility of building collusion-free transaction fee mechanisms. While these papers have led to impossibility results, their conclusions are marred by methodological issues with their handling of truthful preference revelation. This paper explains why these problems exist, shows how they can be eliminated through use of composite utility functions that make the costs and benefits of collusion endogenous to the model, and discusses why building mechanisms that achieve incentive compatibility with collusion-free equilibria will require indirect mechanisms that implement pareto optimality as their social choice rule.
+\end{abstract}
+
+\section{Introduction \label{sec::introduction}}
+
+\emph{Transaction Fee Mechanisms} (TFMs) are a class of distributed systems in which the consensus mechanism governs the allocation of the very resource that incentivizes its own provision. Unlike traditional consensus mechanisms, where the number of honest and dishonest participants is static, TFMs feature dynamic voting power that adjusts with the payouts issued by the mechanism. As a result, any form of collusion that lowers fee throughput or subverts the payout mechanism becomes a fundamental security concern.
+
+The potential for users and producers to manipulate fee levels through collusion has consequently led researchers to apply economic techniques to analyze whether collusion-free TFMs can be designed. In mechanism design terms, this translates to examining whether a mechanism can be both incentive-compatible and resistant to collusion. However, this research has produced a series of impossibility results suggesting that designing collusion-proof TFMs is fundamentally infeasible—conclusions that are directly shaping the roadmaps of major public blockchains, including Ethereum.
+
+This paper challenges these impossibility claims by demonstrating that the models used to support them contain methodological flaws that introduce logical inconsistencies. Among these flaws are: (1) the assumption that truthful preference revelation is a defining condition of incentive compatibility rather than a property that emerges from properly designed mechanisms; (2) the failure to model collusion as an endogenous trade-off between private gains and systemic costs; and (3) the reliance on an improper social choice rule that fails to adequate capture the set of preferences relevant to agent strategy formation. Despite these issues, these flawed conclusions are actively shaping protocol decisions, most notably in the EIP-1559 literature within the Ethereum research community.
+
+After reviewing how existing literature approaches the problem of collusion, we show why these methods fail to justify their conclusions about the feasibility of incentive-compatible TFMs. We then identify a subset of mechanisms capable of supporting collusion-free equilibria: indirect mechanisms with decomposable algorithms that use Pareto optimality as their social choice rule. This suggests that incentive-compatible, collusion-resistant TFMs are not only possible but naturally emerge when mechanisms are structured to endogenously account for the costs and benefits of collusion.
+
+\subsection*{1.1. Methodological Assumptions in the Existing Collusion Literature}
+
+A standard utility equation treats blockspace as a private good:
+
+\[
+u_t\left(b_t\right) : =
+\begin{cases}
+\left(
+        v_t - p_t\left(H,B_k\right) - q_t
+\right) \text{if } j \in S, \\ 0 & \text{otherwise.}
+\end{cases}
+\]
+
+In this equation from \cite{roughgarden2024}, the utility to the user is the value of transaction inclusion, minus any payment from the user to the producer, minus any portion of the fee that is burned. Similar assumptions that treat utility as entirely dependent on the fee level privately chosen by the user are also present in the work of \cite{chung2023foundations}. This modeling choice makes collusion exogenous to the model and is characteristic of almost every paper written on collusion resistance and fee optimality in the TFM literature (see \cite{chen2022bayesian, ferreira2021dynamic, wu2023maximizing, damle2024designing, gafni2024barriers, bahrani2023transaction, bahrani2024transaction, chung2024collusion}).
+
+Incentive compatibility in the TFM literature is commonly defined as requiring "truthful preference revelation" from users and "faithful implementation" of the mechanism by block producers. In these works, truthful preference revelation is typically modeled as users bidding their highest willingness to pay in the absence of strategic incentives to shade their bids \cite{roughgarden2024, chung2023foundations}. This modeling approach implicitly assumes that a user’s maximum bid, rather than their actual bidding strategy, is the relevant signal of their private preferences.
+
+However, in the broader literature on implementation theory, truthful preference revelation is more rigorously defined. Hurwicz and Maskin emphasize that preference revelation requires agents to disclose all private information that affects their strategic behavior within a mechanism. Hurwicz refers to these as the "preference maps" of his agents, while Maskin describes them as the "characteristics" or "types" that must be revealed to ensure proper implementation \cite{hurwicz1973design, hurwicz1960optimality, hurwicz2007guardians, hurwicz1979allocations, maskin1999nash, maskin2002implementation}.
+
+Despite the foundational importance of these works, they are largely absent from recent discussions on transaction fee mechanism design. The reason for the ommission seems to be because the TFM literature focuses on auction-specific interpretations of truthfulness and does not examine whether the bid alone captures the full set of private preferences relevant to strategic behavior. This omission is significant, as it restricts the analysis to fee-based incentives while overlooking broader informational constraints on mechanism design.
+
+From this position, incentive compatibility is asserted to require "truthful preference revelation" from users and "faithful implementation" of the mechanism from block producers. But what exactly is meant by truthful preference revelation? In mechanism design, the criterion for truthful preference revelation is that agents must share -— directly or indirectly -— all private preferences that are relevant to the strategies they form when interacting with the mechanism. Hurwicz refers to these as the "preference maps" of his agents, while Maskin describes them as the "characteristics" or "types" revealed by agents to the mechanism. A substantial body of literature underscores the necessity of adequate preference revelation and highlights the problems that arise in its absence (see \cite{hurwicz1973design, hurwicz1960optimality, hurwicz2007guardians, hurwicz1979allocations, maskin1999nash, maskin2002implementation}).
+
+In his seminal paper on the subject, \cite{roughgarden2024} defines truthful preference revelation as the user bidding the maximum amount they would offer in the absence of strategic opportunities to pay a lower fee. \cite{chung2023foundations} asserts this same \textit{pre-collusion} bid reflects the "honest" valuation. But how can such a bid constitute adequate preference revelation? Why is it not the lower bid -- which encodes the strategic preference of the user to collude -- which is not considered the truthful bid?
+
+Many papers assert that higher bids in auction mechanisms must represent truthful preference revelation, yet this assumption requires careful scrutiny. In order to assert that the higher bid constitutes truthful preference revelation, it is common for papers to reference comparable auction mechanisms, such as the second-price Vickrey-Clarke-Groves (VCG) auction run by a trusted auctioneer. This draws a connection between the on-chain implementation and the trusted-auctioneer model, leading to an unstated assumption: if a bid is deemed truthful in a trusted context, it should also be regarded as truthful in the presence of a potentially adversarial counterparty. This assumption represents a fundamental analytic mistake, as it treats the truthfulness of a bid as a property that exists independently of the rationality of collusion.
+
+This oversight seems to be largely unconscious. Many researchers may not realize they are making this error, given their focus on practical questions of auction design rather than the informational economics of mechanism design. However, it is incorrect to assume that a bidding strategy deemed truthful in one context automatically translates to truthfulness in another. As the work of Hurwicz and Maskin illustrates, truthful preference revelation must involve the direct or indirect disclosure of all private preferences relevant to strategy formation, including those that lead agents to favor collusion and opt for a lower bid.
+
+The impossibility results stymieing advances in the field follow directly from this methodological mistake. Have asserted the higher bid must constitute truthful preference revelation, the impossibility of achieving incentive compatibility is demonstrated by finding situations in which threshold users still have incentives to under-bid, such as through bid-shading strategies. Alternately, a lack of incentive compatibility is shown by demonstrating that should users nevertheless bid truthfully, producers can manipulate fee-levels by creating fake transactions which replace the price-setting bid.
+
+Some papers attempt to address the honesty problem by employing Bayesian models and techniques such as Myerson's Lemma to generalize user bidding strategies based on historical data regarding transaction fee distributions. They claim that any bid derived from historical estimates constitutes collusion-free bids and that any resulting equilibrium is, therefore, collusion-free. However, this overlooks the problems inherent in applying Myerson's Lemma in the context of untruthful bids. Any discovered equilibrium may in fact reflect an equilibrium in which collusion is rational.
+
+As the remainder of this paper will demonstrate, mechanism design does not permit the assumption that the transaction fee constitutes a truthful revelation of preferences in direct mechanisms in which there exist incentives for participants collude. When our social choice rule requires a collusion-free equilibrium, a composite utility function is required. This shift forces a need for higher-dimensional preference revelation, rendering the existing fee structure inadequate for supporting the conclusions drawn in the papers cited above.
+
+To clarify this point, the following section presents a composite utility model that explicitly incorporates the benefits and costs of collusion. By making these factors endogenous, we identify the precise conditions under which users will rationally collude with producers and the relevant private preferences that influence their decision to adopt socially suboptimal strategies. This approach makes it clear that the preferences revelant to strategy formation cannot be encoded in the transaction fee without abandoning our requirement for either a direct mechanism or for incentive compatibility with a collusion-free equilibrium. 
+
+\subsection*{1.2. A Composite Utility Model for Collusion}
+\vspace{0.5em}
+
+Modelling collusion endogenously requires a composite utility model that accounts for both on-chain and off-chain payments. We define \textbf{public fee} as the portion of a transaction fee that is tendered openly for the competitive inclusion of the transaction in the blockchain and \textbf{private fee} as any portion distributed privately as an off-chain payment for the same good. The price paid by user j is the sum of their public and private fees.
+
+$$
+p_j = p_{pub}^j + p_{priv}^j
+$$
+
+While users can purchase transaction inclusion using either a \textit{public fee} or a \textit{private fee}, the utility they receive may differ significantly based on their choice. \textit{Private fees} are more appealing to producers because a larger portion of these fees can be extracted as profit. This possibility exists in conditions of non-atomistic competition, where the privatization of a \textit{public fee} reduces the potential profits available to other producers and diminishes their willingness to spend on any block production function like hashing or staking.
+
+Whenever producers can extract a greater percentage of the overall fee as profit, they shift the fees collected by the network towards the production of alternate forms of utility. To model the impact of this shift on users, our composite utility function must include three specific types of utility-providing goods: \textit{public goods}, \textit{private goods}, and \textit{collusion goods}.
+
+Our first category is \textit{public goods}, which consist of non-excludable benefits that scale monotonically with the \textit{public fees} included in a block. In non-atomistic conditions where producers are not compelled to maximize their spending on the security function, one such good is the economic security of the network. Other benefits commonly associated with "decentralization" in TFMs also qualify as \textit{public goods}, such as the degree of censorship resistance of the network and the lack of barriers of entry preventing new nodes from joining the network to compete with potentially malicious incumbents.
+
+Our second category is \textit{private goods}, which consist of the private benefits of transaction inclusion in the blockchain. The defining feature of this category is not its manner of funding, since users who purchase blockspace with \textit{public fees} also accrue these benefits. Notably, this category does not include any additional benefits that accrue to users as a result of colluding with producers, as those benefits are not issued to non-colluding users who purchase blockspace with \textit{public fees}.
+
+In the absence of collusion, our valuation $\theta_j$ is the sum of the utility offered by these public and private utility functions:
+
+$$
+\theta_j = U_{pub}^j + U_{priv}^j
+$$
+
+Since the utility of the public good component scales with the total amount of public fees in the block, and the utility provided by private goods scales with the fees contributed exclusively by the fee-paying user, our valuation function becomes:
+
+$$
+theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j)
+$$
+
+Which gives us our full utility function in the absence of collusion:
+
+\[
+u_j^U\left(...\right) : =
+\begin{cases}
+\left(
+        f_{pub}^j
+                \left(\sum_{k \in S} p_{pub}^{k}\right)
+                + f_{priv}^j(p_{priv}^j)
+\right)  -   \left(p_{pub}^j + p_{priv}^j\right) & \text{if } j \in S, \\ 0 & \text{otherwise.}
+\end{cases}
+\]
+
+To incorporate the costs and benefits of user-producer collusion in our model, we explicitly add these elements to our equation. We define the term \textit{collusion good} as any benefits producers offer users in exchange for a \textit{collusion fee} whose name indicates it is explicitly allocated by the producer to the production of this type of utility.
+
+Our updated valuation function becomes:
+
+$$
+\theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j) + f_{col}^j(p_{col}^j)
+$$
+
+This equation intuitively illustrates the dynamics of collusion in TFMs. Users control how fees are offered to producers, and their choices affect the potential profits available to producers and the degree of competition they face to produce blocks. This interplay determines the degree of flexibility producers have in allocating fees to the production of different forms of utility.
+
+For users, the valuation function reflects the sum of the utility provided by \textit{public goods}, \textit{private goods} and \textit{collusion goods}. The attractiveness of collusion is determined not only by their valuation for \textit{private good} of transaction inclusion (as is assumed in the univariate models) but also the potential availability of \textit{collusion goods} and the way that other users and producers distribute and allocate their own fees.
+
+Since the utility provided by \textit{private goods} is beyond the ability of producers to manipulate -- given to all transactions in the blockchain regardless of their form of payment -- the rationality of collusion for users depends on the comparative utility they derive from \textit{public goods} and \textit{collusion goods}.
+
+We define collusion as any cooperative action in which users and producers jointly reallocate a portion of the \textit{public fee} to a \textit{collusion fee}. This definition accommodates any exceptions that may arise within the model. Specifically, any increase in the provision of \textit{collusion goods} that does not decrease the level of \textit{public fees} is strictly utility-increasing for all participants and can be viewed as a voluntary trade exogenous to the model. Conversely, an act of collusion that reduces the \textit{public fee} while simultaneously increasing spending on the \textit{collusion good}—resulting in a larger overall fee—can be modeled as an act of collusion coupled with a separate voluntary trade.
+
+In situations where collusion results in a discounted cost of transaction inclusion or cash refund, we simply treat the value of the discount as the utility offered by the \textit{collusion good} being purchased.
+
+Our price shift under collusion becomes:
+
+$$
+p_j = \left( p_{pub}^j - p_{col}^j \right) + \left( p_{priv}^j \right) + \left( p_{col}^j \right)
+$$
+
+And our utility shift becomes:
+
+$$
+\theta_j = f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{col}^j \right) + f_{priv}^j\left( p_{priv}^j \right) + f_{col}^j\left(p_{col}^j \right)
+$$
+
+Since our total fee is unchanged, collusion is attractive if the re-allocation increases utility, i.e.:
+
+\[
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k} - p_{fr}^j \right) + f_{priv}^j( p_{priv}^j + p_{fr}^j ) + f_{col}^j
+>
+f_{pub}^j\left(\sum_{k \in S} p_{pub}^{k}\right) + f_{priv}^j(p_{priv}^j) + f_{col}^j
+\]
+
+This equation makes it clear the transaction fee cannot -- on its own -- constitute adequate preference revelation.
+
+For collusion to be rational the marginal utility of at least one \textit{collusion good} must be higher than the marginal utility of the \textit{public goods} competing for consumption of the same fee. Since our \textit{collusion good} can take the form of a discount or cash refund, it follows that collusion is rational in any situation where the marginal utility of \textit{any other good} is higher than the marginal utility of the \textit{public goods} offered by the blockchain.
+
+The relevant private preferences that affect the attractiveness of collusion thus compromise the comparative marginal utility of goods to our fee-paying users, and their cost-of-production to producers. Collusion is rational when users value \textit{collusion goods} more than \textit{public goods} and/or producers have cost advantages in the production of \textit{collusion goods} which make them more efficient providers of utility than their peers.
+
+\subsection*{1.3 Methodological Problems in the Computer Science Literature}
+
+As discussed in Section 1.2, the vast majority of attempts to model collusion within TFMs treat blockspace as if it is a private good with a non-composite utility function. This approach simplifies the work needed to calculate viable equilibria by reducing the problem to what Hurwicz called a "one-objective maximization function" but obscures the motivations driving users to collude. As such, it misleads researchers regarding the preferences that must be revealed to any direct mechanism aiming for incentive compatibility with a collusion-free outcome. 
+
+This oversight leads to two methodological contradictions that render previous impossibility results internally-inconsistent.
+
+The first issue arises from the assumption that a bid in a TFM constitutes "truthful preference revelation" solely because the mechanism allocates blockspace using a pricing mechanism similar to other mechanisms in which bids are deemed truthful. Any change in social choice rule necessitates a reconsideration of what criteria are needed for truthful preference revelation. In a Vickrey-Clarke-Groves (VCG) auction, the auction mechanism's social choice rule is the "efficient allocation" of a single good, meaning that the transaction fee need only encode users' comparative preferences for that single form of utility. Here, the unobserved switch to requiring users to prefer non-collusion outcomes complicates preference revelation by expanding the scope of relevant preferences to include the comparative utility provided to users by collusion goods.
+
+Likewise, the assertion that incentive compatibility requires producers to "faithfully implement" the mechanism without acting strategically creates another methodological contradiction -- any incentive compatible mechanism will require producers to reveal their cost basis to the mechanism. The structural refusal to consider mechanisms in which producers share this information with mechanisms makes it informationally impossible for previous papers even to discover incentive compatible mechanisms that exist.
+
+The axiomatic declaration that the transaction bid constitutes truthful preference revelation is methodologically unsound, and makes the impossibility results historically used to argue for technical approaches such as EIP-1559 fundamentally invalid. As per Hurwicz and Maskin, we cannot draw conclusions about the impossibility of building direct mechanisms that are incentive compatible if our mechanisms lack adequate preference revelation. Academic proofs of this are not strictly needed since the Revelation Principle itself explicitly forbids this: if we observe users preferring an outcome that involves collusion and the offering of a lower bid than they have declared their truthful preference, the implication is that the higher bid did not constitute an adequate or truthful declaration of preference.
+
+Bayesian approaches also collapse in the face of this problem, since it stops being possible to invoke the Revelation Principle and Myerson's Lemma to generalize about "collusion-free" bidding strategies if the historical bids whose distribution and density are used to calculate bidding strategies reflect outcomes in which collusion may be rational. Bids which contain competitive on-chain fees may not be selected as previous bids were simply because they lack the expected private payment for associated collusion goods.
+
+It remains possible to argue that the transaction fee in a TFM may still constitute truthful preference revelation in an "indirect mechanism" where the revelation of the fee encodes this information obliquely, such as might occur if users only bid in the event that they have privately calculated that collusion is suboptimal. This could be the case if the mechanism ensured that users only bid if the marginal utility of the \textit{public good} is higher to them than the marginal utility of any \textit{collusion good}, but in that case any impossibility result advanced based on fee-manipulation by users or producers requires an implicit transition between models. And impossibility results developed using the Revelation Principle or Myerson's Lemma cannot be generalized to indirect mechanisms which operate on an unknown but broader set of preferences.
+
+In short, without truthful preference revelation we cannot use the standard tools of mechanism design being invoked in these papers to generalize about the possibility or impossibility of achieving incentive compatibility once we must consider the rationality of opportunities to collude. While this finding may seem negative, the shift to use of composite utility functions opens the door to the subclass of mechanisms in which a solution is likely to be found: indirect mechanisms which implement pareto optimality as their social choice rule.
+
+In order to show why this is the case, in the next section we apply our composite utility function in the context of the only social choice rule we can guarantee to be collusion-free.
+
+
+\subsection*{1.4. A Collusion-Free Equilibrium in Composite Utility Models}
+
+In order for collusion to be rational, users and producers must be able to cooperatively reallocate the way resources are invested in the production of utility. The one point at which collusion thus becomes generally irrational is at the \textit{utility possibilities frontier} where all participants are already spending all of their resources in whatever way maximizes their own utility. Collusion is irrational in this equilibrium since it is not possible for any individual or group of participants to adjust the way in which their resources are allocated without making at least one member who changes their allocation strategy worse off. This equilibrium is known as \textit{pareto optimality}.
+
+Since collusion will be costless and rational for at least a subset of participants in any other equilibrium, pareto optimality must be the social choice rule successfully implemented by any mechanism seeking incentive compatibility with an equilibrium which is robust to collusion between participants.
+
+To express this social choice rule mathematically, we introduce two cost functions $F_{{pub} + {priv}}()$ and $F_{col}$ to quantify the total fees invested in the production of our competing forms of on-chain and off-chain utility. A collusion-free equilibrium requires the two sides of our equations to be in equilibrium, so that fees cannot be reallocated between our cost functions in a way that will increase the total amount of utility produced.
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{j=1}^{s} \frac{u_{{pub}+{priv}}^j}{u_{col}^j} = \frac{F_{{pub} + {priv}}}{F_{col}}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+Economists will recognize this as structurally identical to the equation \cite{samuelson1954pure} flagged in his seminal paper hypothesizing on the impossibility of decentralized markets provisioning non-excludable goods in pareto optimal amounts. What the symmetry shows is that collusion subverts pareto optimality for the same reason that free-riding does: the non-excludable nature of a subset of collectively-funded benefits creates rational strategies for individuals to re-allocate their fees in suboptimal ways which create private benefits at the cost of defunding \textit{public goods}.
+
+For Samuelson, the problem with free-riding was that it led to a socially suboptimal provision of \textit{public goods} because it pulled overall production off the \textit{utility possibilities frontier}. The same problem exists with TFMs, with the added problem that once we have been pulled off our \textit{utility possibilities frontier} we are no longer in an equilibrium where collusion is generally irrational. This means that even if a mechanism can target parteo optimality as its social choice rule, once free-riding allows a subset of network participants to costlessly increase their utility by manipulating the proportion in which their fees are allocated to the provision of different kinds of utility, we are thrown back into a situation in which collusion is rational and economic suboptimality is exacerbated.
+
+More helpfully, Samuelson's equation suggests a technical strategy for overcoming free-riding problems. As previously discussed, sub-optimality emerges because free-riding is possible -- users are able to enjoy the benefits of the \textit{public good} without contributing the fees necessary to ensure its provision. Eliminating this problem is possible in mechanisms which induce provision of these benefits without the need for users to explicitly fund their provision. What if the private fee was unnecessary because both users and producers preferred the use of \textit{public fees} for payment of the costs of transaction inclusion? In this situation whatever valuation the user assigned to transaction inclusion would be sufficient for inducing the maximal provision of both public and private benefits.
+
+We model this possibility by simplifying our cost function, removing the public fee from our cost component and adding a variable \textit{x} that reflects the probability that transactions are circulating publicly and available for competitive inclusion from multiple producers:
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{j=1}^{s} \frac{u_{({pub}*{x})+{priv}}^j}{u_{col}^j} = \frac{F_{{priv}}}{F_{col}}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+As the value of \textit{x} approaches 1, an optimal amount of utility from \textit{public goods} will be produced despite the lack of a separate \textit{public fee} which is subject to free-riding pressures.
+
+Observe that when it comes to our numerator:
+
+\begin{itemize}
+  \item \textbf{rational users} - prefer to share transactions publicly, as sharing transactions publicly increases the utility to the user as rational block producers will not discriminate against transactions that are publicly available, ceteris paribus.
+  \item \textbf{rational nodes} - prefer to free-ride on publicly-circulating transactions but not share their own transactions.
+\end{itemize}
+
+The value of \textit{x} depends on whether users and block producers share unconfirmed fee-bearing transactions. Since users marginally prefer paying \textit{public fees} to \textit{private fees} if no discount is available for offering private payment, the obstacle to eliminating free-riding is the preference of block producers to limit the circulation of transactions as doing so improves their probability of collecting the fee.
+
+This shows a mathematical connection between the problems of collusion within TFMs and the \textit{sybil problem} identified by \cite{babaioffredballoons}. Both problems involve parallel free-rider problems -- producers restricting access to their private fee-flow in order to prevent peers who have not contributed to their cost of fee-collection from generating probabilistic claims for collection of the fees. Restricting peer access to transactions is a form of closure that the private sector must add in order to induce rational provision, exactly as \cite{olson1971logic} flagged in 1965.
+
+In mechanisms where block producers have incentives to share the fees they collect with their peers, competitive pressures will motivate the provision of \textit{public goods}. A theoretical claim it is impossible to accomplish this in \textit{proof-of-work} and \textit{proof-of-stake} networks may be found in the above-cited paper \textit{On Bitcoin and Red Balloons}. We nonetheless observe the existence of routing work mechanisms which address this problem by incentivize block producers to share unconfirmed transactions with peers. It follows that at least a subset of indirect mechanisms exists which avoid the Samuelson suboptimality trap as our equation simplifies to the following once \textit{x} becomes 1:
+
+\LARGE
+\begin{adjustwidth}{1.5em}{1.5em}
+\begin{math}
+\sum_{j=1}^{s} \frac{u_{{pub}+{priv}}^j}{u_{col}^j} = \frac{F_{{priv}}}{F_{col}}
+\end{math}
+\end{adjustwidth}
+\normalsize
+
+This ensures maximal provision of both \textit{public goods} and \textit{private goods} and prevents free-riding pressures from dragging provision off the \textit{utility possibilities frontier}.
+
+In mechanisms where there is an incentive to share transactions publicly, even \textit{private fees} are capable of inducing the forms of utility generated by \textit{public goods}. Eliminating sybilling pressures is thus akin to having an atomistic market structure.
+
+\subsection*{1.5 Conclusions}
+
+The shift to modelling collusion as an endogenous problem rather than treating it as exogenous to the design of TFMs is beneficial in several ways.
+
+First, explicitly modelling the incentives that users and producers have to collude in TFMs highlights significant methodological problems in the existing TFM literature that require addressing. As the body of this paper has shown, using a composite utility model to make the incentives for collusion endogenous to our model makes it clear the transaction fee cannot constitute truthful preference revelation in any direct mechanism that is attempting to implement a collusion-free outcome as its social choice rule. This observation renders the conclusions of most of the TFM papers cited in this paper methodologically inconsistent. And given the tendency for academics to develop new lemmas and theorems by citing the results claimed in earlier papers, it shows a return to more rigorous foundational work is required.
+
+Understanding the need to target pareto optimality as the social choice rule for eliminating collusion also provides explanatory power for some findings which are partially true but misanalyzed as technical rather than economic phenomenon. As discussed in section 1.4, users who collude with producers to pay a lower fee are free-riding on the \textit{public fees} contributed by other users to the network. Producers who privatize fee-flow in ways that give them advantages producing longest-chain blocks also gain an advantage in collecting inflationary block rewards. Understanding the two-sided nature of free-riding pressures provides the underlying explanation for the zero-revenue bound identified by Shi and Chung -- as long as both free-riding pressures exist incentives to collude will manifest in any mechanism that has either \textit{public fees} or a block reward.
+
+The model offered by this paper also explains various technical exceptions authors discover regarding their own impossibility results. The zero-revenue bound should disappear under conditions where free-riding becomes irrational. While Shi and Chung identify "many honest users" as an exception to their claim, we can actually observe from the endogenous model that this edge-case in actuality reflects atomistic competition and has nothing to do with user honesty, since free-rider pressures also disappear in atomistic conditions where every transaction fee is paid privately. Suboptimality vanishes in these situations because rational producers will not give users any discount on the public fee, and cannot deny competitors access to fee-flow by privatizing their own transaction flow.
+
+Beyond the above observations, there are three main conclusions this paper offers for those who wish to do more rigorous work in the field.
+
+First, for papers discussing incentive compatibility within consensus mechanisms, it is essential that authors explicitly identify the social choice rule their mechanisms are attempting to implement (i.e. the specific outcome they wish to achieve incentive compatibility) instead of treating truthful preference revelation as if it constitutes a social choice rule. Only once a specific social choice rule is identified is it possible to determine what private preferences are relevant to strategy formation. And it is only if these preferences are adequately revealed that the tools of mechanism design can be used to draw any conclusions about the possibility or impossibility of achieving incentive compatibility.
+
+Second, this paper shows that the obstacles to achieving incentive compatibility with pareto optimal outcomes involve not just the class of problems with strategic manipulation discussed by Hurwicz and Maskin, but also include the class of incentive misalignments identified by Samuelson and studied in public choice theory. The techniques applied to study problems of collusion within TFMs only address the forms of informational manipulation discussed by Hurwicz. The failure to understand that both problems exist lead to impossibility results as technical strategies can always be found to exploit free-riding opportunities even if an incentive for truthfulness exists otherwise.
+
+
+
+
+
+
+
+The failure to roblems which must be named and defined rather than as more subtle forms of incentive misalignment created by the choice of work function itself -- misalignment between the forms of work that networks pay for and the forms of work that generate value-to-users and attract fee-flow into the network.
+
+The knowledge that TFMs are subject to free-rider problems also provides compelling evidence that the exclusive focus on direct mechanisms within the computer science literature is a source of the limitations discovered in their models. Indirect mechanisms are traditionally the type of mechanisms used to handle high-dimensional preference revelation in the presence of public goods. As with the Clarke-Groves mechanism which uses bundled-bidding to induce multi-variate preference revelation, solutions capable of eliminating collusion in the face of free-riding pressures are most likely to be found within this class of mechanism: decomposable algorithms where preference filtering is handled by the user prior to their selection of a fee.
+
+Third, a significant literature in economics exists describing the problems involved in developing distributed algorithms capable of approximating pareto optimality. Despite the difficulty of the problem, this literature is generally ignored. This is a pity not only because it leads to the kinds of analytic issues identified in this paper, but because it prevents computer science as a discipline from answering a fundamental question of value to economics -- are blockchains capable of making progress on the informational issues Hurwicz identified in 1972? Is it possible to design a mechanism in which there is an inherent incentive to truthfulness?
+
+On a final note, we close by observing that this paper provides not only predictive power and but falsifiable claims. It predicts that any technical shift that makes headway on the fundamental informational problems that subvert achieving pareto optimal outcomes in informationally decentralized mechanisms should reduce the scope for collusion within TFMs. It also predicts that any viable solution to the Red Balloons sybil problem will transitively lead mechanisms to incentive compatibility with a collusion-free equilibria.
+
+\cleardoublepage
+\bibliography{ref}
+
+\end{document}
+
+\documentclass[oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
