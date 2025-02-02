@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.16)  2 FEB 2025 12:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.16)  2 FEB 2025 13:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -586,39 +586,32 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [1
 
-Package natbib Warning: Citation `Lavi2017RedesigningBitcoin' on page 1 undefin
-ed on input line 56.
-
-[1
-
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] [4] [5] [6{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/
-cm-super-ts1.enc}] [7] (./freerider.bbl
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+ [4] [5]
+[6{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+}] [7] (./freerider.bbl
 LaTeX Info: Redefining \tempurl on input line 171.
 LaTeX Info: Redefining \tempurl on input line 195.
-LaTeX Info: Redefining \tempurl on input line 212.
-LaTeX Info: Redefining \tempurl on input line 248.
-LaTeX Info: Redefining \tempurl on input line 272.
-)
-
-Package natbib Warning: There were undefined citations.
-
-[8
+LaTeX Info: Redefining \tempurl on input line 211.
+LaTeX Info: Redefining \tempurl on input line 226.
+LaTeX Info: Redefining \tempurl on input line 262.
+LaTeX Info: Redefining \tempurl on input line 286.
+) [8
 
 ] (./freerider.aux)
 Package rerunfilecheck Info: File `freerider.out' has not changed.
 (rerunfilecheck)             Checksum: 5B06098EF931FC22DF31BDA84AD46D9C;111.
  ) 
 Here is how much of TeX's memory you used:
- 12813 strings out of 476025
- 205810 string characters out of 5790017
- 1871388 words of memory out of 5000000
- 33046 multiletter control sequences out of 15000+600000
+ 12817 strings out of 476025
+ 205943 string characters out of 5790017
+ 1870388 words of memory out of 5000000
+ 33049 multiletter control sequences out of 15000+600000
  525054 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,9n,76p,1094b,432s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 71i,9n,76p,1094b,485s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
@@ -637,10 +630,10 @@ ive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
 3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2023
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2023/
 texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on freerider.pdf (8 pages, 258739 bytes).
+Output written on freerider.pdf (8 pages, 258134 bytes).
 PDF statistics:
- 218 PDF objects out of 1000 (max. 8388607)
- 170 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
+ 221 PDF objects out of 1000 (max. 8388607)
+ 173 compressed objects within 2 object streams
+ 36 named destinations out of 1000 (max. 500000)
  9 words of extra memory for PDF output out of 10000 (max. 10000000)
 

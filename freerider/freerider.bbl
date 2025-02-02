@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -197,6 +197,20 @@
 \tempurl}
 \newblock
 \shownote{University of Minnesota, Department of Economics}.
+
+
+\bibitem[Lavi et~al\mbox{.}(2017)]%
+        {Lavi2017RedesigningBitcoin}
+\bibfield{author}{\bibinfo{person}{Ron Lavi}, \bibinfo{person}{Or Sattath},
+  {and} \bibinfo{person}{Aviv Zohar}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Redesigning Bitcoin's Fee Market}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1709.08881}}
+  (\bibinfo{year}{2017}).
+\newblock
+\urldef\tempurl%
+\url{https://arxiv.org/abs/1709.08881}
+\showURL{%
+\tempurl}
 
 
 \bibitem[Maskin(1999)]%

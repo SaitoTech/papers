@@ -46,7 +46,6 @@ Repeated entry---line 404 of file ref.bib
  : @article{babaioffredballoons
  :                             ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "Lavi2017RedesigningBitcoin"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
@@ -65,50 +64,52 @@ Warning--empty publisher in ferreira2021dynamic
 Warning--empty address in ferreira2021dynamic
 Warning--no number and no volume in gafni2024barriers
 Warning--page numbers missing in both pages and numpages fields in gafni2024barriers
+Warning--no number and no volume in Lavi2017RedesigningBitcoin
+Warning--page numbers missing in both pages and numpages fields in Lavi2017RedesigningBitcoin
 Warning--empty address in maskin2002
 Warning--no number and no volume in wu2023maximizing
 Warning--page numbers missing in both pages and numpages fields in wu2023maximizing
 Warning--no number and no volume in Yao2018IncentiveBitcoin
 Warning--page numbers missing in both pages and numpages fields in Yao2018IncentiveBitcoin
-You've used 19 entries,
+You've used 20 entries,
             5981 wiz_defined-function locations,
-            1588 strings with 20886 characters,
-and the built_in function-call counts, 20079 in all, are:
-= -- 2878
-> -- 498
+            1593 strings with 21023 characters,
+and the built_in function-call counts, 21105 in all, are:
+= -- 3041
+> -- 529
 < -- 0
-+ -- 156
-- -- 175
-* -- 1276
-:= -- 1836
-add.period$ -- 100
-call.type$ -- 19
-change.case$ -- 118
-chr.to.int$ -- 19
-cite$ -- 37
-duplicate$ -- 1792
-empty$ -- 1275
-format.name$ -- 215
-if$ -- 5111
++ -- 166
+- -- 184
+* -- 1349
+:= -- 1925
+add.period$ -- 105
+call.type$ -- 20
+change.case$ -- 125
+chr.to.int$ -- 20
+cite$ -- 40
+duplicate$ -- 1875
+empty$ -- 1336
+format.name$ -- 228
+if$ -- 5387
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 64
-newline$ -- 216
-num.names$ -- 135
-pop$ -- 685
+missing$ -- 68
+newline$ -- 228
+num.names$ -- 142
+pop$ -- 723
 preamble$ -- 1
-purify$ -- 268
+purify$ -- 283
 quote$ -- 0
-skip$ -- 614
+skip$ -- 637
 stack$ -- 0
-substring$ -- 1462
-swap$ -- 155
+substring$ -- 1517
+swap$ -- 159
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 402
-warning$ -- 18
-while$ -- 131
+type$ -- 418
+warning$ -- 20
+while$ -- 134
 width$ -- 0
-write$ -- 420
+write$ -- 442
 (There were 10 error messages)
