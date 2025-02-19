@@ -11,7 +11,10 @@ def extract_title_from_tex(tex_file):
             # Look for \title{...} pattern
             title_match = re.search(r'\\title{([^}]*)}', content)
             if title_match:
-                return title_match.group(1)
+                title = title_match.group(1)
+                # Check if title contains multiple words
+                if len(title.split()) > 1:
+                    return title
     except Exception as e:
         print(f"Error reading {tex_file}: {e}")
     return None
@@ -33,6 +36,7 @@ def get_earliest_file_date(folder):
 def update_readme():
     """Update README.md with paper titles and PDF links."""
     papers = []
+    whitepaper = None
     
     # Process each top-level directory
     for folder in [d for d in os.listdir('.') if os.path.isdir(d) and not d.startswith('.')]:
@@ -44,15 +48,21 @@ def update_readme():
         if tex_files and pdf_files:
             title = extract_title_from_tex(tex_files[0])
             if not title:
-                title = folder  # Use folder name if title extraction fails
+                continue  # Skip if no multi-word title found
             
             earliest_date = get_earliest_file_date(folder)
             
-            papers.append({
+            paper_info = {
                 'title': title,
                 'pdf_path': pdf_files[0],
                 'date': earliest_date
-            })
+            }
+            
+            # Check if this is the whitepaper
+            if 'whitepaper' in folder.lower() or 'whitepaper' in title.lower():
+                whitepaper = paper_info
+            else:
+                papers.append(paper_info)
     
     # Sort papers by date (newest first)
     papers.sort(key=lambda x: x['date'], reverse=True)
@@ -62,7 +72,14 @@ def update_readme():
     readme_content += "This is a collection of academic papers related to Saito research and development. "
     readme_content += "The papers are listed in chronological order, with the most recent first.\n\n"
     
-    # Add papers list
+    # Add whitepaper section
+    readme_content += "## Saito Whitepaper\n\n"
+    if whitepaper:
+        relative_path = whitepaper['pdf_path'].replace('\\', '/')
+        readme_content += f"- [{whitepaper['title']}]({relative_path})\n\n"
+    
+    # Add other papers section
+    readme_content += "## Mechanism Design and Economics\n\n"
     for paper in papers:
         relative_path = paper['pdf_path'].replace('\\', '/')
         readme_content += f"- [{paper['title']}]({relative_path})\n"
