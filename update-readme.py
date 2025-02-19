@@ -33,6 +33,19 @@ def get_earliest_file_date(folder):
                 print(f"Error getting date for {file_path}: {e}")
     return earliest_date
 
+def find_best_pdf(folder, pdf_files):
+    """Find the best PDF to use: matching folder name or newest."""
+    folder_name = os.path.basename(folder)
+    
+    # First try to find PDF matching folder name
+    for pdf in pdf_files:
+        pdf_name = os.path.splitext(os.path.basename(pdf))[0]
+        if pdf_name.lower() == folder_name.lower():
+            return pdf
+    
+    # If no match, return newest PDF
+    return max(pdf_files, key=os.path.getmtime)
+
 def update_readme():
     """Update README.md with paper titles and PDF links."""
     papers = []
@@ -51,10 +64,11 @@ def update_readme():
                 continue  # Skip if no multi-word title found
             
             earliest_date = get_earliest_file_date(folder)
+            best_pdf = find_best_pdf(folder, pdf_files)
             
             paper_info = {
                 'title': title,
-                'pdf_path': pdf_files[0],
+                'pdf_path': best_pdf,
                 'date': earliest_date
             }
             

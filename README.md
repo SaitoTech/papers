@@ -4,7 +4,7 @@ This is a collection of academic papers related to Saito research and developmen
 
 ## Saito Whitepaper
 
-- [Saito: A Big-Data Blockchain with Proof-of-Transactions](whitepaper/saito-test.pdf)
+- [Saito: A Big-Data Blockchain with Proof-of-Transactions](whitepaper/saito-whitepaper.v3.pdf)
 
 ## Mechanism Design and Economics
 
@@ -12,4 +12,4 @@ This is a collection of academic papers related to Saito research and developmen
 - [Achieving Incentive Compatibility with Collusion-Proof Equilibria](freerider/freerider.pdf)
 - [The Economics of Optimal Transaction Fee Mechanisms](fee/fee.pdf)
 - [Modifying Blockchain Utility Function to Include Heterogenous Goods](collusion/collusion.pdf)
-- [A Simple Proof of Sybil-Proof](sybil/A_Simple_Proof_of_Sybil_Proof_Lancashire-Parris_2023.pdf)
+- [A Simple Proof of Sybil-Proof](sybil/sybil.pdf)
