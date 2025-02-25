@@ -1,0 +1,73 @@
+\documentclass[oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{changepage}
+\usepackage{hyperref}
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usepackage{cite}
+
+\usepackage[bottom]{footmisc}
+
+
+\title{Modifying Utility Function to Include Heterogenous Goods}
+\author{
+  David Lancashire\\
+  \texttt{david.lancashire@gmail.com}\\
+}
+\begin{document}
+\maketitle 
+
+\subsection*{1.1 Your Utility Function}
+\vspace{0.5em}
+
+You have two kinds of utility:
+
+\begin{itemize}
+  \item \textbf{auction good:} the utility of the item auctioned
+  \item \textbf{collusion good:} the utility of collusion
+\end{itemize}
+\vspace{0.5em}
+
+Collusion shifts fee-allocation towards the collusion good.
+
+$$
+p_i = \left( p_{ag}^i - p_{shift}^i \right) + \left( p_{cg}^i + p_{shift}^i \right)
+$$
+
+$p_i$ is unchanged, so collusion is rational if the user considers the collusion-good offers a higher marginal rate of utility:
+
+
+Assume:
+
+\#1 the user truthfully values the auction good at bid $v_{i}$
+
+\#2 the user may value at least one collusion good more highly
+
+Truthful preference revelation requires complete preferece maps
+
+\#2 is part of the user preference map
+
+Your direct mechanism doesn't collect this information.
+
+\textbf{You do not have truthful preference revelation.}
+
+Myerson's Lemma requires truthful preference revelation.
+
+\pagebreak
+\end{document}
+

@@ -1,0 +1,145 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% LaTeX Template for AAMAS-2025 (based on sample-sigconf.tex)
+%%% Prepared by the AAMAS-2025 Program Chairs based on the version from AAMAS-2025. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Start your document with the \documentclass command.
+
+
+%%% == IMPORTANT ==
+%%% Use the first variant below for the final paper (including auithor information).
+%%% Use the second variant below to anonymize your submission (no authoir information shown).
+%%% For further information on anonymity and double-blind reviewing, 
+%%% please consult the call for paper information
+%%% https://aamas2025.org/index.php/conference/calls/submission-instructions-main-technical-track/
+
+%%%% For anonymized submission, use this
+
+\documentclass[sigconf,anonymous]{aamas} 
+
+%%%% For camera-ready, use this
+%%% \documentclass[sigconf]{aamas} 
+
+
+%%% Load required packages here (note that many are included already).
+
+\usepackage{balance} % for balancing columns on the final page
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{changepage}
+\usepackage{array} % for array environments
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\sankarshan}[1]{\textcolor{magenta}{#1}}
+\newcommand{\manisha}[1]{\textcolor{cyan}{#1}}
+\newcommand{\varul}[1]{\textcolor{red}{#1}}
+
+\setlength{\fboxsep}{10pt}  % Padding inside the box
+\setlength{\fboxrule}{1pt}  % Border thickness
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% AAMAS-2025 copyright block (do not change!)
+
+%%% \setcopyright{ifaamas}
+%%% \acmConference[AAMAS '25]{Proc.\@ of the 24th International Conference
+%%% on Autonomous Agents and Multiagent Systems (AAMAS 2025)}{May 19 -- 23, 2025}
+%%% {Detroit, Michigan, USA}{A.~El~Fallah~Seghrouchni, Y.~Vorobeychik, S.~Das, A.~Nowe (eds.)}
+%%% \copyrightyear{2025}
+%%% \acmYear{2025}
+%%% \acmDOI{}
+%%% \acmPrice{}
+%%% \acmISBN{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% == IMPORTANT ==
+%%% Use this command to specify your EasyChair submission number.
+%%% In anonymous mode, it will be printed on the first page.
+
+\acmSubmissionID{1330}
+%%% \newtheorem{Claim}{Claim}
+%%% \newtheorem{Remark}{Remark}
+%%% \newtheorem{example}{Example}
+%%% \newtheorem{assumption}{Assumption}
+
+% Routing Threshold-based Randomized Transaction Fee Mechanism
+\newcommand{\ourTFM}{\textsc{RTR-TFM}}
+\renewcommand{\paragraph}[1]{\smallskip\noindent\textbf{#1}}
+\newcommand{\ourOPT}{\texttt{OPT$_{\texttt{RTR}}$}}
+
+\title[Routing Threshold-based Randomized Transaction Fee Mechanism]{RTR-TFM: A Routing Threshold-based Randomized Transaction Fee Mechanism}
+
+\author{David Lancashire}
+\affiliation{
+  \institution{Proclus Technologies}
+  \city{Bangkok}
+  \country{Thailand}}
+\email{david@saito.tech}
+
+\begin{abstract}
+Transaction Fee Mechanism (TFM) design explores the strategic interaction between users and block producers in permissionless networks. Classic TFMs give block producers control over the transactions they include in blocks, creating problems preventing collusion and achieving a socially-optimal fee equilibrium. Given previous research showing existing TFMs only eliminate these problems under strictly-limited conditions, we introduce RTR-TFM, an indirect mechanism which achieves collusion-resilience and incentive compatibility through a novel routing-based technique that derives the right to chain-extension and network payouts separately from the efficiency competing nodes demonstrate at the collection and sharing of transaction fees. This paper introduces the mechanism and demonstrates its robustness against the informational problems that prevent incentive compatibility in other TFMs.
+\end{abstract}
+
+\keywords{Transaction Fee Mechanism, Leonid Hurwicz, Incentive Compatibility, Free-Riding, Collective Action Problems, Blockchain, Censorship Resistance, Collusion-Resilience, Distributed Systems}
+
+
+\begin{document}
+\pagestyle{fancy}
+
+\fancyhead{}
+\maketitle 
+
+\section{Introduction \label{sec::introduction}}
+\input{introduction}
+
+%%% \section{The Characteristics of TFMs and the Relationship with Goal Conflict \label{sec::characteristics}}
+%%% \input{characteristics}
+%%%
+%%% \section{The Economics of Eliminating Goal Conflict \label{sec::economics}}
+%%% \input{economics}
+%%%
+%%% \section{The TFM Literature in Computer Science \label{sec::distsys}}
+%%% \input{distsys}
+
+\section{A Solution \label{sec::solution}}
+\input{solution}
+
+\section{Incentive Compatibility \label{sec::compatibility}}
+\input{compatibility}
+
+\section{Conclusion \& Future Work \label{sec::conclusion}}
+\input{conclusion}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% The next two lines define, first, the bibliography style to be 
+%%% applied, and, second, the bibliography file to be used.
+\cleardoublepage
+\bibliographystyle{ACM-Reference-Format} 
+\bibliography{ref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

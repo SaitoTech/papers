@@ -1,0 +1,91 @@
+\documentclass[oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\geometry{legalpaper, portrait, margin=1in}
+\usepackage[parfill]{parskip}    			% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{abstract} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{changepage}
+\usepackage{hyperref}
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usepackage{cite}
+
+\usepackage[bottom]{footmisc}
+
+
+\title{Modifying Utility Function to Include Heterogenous Goods}
+\author{
+  David Lancashire\\
+  \texttt{david.lancashire@gmail.com}\\
+}
+\begin{document}
+\maketitle 
+
+\subsection*{1.1 Your Utility Function}
+\vspace{0.5em}
+
+You have two kinds of utility:
+
+\begin{itemize}
+  \item \textbf{auction good:} the utility of the item auctioned
+  \item \textbf{collusion good:} the utility of collusion
+\end{itemize}
+\vspace{0.5em}
+
+This makes your valuation $v_{i}$ the sum of two utility functions:
+
+$$
+v_{i} = U_{ag}^i + U_{cg}^i
+$$
+
+Collusion shifts fee-allocation towards the collusion good.
+
+$$
+p_i = \left( p_{ag}^i - p_{shift}^i \right) + \left( p_{cg}^i + p_{shift}^i \right)
+$$
+
+$p_i$ is unchanged, so collusion is rational if the collusion-good offers a higher marginal rate of utility:
+
+\[
+\lim_{x \to \infty} \frac{f_{ag}^i()}{f_{cg}^i()} =
+\begin{cases} 
+\infty & \text{if } f_{pub}(x) \text{ collusion irrational} \\
+C > 0 & \text{ indifferent } \\
+0 & \text{if } f_{priv}(x) \text{ collusion rational}
+\end{cases}
+\]
+
+
+\subsection*{1.2 Why is this a Problem?}
+
+Your paper claims the user truthfully values the auction good at valuation $v_{i} - p_{i}$. (p.13)
+
+But collusion is only rational if a non-auction good offers a higher marginal utility.
+
+And in that case -- according to the Revelation Principle -- the user has lied to you.
+
+They honestly prefer spending the fee on something else.
+
+\textbf{You do not have truthful preference revelation.}
+
+And Myerson's Lemma does not work without truthful preference revelation.
+
+
+\subsection*{1.3 An Informational Problem!}
+
+The social choice rule you need to implement to achieve incentive compatibility with a collusion-proof equilibrium is \textit{pareto optimal} as it is only on the "utility possibilities frontier" that the marginal utility of every good is aligned with its marginal cost (Samuelson, 1954). High-dimensional preference revelation is needed to successfully implement this social choice rule (Hurwicz, 1973) which is why the VCG auction bid does not and canot constitute truthful preference revelation in this context -- it is not the private information users are relying on to develop their preference maps etc. etc..
+
+\pagebreak
+\end{document}
+
