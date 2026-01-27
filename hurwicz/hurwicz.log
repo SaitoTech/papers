@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 03:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 06:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -731,40 +731,56 @@ l ex-e-cu-tion op-por-tu-ni-ties and global
 [24]
 
 [25]
-Underfull \hbox (badness 1107) in paragraph at lines 1337--1340
-[]\T1/lmr/m/n/10.95 Attar, A. (2021). Pri-vate dis-clo-sures. SSRN Work-ing Pa-
-per No.
+Overfull \hbox (19.29951pt too wide) in paragraph at lines 1269--1275
+\T1/lmr/m/n/10.95 The mech-a-nisms stud-ied in this pa-per are in-ten-tion-ally
+ \T1/lmr/m/it/10.95 non-revelation-equivalent\T1/lmr/m/n/10.95 .
  []
 
 
 
 [26]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-400.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 
 [27]
 
 [28]
+Underfull \hbox (badness 1107) in paragraph at lines 1434--1437
+[]\T1/lmr/m/n/10.95 Attar, A. (2021). Pri-vate dis-clo-sures. SSRN Work-ing Pa-
+per No.
+ []
 
-[29] (./hurwicz.aux)
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+497.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+
+[29]
+
+[30]
+
+[31] (./hurwicz.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `hurwicz.out' has not changed.
-(rerunfilecheck)             Checksum: 1E007B05EA6DBE12BC638851B715AAF5;4648.
+
+
+Package rerunfilecheck Warning: File `hurwicz.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `hurwicz.out':
+(rerunfilecheck)             Before: 1E007B05EA6DBE12BC638851B715AAF5;4648
+(rerunfilecheck)             After:  922A0A5480C124773CC0612A3024B9AA;6142.
  ) 
 Here is how much of TeX's memory you used:
- 13614 strings out of 473190
- 214579 string characters out of 5715800
+ 13628 strings out of 473190
+ 214793 string characters out of 5715800
  629497 words of memory out of 5000000
- 36558 multiletter control sequences out of 15000+600000
+ 36562 multiletter control sequences out of 15000+600000
  637384 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,715b,612s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,715b,610s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/tex
@@ -780,10 +796,10 @@ lic/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr
 i9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></u
 sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/te
 xlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on hurwicz.pdf (29 pages, 491050 bytes).
+Output written on hurwicz.pdf (31 pages, 496187 bytes).
 PDF statistics:
- 428 PDF objects out of 1000 (max. 8388607)
- 347 compressed objects within 4 object streams
- 104 named destinations out of 1000 (max. 500000)
+ 447 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 114 named destinations out of 1000 (max. 500000)
  194 words of extra memory for PDF output out of 10000 (max. 10000000)
 
