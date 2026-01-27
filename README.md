@@ -8,8 +8,8 @@ This is a collection of academic papers related to Saito research and developmen
 
 ## Mechanism Design and Economics
 
-- [Modifying Utility Function to Include Heterogenous Goods](utility/utility.pdf)
-- [Achieving Incentive Compatibility with Collusion-Proof Equilibria](freerider/freerider.pdf)
-- [The Economics of Optimal Transaction Fee Mechanisms](fee/fee.pdf)
-- [Modifying Blockchain Utility Function to Include Heterogenous Goods](collusion/collusion.pdf)
+- [Beyond Hurwics: Incentive Compatibility under Informational Decentralization](/hurwicz/hurwicz.tex)
 - [A Simple Proof of Sybil-Proof](sybil/sybil.pdf)
+
+
+

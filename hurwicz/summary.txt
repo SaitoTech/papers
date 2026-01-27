@@ -1,0 +1,236 @@
+
+Consensus mechanisms operate in environments where agents disagree over the value of acting first and where agreement must be sustained over time without centralized enforcement. In such settings, learning itself becomes a strategic act: once agents can costlessly observe which actions are profitable, it is individually rational to revise proposals and reopen previously settled decisions, causing disagreement to persist even under full rationality. Classical mechanism design resolves this problem by relying on exogenous enforcement or conditioning, while distributed consensus research typically assumes atomic actions and costless conditioning.
+
+This paper reframes consensus mechanisms as circular, self-referential processes that shape feasible paths of action over time under informational and cost constraints, rather than as static mappings from reports to outcomes. From this perspective, the central challenge is not preference revelation, but the endogenous generation of constraints that impose costs on revision without becoming strategically actionable themselves. We show that this challenge cannot be resolved by direct, revelation-equivalent mechanisms, but can be resolved by a class of indirect mechanisms that are not reducible under the Revelation Principle.
+
+The key mechanism is privacy arising from action rather than reports: when preferences are revealed through costly actions, a single act may encode multiple indistinguishable strategic motives, limiting agents’ ability to free-ride on learning and forcing deviations to be carried through time under uncertainty. This structure allows costs to be paid in a numéraire external to the mechanism’s informational interface while remaining endogenous to its operation.
+
+We develop a unifying invariant for informationally decentralized systems: any mechanism that sustains agreement over time without exogenous authority must generate at least one cost-bearing variable that agents cannot condition on or strategically manipulate within the mechanism itself. This principle clarifies the scope of existing impossibility results in both economics and computer science and identifies a broader design space for permissionless consensus mechanisms.
+
+
+STRUCTURE
+
+1. Circular Mechanisms and Time
+
+consensus is self-referential
+
+state evolves based on previous state
+
+costs must accumulate over time
+
+costs must be impossible to unwind by strategic action
+
+this immediately creates the need for unactionable constraints
+
+LITERATURE REVIEW: * direct mechanisms This sets up the entire remainder of the paper beautifully.
+
+Suggestion:Add one explicit line:“Circularity is not optional in consensus; it is structural.”This anchors the reader.
+
+2. Endogenous Unactionability
+
+once we lose the trusted auctioneer, all enforcement must be internal
+
+therefore constraints must be internal, or projected into the environment as public randomness
+
+therefore constraints must be endogenously created
+
+but these constraints must still be unactionable
+
+therefore endogenous unactionability is needed
+
+This follows immediately from circularity and explains why direct mechanisms fail to model time unless they add exogenous randomness.
+
+3. Non-Myerson Layers
+
+Hurwicz and classic mechanism design permits signals / actions / traces in environment, etc. not just truth-telling.
+
+It is possible to preceding a direct mechanism with a process in which action-in-mechanism generates such of unactionable information -- observed as traces in the environment -- routing can be used as an example, citing Renou & Tomala to show it cannot be reduced to a direct mechanism even in theory
+
+Many properties that direct mechanisms take for granted (enforceability, etc.) can also assume to be the outputs of those layers. Participants who observe the outputs of the direct mechanism and take action which changes the configuration of the game. These are viewed as properties, but they are really exogenous constraints that are produced by a meta-game.
+
+We can model both processes as the combination of a Non-Myerson Layer with a Myerson Layer. We observe that this has always been possible with purely direct mechanisms, but the Revelation Principle collapses Myerson Layer constructs into a single Myerson Layer, so there is no real point to thinking about constructs unless they include at least one Non-Myerson Layer.
+
+
+
+4. Explaining Impossibility
+
+start with impossibility results in computer science (Bracha & Toueg). show that the "atomic steps" imply direct mechanisms. observe that this is not noticed because they are treated. observe that the randomness required can be seen as a Myerson Public Variable being projected into the design, here as random appearance of "attacker" / "honest" types whose determination of exogenous to the mechanism and unactionable.
+
+note the impossibility results assume away the existence of mechanisms that cannot be reduced to this structure, such as Renou & Tomala and other forms of indirect even if action-in-mechanism is possible.  the fact that computers act programmatically in response to known inputs is what blocks conversion.
+
+"costless speech" in CS mirrors economics. return to Hurwicz and show that arguments about incentive compatibility requiring truth-telling assume costless symmetrical speech.
+
+transition back to computer science with the TFM literature and arguments about incentive compatibility within consensus mechanisms. show that the assumptions require direct mechanisms, sometimes by direct assumption and sometimes . the impossibility results are importing the direct mechanism framework by importing its assumptions in the form of structural parameters
+
+return to economics on distributed consensus, and show that their impossibility results import direct mechanisms indirectly, by assuming that the technical limitations in computer science papers are techno-structural limitations on consensus mechanisms, not products of the assumptions that have gone into modelling them as direct mechanisms (Budish, Leshno, etc.)
+
+4. Leap from the Lion's Mouth
+
+This leaves us with two categories in which we know that mechanisms can exist and be stable:
+
+costless , static , direct (Myerson Layers)
+
+costly , dynamic , indirect (Non-Myerson)
+
+We have already demonstrated that direct mechanisms cannot impose costs on action-over-time and must leverage exogenous public randomness in some fashion in order to induce directional change over time. We are in the process of demonstrating that Non-Myerson layers can exist and impose costs on deviations over time when the choice involves taking arbitrage on a position that may move against you re: Becker.
+
+Explain the difficulty of moving conceptually from one to the other. How "stepping stones" has simply led to further impossibility results, since incremental shifts as impossible, and this is taken to assume that any mechanisms making those trade-offs are unimplementable.
+
+Link to CS literature review here -- show specific proposals result in known failures on our (0,0,0) vs (1,1,1) quadrant.
+
+Observe the occluded nature of the action in the Non-Myerson Layer from the perspective of the actors in the Myerson Layer. Cite routing work explicitly and show that the actions that motivate behavior in these mechanisms leave traces in the environment which show up randomly over time in ways that occlude the underlying motivations that. While learning is possible, it is not easy.
+
+
+
+5. Privacy Walls
+
+This demonstrates a property that composite mechanisms can have which non-composite mechanisms cannot. Actions-in-mechanism can result in players generating endogenously-observable information-in-environment whose determining factors cannot be directly understood by peering backwards, and can only be understood by examining how one's own behavior and choices ripple-forwards.
+
+Experimentation and learning becomes, but must now be done "in expectation" as players are necessarily acting in the space of the unknown. Their own behavior is now motivating choices that others are making whose casual logic is opaque to them. Players can still learn and estimate, but learning requires progressive estimation over time in a state of Knightian Uncertainty.
+
+we now define privacy walls
+
+in mechanisms with 1 privacy wall, learning is possible, as players observe how their strategic outputs become the inputs used in the next round. even if those inputs are masked by social aggregation, individuals can tease out how their individual strategies matter.
+
+in mechanisms 2 privacy walls, learning is harder as seeing your own outputs projected as random inputs to the next layer does not allow you to understanding how it is aggregated and transformed into inputs that affect your upstream layer.
+
+in mechanisms with 3 privacy walls there are always two unobservable conversions in which randomness can appear and prevent learning from ever being something that can be achieved in totallity. Instead, participants can make guesses about the directionality of the system, but those guesses are necessarily expectations made under Knightian Uncertainty.
+
+
+
+6. The Revelation Principle
+
+The Revelation Principle is itself a mapping between inputs and outcomes. The fact that some mappings work and some mappings do not work shows us that informational differences must exist which are relevant to the convertibility of the mechanism itself.
+
+exogenous randomness
+
+endogenous cost, behind privacy wall
+
+This provides the theoretical basis for understanding the necessity of Non-Myerson Layers and Privacy Walls for incentive compatibility under conditions of informational decentralization.
+
+Exogenous Randomness cannot be the cause of the difference, since if it were, we could model it as the projection of another Non-Myerson Layer and import that projection into another mechanism.
+
+Endogenous cost is only possible if participants cannot know the price that is being paid. This is only possible with Non-Myerson Layers. While we do not know, there is at least one approach that is known to work.
+
+
+
+7. Time as Cost-Sink
+
+This section formalizes time as the fundamental cost-sink that enables incentive compatibility in non-Myerson mechanisms.
+
+In all layers of the composite mechanism, agents face arbitrage decisions against time. Following Becker, time functions as a universal, shadow-priced constraint: it is scarce, irreversible, and cannot be transferred or rebated. Crucially, time costs are incurred before their full consequences are known, and therefore cannot be perfectly optimized ex ante.
+
+Unlike monetary transfers in direct mechanisms, time costs are:
+
+front-loaded rather than settled ex post,
+
+paid under uncertainty rather than against known prices,
+
+individualized rather than centrally accounted.
+
+This immediately introduces randomness into the mechanism—not as an exogenous draw, but as an endogenous consequence of delayed resolution. Outcomes, congestion, inclusion, propagation, and continuation payoffs are only revealed over time, making the true price of an action unknowable at the moment it is taken.
+
+Observed outcomes can reflect strategic decisions made recently, previously, or attempts to maximize strategic flexibility in the future. 
+
+As a result, rationality in these mechanisms is necessarily expectational rather than outcome-based. Agents choose actions that are optimal in expectation over future states, knowing that realized costs may differ. This is a defining feature of dynamic indirect mechanisms and cannot be replicated by direct revelation, where transfers are conditioned on known reports.
+
+Time-as-cost also explains why privacy walls arise naturally. When costs are paid over time, neither the acting agent nor observers can immediately infer the magnitude or direction of the trade being made. Waiting is required to tease out whether observed changes are a result of changes in strategic behavior or something else, since all traces are noisy, delayed, and aggregated. The mechanism multiples the informational opacity of unknown causal forces with the informational opacity of time-as-cost-of-learning.
+
+This property is impossible in direct mechanisms with explicit type reports. Any mechanism that conditions outcomes directly on reported types permits learning and backward inference: prices, allocations, and payoffs reveal the marginal trade-offs being made. Privacy walls can only be simulated in such systems by injecting public randomness or restricting observability exogenously. Or by imposing structural constraints which thwart learning.
+
+By contrast, when time is the cost-sink, uncertainty is structural. The mechanism does not need to hide information; information simply does not yet exist. This is the sense in which time converts strategic deviation into a gamble whose downside cannot be hedged or precisely estimated.
+
+We can now see why non-Myerson layers are capable of sustaining incentive compatibility where direct mechanisms fail. They transform deviations from costless misreports into positions that must be carried through time, exposing agents to adverse movement, congestion, and opportunity loss. Deviations are disciplined not by punishment, but by exposure.
+
+This resolves the apparent puzzle identified earlier. The difference between collapsible and non-collapsible mechanisms is not randomness per se, but whether costs are realized synchronously with choice or only through temporal unfolding. Only the latter can support endogenous unactionability.
+
+Now this section finally lands where it should.
+
+
+
+Flow:
+
+In non-circular mechanisms, external layers “precede” the mechanism.
+
+In circular mechanisms, these layers must be internalized.
+
+This creates a composite three-layer structure.
+
+These layers generate endogenous unactionability.
+
+They allow the mechanism to behave as if some variables were exogenous.
+
+This aligns beautifully.
+
+Your instinct to place this after RP is correct — because the reader now sees:
+
+RP collapses indirect → direct
+
+but consensus requires indirect components that cannot collapse
+
+therefore composite non-Myerson layers are necessary
+
+
+
+This is elegant.
+
+
+
+8. From Risk to Uncertainty
+
+This section completes the transition from classical risk-based reasoning to Knightian uncertainty as a structural feature of informationally decentralized mechanisms.
+
+In standard mechanism design, uncertainty is modeled as risk: agents assign probabilities to states, optimize expected utility, and update beliefs as information is revealed. This framework presumes a well-defined state space, common priors (or at least mutually intelligible priors), and a topology in which learning converges.
+
+Consensus mechanisms violate each of these assumptions. Information is decentralized, arrival is asynchronous, and strategic actions alter the informational environment itself. Agents are not merely uncertain about outcomes; they are uncertain about which contingencies are even relevant. This is Knightian uncertainty in its original sense: uncertainty about the structure of the world, not just its realization.
+
+Informational decentralization induces a topology rather than a probability distribution. Different agents occupy different informational positions, separated by latency, routing paths, observation sets, and strategic commitments made at different times. These positions are not linearly ordered and cannot be summarized by a single belief vector. Learning therefore does not proceed by Bayesian updating alone, but by movement through this informational topology over time.
+
+This topology creates persistent gradients of expectation. At any moment, agents disagree not only about values, but about directions: whether congestion is rising or falling, whether inclusion pressure is tightening or loosening, whether deviations are becoming more or less costly. These gradients generate arbitrage opportunities, but arbitrage under uncertainty is fundamentally different from arbitrage under risk.
+
+Under risk, arbitrage can be priced, hedged, and neutralized. Under Knightian uncertainty, arbitrage is speculative exposure. Acting on it requires committing to a position whose payoff distribution is unknown and whose downside cannot be bounded ex ante. This converts informational differences into real economic costs through time, rather than instantaneous transfers.
+
+This observation mirrors Keynes’s use of Knightian uncertainty to break classical equilibrium reasoning. Just as Keynes argued that investment decisions cannot be reduced to expected returns under known distributions, we argue that strategic deviations in consensus cannot be reduced to expected gains under known incentive constraints. The uncertainty is structural, not epistemic.
+
+Hurwicz’s introduction of topology into mechanism design anticipated this distinction but stopped short of embracing its implications. Once topology is taken seriously—not as a technical artifact but as a description of lived informational lag—it becomes clear why equilibrium selection and stability cannot rely on pointwise incentive constraints alone.
+
+We can describe this condition as living in the lag. Every agent acts based on delayed, partial, and strategically distorted observations of others’ actions. By the time an action’s consequences are visible, the environment has already moved. This lag prevents full learning, prevents perfect inference, and prevents collapse into a static equilibrium concept.
+
+Crucially, this does not make coordination impossible. On the contrary, it makes coordination possible without direct revelation. Consensus emerges not because agents agree on a common model of the world, but because disagreements create gradients that incentivize costly experimentation. Over time, only strategies that are robust to deep uncertainty survive.
+
+This reframes incentive compatibility. Rather than requiring that truthful reporting dominate all deviations at every history, we require that deviations expose agents to uncertainty they cannot price or control. Stability arises because the mechanism converts informational disagreement into temporal exposure.
+
+In this sense, Knightian uncertainty is not a bug but a resource. It is the mechanism by which non-Myerson layers can discipline behavior without enforcement, punishment, or revelation. This allows for these properties to exist in self-referential mechanisms, which allows for incentive compatibility in consensus mechanisms. The next section explores the implications of this perspective across consensus protocols and distributed systems more broadly.
+
+9. Implications: What the Framework Explains
+
+This section demonstrates that the preceding framework is not merely internally consistent, but explanatorily powerful. Once non-Myerson layers, endogenous unactionability, time-as-cost, privacy walls, and Knightian uncertainty are admitted as structural features, a wide range of empirical and theoretical puzzles become ordinary consequences.
+
+First, consider proof-of-work difficulty stability. PoW systems remain remarkably stable despite extreme variance in demand and hashpower. In the present framework, this stability follows from front-loaded time and capital costs borne under uncertainty. Miners who deviate from equilibrium strategies must carry positions through time while exposed to congestion, difficulty adjustment, and opportunity cost. Difficulty is not a price; it is a delayed reflection of accumulated exposure. Classical models that treat PoW as a static contest miss this dynamic disciplining effect.
+
+By contrast, proof-of-stake instability is no longer mysterious. When rewards and penalties collapse into a single, transparent layer with low temporal exposure, deviations become hedgeable and reversible. Validators can condition behavior on near-complete information about rewards, coordination, and future states. The absence of deep privacy walls and front-loaded uncertainty removes the cost-sink that would otherwise discipline deviation. What appears as a governance or coordination problem is, in fact, a layer-collapse problem.
+
+Miner extractable value (MEV) is likewise reinterpreted. MEV arises when private information leaks across insufficient privacy walls, allowing agents to infer future ordering or inclusion with enough precision to price deviations. In this view, MEV is not an anomaly but a diagnostic: it signals that the mechanism has failed to maintain opacity between layers that should remain informationally separated. Attempts to “fix” MEV by adding rules or penalties address symptoms rather than the underlying structural leak.
+
+Fee volatility and congestion spikes admit a similar explanation. These are not merely demand shocks but manifestations of expectation gradients under Knightian uncertainty. When agents disagree about future inclusion pressure or propagation conditions, they take speculative positions through bids, routing effort, or delay. Prices spike not because information is revealed, but because information remains unresolved and agents pay to hedge against adverse movement.
+
+Classical impossibility results can now be reclassified. Results that prove impossibility under assumptions of atomic steps, costless messages, or synchronous observability are best understood as statements about fully collapsible mechanisms. They do not apply to composite mechanisms with non-Myerson layers that impose endogenous costs over time. What was previously interpreted as a fundamental limit is revealed as an artifact of modeling circular systems as acyclic games.
+
+Finally, the framework explains why many distributed protocols appear to “almost work.” Such protocols often introduce partial costs, partial delays, or partial opacity, but allow these features to be arbitraged away through auxiliary channels or rapid learning. They sit between collapsible and non-collapsible regimes. Their failures are not accidental; they arise because one missing privacy wall or one prematurely revealed signal restores direct-mechanism reasoning and reopens profitable deviations.
+
+Taken together, these examples show that the theory does not merely accommodate consensus mechanisms—it organizes them. It provides a language for diagnosing stability, failure, and trade-offs across protocols that were previously analyzed in isolation.
+
+Conclusion
+
+This paper has argued that incentive compatibility in self-referential, decentralized systems cannot be understood through the lens of single-layer direct mechanisms. The Revelation Principle, while powerful in static settings with a trusted auctioneer, collapses precisely the structures that consensus mechanisms require to function.
+
+By introducing non-Myerson layers, we recover a class of mechanisms in which costs are imposed endogenously, actions unfold over time, and deviations are disciplined through exposure rather than punishment. Time emerges as the fundamental cost-sink, privacy walls arise naturally, and Knightian uncertainty becomes a resource rather than an obstacle.
+
+The central claim is not that direct mechanisms are wrong, but that they are incomplete. In circular environments where today’s actions shape tomorrow’s game, incentive compatibility is a property of the entire layered process, not of isolated reporting stages. Attempting to collapse such processes into a single layer erases the very forces that sustain equilibrium.
+
+This perspective reframes a wide range of results in both economics and computer science. Impossibility theorems are revealed as conditional statements about collapsible models, while successful protocols are understood as implementations of costly, indirect, time-extended mechanisms. The gap between theory and practice narrows once the correct objects are studied.
+
+More broadly, the analysis suggests that mechanism design must expand its vocabulary. Endogenous cost, informational topology, and non-collapsible layers are not edge cases but central tools for designing systems without trusted intermediaries. Consensus mechanisms make this necessity explicit, but the lesson extends to any environment where enforcement, observability, and commitment must be generated from within the system itself.
+
+In such environments, incentive compatibility is not achieved by eliciting truth, but by shaping the paths agents must walk through time.
+
