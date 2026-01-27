@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  27 JAN 2026 23:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 03:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -431,7 +431,7 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count311
 \l__pdf_internal_box=\box56
 )
-No file hurwicz.aux.
+(./hurwicz.aux)
 \openout1 = `hurwicz.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
@@ -452,6 +452,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 99.
 LaTeX Font Info:    ... okay on input line 99.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 99.
 LaTeX Font Info:    ... okay on input line 99.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -522,6 +523,8 @@ Package color Info: Driver file: pdftex.def on input line 149.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
 Package hyperref Info: Link coloring ON on input line 99.
+
+(./hurwicz.out) (./hurwicz.out)
 \@outlinefile=\write3
 \openout3 = `hurwicz.out'.
 
@@ -569,6 +572,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 113.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 139.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 139.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 139.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 139.
 
 
 [1
@@ -583,52 +594,36 @@ al/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
 [4]
 
 [5]
-
-LaTeX Warning: Reference `fig:myerson-nonmyerson' on page 6 undefined on input 
-line 356.
-
-<images/section4-1.png, id=35, 307.1475pt x 200.75pt>
+<images/section4-1.png, id=155, 307.1475pt x 200.75pt>
 File: images/section4-1.png Graphic file (type png)
 <use images/section4-1.png>
-Package pdftex.def Info: images/section4-1.png  used on input line 360.
+Package pdftex.def Info: images/section4-1.png  used on input line 357.
 (pdftex.def)             Requested size: 289.08112pt x 188.95313pt.
-<images/section4-2.png, id=37, 306.14375pt x 197.73875pt>
+<images/section4-2.png, id=157, 306.14375pt x 197.73875pt>
 File: images/section4-2.png Graphic file (type png)
 <use images/section4-2.png>
-Package pdftex.def Info: images/section4-2.png  used on input line 378.
+Package pdftex.def Info: images/section4-2.png  used on input line 375.
 (pdftex.def)             Requested size: 289.08112pt x 186.72833pt.
 
 
 [6]
-
-LaTeX Warning: Reference `fig:nonmyerson-myerson' on page 7 undefined on input 
-line 395.
-
-
-LaTeX Warning: Reference `fig:myerson-construct' on page 7 undefined on input l
-ine 400.
-
-<images/section4-3.png, id=42, 570.13pt x 278.03876pt>
+<images/section4-3.png, id=165, 570.13pt x 278.03876pt>
 File: images/section4-3.png Graphic file (type png)
 <use images/section4-3.png>
-Package pdftex.def Info: images/section4-3.png  used on input line 404.
+Package pdftex.def Info: images/section4-3.png  used on input line 401.
 (pdftex.def)             Requested size: 289.08112pt x 140.97484pt.
-
-LaTeX Warning: Reference `fig:nonmyerson-construct' on page 7 undefined on inpu
-t line 417.
-
-<images/section4-4.png, id=43, 572.1375pt x 283.0575pt>
+<images/section4-4.png, id=167, 572.1375pt x 283.0575pt>
 File: images/section4-4.png Graphic file (type png)
 <use images/section4-4.png>
-Package pdftex.def Info: images/section4-4.png  used on input line 421.
+Package pdftex.def Info: images/section4-4.png  used on input line 418.
 (pdftex.def)             Requested size: 289.08112pt x 143.01848pt.
 
 
 [7 <./images/section4-1.png>]
-<images/section5-1.png, id=51, 538.01pt x 287.0725pt>
+<images/section5-1.png, id=177, 538.01pt x 287.0725pt>
 File: images/section5-1.png Graphic file (type png)
 <use images/section5-1.png>
-Package pdftex.def Info: images/section5-1.png  used on input line 453.
+Package pdftex.def Info: images/section5-1.png  used on input line 448.
 (pdftex.def)             Requested size: 289.08112pt x 154.25027pt.
 
 
@@ -637,7 +632,13 @@ Package pdftex.def Info: images/section5-1.png  used on input line 453.
 [9 <./images/section4-3.png>]
 
 [10 <./images/section4-4.png>]
-Overfull \hbox (1.24pt too wide) in paragraph at lines 547--552
+Overfull \hbox (2.04033pt too wide) in paragraph at lines 535--539
+[]\T1/lmr/m/n/10.95 Yet these se-lec-tive dis-clo-sure strate-gies ex-ist only 
+in non-revelation-equivalent
+ []
+
+
+Overfull \hbox (1.24pt too wide) in paragraph at lines 544--549
 \T1/lmr/m/n/10.95 Throughout this pa-per, we use \T1/lmr/m/it/10.95 un-cer-tain
 ty \T1/lmr/m/n/10.95 in the sense ar-tic-u-lated by Knight,
  []
@@ -648,10 +649,9 @@ ty \T1/lmr/m/n/10.95 in the sense ar-tic-u-lated by Knight,
 
 [12{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/l
 ocal/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texli
-ve/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2025/texmf-
-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+ve/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
 
-[13]
+[13{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [14]
 
@@ -666,121 +666,58 @@ dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 [19]
 
 [20]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 1022.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 1022.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 1022.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1026--1026
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1022
 []\T1/lmr/bx/n/10 Revelation-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1026--1026
-\T1/lmr/bx/n/10 Equivalent or
+Underfull \hbox (badness 10000) in paragraph at lines 1030--1031
+[]\T1/lmr/m/n/10 One-shot vot-ing games
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1029--1030
-[]\T1/lmr/m/n/10 Static direct-revelation
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1029--1030
-\T1/lmr/m/n/10 mech-a-nisms (e.g. VCG,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1031--1032
-[]\T1/lmr/m/n/10 Revelation-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1034--1035
-[]\T1/lmr/m/n/10 One-shot vot-ing rules
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1034--1035
+Underfull \hbox (badness 10000) in paragraph at lines 1030--1031
 \T1/lmr/m/n/10 (Ar-row, Gibbard--
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1036--1037
-[]\T1/lmr/m/n/10 Revelation-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1039--1040
+Underfull \hbox (badness 10000) in paragraph at lines 1035--1036
 []\T1/lmr/m/n/10 Repeated di-rect mech-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1039--1040
+Underfull \hbox (badness 10000) in paragraph at lines 1035--1036
 \T1/lmr/m/n/10 a-nisms with Bayesian
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1041--1042
-[]\T1/lmr/m/n/10 Revelation-
- []
-
-
-Underfull \hbox (badness 7133) in paragraph at lines 1044--1045
-[]\T1/lmr/m/n/10 Mechanisms with pub-lic
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1046--1047
-[]\T1/lmr/m/n/10 Revelation-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1049--1050
-[]\T1/lmr/m/n/10 Posted-price mech-a-nisms
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1051--1052
-[]\T1/lmr/m/n/10 Revelation-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1064--1065
+Underfull \hbox (badness 10000) in paragraph at lines 1060--1061
 []\T1/lmr/m/n/10 Contract rene-go-ti-a-tion
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 1067--1068
+Underfull \hbox (badness 2753) in paragraph at lines 1063--1064
 \T1/lmr/m/n/10 en-doge-nous when rene-go-ti-a-tion costs
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1074--1075
+Underfull \hbox (badness 10000) in paragraph at lines 1070--1071
 []\T1/lmr/m/n/10 Gossip-based broad-cast
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1084--1085
-[]\T1/lmr/m/n/10 Proof-of-Stake con-sen-sus
- []
-
-
-Overfull \hbox (136.20314pt too wide) in paragraph at lines 1022--1096
+Overfull \hbox (136.20314pt too wide) in paragraph at lines 1018--1092
  [][] 
  []
 
-
-
-[21]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-117.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
+113.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (4.94704pt too wide) in paragraph at lines 1138--1141
+Overfull \hbox (4.94704pt too wide) in paragraph at lines 1134--1137
 []\T1/lmr/m/it/10.95 Arbitrages: \T1/lmr/m/n/10.95 Dif-fer-ences be-tween lo-ca
 l ex-e-cu-tion op-por-tu-ni-ties and global
  []
@@ -794,7 +731,7 @@ l ex-e-cu-tion op-por-tu-ni-ties and global
 [24]
 
 [25]
-Underfull \hbox (badness 1107) in paragraph at lines 1341--1344
+Underfull \hbox (badness 1107) in paragraph at lines 1337--1340
 []\T1/lmr/m/n/10.95 Attar, A. (2021). Pri-vate dis-clo-sures. SSRN Work-ing Pa-
 per No.
  []
@@ -803,42 +740,31 @@ per No.
 
 [26]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-394.
+400.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
 [27]
 
-[28] (./hurwicz.aux)
+[28]
+
+[29] (./hurwicz.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `hurwicz.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `hurwicz.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  341658AA2A456F1856F7B21FBF196061;4801.
+Package rerunfilecheck Info: File `hurwicz.out' has not changed.
+(rerunfilecheck)             Checksum: 1E007B05EA6DBE12BC638851B715AAF5;4648.
  ) 
 Here is how much of TeX's memory you used:
- 13562 strings out of 473190
- 213912 string characters out of 5715800
- 627694 words of memory out of 5000000
- 36523 multiletter control sequences out of 15000+600000
- 623118 words of font info for 87 fonts, out of 8000000 for 9000
+ 13614 strings out of 473190
+ 214579 string characters out of 5715800
+ 629497 words of memory out of 5000000
+ 36558 multiletter control sequences out of 15000+600000
+ 637384 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,715b,610s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,715b,612s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/tex
@@ -846,15 +772,18 @@ mf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fo
 nts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/p
 ublic/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lm
 r12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></u
-sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/
-texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist
-/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
-1/public/lm/lmtt10.pfb>
-Output written on hurwicz.pdf (28 pages, 405210 bytes).
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/tex
+live/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/te
+xmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fon
+ts/type1/public/lm/lmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/pub
+lic/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr
+i9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/te
+xlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on hurwicz.pdf (29 pages, 491050 bytes).
 PDF statistics:
- 308 PDF objects out of 1000 (max. 8388607)
- 237 compressed objects within 3 object streams
- 99 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 428 PDF objects out of 1000 (max. 8388607)
+ 347 compressed objects within 4 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 194 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -131,12 +131,12 @@ is needed --- Shiva --- to stabilize the system.
 Hurwicz echoes this structural constraint in his foundational papers on
 implementation theory, arguing that whenever participants can mislead others
 about their preferences, incentive compatibility requires an external authority
-to punish deviations. Hurwicz saw his claim as a fundamental impossibility
+to punish deviations. Hurwicz saw this as a fundamental impossibility
 result, and concluded it made incentive compatibility impossible in all
-informationally decentralized systems lacking such authorities.
+informationally decentralized systems lacking authorities to enforce transfers.
 
 \begin{quote}\small
-These results show that the difficulty is due not to our lack of inventiveness, but to a fundamental conflict among such mechanism attributes as the optimality of equilibria, incentive-compatibility of the rules, and the requirements of informational decentralization.
+These results show that the difficulty is due not to our lack of inventiveness, but to a fundamental conflict among such mechanism attributes as the optimality of equilibria, incentive-compatibility of the rules, and the requirements of informational decentralization.\footnote{Hurwicz, L. (1972). On the design of mechanisms for resource allocation. \emph{American Economic Review Papers \& Proceedings}, 62(2), 1-30.}
 \end{quote}
 
 Designers have accepted these arguments rather than confronting them directly.
@@ -154,12 +154,12 @@ equilibrium strategically must bear exposure to uncertainty over time, and this 
 cannot be neutralized from within the mechanism. These mechanisms lie just
 beyond the boundary identified by Hurwicz.
 
-This paper explains how such a solution is possible. It starts with theory: why
+This paper explains how such solutions are possible. It starts with theory: why
 circular mechanisms are unstable, and how designers stabilize them by
 introducing enforcement costs that do not respond to strategic play. It then
 shows it is possible to make these constraints responsive to play without making
 deviation rational --- through design techniques which force agents to pay
-front-loaded costs under uncertainty to propose changes that will adjust
+front-loaded costs under uncertainty when proposing changes that will shift
 equilibrium security levels in the mechanism. This permits incentive
 compatibility to emerge in ways that are unimplementable in direct or
 revelation-equivalent mechanisms.
@@ -170,31 +170,33 @@ revelation-equivalent mechanisms.
 % --------------------
 % Section 2
 % --------------------
-\section{The Special Class of Circular Mechanisms}
+\section{A Special Class of Circular Mechanisms}
 
 In the canonical definition provided by Hurwicz (1972), a mechanism is simply a
 function that maps actions or messages to outcomes. Whether a mechanism is
 incentive compatible depends on whether its outcomes implement a social choice
-rule as defined by Arrow (1951), and later developed by Gibbard and Satterthwaite
+rule as defined by Arrow (1951), and later Gibbard and Satterthwaite
 (1973, 1975) and Maskin (1977).
 
 It would take a decade before Myerson showed that under certain conditions
 indirect mechanisms can be reduced to direct ones without loss of generality
-(1981). The sheer power of his Revelation Principle would later induce many to
+(1981)\cite{Myerson1981}
+. The sheer power of his Revelation Principle would later induce many to
 see indirect mechanisms as essentially interchangeable with direct ones. But in
 the early 1970s, this suspicion had yet to take root, and Hurwicz framed his
 definitions to cover games in both classes. Nor did he presuppose any particular
-environment or specify how messages are communicated.
+environment or specify how messages be communicated.
 
 Rather, Hurwicz defined a mechanism as incentive compatible when, given the rules of the
 game, each agent finds it optimal to act in a way that implements the intended
 social choice rule. The circular mechanisms studied here fall squarely within
-this definition. They map actions into outcomes. What distinguishes them from other mechanisms is a structural property: they operate in rounds with the results of early stages reappearing as constraints on later play.
+this definition. They map actions into outcomes. What distinguishes them from other mechanisms 
+is a structural property: they operate in rounds with the results of early stages reappearing as constraints on later play.
 
-For clarity, circular mechanisms should not be confused with repeated games that
+For this reason, circular mechanisms should not be confused with repeated games that
 extend over time. While circular mechanisms share similarities with such games,
-what makes them uniquely vulnerable is that their own enforcement mechanism—the
-constraints that impose costs on deviations—can be strategically manipulated
+what makes them uniquely vulnerable is that their own enforcement penalities -- the
+costs that punish deviations -- can be strategically manipulated
 within the game. Agents who learn how the game handles enforcement can
 deliberately weaken it to enable deviation at lower cost.
 
@@ -205,46 +207,43 @@ routing, and consensus mechanisms in computer science. Appendix~A provides a
 representative taxonomy.
 
 Existing research covers these games as well. Because their incentives are
-inherently path-dependent, players evaluate strategies over histories rather
-than in isolation (Abreu, Pearce \& Stacchetti; Fudenberg \& Levine; Fudenberg \&
-Maskin). Players may also reassess earlier choices in a phenomenon known as
+path-dependent, we know players evaluate strategies over histories rather
+than in isolation (Abreu, Pearce \& Stacchetti; Fudenberg \& Levine; Fudenberg \& Maskin)\cite{AbreuPearceStacchetti,FudenbergLevine1994,FudenbergMaskin1986}
+. Players may also reassess earlier choices in a phenomenon known as
 \emph{time inconsistency} (see Strotz; Pollack; Hicks; Kydland \& Prescott), which
 is destabilizing not only because agents may want to revise plans, but because
-the mere possibility of revision may be anticipated (Hart \& Tirole;
+the possibility of revision may be anticipated (Hart \& Tirole;
 Dewatripont; Barro \& Gordon). Incentive compatibility can fail even if all
-parties regard the unrevised outcome as mutually beneficial (Farrell \& Maskin,
-1989; Maskin \& Moore, 1988).
+parties regard the unrevised outcome as mutually beneficial (Farrell \& Maskin; Maskin \& Moore)\cite{FarrellMaskin1989,MaskinMoore1988}.
 
-The problem is that \emph{ex post revision} creates the same need for enforcement
-that Hurwicz identified in static settings: the need for a credible punishment
-to incentivize honesty. Hurwicz assumed such punishment was impossible in
+The problem with \emph{ex post revision} is that it creates the same need for a credible punishment
+that Hurwicz identified in statics setting. Hurwicz assumed such punishment was impossible in
 decentralized environments lacking institutions capable of observing and
 punishing inconsistency. His logic extends naturally to dynamic games with
 incentives for revision, making it surprising that circular mechanisms can
 eliminate this problem.
 
-Yet the solution is already hinted at in a subset of theoretical papers. The most
-striking such result is James Jordan’s discovery that when incentive
+Yet the solution is oddly anticipated in a subset of theoretical papers. The most
+striking is James Jordan’s discovery that when incentive
 compatibility is unattainable in one-shot mechanisms, it can re-emerge in
-path-dependent indirect mechanisms. Jordan does not argue that the solution
+path-dependent indirect mechanisms.\cite{Jordan1982a,Jordan1982b}
+ Jordan does not argue that the solution
 requires circularity, but demonstrates that any solution must distribute costs
-over time. He also anticipates more recent work showing that direct mechanisms
-can fail to implement equilibria available to indirect ones (Aumann; Renou \&
-Tomala; Strack \& Mora; Attar), and that incentive compatibility can be restored
-once mechanisms can leverage expectations of future payoffs as part of their
+over time. He also anticipates later work showing that direct mechanisms
+can fail to implement equilibria available to indirect ones (Aumann; Renou \& Tomala; Strack \& Mora; Attar)\cite{Aumann1974,RenouTomala2012,RenouTomala2016,StrackMora,Attar2021}, and that incentive compatibility can be restored
+by leveraging expectations of future payoffs in their
 enforcement structure (Maskin \& Moore; Abreu, Pearce \& Stacchetti).
 
-The remainder of this paper shows how a narrow subclass of mechanisms fulfills
-these criteria by introducing a dual-enforcement regime that allows the
-mechanism to optimize its own security function by observing it indirectly—in
-the revealed preference of players to coordinate beyond the scope of its
+The remainder of this paper shows how a narrow subclass of mechanisms can fulfill
+these criteria by creating dual-enforcement regime that allows the
+mechanism to optimize its own security function by observing it indirectly in
+the revealed preference players show to coordinate beyond the scope of its
 enforcement guarantees.
-
 
 
 \section{Endogenous Unactionability}
 
-Sifting through these papers, we can see that where incentive compatibility
+Sifting through paper after paper, we can see that where incentive compatibility
 survives informational decentralization, it is because the mechanism embeds a
 constraint that agents must bear but cannot neutralize. For the rest of this
 paper, we refer to this property as \emph{endogenous unactionability}.
@@ -252,60 +251,58 @@ paper, we refer to this property as \emph{endogenous unactionability}.
 In mechanisms where external authorities punish deviation, endogenous
 unactionability emerges trivially, as enforcers have no utility function in the
 mechanism. Authorities must still be immune to strategic manipulation, but this
-is imposed by requiring them to verify any public states used to determine
-allocations or transfers. From this perspective, one of the reasons circular
-mechanisms appear counterintuitive is that opacity --- not transparency --- is
+is handled by requiring them to verify any public states used to determine
+allocations or transfers. This explains one of the reasons circular
+mechanisms can appear counterintuitive: opacity -- not transparency -- is
 what enables enforcement.
 
-It may seem odd to argue that endogenous unactionability is required for
-incentive compatibility in decentralized networks. In computer science, many
-protocols exist which implement outcomes over time, and some accomplish this
+In computer science, many decentralized protocols exist which implement outcomes, 
+and some accomplish this
 without adding trusted authorities. Are they not incentive compatible? The
 answer is no in the sense that each known solution only achieves convergence by
-fixing at least one cost-imposing dimension of the environment so that it does not respond
+fixing at least one cost-imposing dimension of the environment so that it cannot respond
 to strategic pressure. This is different from the challenge posed by Hurwicz,
-who asked whether mechanisms could incentivize their own enforcement function,
-not assume it into existence beyond the game.
+who asked whether mechanisms could incentivize a stable enforcement function,
+not assume one into existence beyond the game.
 
-In games that converge through repeated play with Bayesian updating, known
-solutions require agents to update beliefs about a fixed state space with common
-priors and stationary likelihoods (Milgrom \& Roberts; Fudenberg \& Levine).
-Agreement can also be induced through public randomness or correlated devices,
-as in Myerson’s \emph{Great War} paper or Aumann’s correlated equilibrium, but
-those approaches work because randomness is unintelligible and thus
-unactionable. Deviation is only costly where incorrect beliefs can induce
+In games that converge through repeated play with Bayesian updating, achieving agreement
+requires agents to update beliefs about a fixed state space with common
+priors and stationary likelihoods (Milgrom \& Roberts; Fudenberg \& Levine).\cite{MilgromRoberts1991,FudenbergLevine1998} 
+Agreement can also be induced through public randomness or correlated devices, but
+such approaches work where randomness is unintelligible and thus
+unactionable as in Myerson’s \emph{Great War} paper or Aumann’s correlated equilibrium.\cite{MyersonGreatWar,Aumann1974}  
+Deviation in these approaches is only costly once incorrect beliefs can induce
 suboptimal outcomes, so coordination unravels once agents can influence signal
 generation, timing, or interpretation.
 
-This problem also characterizes mechanisms that rely on fixed type
+This same problem characterizes mechanisms that rely on fixed type
 distributions, posted prices, or deterministic rules. Games that exploit
 Byzantine fault tolerance, posted-price structures, or fair schedulers are only
 stable when honesty, prices, and timing are strategically insulated: once those
-dimensions are endogenized, security and convergence collapse. Approaches based
-on regret minimization and multiplicative weights exhibit the same structure:
+dimensions are endogenized, security and convergence collapse. Approaches leveraging 
+regret minimization and multiplicative weights exhibit the same structure:
 they require stationary payoffs and non-strategic feedback, and cycling
 reappears as soon as agent actions reshape allocations.
 
-Across cases, designers implement outcomes by finding load-bearing structures
-that resist strategic manipulation, not mechanisms in which the enforcement
-function is optimized through strategic play. Incentive compatibility requires
+Across all cases, designers implement outcomes by asserting load-bearing structures
+that resist strategic manipulation, not optimizing the enforcement
+function itself through strategic play. Incentive compatibility requires
 the latter, but this seems absurd: how can costs be both endogenously generated
-and non-manipulable? Such opacity is clearly impossible in direct mechanisms,
+and non-manipulable? Such opacity is self-evidently impossible in direct mechanisms,
 where implementability demands truthful preference revelation and the need for
 Maskin monotonicity further prevents agents from commingling multiple values into
 non-scalar reports and sharing their preferences obliquely. Any solutions must
 therefore lie outside the class of direct mechanisms or their
 revelation-equivalent indirect counterparts.
 
-We shall see that the techniques which accomplish this do in fact break
-reduction under the Revelation Principle. But discussing how indirect mechanisms
+As we shall see, the techniques which create endogenous unactionability do in fact 
+block reduction under the Revelation Principle. But discussing how indirect mechanisms
 can preserve opacity requires a way to reason about how mechanisms can protect
-informational privacy, and so our next section introduces the concepts of
+informational privacy. To provide these, our next section introduces the concepts of
 \emph{Myerson} and \emph{Non-Myerson Layers} to show how constructs composed of
-the latter can sustain the kinds of compartmentalization which impede agents
-from knowing the true preferences of other agents in the same mechanism, even
+the latter can sustain the kinds of compartmentalization which block agents
+from verifying the true preferences of other agents in the mechanism, even
 while aggregating their underlying preferences into a shared enforcement cost.
-
 
 
 
@@ -315,18 +312,19 @@ The Revelation Principle is a brilliant analytical reduction which demonstrates
 that many indirect mechanisms can be reduced to simplified games in which agents
 report types, the mechanism selects an outcome, and transfers enforce truthful
 revelation. Within its domain, the principle provides extraordinary clarity,
-allowing designers to reason about incentives without worrying about structural
-compartmentalization or the passage of time in a game.
+allowing designers to reason about incentives without worrying about the structural
+compartmentalization or passage of time in a game.
 
 Yet many non-revelation-equivalent games exist which cannot be reduced to direct
 mechanisms without breaking incentive compatibility. The techniques that block
 reduction are fairly easy to implement technically, including strategic routing
 (Renou \& Tomala), some probabilistic lotteries (Strack \& Mora), and asymmetric
-information disclosure (Attar).
+information disclosure (Attar). Claims of universal reduction only hold under 
+restrictive assumptions that exclude these phenomena.
 
 These non-revelation-equivalent strategies become meaningful when mechanisms are
-treated as \emph{constructs} composed of multiple layers. In such designs, each layer can serve a
-different function, yet participants may condition on inputs from previous
+treated as \emph{constructs} composed of multiple layers. In such designs, each 
+layer can serve a different function, yet condition on inputs from previous
 layers and create outputs for subsequent ones. A boundary between layers exists
 at any point where inputs are strategically indistinguishable from randomness
 when analyzed in isolation.
@@ -334,26 +332,25 @@ when analyzed in isolation.
 For clarity, we call a layer a \emph{Myerson Layer} if its incentive structure can
 be faithfully represented by a reduced game that acts on direct-type reports and
 has verifiable outputs. These layers follow the same rules as direct mechanisms
-and, when linked together in chained succession, are analyzed as if occurring
-simultaneously. The terminology is an analytic convenience indicating that a
-layer is intended to process information sequentially even though it can be
-represented through a static interface.
+and, when chained together in sequence, may be analyzed as if occurring
+simultaneously even though it may requires time to conclude.
 
 In contrast, a \emph{Non-Myerson Layer} has the properties of non-revelation-
 equivalent indirect mechanisms, relying on forms of action within the mechanism
-that do not admit reduction without loss of essential structure.
+that do not admit reduction without loss of essential structure, and producing 
+outputs that encode preferences obliquely.
 
-The distinction matters for circular mechanisms. Any sequence of Myerson Layers
-may be collapsed into a single Myerson Layer under the Revelation Principle, but
-constructs that contain Non-Myerson Layers are irreducible because the incentive
-structure of at least one layer cannot be reduced to direct type reports.
+The distinction matters with circular mechanisms, as any sequence of Myerson Layers
+collapses into a single Myerson Layer under the Revelation Principle, but
+constructs with Non-Myerson Layers are irreducible because the informational
+structure of at least one layer blocks reduction to direct type reports.
 
-This makes \emph{constructs} useful conceptual tools for visualizing where
-requirements for credibility and enforcement emerge in mechanisms. In classical
+This makes \emph{constructs} useful conceptual tools for conceptualizing where
+the demand for credibility and supply of enforcement happen in circular mechanisms. In classical
 designs reliant on external authorities, enforcement is typically provided by
-institutions that are operationally indistinguishable from upstream layers that
-project randomness downstream where it appears as honest types or fixed
-constraints. This is shown in Figure~\ref{fig:myerson-nonmyerson}, which shows a \emph{Non-Myerson Layer} preceding a \emph{Myerson Layer}.
+upstream institutions that project outputs downstream where they appears as 
+exogenously-fixed honest types or other constraints. This is shown in Figure~\ref{fig:myerson-nonmyerson}, which shows 
+a \emph{Non-Myerson Layer} preceding a \emph{Myerson Layer}.
 
 \begin{figure}[t]
 \begin{narrowfigure}
@@ -366,12 +363,12 @@ constraints. This is shown in Figure~\ref{fig:myerson-nonmyerson}, which shows a
   \end{narrowfigure}
 \end{figure}
 
-Such arrangements also affect the viability of trade-offs in downstream layers.
-A canonical example is budget balance in the Myerson--Satterthwaite setting,
+Such arrangements can affect the viability of trade-offs in downstream layers.
+A canonical example is budget balance in the Myerson-Satterthwaite setting,
 where adding a trusted auctioneer implicitly assumes an upstream layer to
 incentivize its provision. When this layer is removed in revelation-equivalent
-constructs, budget balance fails as the mechanism must internalize the cost of
-generating a behavior that was previously induced externally.
+constructs, budget balance fails downstream as the mechanism must internalize 
+the cost of generating enforcement that was previously incentivized externally.
 
 \begin{figure}[t]
 \begin{narrowfigure}
@@ -385,19 +382,19 @@ generating a behavior that was previously induced externally.
 \end{figure}
 
 Constructs in which Myerson Layers project information into Non-Myerson Layers
-can be useful when the second layer introduces opacity, delay, or strategic
+are rarer, but can be useful when the second layer introduces opacity, delay, or strategic
 aggregation to the preferences revealed in the first, transforming the original
-inputs into signals that emerge staggered over time. An example is sequential
+inputs into signals that emerge staggered in time. An example is sequential
 voting systems with portfolio assembly, where individual votes cast in the first
 layer may not be immediately visible in the outputs of the second. Blockchains
-with private mempools show how this design adds obfuscation and delay which
-frustrate attempts to reconstruct whose preferences are reflected in aggregated
+with private mempools show how this design can add obfuscation and delay which
+frustrates attempts to reconstruct whose preferences are reflected in aggregated
 outcomes at any point in time. This is depicted in Figure~\ref{fig:nonmyerson-myerson}, which shows a \emph{Myerson Layer} preceding a \emph{Non-Myerson Layer}
 
 These differences become decisive when layers are chained into circular
 constructs. Consider a construct consisting solely of Myerson Layers, which the
 Revelation Principle collapses into a single layer in which outputs from any
-round become transparent inputs to the next as shown in Figure~\ref{fig:myerson-construct}.
+round are transparent inputs to the next, as shown in Figure~\ref{fig:myerson-construct}.
 
 \begin{figure}[t]
 \begin{narrowfigure}
@@ -410,11 +407,11 @@ round become transparent inputs to the next as shown in Figure~\ref{fig:myerson-
   \end{narrowfigure}
 \end{figure}
 
-In contrast, circular mechanisms with multiple Non-Myerson Layers can preserve
+Circular mechanisms with multiple Non-Myerson Layers are needed to preserve
 forms of informational compartmentalization. While each layer still acts on
 information projected into it from previous layers, its inputs need not be
-reducible to direct type reports and may consist of non-scalar values that
-preserve ambiguity of intent. This is shown in Figure~\ref{fig:nonmyerson-construct}.
+reducible to direct type reports and may include the non-scalar outputs of 
+previous layers that preserve ambiguity of intent. This is shown in Figure~\ref{fig:nonmyerson-construct}.
 
 \begin{figure}[t]
 \begin{narrowfigure}
@@ -431,8 +428,8 @@ Across the lossy informational boundaries that separate layers in these
 constructs, which we call \emph{privacy walls}, agents can observe actions
 without reconstructing intent. They must, in effect, peer through a glass
 darkly. In the next section, we show how these privacy walls combine with
-non-scalar values to enable a new type of strategy that can exist only in
-indirect mechanisms.
+non-scalar values to enable a new type of strategy that re-opens the door 
+to incentive compatibility in conditions of decentralization.
 
 
 
@@ -440,13 +437,11 @@ indirect mechanisms.
 \section{From Privacy Walls to Selective Disclosure}
 
 Because direct mechanisms are evaluated in a static frame, the Revelation
-Principle forces any revelation-equivalent circular mechanism to operate
-sequentially, as anything else implicitly breaks reduction (Myerson, 1986). In
-non-revelation-equivalent mechanisms, however, multiple layers may operate in
-parallel, permitting a new class of strategies to emerge that cannot exist in
-revelation-equivalent designs. These are \emph{selective disclosure strategies},
-in which agents pierce privacy walls and reveal preferences directly to other
-participants, as depicted in Figure
+Principle forces its circular mechanisms to operate
+sequentially, as anything else implicitly breaks reduction (Myerson, 1986). 
+Multiple layers may operate in parallel in non-revelation-equivalent mechanisms, however, 
+permitting \emph{selective disclosure strategies} to emerge, where agents pierce 
+privacy walls and reveal preferences directly to other participants.
 
 \begin{figure}[t]
 \begin{narrowfigure}
@@ -464,7 +459,6 @@ participants, as depicted in Figure
   \end{narrowfigure}
 \end{figure}
 
-
 Such disclosures exist in many auction designs. They are common in
 \emph{off-book trading mechanisms}, where players must choose between submitting
 anonymous limit orders to a central book or negotiating privately with dealers
@@ -476,68 +470,71 @@ negotiated benefits.
 As in other mechanisms, strategies involving the disclosure of preference maps
 create a two-sided risk. Agents who offer sincere interpretations expose
 themselves by making their internal structure legible, while agents who receive
-offers face the risk of strategic manipulation. A user who sells transactions to
-a miner may signal interest in a discount, but the true objective may be to lower
-overall security and make deviations cheaper within the mechanism. An informed
-counterparty may rationally decline such a trade.
+disclosures face the risk of strategic manipulation. A blockchain user who sells 
+transactions to a miner may be signalling interest in discounted inclusion, but 
+their true objective may be to lower overall security and make deviations cheaper 
+within the mechanism. An informed counterparty may rationally decline such a trade.
 
-Circular mechanisms can therefore invite players to pierce privacy walls and engage
-in disclosure games outside the mechanism’s enforcement regime. The same
-non-scalar messages that preserve privacy also prevent either party from
-grounding claims of credibility in actions taken under enforcement, preventing the value of the enforcement function from interfering with its measurement of its own utility.
+Because the act of piercing a privacy wall connects otherwise compartmentalized 
+information spaces, and the base-layer mechanism only penalizes deviations involving 
+non-scalar outputs from those compartments, selective disclosure strategies create new 
+meta-games outside the mechanism’s core enforcement regime. Players have a strategic 
+choice of which regime to use for preference revelation, and the economic consequences 
+of deception can vary based on which communication channel is chosen.
 
-Circular mechanisms thus invite players to pierce privacy walls and play
-disclosure games outside the scope of the mechanism’s enforcement function. What
-makes these games distinctive is that the non-scalar messages that create
-privacy also prevent either side from supporting claims about credibility by
-referencing actions ever taken under the mechanism’s enforcement regime. The
-mechanism is therefore inducing an external game which allows it to observe,
-insulated from its own influence, the marginal utility of its own enforcement
+The non-scalar messages that create privacy on the base layer then reinforce the 
+informational isolation of the meta-game, as no players communicating through those 
+channels can providing credible evidence of consistency with their preferences as 
+revealed obliquely under enforcement penalities. Where the mechanism makes these 
+games rational for participants, it essentially inducing kenosis: pulling away from 
+players to create a safe space for them to interact that will let it observe, 
+insulated from its influence, the marginal utility of its own enforcement
 function.
 
-To see the problem more clearly, consider a case where Alice asks Bob to take an
-action that lowers security in the mechanism. Alice may be attempting to convert
-a global public good (security) into a dyadic trust good, capturing the savings
-while Bob absorbs the risk. Alternatively, her offer may be sincere, with Alice
-willing to bear exposure while offering Bob the benefits. Both interpretations
-are consistent with the same proposal.
+To see the solution more clearly, consider a case where Alice asks Bob to take an
+action that lowers security in the mechanism. From Bob's perspective, Alice may 
+be attempting to convert a global public good (security) into a dyadic trust good, 
+capturing the savings while Bob absorbs the risk. Alternatively, her offer may be 
+sincere, with Alice willing to bear exposure while offering Bob the benefits. Both 
+interpretations are consistent with her proposal.
 
-Some may argue that the question is unanswerable, but Bob may have rational
-grounds to judge Alice’s credibility. While the mechanism cannot observe these
-factors directly, it cannot deny their relevance if they lead Bob to support a
-higher or lower level of enforcement. If Bob already prefers lower security, he
-needs no persuasion. Alice’s credibility becomes decisive only when Bob’s
-preferred strategy depends on her sincerity. In that case, disbelief justifies
-maintaining a high-security equilibrium, while trust rationalizes lowering it.
+And while some may argue that Bob lacks all rational grounds to judge Alice’s 
+proposal, we cannot restrict Bob from rational decisions on the basis of his 
+private preferences. The mechanism may not be able to observe them directly, but Bob 
+is the one who determines their relevance. And there is no harm to letting him do so, for
+if Bob already prefers lower security, he needs no persuasion. Alice’s 
+suggestion only becomes decisive in the exact case when Bob’s strategy depends on it. 
+And in that case her lack of it justifies his maintaining a high-security equilibrium, while 
+his trust in her rationalizes lowering it.
 
-From the perspective of the mechanism, Alice’s action opens a Non-Myerson Layer
-that is opaque to it. This external game operates under a different enforcement
-regime and produces a non-scalar output encoding Bob’s trust only in cases where
-that trust is decisive. The mechanism observes Bob’s action but not the internal
-message space that motivates it. If Bob trusts Alice when enforcement could
-protect him from loss, the mechanism can infer that additional protection is not
-needed.
+From the perspective of the mechanism, Alice is opening a Non-Myerson Layer whose 
+output is opaque to the base-layer, operates under a different enforcement
+regime and results in a non-scalar output that can invisibly commingle Bob's own 
+preferences along with his trust in her. The mechanism can see Bob’s choice but not 
+known what preferences motivates it. But it does not need this information. All it 
+knows is that if Bob trusts Alice when its enforcement regime could protect him from 
+loss, its level of protection is excessive.
 
-The mechanism is thus creating a counterfactual game it observes only
-indirectly, which signals the marginal utility of its own enforcement function
-back to it. This signal is credible precisely because Alice cannot cite any
-verifiable action taken under the mechanism’s enforcement regime as evidence of
-her credibility. Were such a link possible, Bob could assign probabilities to
+The mechanism is thus creating a counterfactual game it can observe indirectly, 
+one which signals the marginal utility of its own enforcement function back to it. 
+This signal is credible precisely because Alice cannot cite any verifiable action 
+taken under the mechanism’s enforcement regime as evidence of her credibility. 
+Were such a link possible, Bob could assign probabilities to
 Alice’s sincerity and uncertainty would collapse into risk, correlating the two
 games and destroying the informational separation required for inference.
 
 For readers accustomed to direct mechanisms, it may seem counterintuitive that a
 mechanism never observes the preferences that are decisive. But it does not need
-to. When enforcement is far from optimal, selective disclosure becomes
-attractive. As enforcement converges toward equilibrium, the risks of disclosure
-outweigh its benefits, credibility becomes less valuable, and disclosure
-strategies disappear. Credibility is thus decisive and unobservable in exactly
-the proportion required for it to substitute for the marginal utility of
-enforcement.
+to. When enforcement levels are far from equilibrium, private communications are 
+cost-saving and attractive. As they converge toward equilibrium, the risks 
+of disclosure grow while savings shirk, credibility becomes less valuable, and disclosure
+strategies less attractive on the margin. The mechanism is essentially incentivizing 
+the creation of alternate enforcement regimes in the proportion needed to drive its 
+marginal utility of enforcement into optimal equilibrium.
 
-Selective disclosure strategies exist only in non-revelation-equivalent
+Yet these selective disclosure strategies exist only in non-revelation-equivalent
 mechanisms. In the next section we show this formally, demonstrating that no
-statement Alice can offer Bob avoids collapsing into epistemic claims whose
+direct report Alice can offer Bob avoids collapsing into epistemic claims whose
 credibility cannot be established within the mechanism itself.
 
 
@@ -551,15 +548,15 @@ any representation that can be rationalized within an internally coherent
 evaluative framework. As Keynes famously wrote:
 
 \begin{quote}\small
-The sense in which I am using the term is that in which the prospect of a European war is uncertain\ldots{} or the price of copper and the rate of interest twenty years hence\ldots{} About these matters there is no scientific basis on which to form any calculable probability whatever.
+The sense in which I am using the term is that in which the prospect of a European war is uncertain\ldots{} or the price of copper and the rate of interest twenty years hence\ldots{} About these matters there is no scientific basis on which to form any calculable probability whatever.\footnote{Keynes, J. M. (1936). \emph{The General Theory of Employment, Interest, and Money}, Chapter~12. Macmillan.}
 \end{quote}
 
 For the sake of convenience, we refer to whatever variable motivates agents to
-accept or reject proposals under uncertainty as \emph{trust}. This does not
-involve any ontological claims. We do not attribute moral qualities to trust, nor
+accept or reject selective disclosure proposals as \emph{trust}. This is not meant as an 
+ontological statement. We do not attribute moral qualities to trust, nor
 deny that it may be the product of utilitarian calculation. We merely name a
-variable that motivates action in cases where enforcement levels are decisive at
-the margins. An agent acts on trust whenever they accept that statements offered
+variable that motivates action when enforcement levels are decisive at
+the margins. So we state that an agent acts on trust whenever they accept that statements offered
 by a counterparty may be false, yet prefer to act as if they are true. An agent
 who withholds trust prefers to assume they may be false and instead relies on
 the baseline guarantees enforced by the mechanism.
@@ -569,19 +566,20 @@ to eliminate uncertainty by expanding the state space through additional
 parameters, beliefs, or utility dimensions. We do not dispute the usefulness of
 such methods, but deny that they can eliminate epistemic uncertainty.
 
-The reason is that regardless of how one conceptualizes trust --- whether as a
-psychological variable or as a non-scalar value that can be disaggregated and
-studied --- representing it as a direct type collapses the information it is
+The reason is that regardless of how one conceptualizes trust -- whether as a
+psychological variable or a non-scalar value that can be disaggregated and
+dissected -- representing it as a direct type collapses the information it is
 meant to convey. The problem is connected to the way security and trust become
 substitutes across uncorrelated games when agents have the option of lowering
 enforcement costs in one by extending trust in another.
 
 \subsection{Trust as an Unparameterizable Domain Space}
 
-In informationally decentralized systems such as blockchains, deviation must be
-discouraged without recourse to external enforcement. Generating security is
-therefore costly. Let $S \ge 0$ denote the level of security imposed by the
-mechanism, with cost function $K(S)$, where
+In informationally decentralized systems such as consensus mechanisms, 
+deviation must be discouraged without recourse to external enforcement. 
+Generating security is therefore costly. Let $S \ge 0$ denote the level 
+of security imposed by th mechanism, with cost function $K(S)$, where
+
 \[
 K'(S) > 0.
 \]
@@ -589,6 +587,7 @@ K'(S) > 0.
 Let $\tau$ denote the \emph{trust environment}: an aggregate property capturing
 how willing participants are to refrain from deviation absent strong
 enforcement. Let $R(S,\tau)$ denote residual cheating risk, where
+
 \[
 \frac{\partial R}{\partial S} < 0,
 \quad \text{and} \quad
@@ -604,6 +603,7 @@ forms of utility at the margin.
 
 Welfare improvements require changing the socially optimal level of security,
 which solves
+
 \[
 \min_{S \ge 0} \; K(S) + R(S,\tau),
 \]
@@ -656,8 +656,8 @@ value of enforcement itself.
 Within each game, the other appears as a Non-Myerson Layer whose output is opaque
 and subject to misinterpretation. Each nevertheless serves as a venue in which
 rational judgment is expressed about the other. Although cognitive frameworks
-may differ across layers, actions remain credible within the enforcement regime
-of the circular mechanism.
+may differ across layers, actions remain credible within the mechanism, as 
+representations in both layers can affect allocations and transfers on the base-layer.
 
 In this way, indirect mechanisms convert an unrepresentable parameter into an
 observable gradient without collapsing uncertainty into a reportable type. The
@@ -668,9 +668,8 @@ on the allocation of resources within the mechanism itself.
 It follows that any informationally decentralized mechanism that must optimize
 its own enforcement levels cannot be direct. What it must observe is a
 Gödel-type object: fleeting, disguised, decisive only when necessary, and
-structurally impossible to represent directly, yet capable of guiding action.
-
-
+structurally impossible to represent directly, yet capable of guiding rational 
+action.
 
 
 
@@ -692,19 +691,17 @@ structure can improve expected welfare, selective disclosure ceases to be
 profitable, and security remains stable in equilibrium.
 
 Seen in this light, uncertainty is not an epiphenomenon but the functional
-substitute for external authority in decentralized systems. Incentive
+substitute for external authority in decentralized systems. And incentive
 compatibility can emerge more generally as self-stabilizing security levels now
 provide a common \emph{num\'eraire} against which other forms of utility can be
 expressed. Appendix~D shows a practical example of a mechanism exhibiting this
 dynamic.
 
-The solution may only be implementable within a narrow subclass of indirect
+The technique may only be implementable within a narrow subclass of indirect
 mechanisms, but it exists. In the next section, we revisit the large body of
 impossibility results in computer science and economics which claim it cannot,
 showing that their conclusions exclude indirect mechanisms by assumption, often
 for reasons their authors do not recognize can be relaxed.
-
-
 
 
 
@@ -736,7 +733,8 @@ Canonical results from computer science reinforce the same assumption. Developed
 in foundational papers by Lamport, Shostak, and Pease, and later formalized by
 Bracha and Toueg, results on the limits of adversarial tolerance assume that
 algorithms behave according to fixed rules and execute changes as \emph{atomic
-steps}. These models implicitly treat actions as costless, uncertainty as
+steps}.\cite{LamportShostakPease1982,BrachaToueg1985,FLP1985}
+ These models implicitly treat actions as costless, uncertainty as
 absent, and assume deviation cannot be punished through exposure accumulated
 over time. Later results such as the FLP theorem operate in this same framework,
 in which non-termination and inconsistency arise because no mechanism exists to
@@ -793,9 +791,7 @@ that nothing fundamental changes?
 
 
 
-
-
-\section{Why This Is Hard to See: The Gravity Well of Direct Mechanisms}
+\section{The Gravity Well of Direct Mechanisms}
 
 The answer seems to be that mechanisms governed by the Revelation Principle exert a
 strong cognitive pull. Once a model satisfies even a subset of its defining
@@ -1021,39 +1017,39 @@ mechanisms relate to the core distinctions developed in the text.
 \small
 \begin{tabular}{p{4.2cm} p{2.2cm} p{3.2cm} p{6.2cm}}
 \toprule
-\textbf{Mechanism / Class} &
-\textbf{Direct or Indirect} &
-\textbf{Revelation-Equivalent or Irreducible} &
+\textbf{Mechanism} &
+\textbf{Type} &
+\textbf{Revelation-Equivalent} &
 \textbf{Location of Unactionability} \\
 \midrule
-Static direct-revelation mechanisms (e.g.\ VCG, Myerson auctions)
+VCG, Myerson auctions
 & Direct
-& Revelation-equivalent
+& Reducible
 & Exogenous (verifiability, transfers, enforcement assumptions) \\
 
-One-shot voting rules (Arrow, Gibbard--Satterthwaite settings)
+One-shot voting games (Arrow, Gibbard--Satterthwaite)
 & Direct
-& Revelation-equivalent
+& Reducible
 & Exogenous (fixed rules, no revision, costless speech) \\
 
 Repeated direct mechanisms with Bayesian updating
 & Direct
-& Revelation-equivalent
+& Reducible
 & Exogenous (fixed state space, common priors, stationary likelihoods) \\
 
-Mechanisms with public randomization / correlating devices
-& Direct or Indirect
-& Revelation-equivalent
+Public randomization / correlating mechanisms
+& Both
+& Yes
 & Exogenous (unmanipulable public randomness) \\
 
-Posted-price mechanisms with externally set prices
+Posted-price mechanisms
 & Indirect
-& Revelation-equivalent
-& Exogenous (price formation outside the mechanism) \\
+& Reducible
+& Exogenous (prices set outside the mechanism) \\
 
 Continuous double auctions
 & Indirect
-& Typically irreducible
+& Irreducible (mostly)
 & Mixed; often exogenous via institutional rules, sometimes endogenous via market impact \\
 
 Reputation systems
@@ -1074,22 +1070,22 @@ Prediction markets with endogenous liquidity
 Gossip-based broadcast and coordination protocols
 & Indirect
 & Irreducible
-& Exogenous or mixed (scheduler assumptions, network topology) \\
+& Exogenous or Mixed (scheduler assumptions, network topology) \\
 
 Proof-of-Work consensus
 & Indirect
 & Irreducible
-& Endogenous (irreversible expenditure of hash power; revision requires additional work) \\
+& Endogenous (irreversible expenditure of hash) \\
 
-Proof-of-Stake consensus with slashing
+Proof-of-Stake slashing
 & Indirect
 & Irreducible
-& Mixed; endogenous (slashing, delayed payouts) with possible exogenous governance \\
+& Mixed; Endogenous w/ Exogenous Governance \\
 
 Saito Consensus
 & Indirect
 & Irreducible
-& Endogenous (continuation value secured by entropy) \\
+& Endogenous (irreversible loss of continuation value) \\
 
 \bottomrule
 \end{tabular}
@@ -1351,6 +1347,16 @@ Toward a theory of discounted repeated games with imperfect monitoring.
 Fudenberg, D., \& Levine, D. (1994).
 Efficiency and observability with long-run and short-run players.
 \emph{Journal of Economic Theory}, 62(1), 103--135.
+
+\bibitem{FudenbergLevine1998}
+Fudenberg, D., \& Levine, D. (1998).
+\emph{The Theory of Learning in Games}.
+MIT Press.
+
+\bibitem{MilgromRoberts1991}
+Milgrom, P., \& Roberts, J. (1991).
+Rationalizability, learning, and equilibrium in games with strategic complementarities.
+\emph{Econometrica}, 59(5), 1255--1277.
 
 \bibitem{FudenbergMaskin1986}
 Fudenberg, D., \& Maskin, E. (1986).
