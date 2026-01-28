@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 16:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 17:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -669,47 +669,47 @@ dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 [20]
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 1042--1042
+Underfull \hbox (badness 10000) in paragraph at lines 1040--1040
 []\T1/lmr/bx/n/10 Revelation-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1051
+Underfull \hbox (badness 10000) in paragraph at lines 1048--1049
 []\T1/lmr/m/n/10 One-shot vot-ing games
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1051
+Underfull \hbox (badness 10000) in paragraph at lines 1048--1049
 \T1/lmr/m/n/10 (Ar-row, Gibbard--
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1055--1056
+Underfull \hbox (badness 10000) in paragraph at lines 1053--1054
 []\T1/lmr/m/n/10 Repeated di-rect mech-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1055--1056
+Underfull \hbox (badness 10000) in paragraph at lines 1053--1054
 \T1/lmr/m/n/10 a-nisms with Bayesian
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1080--1081
+Underfull \hbox (badness 10000) in paragraph at lines 1078--1079
 []\T1/lmr/m/n/10 Contract rene-go-ti-a-tion
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 1083--1084
+Underfull \hbox (badness 2753) in paragraph at lines 1081--1082
 \T1/lmr/m/n/10 en-doge-nous when rene-go-ti-a-tion costs
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1090--1091
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1089
 []\T1/lmr/m/n/10 Gossip-based broad-cast
  []
 
 
-Overfull \hbox (136.20314pt too wide) in paragraph at lines 1038--1112
+Overfull \hbox (136.20314pt too wide) in paragraph at lines 1036--1110
  [][] 
  []
 
@@ -717,11 +717,11 @@ Overfull \hbox (136.20314pt too wide) in paragraph at lines 1038--1112
 
 [22]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-133.
+131.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (4.94704pt too wide) in paragraph at lines 1154--1157
+Overfull \hbox (4.94704pt too wide) in paragraph at lines 1152--1155
 []\T1/lmr/m/it/10.95 Arbitrages: \T1/lmr/m/n/10.95 Dif-fer-ences be-tween lo-ca
 l ex-e-cu-tion op-por-tu-ni-ties and global
  []
@@ -733,7 +733,7 @@ l ex-e-cu-tion op-por-tu-ni-ties and global
 [24]
 
 [25]
-Overfull \hbox (19.29951pt too wide) in paragraph at lines 1293--1299
+Overfull \hbox (19.29951pt too wide) in paragraph at lines 1291--1297
 \T1/lmr/m/n/10.95 The mech-a-nisms stud-ied in this pa-per are in-ten-tion-ally
  \T1/lmr/m/it/10.95 non-revelation-equivalent\T1/lmr/m/n/10.95 .
  []
@@ -745,7 +745,7 @@ Overfull \hbox (19.29951pt too wide) in paragraph at lines 1293--1299
 [27]
 
 [28]
-Underfull \hbox (badness 1107) in paragraph at lines 1470--1473
+Underfull \hbox (badness 1107) in paragraph at lines 1468--1471
 []\T1/lmr/m/n/10.95 Attar, A. (2021). Pri-vate dis-clo-sures. SSRN Work-ing Pa-
 per No.
  []
@@ -756,7 +756,7 @@ per No.
 
 [30]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-568.
+566.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -794,7 +794,7 @@ lic/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr
 i9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></u
 sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/te
 xlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on hurwicz.pdf (32 pages, 500211 bytes).
+Output written on hurwicz.pdf (32 pages, 500273 bytes).
 PDF statistics:
  477 PDF objects out of 1000 (max. 8388607)
  393 compressed objects within 4 object streams
