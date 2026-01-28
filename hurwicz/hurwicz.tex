@@ -178,10 +178,9 @@ incentive compatible depends on whether its outcomes implement a social choice
 rule as defined by Arrow (1951), and later Gibbard and Satterthwaite
 (1973, 1975) and Maskin (1977).
 
-It would take a decade before Myerson showed that under certain conditions
+It would take almost a decade before Myerson showed that under certain conditions
 indirect mechanisms can be reduced to direct ones without loss of generality
-(1981)\cite{Myerson1981}
-. The sheer power of his Revelation Principle would later induce many to
+(1979)\cite{Myerson1979}. The sheer power of his Revelation Principle would later induce many to
 see indirect mechanisms as essentially interchangeable with direct ones. But in
 the early 1970s, this suspicion had yet to take root, and Hurwicz framed his
 definitions to cover games in both classes. Nor did he presuppose any particular
@@ -230,7 +229,7 @@ path-dependent indirect mechanisms.\cite{Jordan1982a,Jordan1982b}
  Jordan does not argue that the solution
 requires circularity, but demonstrates that any solution must distribute costs
 over time. He also anticipates later work showing that direct mechanisms
-can fail to implement equilibria available to indirect ones (Aumann; Renou \& Tomala; Strack \& Mora; Attar)\cite{Aumann1974,RenouTomala2012,RenouTomala2016,StrackMora,Attar2021}, and that incentive compatibility can be restored
+can fail to implement equilibria available to indirect ones (Aumann; Renou \& Tomala; Strack \& Mora; Attar)\cite{Aumann1974,RenouTomala2012,StrackMora,Attar2021}, and that incentive compatibility can be restored
 by leveraging expectations of future payoffs in their
 enforcement structure (Maskin \& Moore; Abreu, Pearce \& Stacchetti).
 
@@ -267,7 +266,7 @@ not assume one into existence beyond the game.
 
 In games that converge through repeated play with Bayesian updating, achieving agreement
 requires agents to update beliefs about a fixed state space with common
-priors and stationary likelihoods (Milgrom \& Roberts; Fudenberg \& Levine).\cite{MilgromRoberts1991,FudenbergLevine1998} 
+priors and stationary likelihoods (Milgrom \& Roberts; Fudenberg \& Levine).\cite{MilgromRoberts1990,FudenbergLevine1998} 
 Agreement can also be induced through public randomness or correlated devices, but
 such approaches work where randomness is unintelligible and thus
 unactionable as in Myerson’s \emph{Great War} paper or Aumann’s correlated equilibrium.\cite{MyersonGreatWar,Aumann1974}  
@@ -645,6 +644,21 @@ epistemic ignorance resolvable through learning; it is structural. The mechanism
 cannot observe the counterfactual worlds in which different trust levels would
 have prevailed, nor price security optimally without exposing itself to over- or
 under-enforcement.
+
+At first glance, this conclusion may seem too strong. One might object that the
+determinants of credibility may be discovered and formalized. And if credibility 
+can be discovered as a high-dimensional but well-defined variable, why could it 
+not be elicited by the base layer directly?
+
+Unfortunately, the challenge is not whether credibility can be defined, but whether 
+it can be made \emph{actionable} within the base layer without breaking incentive
+compatibility. If credibility were semantically defineable, the
+mechanism could indeed condition enforcement on it -- filtering reports to privilege
+credible agents. But this would exclude the preferences of non-credible agents
+from aggregation, driving enforcement costs away from social optimal levels. Incentive
+compatibility requires optimizing over all preferences, not merely a subset of 
+trusted players.
+
 
 \subsection{Uncertainty and Indirect Mechanisms}
 
@@ -1259,10 +1273,14 @@ the same structural properties.
 
 \section{Interpretive Constraints and Irreducible Structure}
 
-This appendix clarifies a set of interpretive constraints implicit throughout the
-paper. Its purpose is not to introduce new claims or constructions, but to prevent
-mischaracterizations that arise when analytical tools designed for direct or
-revelation-equivalent mechanisms are applied outside their domain of validity.
+This paper deliberately avoids equilibrium characterizations and toy models that
+represent trust, credibility, or willingness to bear exposure as actionable parameters. 
+Any such formalization would reenact the collapse it diagnoses: decisive variables 
+would become conditionable within the meta-theory, reintroducing the gravity well of 
+revelation-equivalent mechanisms that these constructions are designed to escape. The 
+argument therefore proceeds through structural contradiction, historical diagnosis of 
+impossibility results, and constructive witness rather than internal equilibrium proofs. 
+This is a methodological boundary, not an absence of rigor.
 
 \subsection{Irreducibility and Forbidden Reductions}
 
@@ -1397,6 +1415,11 @@ Maskin, E. (1977).
 Nash equilibrium and welfare optimality.
 MIT Working Paper.
 
+\bibitem{Myerson1979}
+Myerson, R. B. (1979).
+Incentive compatibility and the bargaining problem.
+\emph{Econometrica}, 47(1), 61--73.
+
 \bibitem{Myerson1981}
 Myerson, R. B. (1981).
 Optimal auction design.
@@ -1432,11 +1455,6 @@ Renou, L., \& Tomala, T. (2012).
 Mechanism design and communication networks.
 \emph{Theoretical Economics}, 7(2), 209--256.
 
-\bibitem{RenouTomala2016}
-Renou, L., \& Tomala, T. (2016).
-Communication and information design.
-\emph{Economic Theory}, 61, 1--31.
-
 \bibitem{StrackMora}
 Strack, P., \& Mora, R. (2025).
 Information without rents: Mechanism design without expected utility.
@@ -1462,10 +1480,10 @@ Fudenberg, D., \& Levine, D. (1998).
 \emph{The Theory of Learning in Games}.
 MIT Press.
 
-\bibitem{MilgromRoberts1991}
-Milgrom, P., \& Roberts, J. (1991).
+\bibitem{MilgromRoberts1990}
+Milgrom, P., \& Roberts, J. (1990).
 Rationalizability, learning, and equilibrium in games with strategic complementarities.
-\emph{Econometrica}, 59(5), 1255--1277.
+\emph{Econometrica}, 58(6), 1255--1277.
 
 \bibitem{FudenbergMaskin1986}
 Fudenberg, D., \& Maskin, E. (1986).
@@ -1481,6 +1499,41 @@ Renegotiation in repeated games.
 Maskin, E., \& Moore, J. (1988).
 Implementation and renegotiation.
 \emph{Review of Economic Studies}, 66(1), 39--56.
+
+\bibitem{Strotz1955}
+Strotz, R. H. (1955).
+Myopia and inconsistency in dynamic utility maximization.
+\emph{Review of Economic Studies}, 23(3), 165--180.
+
+\bibitem{Pollak1968}
+Pollak, R. A. (1968).
+Consistent planning.
+\emph{Review of Economic Studies}, 35(2), 201--208.
+
+\bibitem{Hicks1939}
+Hicks, J. R. (1939).
+\emph{Value and Capital}.
+Oxford University Press.
+
+\bibitem{KydlandPrescott1977}
+Kydland, F. E., \& Prescott, E. C. (1977).
+Rules rather than discretion: The inconsistency of optimal plans.
+\emph{Journal of Political Economy}, 85(3), 473--491.
+
+\bibitem{HartTirole1988}
+Hart, O. D., \& Tirole, J. (1988).
+Contract renegotiation and Coasian dynamics.
+\emph{Review of Economic Studies}, 55(4), 509--540.
+
+\bibitem{Dewatripont1988}
+Dewatripont, M. (1988).
+Commitment through renegotiation-proof contracts with third parties.
+\emph{Review of Economic Studies}, 55(3), 377--390.
+
+\bibitem{BarroGordon1983}
+Barro, R. J., \& Gordon, D. B. (1983).
+Rules, discretion and reputation in a model of monetary policy.
+\emph{Journal of Monetary Economics}, 12(1), 101--121.
 
 \bibitem{Knight1921}
 Knight, F. H. (1921).
