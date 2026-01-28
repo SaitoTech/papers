@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 16:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -597,7 +597,7 @@ al/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
 <images/section4-1.png, id=177, 307.1475pt x 200.75pt>
 File: images/section4-1.png Graphic file (type png)
 <use images/section4-1.png>
-Package pdftex.def Info: images/section4-1.png  used on input line 356.
+Package pdftex.def Info: images/section4-1.png  used on input line 355.
 (pdftex.def)             Requested size: 289.08112pt x 188.95313pt.
 
 
@@ -605,17 +605,17 @@ Package pdftex.def Info: images/section4-1.png  used on input line 356.
 <images/section4-2.png, id=184, 306.14375pt x 197.73875pt>
 File: images/section4-2.png Graphic file (type png)
 <use images/section4-2.png>
-Package pdftex.def Info: images/section4-2.png  used on input line 374.
+Package pdftex.def Info: images/section4-2.png  used on input line 373.
 (pdftex.def)             Requested size: 289.08112pt x 186.72833pt.
 <images/section4-3.png, id=187, 570.13pt x 278.03876pt>
 File: images/section4-3.png Graphic file (type png)
 <use images/section4-3.png>
-Package pdftex.def Info: images/section4-3.png  used on input line 400.
+Package pdftex.def Info: images/section4-3.png  used on input line 399.
 (pdftex.def)             Requested size: 289.08112pt x 140.97484pt.
 <images/section4-4.png, id=189, 572.1375pt x 283.0575pt>
 File: images/section4-4.png Graphic file (type png)
 <use images/section4-4.png>
-Package pdftex.def Info: images/section4-4.png  used on input line 417.
+Package pdftex.def Info: images/section4-4.png  used on input line 416.
 (pdftex.def)             Requested size: 289.08112pt x 143.01848pt.
 
 
@@ -623,7 +623,7 @@ Package pdftex.def Info: images/section4-4.png  used on input line 417.
 <images/section5-1.png, id=199, 538.01pt x 287.0725pt>
 File: images/section5-1.png Graphic file (type png)
 <use images/section5-1.png>
-Package pdftex.def Info: images/section5-1.png  used on input line 447.
+Package pdftex.def Info: images/section5-1.png  used on input line 446.
 (pdftex.def)             Requested size: 289.08112pt x 154.25027pt.
 
 
@@ -632,13 +632,13 @@ Package pdftex.def Info: images/section5-1.png  used on input line 447.
 [9 <./images/section4-3.png>]
 
 [10 <./images/section4-4.png>]
-Overfull \hbox (2.04033pt too wide) in paragraph at lines 534--538
+Overfull \hbox (2.04033pt too wide) in paragraph at lines 533--537
 []\T1/lmr/m/n/10.95 Yet these se-lec-tive dis-clo-sure strate-gies ex-ist only 
 in non-revelation-equivalent
  []
 
 
-Overfull \hbox (1.24pt too wide) in paragraph at lines 543--548
+Overfull \hbox (1.24pt too wide) in paragraph at lines 542--547
 \T1/lmr/m/n/10.95 Throughout this pa-per, we use \T1/lmr/m/it/10.95 un-cer-tain
 ty \T1/lmr/m/n/10.95 in the sense ar-tic-u-lated by Knight,
  []
@@ -647,11 +647,12 @@ ty \T1/lmr/m/n/10.95 in the sense ar-tic-u-lated by Knight,
 
 [11 <./images/section5-1.png>]
 
-[12{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/l
-ocal/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texli
-ve/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
+[12]
 
-[13{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+[13{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/l
+ocal/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texli
+ve/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2025/texmf-
+dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [14]
 
@@ -712,13 +713,14 @@ Overfull \hbox (136.20314pt too wide) in paragraph at lines 1038--1112
  [][] 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-133.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
+
 
 [22]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+133.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 Overfull \hbox (4.94704pt too wide) in paragraph at lines 1154--1157
 []\T1/lmr/m/it/10.95 Arbitrages: \T1/lmr/m/n/10.95 Dif-fer-ences be-tween lo-ca
 l ex-e-cu-tion op-por-tu-ni-ties and global
@@ -751,13 +753,13 @@ per No.
 
 
 [29]
+
+[30]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
 568.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-
-[30]
 
 [31]
 
@@ -792,7 +794,7 @@ lic/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr
 i9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></u
 sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/te
 xlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on hurwicz.pdf (32 pages, 500160 bytes).
+Output written on hurwicz.pdf (32 pages, 500211 bytes).
 PDF statistics:
  477 PDF objects out of 1000 (max. 8388607)
  393 compressed objects within 4 object streams

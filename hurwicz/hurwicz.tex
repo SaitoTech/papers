@@ -207,8 +207,7 @@ representative taxonomy.
 
 Existing research covers these games as well. Because their incentives are
 path-dependent, we know players evaluate strategies over histories rather
-than in isolation (Abreu, Pearce \& Stacchetti; Fudenberg \& Levine; Fudenberg \& Maskin)\cite{AbreuPearceStacchetti,FudenbergLevine1994,FudenbergMaskin1986}
-. Players may also reassess earlier choices in a phenomenon known as
+than in isolation (Abreu, Pearce \& Stacchetti; Fudenberg \& Levine; Fudenberg \& Maskin)\cite{AbreuPearceStacchetti,FudenbergLevine1994,FudenbergMaskin1986}. Players may also reassess earlier choices in a phenomenon known as
 \emph{time inconsistency} (see Strotz; Pollack; Hicks; Kydland \& Prescott), which
 is destabilizing not only because agents may want to revise plans, but because
 the possibility of revision may be anticipated (Hart \& Tirole;
@@ -216,7 +215,7 @@ Dewatripont; Barro \& Gordon). Incentive compatibility can fail even if all
 parties regard the unrevised outcome as mutually beneficial (Farrell \& Maskin; Maskin \& Moore)\cite{FarrellMaskin1989,MaskinMoore1988}.
 
 The problem with \emph{ex post revision} is that it creates the same need for a credible punishment
-that Hurwicz identified in statics setting. Hurwicz assumed such punishment was impossible in
+that Hurwicz identified in static settings. Hurwicz assumed such punishment was impossible in
 decentralized environments lacking institutions capable of observing and
 punishing inconsistency. His logic extends naturally to dynamic games with
 incentives for revision, making it surprising that circular mechanisms can
@@ -234,7 +233,7 @@ by leveraging expectations of future payoffs in their
 enforcement structure (Maskin \& Moore; Abreu, Pearce \& Stacchetti).
 
 The remainder of this paper shows how a narrow subclass of mechanisms can fulfill
-these criteria by creating dual-enforcement regime that allows the
+these criteria by creating a dual-enforcement regime that allows the
 mechanism to optimize its own security function by observing it indirectly in
 the revealed preference players show to coordinate beyond the scope of its
 enforcement guarantees.
@@ -481,54 +480,54 @@ meta-games outside the mechanism’s core enforcement regime. Players have a str
 choice of which regime to use for preference revelation, and the economic consequences 
 of deception can vary based on which communication channel is chosen.
 
-The non-scalar messages that create privacy on the base layer then reinforce the 
-informational isolation of the meta-game, as no players communicating through those 
-channels can providing credible evidence of consistency with their preferences as 
-revealed obliquely under enforcement penalities. Where the mechanism makes these 
-games rational for participants, it essentially inducing kenosis: pulling away from 
-players to create a safe space for them to interact that will let it observe, 
-insulated from its influence, the marginal utility of its own enforcement
-function.
+The non-scalar messages that protect privacy on the base layer then reinforce the 
+informational integrity of the meta-game, as players engaging in strategic disclosure 
+cannot provide verifiable evidence of consistent beliefs with their preferences as 
+revealed obliquely under the main enforcement regime. Where the mechanism makes playing 
+such games rational for participants, it essentially induces kenosis: pulling away from 
+players to create a safe space for them to interact that it cannot observe, but that 
+will let it intuit, insulated from its influence, the marginal utility of its own 
+enforcement function.
 
 To see the solution more clearly, consider a case where Alice asks Bob to take an
 action that lowers security in the mechanism. From Bob's perspective, Alice may 
 be attempting to convert a global public good (security) into a dyadic trust good, 
 capturing the savings while Bob absorbs the risk. Alternatively, her offer may be 
-sincere, with Alice willing to bear exposure while offering Bob the benefits. Both 
-interpretations are consistent with her proposal.
+sincere, with Alice offering Bob benefits for helping her lower in-mechanism security. 
 
 And while some may argue that Bob lacks all rational grounds to judge Alice’s 
-proposal, we cannot restrict Bob from rational decisions on the basis of his 
-private preferences. The mechanism may not be able to observe them directly, but Bob 
-is the one who determines their relevance. And there is no harm to letting him do so, for
-if Bob already prefers lower security, he needs no persuasion. Alice’s 
-suggestion only becomes decisive in the exact case when Bob’s strategy depends on it. 
-And in that case her lack of it justifies his maintaining a high-security equilibrium, while 
-his trust in her rationalizes lowering it.
+proposal, we cannot restrict Bob deciding himself on the basis of his private 
+preferences. The mechanism may not be able to observe those directly, but Bob 
+is the decision-maker who determines their relevance. And there is no harm to 
+letting him do so, for if Bob already prefers lower security, he needs no persuasion. 
+Alice’s suggestion only becomes decisive in the exact case when Bob’s strategy 
+changes based on it. And in that case her lack of credibility justifies his 
+maintaining a high-security equilibrium, while his trust in her rationalizes 
+lowering it.
 
 From the perspective of the mechanism, Alice is opening a Non-Myerson Layer whose 
-output is opaque to the base-layer, operates under a different enforcement
-regime and results in a non-scalar output that can invisibly commingle Bob's own 
-preferences along with his trust in her. The mechanism can see Bob’s choice but not 
-known what preferences motivates it. But it does not need this information. All it 
-knows is that if Bob trusts Alice when its enforcement regime could protect him from 
-loss, its level of protection is excessive.
+output and existence is opaque to the base-layer, operates under a different enforcement
+regime and results in a non-scalar output that is indistinguishable from one produced
+under the base-layer, and will invisibly commingle Bob's other preferences with his 
+assessment of her credibility. The mechanism can see Bob’s choice without knowing what 
+preferences motivates it. But it does not need this information: if Bob trusts Alice 
+when its enforcement regime could protect him from loss, its level of protection is excessive.
 
-The mechanism is thus creating a counterfactual game it can observe indirectly, 
-one which signals the marginal utility of its own enforcement function back to it. 
-This signal is credible precisely because Alice cannot cite any verifiable action 
-taken under the mechanism’s enforcement regime as evidence of her credibility. 
-Were such a link possible, Bob could assign probabilities to
+The mechanism is essentially inducing a counterfactual game it cannot observe, 
+one which nonetheless signals the marginal utility of its own enforcement function back 
+to it in a form indistinguishable from normal gameplay. And this signal is credible precisely 
+because Alice cannot cite any verifiable action taken under the mechanism’s enforcement 
+regime as evidence of her credibility. Were such a link possible, Bob could assign probabilities to
 Alice’s sincerity and uncertainty would collapse into risk, correlating the two
 games and destroying the informational separation required for inference.
 
 For readers accustomed to direct mechanisms, it may seem counterintuitive that a
 mechanism never observes the preferences that are decisive. But it does not need
-to. When enforcement levels are far from equilibrium, private communications are 
+to. When enforcement levels are above equilibrium, private communications are 
 cost-saving and attractive. As they converge toward equilibrium, the risks 
-of disclosure grow while savings shirk, credibility becomes less valuable, and disclosure
-strategies less attractive on the margin. The mechanism is essentially incentivizing 
-the creation of alternate enforcement regimes in the proportion needed to drive its 
+of disclosure grow while its benefits shrink, and disclosure strategies become 
+less attractive on the margin. The mechanism essentially incentivizes retreat 
+to alternate enforcement regimes in the proportion needed to drive its 
 marginal utility of enforcement into optimal equilibrium.
 
 Yet these selective disclosure strategies exist only in non-revelation-equivalent
@@ -542,7 +541,7 @@ credibility cannot be established within the mechanism itself.
 
 Throughout this paper, we use \emph{uncertainty} in the sense articulated by
 Knight, Keynes, and G.~L.~S.~Shackle: not as a variable that can be calculated or
-approximated probabilistically, but as \emph{unknowability} --- the absence of
+approximated probabilistically, but as \emph{unknowability} -- the absence of
 any representation that can be rationalized within an internally coherent
 evaluative framework. As Keynes famously wrote:
 
@@ -556,21 +555,22 @@ ontological statement. We do not attribute moral qualities to trust, nor
 deny that it may be the product of utilitarian calculation. We merely name a
 variable that motivates action when enforcement levels are decisive at
 the margins. So we state that an agent acts on trust whenever they accept that statements offered
-by a counterparty may be false, yet prefer to act as if they are true. An agent
-who withholds trust prefers to assume they may be false and instead relies on
+by a counterparty may be false, yet prefer to act as if they are true. Agents
+who withhold trust prefer to assume statements may be false and instead rely on
 the baseline guarantees enforced by the mechanism.
 
 This approach contrasts with much modern work in computer science, which seeks
 to eliminate uncertainty by expanding the state space through additional
 parameters, beliefs, or utility dimensions. We do not dispute the usefulness of
-such methods, but deny that they can eliminate epistemic uncertainty.
+such methods, but deny that they can achieve endogenous unactionability.
 
 The reason is that regardless of how one conceptualizes trust -- whether as a
-psychological variable or a non-scalar value that can be disaggregated and
-dissected -- representing it as a direct type collapses the information it is
+psychological variable or a non-scalar value that can be formally modelled -- 
+representing it as a direct type to the base-layer collapses the information it is
 meant to convey. The problem is connected to the way security and trust become
 substitutes across uncorrelated games when agents have the option of lowering
-enforcement costs in one by extending trust in another.
+enforcement costs in one by extending trust in another. We can show this formally.
+
 
 \subsection{Trust as an Unparameterizable Domain Space}
 
@@ -597,7 +597,7 @@ enforcement. Let $R(S,\tau)$ denote residual cheating risk, where
 Trust and security are substitutes in this environment: trust reduces the
 marginal utility of additional enforcement. When Alice proposes that Bob
 cooperate with her to reduce security, she is implicitly suggesting that welfare
-can be jointly increased by reallocating resources from enforcement toward other
+can be jointly increased by reallocating resources from enforcement to other
 forms of utility at the margin.
 
 Welfare improvements require changing the socially optimal level of security,
