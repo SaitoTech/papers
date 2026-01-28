@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 06:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  28 JAN 2026 12:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -594,12 +594,12 @@ al/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
 [4]
 
 [5]
-<images/section4-1.png, id=155, 307.1475pt x 200.75pt>
+<images/section4-1.png, id=179, 307.1475pt x 200.75pt>
 File: images/section4-1.png Graphic file (type png)
 <use images/section4-1.png>
 Package pdftex.def Info: images/section4-1.png  used on input line 357.
 (pdftex.def)             Requested size: 289.08112pt x 188.95313pt.
-<images/section4-2.png, id=157, 306.14375pt x 197.73875pt>
+<images/section4-2.png, id=181, 306.14375pt x 197.73875pt>
 File: images/section4-2.png Graphic file (type png)
 <use images/section4-2.png>
 Package pdftex.def Info: images/section4-2.png  used on input line 375.
@@ -607,12 +607,12 @@ Package pdftex.def Info: images/section4-2.png  used on input line 375.
 
 
 [6]
-<images/section4-3.png, id=165, 570.13pt x 278.03876pt>
+<images/section4-3.png, id=189, 570.13pt x 278.03876pt>
 File: images/section4-3.png Graphic file (type png)
 <use images/section4-3.png>
 Package pdftex.def Info: images/section4-3.png  used on input line 401.
 (pdftex.def)             Requested size: 289.08112pt x 140.97484pt.
-<images/section4-4.png, id=167, 572.1375pt x 283.0575pt>
+<images/section4-4.png, id=191, 572.1375pt x 283.0575pt>
 File: images/section4-4.png Graphic file (type png)
 <use images/section4-4.png>
 Package pdftex.def Info: images/section4-4.png  used on input line 418.
@@ -620,7 +620,7 @@ Package pdftex.def Info: images/section4-4.png  used on input line 418.
 
 
 [7 <./images/section4-1.png>]
-<images/section5-1.png, id=177, 538.01pt x 287.0725pt>
+<images/section5-1.png, id=202, 538.01pt x 287.0725pt>
 File: images/section5-1.png Graphic file (type png)
 <use images/section5-1.png>
 Package pdftex.def Info: images/section5-1.png  used on input line 448.
@@ -743,18 +743,19 @@ Overfull \hbox (19.29951pt too wide) in paragraph at lines 1269--1275
 [27]
 
 [28]
-Underfull \hbox (badness 1107) in paragraph at lines 1434--1437
+Underfull \hbox (badness 1107) in paragraph at lines 1446--1449
 []\T1/lmr/m/n/10.95 Attar, A. (2021). Pri-vate dis-clo-sures. SSRN Work-ing Pa-
 per No.
  []
 
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-497.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
+
 
 [29]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+509.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 
 [30]
 
@@ -763,24 +764,17 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-Package rerunfilecheck Warning: File `hurwicz.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `hurwicz.out':
-(rerunfilecheck)             Before: 1E007B05EA6DBE12BC638851B715AAF5;4648
-(rerunfilecheck)             After:  922A0A5480C124773CC0612A3024B9AA;6142.
+Package rerunfilecheck Info: File `hurwicz.out' has not changed.
+(rerunfilecheck)             Checksum: 922A0A5480C124773CC0612A3024B9AA;6142.
  ) 
 Here is how much of TeX's memory you used:
- 13628 strings out of 473190
- 214793 string characters out of 5715800
+ 13634 strings out of 473190
+ 214885 string characters out of 5715800
  629497 words of memory out of 5000000
- 36562 multiletter control sequences out of 15000+600000
+ 36568 multiletter control sequences out of 15000+600000
  637384 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,715b,610s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,715b,612s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/tex
@@ -796,10 +790,10 @@ lic/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr
 i9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></u
 sr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/te
 xlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on hurwicz.pdf (31 pages, 496187 bytes).
+Output written on hurwicz.pdf (31 pages, 497364 bytes).
 PDF statistics:
- 447 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
+ 465 PDF objects out of 1000 (max. 8388607)
+ 382 compressed objects within 4 object streams
  114 named destinations out of 1000 (max. 500000)
- 194 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 242 words of extra memory for PDF output out of 10000 (max. 10000000)
 
