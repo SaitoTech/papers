@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
 % --------------------
 % Encoding & Typography
@@ -6,6 +6,10 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{changepage}
+\usepackage{tabularx}
 
 % --------------------
 % Page Layout
@@ -136,7 +140,7 @@ result, and concluded it made incentive compatibility impossible in all
 informationally decentralized systems lacking authorities to enforce transfers.
 
 \begin{quote}\small
-These results show that the difficulty is due not to our lack of inventiveness, but to a fundamental conflict among such mechanism attributes as the optimality of equilibria, incentive-compatibility of the rules, and the requirements of informational decentralization.\footnote{Hurwicz, L. (1972). On the design of mechanisms for resource allocation. \emph{American Economic Review Papers \& Proceedings}, 62(2), 1-30.}
+These results show that the difficulty is due not to our lack of inventiveness, but to a fundamental conflict among such mechanism attributes as the optimality of equilibria, incentive\-compatibility of the rules, and the requirements of informational decentralization.\footnote{Hurwicz, L. (1972). On the design of mechanisms for resource allocation. \emph{American Economic Review Papers \& Proceedings}, 62(2), 1-30.}
 \end{quote}
 
 Designers have accepted these arguments rather than confronting them directly.
@@ -320,7 +324,7 @@ reduction are fairly easy to implement technically, including strategic routing
 information disclosure (Attar). Claims of universal reduction only hold under 
 restrictive assumptions that exclude these phenomena.
 
-These non-revelation-equivalent strategies become meaningful when mechanisms are
+These non\-revelation\-equivalent strategies become meaningful when mechanisms are
 treated as \emph{constructs} composed of multiple layers. In such designs, each 
 layer can serve a different function, yet condition on inputs from previous
 layers and create outputs for subsequent ones. A boundary between layers exists
@@ -445,16 +449,10 @@ privacy walls and reveal preferences directly to other participants.
 \begin{narrowfigure}
     \includegraphics[width=\linewidth]{images/section5-1.png}
   \caption{
-  \textbf{Selective Disclosure as Communications Strategy.}
-  Agents pierce privacy walls and communicate preferences directly through Non-Myerson meta-games 
-  the mechanism encourages to be created in private channels where speech is not tracked or 
-  penalized, but whose output is a structured input returned to the mechanism which drives the 
-  mechanism into equilibrium. This makes it a part of the underlying game, not the "null case" 
-  of player "exit" or "opt-out" as retreats to non-enforcement environments are traditionally 
-  modelled in implementation theory.
-  }
+  \textbf{Selective Disclosure as Communications Strategy.} 
+  Agents pierce privacy walls and communicate preferences directly through Non-Myerson meta-games the mechanism encourages to be created in private channels where speech is not tracked or penalized, but whose output is a structured input returned to the mechanism which drives the mechanism into equilibrium. This makes it a part of the underlying game, not the "null case" of player "exit" or "opt-out" as retreats to non-enforcement environments are traditionally modelled in implementation theory.}
   \label{fig:selective-disclosure}
-  \end{narrowfigure}
+\end{narrowfigure}
 \end{figure}
 
 Such disclosures exist in many auction designs. They are common in
@@ -928,461 +926,7 @@ The lesson returns us, in many ways, to our mythological stories of creation.
 Where stabilizing costs can be paid outside a system, stability can follow.
 Where they cannot, they must be borne within the system in a manner that renders
 them external and incomprehensible to its own rational framework.
-
-
-% --------------------
-% Appendices
-% --------------------
-\appendix
-
-\section{Terminology}
-
-This appendix collects and standardizes the key terms introduced in the paper.
-Its purpose is not to introduce new concepts, but to fix language so that ideas
-are referred to consistently and unambiguously throughout.
-
-\textbf{Mechanism.} A mechanism is a process that specifies admissible actions,
-information structure, and outcome rules governing interactions between agents.
-Following Hurwicz, a mechanism maps actions or messages into outcomes.
-
-\textbf{Incentive compatibility.} A mechanism is incentive compatible with
-respect to a social choice rule if, for each agent, acting according to the
-strategy prescribed by the mechanism is optimal given the strategies of others,
-so that the induced equilibrium implements the intended social choice rule.
-
-\textbf{Direct mechanism.} A direct mechanism is one in which agents report types
-or preferences in a single interface, after which the mechanism selects an
-outcome and transfers enforce truthful revelation. Direct mechanisms are the
-canonical objects governed by the Revelation Principle.
-
-\textbf{Indirect mechanism.} An indirect mechanism is one in which agents express
-preferences through actions taken within the mechanism rather than through
-direct type reports. Outcomes depend non-trivially on how actions are aggregated,
-sequenced, and interpreted.
-
-\textbf{Construct.} A construct is a mechanism composed of multiple internally
-chained layers. Constructs, rather than individual layers, are the primary
-objects of interest in circular and self-referential mechanisms.
-
-\textbf{Layer.} A layer is a subcomponent of a construct in which agents condition
-on inputs and project outputs into subsequent layers in ways that appear to be
-unactionable when layers are studied in isolation.
-
-\textbf{Myerson Layer.} A Myerson Layer is a layer whose incentive structure can
-be faithfully represented as a direct mechanism acting on type reports and
-projecting its output as publicly observable randomness or state changes. Any
-sequential composition of Myerson Layers may be reduced to a single Myerson Layer
-under the Revelation Principle.
-
-\textbf{Non-Myerson Layer.} A Non-Myerson Layer is a layer whose incentive
-structure is not revelation-equivalent. Such layers rely on action-based
-incentives, ambiguous signals, dynamic preference aggregation, delayed
-resolution, or strategic routing, and cannot be reduced without loss of
-essential structure.
-
-\textbf{Privacy wall.} A privacy wall is an informational boundary created by
-Non-Myerson Layers across which actions and outcomes are observable, but
-underlying motivations cannot be uniquely inferred. Privacy walls preserve
-ambiguity of intent by permitting non-scalar variables to motivate action and
-prevent agents from conditioning strategies outside the mechanism on fully
-reconstructible causal explanations of behavior within it.
-
-\textbf{Circular mechanism.} A circular mechanism is a mechanism whose outputs
-re-enter itself as inputs in future stages of play, so that agents’ present
-actions shape the future strategic environment in which they and others must
-act. In circular mechanisms, learning and revision are endogenous, and incentive
-compatibility depends on how the mechanism disciplines attempts to revisit or
-unwind past decisions.
-
-\textbf{Risk.} Risk refers to uncertainty over a fully specified and stable set
-of possible states, where the mapping from actions to outcomes is known and
-probabilities can be meaningfully assigned \emph{ex ante}. Under risk, agents can
-evaluate strategies by computing expected utilities, price deviations in
-advance, and revise behavior through belief updating without incurring
-structural costs beyond those implied by known distributions.
-
-\textbf{Knightian uncertainty.} Knightian uncertainty refers to uncertainty over
-states, variables, or aggregation outcomes that are not defined at the time
-action must be taken, and therefore cannot be assigned probabilities \emph{ex
-ante}.
-
-\textbf{Unactionability.} A constraint is unactionable if agents cannot condition
-their behavior so as to offset, unwind, or neutralize its effects within the
-mechanism, even when the constraint is observed or anticipated.
-
-\textbf{Endogenous unactionability.} A constraint is endogenously unactionable if
-it is generated by strategic interaction within the mechanism and, once
-generated, cannot be neutralized, offset, or unwound by further strategic action
-within that same mechanism.
-
-\textbf{Informational decentralization.} A mechanism is informationally
-decentralized if no agent or authority has access to the full state required to
-determine outcomes or enforce behavior at the time actions are taken.
-Information relevant to outcomes is dispersed across agents and realized only
-through interaction over time.
-
-
-% Appendix B
-
-\section{Circular Mechanisms}
-
-This appendix provides a taxonomy of representative circular mechanisms. The
-purpose is not to be exhaustive, but to illustrate how known families of
-mechanisms relate to the core distinctions developed in the text.
-
-\begin{table*}[t]
-\centering
-\small
-\begin{tabular}{p{4.2cm} p{2.2cm} p{3.2cm} p{6.2cm}}
-\toprule
-\textbf{Mechanism} &
-\textbf{Type} &
-\textbf{Revelation-Equivalent} &
-\textbf{Location of Unactionability} \\
-\midrule
-VCG, Myerson auctions
-& Direct
-& Reducible
-& Exogenous (verifiability, transfers, enforcement assumptions) \\
-
-One-shot voting games (Arrow, Gibbard--Satterthwaite)
-& Direct
-& Reducible
-& Exogenous (fixed rules, no revision, costless speech) \\
-
-Repeated direct mechanisms with Bayesian updating
-& Direct
-& Reducible
-& Exogenous (fixed state space, common priors, stationary likelihoods) \\
-
-Public randomization / correlating mechanisms
-& Both
-& Yes
-& Exogenous (unmanipulable public randomness) \\
-
-Posted-price mechanisms
-& Indirect
-& Reducible
-& Exogenous (prices set outside the mechanism) \\
-
-Continuous double auctions
-& Indirect
-& Irreducible (mostly)
-& Mixed; often exogenous via institutional rules, sometimes endogenous via market impact \\
-
-Reputation systems
-& Indirect
-& Irreducible
-& Endogenous (history-dependent payoffs, difficult to unwind reputational effects) \\
-
-Contract renegotiation mechanisms
-& Indirect
-& Irreducible
-& Mixed; exogenous when courts enforce, endogenous when renegotiation costs persist \\
-
-Prediction markets with endogenous liquidity
-& Indirect
-& Irreducible
-& Endogenous (liquidity and price impact respond to participation but are not fully controllable) \\
-
-Gossip-based broadcast and coordination protocols
-& Indirect
-& Irreducible
-& Exogenous or Mixed (scheduler assumptions, network topology) \\
-
-Proof-of-Work consensus
-& Indirect
-& Irreducible
-& Endogenous (irreversible expenditure of hash) \\
-
-Proof-of-Stake slashing
-& Indirect
-& Irreducible
-& Mixed; Endogenous w/ Exogenous Governance \\
-
-Saito Consensus
-& Indirect
-& Irreducible
-& Endogenous (irreversible loss of continuation value) \\
-
-\bottomrule
-\end{tabular}
-\caption{A taxonomy of circular mechanisms and the location of unactionability.}
-\end{table*}
-
-
-% Appendix C
-
-\section{Saito as an Implemented Instance of Endogenous Unactionability}
-
-This appendix provides a constructive witness to the claims made in the paper. It
-does not attempt to prove correctness, security, or equilibrium properties.
-Rather, it shows how non-reducibility emerges in practice from the structural
-requirements for incentive compatibility identified in theory.
-
-\subsection{Layers, Aggregation, and Arbitrage}
-
-Saito Consensus consists of three Non-Myerson Layers cycling in parallel. Each
-layer aggregates preferences revealed by others into welfare-improving proposals
-that adjust global prices. Three cross-layer properties are primitive structural
-requirements for avoiding impossibility in theory:
-
-\begin{itemize}
-\item \textbf{Continuation value.} Benefits include options for continued play,
-which are actively traded between participants as part of the aggregation
-process, dividing transaction fees into mining and routing payouts.
-
-\item \textbf{Costly uncertainty.} All strategies require participants to commit
-to front-loaded and irreversible expenditures of utility that are fungible with
-continuation value (fees, routing rewards, or resource consumption) under
-uncertainty.
-
-\item \textbf{Informational decentralization.} No trusted authorities exist in
-any layer of the mechanism. Players act under uncertainty about the global
-state, which is dispersed and aggregated only through play over time.
-\end{itemize}
-
-These properties apply to each of the three layers in the mechanism, which are
-distinguished by their aggregation functions and the arbitrage opportunities
-they expose.
-
-\paragraph{User Layer}
-\begin{itemize}
-\item \emph{Aggregates:} Heterogeneous bundles of utility into transactions.
-\item \emph{Arbitrages:} Differences between local execution opportunities and
-global settlement prices, broadcast as transactions for processing and
-settlement by other layers.
-\end{itemize}
-
-\paragraph{Routing Layer}
-\begin{itemize}
-\item \emph{Aggregates:} Bundles of transactions into provisional blocks.
-\item \emph{Arbitrages:} Differences between marginal routing rewards and the cost
-of providing ancillary collusion goods, producing efficient routing paths for
-payout division.
-\end{itemize}
-
-\paragraph{Chain Resolution Layer}
-\begin{itemize}
-\item \emph{Aggregates:} Bundles of blocks into chains with a cost of revision.
-\item \emph{Arbitrages:} Discrepancies between current aggregate security
-preferences and expected future settlement conditions, broadcast as payouts
-that simultaneously propose adjustments to global prices.
-\end{itemize}
-
-Each layer acts both as an aggregator of upstream preferences and as a generator
-of downstream arbitrage opportunities. No layer determines final meaning in
-isolation. Convergence is emergent, and the cost of revision increases with block
-settlement depth in the game tree.
-
-\subsection{Trust, Uncertainty, and Exposure}
-
-Trust is a semantically meaningless variable. It is measured only indirectly,
-through the shifts it induces from reliance on mechanism-enforced collective
-settlement guarantees to coordination through private channels where
-counterparty credibility is subject to time inconsistency.
-
-These shifts take the form of selective disclosure strategies that pierce the
-privacy walls of the mechanism. Where such strategies are rational, they improve
-public welfare by optimizing the enforcement function. Where they are irrational,
-they reduce the expected utility of the proposer.
-
-\paragraph{User Layer}
-\begin{itemize}
-\item Selective disclosure of preference maps to routers.
-\end{itemize}
-
-\paragraph{Routing Layer}
-\begin{itemize}
-\item Selective disclosure of preference maps to users.
-\item Selective disclosure of routing competitiveness to peers.
-\end{itemize}
-
-\paragraph{Chain Resolution Layer}
-\begin{itemize}
-\item Selective disclosure of willingness to bear future exposure.
-\end{itemize}
-
-All forms of selective disclosure become less rational as the marginal utility of
-environmental trust converges toward equilibrium with the marginal utility of the
-mechanism’s enforcement function.
-
-\subsection{Non-Reducibility under the Revelation Principle}
-
-The mechanism is a three-layer construct composed entirely of Non-Myerson
-Layers, and cannot be reduced to a revelation-equivalent mechanism. Messages are
-shared through public channels only as non-scalar values. Multiple strategies
-block reduction.
-
-\paragraph{User Layer}
-\begin{itemize}
-\item Routing strategies (Renou \& Tomala).
-\item Selective disclosure (Attar).
-\end{itemize}
-
-\paragraph{Routing Layer}
-\begin{itemize}
-\item Routing strategies (Renou \& Tomala).
-\item Selective disclosure (Attar).
-\end{itemize}
-
-\paragraph{Chain Resolution Layer}
-\begin{itemize}
-\item Routing strategies (Renou \& Tomala).
-\item Selective disclosure (Attar).
-\item Time-uncertain fixed-difficulty hashing lottery (Strack \& Mora).
-\end{itemize}
-
-Across layers, selective disclosure introduces additional Non-Myerson Layers
-that observe mechanism outputs and produce non-scalar outputs reflecting the
-attractiveness of coordination outside the mechanism’s enforcement guarantees.
-
-No portion of the mechanism is reducible to a direct mechanism:
-\begin{itemize}
-\item No layer relies on truthful type reports.
-\item All layers operate concurrently rather than sequentially.
-\item Information flows are non-stationary and non-topologizable.
-\item Actions project ambiguous signals rather than verifiable messages.
-\item Some strategies skip layers through uncertain execution order.
-\item Learning cannot model semantically undefined variables.
-\end{itemize}
-
-Attempts to analyze any single layer in isolation assume away the exogenous
-structure provided by the construct as a whole, reintroducing verifiability only
-by destroying the opacity that allows the mechanism to observe rational
-responses to the marginal utility of enforcement.
-
-Because all forms of value are fungible with continuation value, higher-
-dimensional optimization emerges over message spaces containing utilities that
-can be exchanged for continuation value. These trades aggregate into global
-prices, inducing convergence.
-
-\subsection{What This Appendix Does Not Claim}
-
-This appendix does not claim:
-\begin{itemize}
-\item that Saito is unique;
-\item that similar mechanisms are easy to design; or
-\item that the theory provides a general construction algorithm.
-\end{itemize}
-
-It makes a narrower and stronger observation: \emph{a mechanism satisfying the
-theoretical constraints identified through implementation theory does exist},
-and when other incentive-compatible mechanisms are discovered, they will exhibit
-the same structural properties.
-
-
-
-% Appendix D
-
-\section{Interpretive Constraints and Irreducible Structure}
-
-This paper deliberately avoids equilibrium characterizations and toy models that
-represent trust, credibility, or willingness to bear exposure as actionable parameters. 
-Any such formalization would reenact the collapse it diagnoses: decisive variables 
-would become conditionable within the meta-theory, reintroducing the gravity well of 
-revelation-equivalent mechanisms that these constructions are designed to escape. The 
-argument therefore proceeds through structural contradiction, historical diagnosis of 
-impossibility results, and constructive witness rather than internal equilibrium proofs. 
-This is a methodological boundary, not an absence of rigor.
-
-\subsection{Irreducibility and Forbidden Reductions}
-
-The mechanisms studied in this paper are intentionally
-\emph{non-revelation-equivalent}. Any analytical move that presupposes the
-applicability of the Revelation Principle --- including reduction to direct
-mechanisms, representation of decisive variables as scalar types, or evaluation
-under a single enforcement regime --- alters the object under study and
-invalidates conclusions drawn from it.
-
-In particular:
-\begin{itemize}
-\item No agent possesses a type that encodes trust, credibility, or willingness to
-bear exposure.
-\item No report or message can truthfully represent preferences over enforcement
-levels.
-\item No single enforcement regime governs all strategic interaction.
-\end{itemize}
-
-Analyses that assume otherwise implicitly reintroduce exogenous authority or
-verifiability and therefore collapse the mechanism into a different class.
-
-\subsection{Non-Scalar Variables and Epistemic Boundaries}
-
-Several variables that are decisive for equilibrium selection in these mechanisms
-are \emph{non-scalar} and intentionally unrepresentable. These include trust,
-credibility, and continuation value under uncertainty. Their role is not to be
-measured directly, but to motivate action in ways that cannot be neutralized or
-arbitraged within the mechanism.
-
-The paper’s central claim is not that such variables are ineffable or
-psychological, but that any attempt to encode them as types destroys the
-information they convey. This creates epistemic boundaries --- privacy walls ---
-across which actions are observable but intent is not reconstructible. These
-boundaries are structural, not accidental.
-
-\subsection{Parallel Enforcement Regimes}
-
-Selective disclosure strategies operate by shifting coordination into
-\emph{parallel games} governed by different enforcement regimes. These regimes
-are not deviations, collusion, or exits from the mechanism, but are induced by its
-design and feed back into it as structured but opaque signals.
-
-The mechanism does not observe the content of these interactions. It observes
-only the willingness of agents to bear exposure outside its guarantees. This is
-sufficient to infer the marginal utility of its own enforcement function.
-
-Any interpretation that treats off-mechanism coordination as exogenous or illicit
-misses this feedback loop and misidentifies the equilibrium logic.
-
-\subsection{Shiva, Entropy, and Continuation Value}
-
-The role played by \emph{Shiva} in this paper should not be understood as that of
-a discretionary authority, governance body, or punitive enforcer. Shiva denotes
-the \emph{irreversible sink} required to couple continuation value with real
-costs over time.
-
-Shiva is external to the mechanism’s strategic domain but internal to the agents’
-evaluative horizon. It is not a player, rule, layer, or governance body, and no
-action within the mechanism can condition on it strategically. Yet agents
-experience Shiva as time, irreversibility, and loss, and therefore incorporate
-its effects directly into their private judgments of continuation value. In this
-sense, Shiva supplies the functional role of authority without being an
-institutional authority: it constrains behavior by rendering certain choices
-irreversible, not by issuing commands, verifying actions, or enforcing rules.
-Because Shiva cannot be manipulated, appealed to, or conditioned upon within
-the mechanism, it remains authoritative only in the phenomenological sense that
-its consequences are real to participants and unavoidable over time.
-
-Hashing links two aspects of the same object:
-\begin{enumerate}
-\item \emph{Continuation value}, which agents trade and allocate through
-strategic interaction.
-\item \emph{Entropy expenditure}, which renders certain actions irreversible and
-prevents the unwinding of exposure.
-\end{enumerate}
-
-These are not separable. Continuation value is only meaningful because it can be
-irreversibly spent; entropy expenditure is only economically relevant because it
-destroys continuation value. Framing Shiva as a ``high cost'' misunderstands its
-function: it is not a deterrent priced in equilibrium, but the thermodynamic
-constraint that makes time, commitment, and revision meaningful.
-
-Without such an entropy sink, enforcement collapses into arbitrage, as exposure
-can always be reversed or postponed. With it, costs are front-loaded under
-uncertainty and cannot be neutralized by strategic play.
-
-\subsection{Evaluation Criterion}
-
-Incentive compatibility in these mechanisms must be evaluated over
-\emph{histories and parallel games}, not reports. The relevant question is not
-whether agents can profitably misreport preferences, but whether they can improve
-expected welfare by manipulating the mechanism’s enforcement function without
-bearing irreversible exposure.
-
-The paper’s claims apply only under this evaluative frame. Within it,
-impossibility results derived for direct mechanisms remain correct but
-incomplete.
+\clearpage
 
 
 % --------------------
@@ -1391,7 +935,7 @@ incomplete.
 % --------------------
 % Bibliography
 % --------------------
-
+\newpage
 \begin{thebibliography}{99}
 
 \bibitem{Hurwicz1972}
@@ -1613,6 +1157,464 @@ Barriers to collusion-resistant transaction fee mechanisms.
 Working paper.
 
 \end{thebibliography}
-\end{document}
 
+
+\newpage
+
+% --------------------
+% Appendices
+% --------------------
+\appendix
+
+\section{Terminology}
+
+This appendix collects and standardizes the key terms introduced in the paper.
+Its purpose is not to introduce new concepts, but to fix language so that ideas
+are referred to consistently and unambiguously throughout.
+
+\textbf{Mechanism.} A mechanism is a process that specifies admissible actions,
+information structure, and outcome rules governing interactions between agents.
+Following Hurwicz, a mechanism maps actions or messages into outcomes.
+
+\textbf{Incentive compatibility.} A mechanism is incentive compatible with
+respect to a social choice rule if, for each agent, acting according to the
+strategy prescribed by the mechanism is optimal given the strategies of others,
+so that the induced equilibrium implements the intended social choice rule.
+
+\textbf{Direct mechanism.} A direct mechanism is one in which agents report types
+or preferences in a single interface, after which the mechanism selects an
+outcome and transfers enforce truthful revelation. Direct mechanisms are the
+canonical objects governed by the Revelation Principle.
+
+\textbf{Indirect mechanism.} An indirect mechanism is one in which agents express
+preferences through actions taken within the mechanism rather than through
+direct type reports. Outcomes depend non-trivially on how actions are aggregated,
+sequenced, and interpreted.
+
+\textbf{Construct.} A construct is a mechanism composed of multiple internally
+chained layers. Constructs, rather than individual layers, are the primary
+objects of interest in circular and self-referential mechanisms.
+
+\textbf{Layer.} A layer is a subcomponent of a construct in which agents condition
+on inputs and project outputs into subsequent layers in ways that appear to be
+unactionable when layers are studied in isolation.
+
+\textbf{Myerson Layer.} A Myerson Layer is a layer whose incentive structure can
+be faithfully represented as a direct mechanism acting on type reports and
+projecting its output as publicly observable randomness or state changes. Any
+sequential composition of Myerson Layers may be reduced to a single Myerson Layer
+under the Revelation Principle.
+
+\textbf{Non-Myerson Layer.} A Non-Myerson Layer is a layer whose incentive
+structure is not revelation-equivalent. Such layers rely on action-based
+incentives, ambiguous signals, dynamic preference aggregation, delayed
+resolution, or strategic routing, and cannot be reduced without loss of
+essential structure.
+
+\textbf{Privacy wall.} A privacy wall is an informational boundary created by
+Non-Myerson Layers across which actions and outcomes are observable, but
+underlying motivations cannot be uniquely inferred. Privacy walls preserve
+ambiguity of intent by permitting non-scalar variables to motivate action and
+prevent agents from conditioning strategies outside the mechanism on fully
+reconstructible causal explanations of behavior within it.
+
+\textbf{Circular mechanism.} A circular mechanism is a mechanism whose outputs
+re-enter itself as inputs in future stages of play, so that agents’ present
+actions shape the future strategic environment in which they and others must
+act. In circular mechanisms, learning and revision are endogenous, and incentive
+compatibility depends on how the mechanism disciplines attempts to revisit or
+unwind past decisions.
+
+\textbf{Risk.} Risk refers to uncertainty over a fully specified and stable set
+of possible states, where the mapping from actions to outcomes is known and
+probabilities can be meaningfully assigned \emph{ex ante}. Under risk, agents can
+evaluate strategies by computing expected utilities, price deviations in
+advance, and revise behavior through belief updating without incurring
+structural costs beyond those implied by known distributions.
+
+\textbf{Knightian uncertainty.} Knightian uncertainty refers to uncertainty over
+states, variables, or aggregation outcomes that are not defined at the time
+action must be taken, and therefore cannot be assigned probabilities \emph{ex
+ante}.
+
+\textbf{Unactionability.} A constraint is unactionable if agents cannot condition
+their behavior so as to offset, unwind, or neutralize its effects within the
+mechanism, even when the constraint is observed or anticipated.
+
+\textbf{Endogenous unactionability.} A constraint is endogenously unactionable if
+it is generated by strategic interaction within the mechanism and, once
+generated, cannot be neutralized, offset, or unwound by further strategic action
+within that same mechanism.
+
+\textbf{Informational decentralization.} A mechanism is informationally
+decentralized if no agent or authority has access to the full state required to
+determine outcomes or enforce behavior at the time actions are taken.
+Information relevant to outcomes is dispersed across agents and realized only
+through interaction over time.\newpage
+
+% Appendix B
+\section{Illustrative Circular Mechanisms}
+
+\begin{adjustwidth}{-0.75in}{-0.75in}
+\begin{table*}[!t]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabularx}{\linewidth}{
+  p{3.4cm}
+  p{1.6cm}
+  p{2.4cm}
+  X
+}
+\toprule
+\textbf{Mechanism} &
+\textbf{Type} &
+\textbf{Revelation-Equivalent} &
+\textbf{Location of Unactionability} \\
+\midrule
+
+VCG, Myerson auctions
+& Direct
+& Reducible
+& Exogenous (verifiability, transfers, enforcement assumptions) \\
+
+One-shot voting games
+& Direct
+& Reducible
+& Exogenous (fixed rules, no revision, costless speech) \\
+
+Repeated direct games (Bayesian updating)
+& Direct
+& Reducible
+& Exogenous (fixed state space, common priors, stationary likelihoods) \\
+
+Public randomization / correlating
+& Both
+& Reducible
+& Exogenous (unmanipulable public randomness) \\
+
+Posted-price mechanisms
+& Indirect
+& Reducible
+& Exogenous (prices set outside the mechanism) \\
+
+Continuous double auctions
+& Indirect
+& Irreducible (mostly)
+& Mixed; exogenous via institutional rules, endogenous via market impact \\
+
+Reputation systems
+& Indirect
+& Irreducible
+& Endogenous (history-dependent payoffs, reputational effects) \\
+
+Contract renegotiation mechanisms
+& Indirect
+& Irreducible
+& Mixed; exogenous via courts, endogenous via renegotiation costs \\
+
+Prediction markets (endogenous liquidity)
+& Indirect
+& Irreducible
+& Endogenous (liquidity and price impact respond uncontrollably) \\
+
+Proof-of-Work consensus
+& Indirect
+& Irreducible
+& Endogenous (irreversible expenditure of hash) \\
+
+Proof-of-Stake slashing
+& Indirect
+& Irreducible
+& Mixed; Endogenous w/ Exogenous Governance \\
+
+Saito Consensus
+& Indirect
+& Irreducible
+& Endogenous (irreversible loss of continuation value) \\
+
+\bottomrule
+\end{tabularx}
+\caption{A taxonomy of circular mechanisms with unactionability}
+\end{table*}
+\end{adjustwidth}
+\clearpage
+
+% Appendix C
+
+\section{Saito as an Implemented Instance of Endogenous Unactionability}
+
+This appendix provides a constructive witness to the claims made in the paper. It
+does not attempt to prove correctness, security, or equilibrium properties.
+Rather, it shows how non-reducibility emerges in practice from the structural
+requirements for incentive compatibility identified in theory.
+
+\subsection{Layers, Aggregation, and Arbitrage}
+
+Saito Consensus consists of three Non-Myerson Layers cycling in parallel. Each
+layer aggregates preferences revealed by others into welfare-improving proposals
+that adjust global prices. Three cross-layer properties are primitive structural
+requirements for avoiding impossibility in theory:
+
+\begin{itemize}
+\item \textbf{Continuation value.} Benefits include options for continued play,
+which are actively traded between participants as part of the aggregation
+process, dividing transaction fees into mining and routing payouts.
+
+\item \textbf{Costly uncertainty.} All strategies require participants to commit
+to front-loaded and irreversible expenditures of utility that are fungible with
+continuation value (fees, routing rewards, or resource consumption) under
+uncertainty.
+
+\item \textbf{Informational decentralization.} No trusted authorities exist in
+any layer of the mechanism. Players act under uncertainty about the global
+state, which is dispersed and aggregated only through play over time.
+\end{itemize}
+
+These properties apply to each of the three layers in the mechanism, which are
+distinguished by their aggregation functions and the arbitrage opportunities
+they expose.
+
+\paragraph{User Layer}
+\begin{itemize}
+\item \emph{Aggregates:} Heterogeneous bundles of utility into transactions.
+\item \emph{Arbitrages:} Differences between local execution opportunities and
+global settlement prices, broadcast as transactions for processing and
+settlement by other layers.
+\end{itemize}
+
+\paragraph{Routing Layer}
+\begin{itemize}
+\item \emph{Aggregates:} Bundles of transactions into provisional blocks.
+\item \emph{Arbitrages:} Differences between marginal routing rewards and the cost
+of providing ancillary collusion goods, producing efficient routing paths for
+payout division.
+\end{itemize}
+
+\paragraph{Chain Resolution Layer}
+\begin{itemize}
+\item \emph{Aggregates:} Bundles of blocks into chains with a cost of revision.
+\item \emph{Arbitrages:} Discrepancies between current aggregate security
+preferences and expected future settlement conditions, broadcast as payouts
+that simultaneously propose adjustments to global prices.
+\end{itemize}
+
+Each layer acts both as an aggregator of upstream preferences and as a generator
+of downstream arbitrage opportunities. No layer determines final meaning in
+isolation. Convergence is emergent, and the cost of revision increases with block
+settlement depth in the game tree.
+
+\subsection{Trust, Uncertainty, and Exposure}
+
+Trust is a semantically meaningless variable. It is measured only indirectly,
+through the shifts it induces from reliance on mechanism-enforced collective
+settlement guarantees to coordination through private channels where
+counterparty credibility is subject to time inconsistency.
+
+These shifts take the form of selective disclosure strategies that pierce the
+privacy walls of the mechanism. Where such strategies are rational, they improve
+public welfare by optimizing the enforcement function. Where they are irrational,
+they reduce the expected utility of the proposer.
+
+\paragraph{User Layer}
+\begin{itemize}
+\item Selective disclosure of preference maps to routers.
+\end{itemize}
+
+\paragraph{Routing Layer}
+\begin{itemize}
+\item Selective disclosure of preference maps to users.
+\item Selective disclosure of routing competitiveness to peers.
+\end{itemize}
+
+\paragraph{Chain Resolution Layer}
+\begin{itemize}
+\item Selective disclosure of willingness to bear future exposure.
+\end{itemize}
+
+All forms of selective disclosure become less rational as the marginal utility of
+environmental trust converges toward equilibrium with the marginal utility of the
+mechanism’s enforcement function.
+
+\subsection{Non-Reducibility under the Revelation Principle}
+
+The mechanism is a three-layer construct composed entirely of Non-Myerson
+Layers, and cannot be reduced to a revelation-equivalent mechanism. Messages are
+shared through public channels only as non-scalar values. Multiple strategies
+block reduction.
+
+\paragraph{User Layer}
+\begin{itemize}
+\item Routing strategies (Renou \& Tomala).
+\item Selective disclosure (Attar).
+\end{itemize}
+
+\paragraph{Routing Layer}
+\begin{itemize}
+\item Routing strategies (Renou \& Tomala).
+\item Selective disclosure (Attar).
+\end{itemize}
+
+\paragraph{Chain Resolution Layer}
+\begin{itemize}
+\item Routing strategies (Renou \& Tomala).
+\item Selective disclosure (Attar).
+\item Time-uncertain fixed-difficulty hashing lottery (Strack \& Mora).
+\end{itemize}
+
+Across layers, selective disclosure introduces additional Non-Myerson Layers
+that observe mechanism outputs and produce non-scalar outputs reflecting the
+attractiveness of coordination outside the mechanism’s enforcement guarantees.
+
+No portion of the mechanism is reducible to a direct mechanism:
+\begin{itemize}
+\item No layer relies on truthful type reports.
+\item All layers operate concurrently rather than sequentially.
+\item Information flows are non-stationary and non-topologizable.
+\item Actions project ambiguous signals rather than verifiable messages.
+\item Some strategies skip layers through uncertain execution order.
+\item Learning cannot model semantically undefined variables.
+\end{itemize}
+
+Attempts to analyze any single layer in isolation assume away the exogenous
+structure provided by the construct as a whole, reintroducing verifiability only
+by destroying the opacity that allows the mechanism to observe rational
+responses to the marginal utility of enforcement.
+
+Because all forms of value are fungible with continuation value, higher-
+dimensional optimization emerges over message spaces containing utilities that
+can be exchanged for continuation value. These trades aggregate into global
+prices, inducing convergence.
+
+\subsection{What This Appendix Does Not Claim}
+
+This appendix does not claim:
+\begin{itemize}
+\item that Saito is unique;
+\item that similar mechanisms are easy to design; or
+\item that the theory provides a general construction algorithm.
+\end{itemize}
+
+It makes a narrower and stronger observation: \emph{a mechanism satisfying the
+theoretical constraints identified through implementation theory does exist},
+and when other incentive-compatible mechanisms are discovered, they will exhibit
+the same structural properties.
+\clearpage
+
+
+
+% Appendix D
+
+\section{Interpretive Constraints and Irreducible Structure}
+
+This paper deliberately avoids equilibrium characterizations and toy models that
+represent trust, credibility, or willingness to bear exposure as actionable parameters. 
+Any such formalization would reenact the collapse it diagnoses: decisive variables 
+would become conditionable within the meta-theory, reintroducing the gravity well of 
+revelation-equivalent mechanisms that these constructions are designed to escape. The 
+argument therefore proceeds through structural contradiction, historical diagnosis of 
+impossibility results, and constructive witness rather than internal equilibrium proofs. 
+This is a methodological boundary, not an absence of rigor.
+
+\subsection{Irreducibility and Forbidden Reductions}
+
+The mechanisms studied in this paper are intentionally
+\emph{non-revelation-equivalent}. Any analytical move that presupposes the
+applicability of the Revelation Principle --- including reduction to direct
+mechanisms, representation of decisive variables as scalar types, or evaluation
+under a single enforcement regime --- alters the object under study and
+invalidates conclusions drawn from it.
+
+In particular:
+\begin{itemize}
+\item No agent possesses a type that encodes trust, credibility, or willingness to
+bear exposure.
+\item No report or message can truthfully represent preferences over enforcement
+levels.
+\item No single enforcement regime governs all strategic interaction.
+\end{itemize}
+
+Analyses that assume otherwise implicitly reintroduce exogenous authority or
+verifiability and therefore collapse the mechanism into a different class.
+
+\subsection{Non-Scalar Variables and Epistemic Boundaries}
+
+Several variables that are decisive for equilibrium selection in these mechanisms
+are \emph{non-scalar} and intentionally unrepresentable. These include trust,
+credibility, and continuation value under uncertainty. Their role is not to be
+measured directly, but to motivate action in ways that cannot be neutralized or
+arbitraged within the mechanism.
+
+The paper’s central claim is not that such variables are ineffable or
+psychological, but that any attempt to encode them as types destroys the
+information they convey. This creates epistemic boundaries --- privacy walls ---
+across which actions are observable but intent is not reconstructible. These
+boundaries are structural, not accidental.
+
+\subsection{Parallel Enforcement Regimes}
+
+Selective disclosure strategies operate by shifting coordination into
+\emph{parallel games} governed by different enforcement regimes. These regimes
+are not deviations, collusion, or exits from the mechanism, but are induced by its
+design and feed back into it as structured but opaque signals.
+
+The mechanism does not observe the content of these interactions. It observes
+only the willingness of agents to bear exposure outside its guarantees. This is
+sufficient to infer the marginal utility of its own enforcement function.
+
+Any interpretation that treats off-mechanism coordination as exogenous or illicit
+misses this feedback loop and misidentifies the equilibrium logic.
+
+\subsection{Shiva, Entropy, and Continuation Value}
+
+The role played by \emph{Shiva} in this paper should not be understood as that of
+a discretionary authority, governance body, or punitive enforcer. Shiva denotes
+the \emph{irreversible sink} required to couple continuation value with real
+costs over time.
+
+Shiva is external to the mechanism’s strategic domain but internal to the agents’
+evaluative horizon. It is not a player, rule, layer, or governance body, and no
+action within the mechanism can condition on it strategically. Yet agents
+experience Shiva as time, irreversibility, and loss, and therefore incorporate
+its effects directly into their private judgments of continuation value. In this
+sense, Shiva supplies the functional role of authority without being an
+institutional authority: it constrains behavior by rendering certain choices
+irreversible, not by issuing commands, verifying actions, or enforcing rules.
+Because Shiva cannot be manipulated, appealed to, or conditioned upon within
+the mechanism, it remains authoritative only in the phenomenological sense that
+its consequences are real to participants and unavoidable over time.
+
+Hashing links two aspects of the same object:
+\begin{enumerate}
+\item \emph{Continuation value}, which agents trade and allocate through
+strategic interaction.
+\item \emph{Entropy expenditure}, which renders certain actions irreversible and
+prevents the unwinding of exposure.
+\end{enumerate}
+
+These are not separable. Continuation value is only meaningful because it can be
+irreversibly spent; entropy expenditure is only economically relevant because it
+destroys continuation value. Framing Shiva as a ``high cost'' misunderstands its
+function: it is not a deterrent priced in equilibrium, but the thermodynamic
+constraint that makes time, commitment, and revision meaningful.
+
+Without such an entropy sink, enforcement collapses into arbitrage, as exposure
+can always be reversed or postponed. With it, costs are front-loaded under
+uncertainty and cannot be neutralized by strategic play.
+
+\subsection{Evaluation Criterion}
+
+Incentive compatibility in these mechanisms must be evaluated over
+\emph{histories and parallel games}, not reports. The relevant question is not
+whether agents can profitably misreport preferences, but whether they can improve
+expected welfare by manipulating the mechanism’s enforcement function without
+bearing irreversible exposure.
+
+The paper’s claims apply only under this evaluative frame. Within it,
+impossibility results derived for direct mechanisms remain correct but
+incomplete.
+\clearpage
+
+\end{document}
 
