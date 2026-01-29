@@ -199,9 +199,9 @@ is a structural property: they operate in rounds with the results of early stage
 For this reason, circular mechanisms should not be confused with repeated games that
 extend over time. While circular mechanisms share similarities with such games,
 what makes them uniquely vulnerable is that their own enforcement penalities -- the
-costs that punish deviations -- can be strategically manipulated
+costs that punish deviations -- are strategically responsive to play
 within the game. Agents who learn how the game handles enforcement can
-deliberately weaken it to enable deviation at lower cost.
+understand how to weaken it to enable deviation at lower cost.
 
 Such mechanisms appear across many domains: as continuous double auctions and
 adaptive market-clearing processes in economics; as reputation systems and
@@ -514,10 +514,8 @@ when its enforcement regime could protect him from loss, its level of protection
 The mechanism is essentially inducing a counterfactual game it cannot observe, 
 one which nonetheless signals the marginal utility of its own enforcement function back 
 to it in a form indistinguishable from normal gameplay. And this signal is credible precisely 
-because Alice cannot cite any verifiable action taken under the mechanism’s enforcement 
-regime as evidence of her credibility. Were such a link possible, Bob could assign probabilities to
-Alice’s sincerity and uncertainty would collapse into risk, correlating the two
-games and destroying the informational separation required for inference.
+because Bob cannot know which activities on the base-layer network represent Alice, so 
+no representations she can make do not invite questions of credibility.
 
 For readers accustomed to direct mechanisms, it may seem counterintuitive that a
 mechanism never observes the preferences that are decisive. But it does not need
@@ -635,7 +633,7 @@ Encoding trust destroys its informational role. This is a Gödel-type phenomenon
 certain economically necessary variables are unrepresentable within mechanisms
 because any attempt to encode them renders the encoding meaningless.
 
-This collapse creates \emph{fundamental uncertainty}. The mechanism requires
+This collapse creates \emph{fundamental unrepresentability}. The mechanism requires
 $\tau$ to compute $S^*(\tau)$, but $\tau$ cannot be known ex ante, inferred from
 reports, or represented within the mechanism without contradiction. This is not
 epistemic ignorance resolvable through learning; it is structural. The mechanism
@@ -679,8 +677,8 @@ representations in the parallel game are penalized on the base-layer.
 In this way, indirect mechanisms convert an unrepresentable parameter into an
 observable gradient without collapsing uncertainty into a reportable type. The
 solution is unimplementable without a base-layer game consisting of Non-Myerson 
-Layers that generate privacy walls, invite agents to bypass them, and treat the 
-result as an opaque referendum on the efficiency of the allocation of resources 
+Layers that generate privacy walls, creating potential for agents to bypass them, and letting the mechanism treat the 
+result as an opaque referendum on the efficiency of its marginal allocation of resources 
 to the enforcement regime of the mechanism.
 
 It follows that any informationally decentralized mechanism that must optimize
