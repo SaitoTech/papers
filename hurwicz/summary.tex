@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=0.8in,bottom=1.1in,left=1.1in,right=1.1in]{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+
+
+\setlist[itemize]{leftmargin=1.8em,rightmargin=1.8em}
+\titlespacing*{\section}{0pt}{1.4ex}{1.6ex}
+\titleformat{\section}
+  {\normalsize}
+  {}
+  {0pt}
+  {\underline}
+
+\begin{document}
+
+\begin{center}
+{\large{\textbf{Incentive Compatibility under Informational Decentralization}}}
+\end{center}
+
+\vspace{0.25em}
+
+\section*{Background}
+
+\noindent
+The paper takes the classical impossibility results of mechanism design as given. It does not:
+
+\begin{itemize}
+    \item weaken or refute the Revelation Principle
+    \item overturn any impossibility results within their assumptions
+    \item rely on repeated-game discipline, reputation effects, or exogenous commitment devices
+\end{itemize}
+
+
+\section*{Summary of Paper}
+
+\noindent
+A subclass of \emph{non revelation-equivalent indirect mechanisms} exists which permits incentive compatibility under conditions of informational decentralization. The existence of this class is anticipated in theory. The class:
+
+\begin{itemize}
+    \item falls into the non–revelation-equivalent class under standard theory
+    \item employs multidimensional, non-scalar message spaces 
+    \item has compartmentalized layers running in parallel
+    \item uses a dual enforcement regime to price deviations in unobserved strategic dimensions
+    \item ensures all deviations that alter equilibrium allocations alter continuation value
+\end{itemize}
+
+
+\section*{Implications for Economics and Computer Science}
+
+The mechanism lies outside the direct-mechanism paradigm that underlies much distributed systems theory. Its existence clarifies the scope of several canonical results in computer science by isolating the modelling assumptions on which they depend.
+
+\begin{itemize}
+    \item Incentive compatibility can arise from pricing non-verifiable dimensions via uncertainty. (econ)
+    \item Direct-mechanism models are excluded from implementing this solution by construction. (econ)
+    \item Some strategic dimensions must remain private to sustain enforcement. (econ)
+    \item Several canonical impossibility results in computer science are conditional on direct mechanism modeling assumptions. (cs)
+    \item In fee mechanisms, UIC + MIC become possible at the cost of ex post verifiability (cs)
+\end{itemize}
+
+\end{document}
+

@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*, itemsep=0.6em}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{One-Pager: Core Argument Summary}}\\[0.5em]
+{\normalsize David Lancashire}\\
+{\small January 2026}
+\end{center}
+
+\vspace{1em}
+
+\noindent
+\textbf{Context.}
+\begin{itemize}
+\item Classical mechanism design (Hurwicz, Myerson, Maskin) establishes strong impossibility results for incentive compatibility under informational decentralization.
+\item These results rely on the need for credible enforcement when agents can revise actions or misrepresent preferences.
+\item In decentralized settings, enforcement is typically assumed to require an external authority (courts, institutions, trusted operators).
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+\textbf{Standard difficulty.}
+\begin{itemize}
+\item In circular or path-dependent mechanisms, enforcement penalties are often endogenous to play.
+\item Once agents understand how enforcement responds to actions, they can strategically weaken it.
+\item Revelation-equivalent mechanisms make this unavoidable: any manipulable enforcement dimension becomes a target for deviation.
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+\textbf{Core claim.}
+\begin{itemize}
+\item There exists a narrow class of indirect, non–revelation-equivalent mechanisms that achieve incentive compatibility without external authorities.
+\item These mechanisms generate enforcement costs endogenously by exposing deviating agents to front-loaded uncertainty over time.
+\item Crucially, this exposure cannot be neutralized or priced away from within the mechanism.
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+\textbf{Key design move.}
+\begin{itemize}
+\item The mechanism does not observe or punish deviation directly.
+\item Instead, agents who attempt to shift equilibrium security must commit resources under uncertainty before outcomes are known.
+\item Successful coordination to evade enforcement requires off-mechanism agreement that the mechanism itself cannot verify or respond to.
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+\textbf{Why this avoids standard impossibility results.}
+\begin{itemize}
+\item The enforcement cost is endogenous but strategically unactionable.
+\item This blocks reduction under the Revelation Principle without contradicting it.
+\item Hurwicz-style impossibility results apply to mechanisms with fixed or manipulable enforcement interfaces; this class lies just beyond that boundary.
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+\textbf{What is \emph{not} being claimed.}
+\begin{itemize}
+\item This does not show universal implementability.
+\item This does not refute Myerson or the Revelation Principle.
+\item This does not eliminate the need for cost-bearing constraints.
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent
+\textbf{Contribution.}
+\begin{itemize}
+\item Identifies a structural condition—endogenous unactionability—under which incentive compatibility can survive informational decentralization.
+\item Clarifies why some decentralized protocols (economic or computational) succeed despite classical impossibility intuitions.
+\item Provides a conceptual bridge between mechanism design and path-dependent enforcement in decentralized systems.
+\end{itemize}
+
+\vspace{1em}
+
+\noindent
+\textit{Full paper: ``Beyond Hurwicz: Incentive Compatibility under Informational Decentralization.''  
+This summary is intended to be read in 1--2 minutes.}
+
+\end{document}
+
