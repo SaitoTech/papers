@@ -112,7 +112,7 @@
 \begin{minipage}{0.75\textwidth}
 \begin{abstract}
 \small
-Achieving incentive compatibility under informational decentralization has long been considered an impossibility in economics and computer science. We show this is conditional by identifying a subset of non-revelation-equivalent mechanisms that infer enforcement preferences indirectly from parallel, uncorrelatable games.
+Achieving incentive compatibility under informational decentralization is impossible within the class of direct and revelation-equivalent mechanisms typically studied in economics and computer science. We show that these impossibility results are conditional by identifying a narrow class of non-revelation-equivalent mechanisms that sustain enforcement by inferring preferences indirectly through parallel, uncorrelatable games.
 \end{abstract}
 \end{minipage}
 \end{center}
@@ -725,12 +725,12 @@ for reasons their authors do not recognize can be relaxed.
 
 Across economics and computer science, impossibility results share a common
 premise: that all strategic interaction occurs under a single enforcement
-regime. The edifice of mechanism design incorporates this assumption: excluding the possibility that agents might rationally shift
+regime. The edifice of mechanism design is typically formulated under this assumption: abstracting away from the possibility that agents might rationally shift
 coordination into lower-security domains created by the mechanism itself.
 
-This possibility was invisible to early theorists. Because Hurwicz
+This possibility lay outside the scope of early theorists. Because Hurwicz
 examined allocation in environments whose setting was practically
-indistinguishable from the state of nature, he never considered that successful 
+indistinguishable from the state of nature, he did not model the case in which successful 
 implementation might create an enforcement regimes from which strategic retreat 
 might be possible. His impossibility result is therefore
 correct for the class of mechanisms he analyzes, but does not extend to
@@ -751,8 +751,7 @@ in foundational papers by Lamport, Shostak, and Pease, and later formalized by
 Bracha and Toueg, results on the limits of adversarial tolerance assume that
 algorithms behave according to fixed rules and execute changes as \emph{atomic
 steps}.\cite{LamportShostakPease1982,BrachaToueg1985,FLP1985}
- These models implicitly treat actions as costless, uncertainty as
-absent, and assume deviation cannot be punished through exposure accumulated
+ These models are defined to treat actions as costless, abstract away Knightian uncertainty, and assume deviation cannot be punished through exposure accumulated
 over time. Later results such as the FLP theorem operate in this same framework,
 in which non-termination and inconsistency arise because no mechanism can
 impose asymmetrical costs that diverge over time.
@@ -760,8 +759,8 @@ impose asymmetrical costs that diverge over time.
 In more recent work, including the so-called TFM literature, we find further
 arguments discouraging attention to indirect mechanisms as a viable solution
 class, with some authors even asserting analysis can be entirely restricted to
-the study of direct mechanisms. Many of these results fail to generalize due to
-improper reduction under the Revelation Principle, often from changing a
+the study of direct mechanisms. Many of these results do not generalize beyond 
+the setting induced by reduction under the Revelation Principle, often from changing a
 two-sided, multi-parameter and dynamic game into a one-sided, single-parameter,
 static auction that cannot even in theory implement the same set of outcomes. A
 contributing source of difficulty is that off-chain coordination in TFMs
@@ -785,8 +784,8 @@ Philosophically, the category error that emerges is the inverse of that
 identified by Gilbert Ryle in \emph{The Concept of Mind} (1949). In that book,
 which popularized the phrase ``ghost in the machine,'' Ryle critiqued Descartes
 for assuming the existence of an immaterial spirit simply because the mind seems
-to have agency. The error in our time is reversed: analysts retreat to
-deterministic models because networks are made of machines. Impossibility
+to have agency. The error in our time is typically reversed: analysts retreat to
+deterministic models in part because networks are made of machines. Impossibility
 reappears quietly because deterministic execution cannot accommodate semantic
 ambiguity.
 

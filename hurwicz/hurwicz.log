@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  31 JAN 2026 20:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  1 FEB 2026 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -769,7 +769,7 @@ dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [25]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-108.
+107.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -788,97 +788,97 @@ Package microtype Info: Loading generic protrusion settings for font family
 [29]
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/bx/n/10.95 (+20) Revelation-
  []
 
 
-Underfull \hbox (badness 2538) in paragraph at lines 1336--1336
+Underfull \hbox (badness 2538) in paragraph at lines 1335--1335
 []|\T1/lmr/bx/n/10.95 (+20) Location of Un-ac-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) One-shot vot-ing
  []
 
 
-Underfull \hbox (badness 4673) in paragraph at lines 1336--1336
+Underfull \hbox (badness 4673) in paragraph at lines 1335--1335
 \T1/lmr/m/n/10.95 (+20) no re-vi-sion, cost-less
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Repeated di-rect
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 \T1/lmr/m/n/10.95 (+20) games (Bayesian
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Public ran-dom-iza-
  []
 
 
-Underfull \hbox (badness 3209) in paragraph at lines 1336--1336
+Underfull \hbox (badness 3209) in paragraph at lines 1335--1335
 \T1/lmr/m/n/10.95 (+20) la-ble pub-lic ran-dom-
  []
 
 
-Underfull \hbox (badness 2772) in paragraph at lines 1336--1336
+Underfull \hbox (badness 2772) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Continuous dou-ble
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Irreducible
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Endogenous (history-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 \T1/lmr/m/n/10.95 (+20) dependent pay-offs,
  []
 
 
-Underfull \hbox (badness 1107) in paragraph at lines 1336--1336
+Underfull \hbox (badness 1107) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Prediction mar-kets
  []
 
 
-Underfull \hbox (badness 1609) in paragraph at lines 1336--1336
+Underfull \hbox (badness 1609) in paragraph at lines 1335--1335
 \T1/lmr/m/n/10.95 (+20) (en-doge-nous liq-uid-
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 1336--1336
+Underfull \hbox (badness 1062) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Endogenous (liq-uid-ity
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 1336--1336
+Underfull \hbox (badness 1496) in paragraph at lines 1335--1335
 \T1/lmr/m/n/10.95 (+20) and price im-pact re-
  []
 
 
-Underfull \hbox (badness 1721) in paragraph at lines 1336--1336
+Underfull \hbox (badness 1721) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Proof-of-Work con-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Endogenous (ir-re-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1335
 []|\T1/lmr/m/n/10.95 (+20) Endogenous (ir-re-
  []
 
@@ -892,7 +892,7 @@ LaTeX Warning: Text page 32 contains only floats.
 
 [32]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-359.
+358.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -922,11 +922,11 @@ Package rerunfilecheck Info: File `hurwicz.out' has not changed.
 (rerunfilecheck)             Checksum: 0FB7DFB5ABC1F2EF15692D2BF4874783;6210.
  ) 
 Here is how much of TeX's memory you used:
- 16072 strings out of 473190
- 257057 string characters out of 5715800
+ 16070 strings out of 473190
+ 257041 string characters out of 5715800
  700911 words of memory out of 5000000
  38722 multiletter control sequences out of 15000+600000
- 648763 words of font info for 215 fonts, out of 8000000 for 9000
+ 648726 words of font info for 214 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,79p,1004b,630s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
@@ -943,7 +943,7 @@ onts/type1/public/lm/lmri12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
 /public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm
 /lmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
 >
-Output written on hurwicz.pdf (39 pages, 479984 bytes).
+Output written on hurwicz.pdf (39 pages, 480116 bytes).
 PDF statistics:
  503 PDF objects out of 1000 (max. 8388607)
  414 compressed objects within 5 object streams
