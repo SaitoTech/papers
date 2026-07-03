@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  3 JUL 2026 19:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.27)  3 JUL 2026 20:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -821,12 +821,13 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count329
 \l__pdf_internal_box=\box68
 )
-No file equilibrium.aux.
+(./equilibrium.aux)
 \openout1 = `equilibrium.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/zchmi/m/it on input line 95.
 LaTeX Font Info:    Trying to load font information for OML+zchmi on input line
  95.
+
 (/usr/local/texlive/2025/texmf-dist/tex/latex/xcharter/omlzchmi.fd
 File: omlzchmi.fd 2019/11/21 Fontinst v1.933 font definitions for OML/zchmi.
 )
@@ -952,6 +953,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring OFF on input line 95.
+
+(./equilibrium.out) (./equilibrium.out)
 \@outlinefile=\write4
 \openout4 = `equilibrium.out'.
 
@@ -1129,22 +1132,15 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-Package rerunfilecheck Warning: File `equilibrium.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `equilibrium.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `equilibrium.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26476 strings out of 473190
- 470846 string characters out of 5715800
- 862157 words of memory out of 5000000
- 49183 multiletter control sequences out of 15000+600000
- 664611 words of font info for 177 fonts, out of 8000000 for 9000
+ 26481 strings out of 473190
+ 470923 string characters out of 5715800
+ 862216 words of memory out of 5000000
+ 49185 multiletter control sequences out of 15000+600000
+ 664281 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,7n,91p,1008b,682s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold
@@ -1154,7 +1150,7 @@ ter-Roman.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xcharter/X
 CharterMathMI.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/xchart
 er/XCharterMathRM.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/ne
 wtx/txsys.pfb>
-Output written on equilibrium.pdf (5 pages, 195769 bytes).
+Output written on equilibrium.pdf (5 pages, 195664 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  50 compressed objects within 1 object stream
